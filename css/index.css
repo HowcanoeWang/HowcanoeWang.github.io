@@ -1,0 +1,102 @@
+.blog-header {
+	line-height: 1; border-bottom-color: rgb(229, 229, 229); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.blog-header-logo {
+	font-family: Microsoft YaHei, Georgia, "Times New Roman", serif; font-size: 2.25rem;
+}
+.blog-header-logo:hover {
+	text-decoration: none;
+}
+h1 {
+	font-family: Microsoft YaHei, Georgia, "Times New Roman", serif;
+}
+h2 {
+	font-family: Microsoft YaHei, Georgia, "Times New Roman", serif;
+}
+h3 {
+	font-family: Microsoft YaHei, Georgia, "Times New Roman", serif;
+}
+h4 {
+	font-family: Microsoft YaHei, Georgia, "Times New Roman", serif;
+}
+h5 {
+	font-family: Microsoft YaHei, Georgia, "Times New Roman", serif;
+}
+h6 {
+	font-family: Microsoft YaHei, Georgia, "Times New Roman", serif;
+}
+.display-4 {
+	font-size: 2.5rem;
+}
+@media all and (min-width:768px)
+{
+.display-4 {
+	font-size: 3rem;
+}
+}
+.nav-scroller {
+	height: 2.75rem; position: relative; z-index: 2; -ms-overflow-y: hidden;
+}
+.nav-scroller .nav {
+	text-align: center; padding-bottom: 1rem; margin-top: -1px; display: flex; white-space: nowrap; -ms-overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch;
+}
+.nav-scroller .nav-link {
+	padding-top: 0.75rem; padding-bottom: 0.75rem; font-size: 0.87rem;
+}
+.card-img-right {
+	border-radius: 0px 3px 3px 0px; height: 100%;
+}
+.flex-auto {
+	flex:0 0 auto; -webkit-box-flex: 0;
+}
+.h-250 {
+	height: 250px;
+}
+@media all and (min-width:768px)
+{
+.h-md-250 {
+	height: 250px;
+}
+}
+.border-top {
+	border-top-color: rgb(229, 229, 229); border-top-width: 1px; border-top-style: solid;
+}
+.border-bottom {
+	border-bottom-color: rgb(229, 229, 229); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.box-shadow {
+	box-shadow: 0px 0.25rem 0.75rem rgba(0,0,0,0.05);
+}
+.blog-title {
+	font-size: 2rem; font-weight: 400; margin-bottom: 0px;
+}
+.blog-description {
+	color: rgb(153, 153, 153); font-size: 1.1rem;
+}
+@media all and (min-width:40em)
+{
+.blog-title {
+	font-size: 3.5rem;
+}
+}
+.blog-pagination {
+	margin-bottom: 4rem;
+}
+.blog-pagination > .btn {
+	border-radius: 2rem;
+}
+.blog-post {
+	margin-bottom: 4rem;
+}
+.blog-post-title {
+	font-size: 2.5rem; margin-bottom: 0.25rem;
+}
+.blog-post-meta {
+	color: rgb(153, 153, 153); margin-bottom: 1.25rem;
+}
+.blog-footer {
+	padding: 2.5rem 0px; text-align: center; color: rgb(153, 153, 153); border-top-color: rgb(229, 229, 229); border-top-width: 0.05rem; border-top-style: solid; background-color: rgb(249, 249, 249);
+}
+.blog-footer p:last-child {
+	margin-bottom: 0px;
+}

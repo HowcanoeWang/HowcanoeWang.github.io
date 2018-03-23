@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="images/home.ico" rel="icon"> 
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
+		<title>合喵网(≧∇≦)ﾉ</title>
+		
+		<!-- Custom styles for this page -->
+		<link rel="stylesheet" href="css/index.css">
+		
+		<style>
+			html,body{ padding: 0; margin: 0;}
+    	</style>
+	</head>
+	<body>
+		<div class="container">
+			<header class="blog-header py-3">
+				<div class="row flex-nowrap justify-content-between align-items-center">
+					<div class="col-4 pt-1">
+						<img class="d-block mb-1" src="images/home.ico" alt="" width="36" height="36">
+					</div>
+					<div class="col-4 text-center">
+						<a class="blog-header-logo text-dark">合喵网</a>
+					</div>
+					<div class="col-4 d-flex justify-content-end align-items-center">
+						<a class="text-muted" href="https://www.bing.com" target="ifm">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+						</a>
+						<a class="btn btn-sm btn-outline-secondary disabled" href="#">注册</a>
+					</div>
+				</div>
+				<div class="nav-scroller py-1 mb-2">
+					<nav class="nav d-flex justify-content-between">
+						<a class="p-2 text-muted" href="home.html" target="ifm">首页</a>
+						<a class="p-2 text-muted dropdown-toggle" data-toggle="dropdown" href="#" id="blog" aria-haspopup="true" aria-expanded="false">博客</a>
+						<div class="dropdown-menu" aria-labelledby="blog">
+							<a class="p-3 text-muted dropdown-item" href="#">浩瀚猫</a>
+							<a class="p-3 text-muted dropdown-item" href="#">约翰·SG</a>
+							<a class="p-3 text-muted dropdown-item" href="#">杀出黎明</a>
+						</div>
+						<a class="p-2 text-muted" href="#">笔记</a>
+						<a class="p-2 text-muted" href="#">编程</a>
+						<a class="p-2 text-muted" href="#">项目</a>
+						<a class="p-2 text-muted" href="#">论文</a>
+						<a class="p-2 text-muted" href="#">口琴</a>
+						<a class="p-2 text-muted" href="#">游戏</a>
+						<a class="p-2 text-muted" href="#">绘画</a>
+					</nav>
+				</div>
+			</header>
+		</div>
+		
+		<div class="test" id="test"  style="width: 100%;">
+			<iframe id="ifm" name="ifm" width="100%" frameborder="none" scrolling="auto" style="width: 100%; height: 100%" onload="" src="home.html"></iframe>
+		</div>
+		
+		<footer class="blog-footer">
+			<p>本网站基于<a href="https://getbootstrap.com/">Bootstrap</a>搭建，作者 <a href="https://www.facebook.com/howcanoe.wang">@浩瀚猫</a>.</p>
+			<p>
+				<a href="#">返回顶部</a>
+			</p>
+		</footer>
+		
+		<!-- Optional JavaScript -->
+		<script>
+			function test(h){
+				document.getElementById("test").style.height = h+"px"
+			}
+			//在父级操作容器高度，这有个问题就是在iframe中的页面有高度改变的时候这里并不会改变
+			/*document.getElementById("ifr").onload = function(){
+				document.getElementById("test").style.height = this.contentWindow.document.body.clientHeight+"px";
+			};*/
+		</script>
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</body>
+</html>
