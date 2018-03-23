@@ -23,7 +23,7 @@
 			<header class="blog-header py-3">
 				<div class="row flex-nowrap justify-content-between align-items-center">
 					<div class="col-4 pt-1">
-						<img class="d-block mb-1" src="images/home.ico" alt="" width="36" height="36">
+						<a href="home.html" target="ifm"><img class="d-block mb-1" src="images/home.ico" alt="" width="36" height="36"></a>
 					</div>
 					<div class="col-4 text-center">
 						<a class="blog-header-logo text-dark">合喵网</a>
@@ -37,20 +37,58 @@
 				</div>
 				<div class="nav-scroller py-1 mb-2">
 					<nav class="nav d-flex justify-content-between">
-						<a class="p-2 text-muted" href="home.html" target="ifm">首页</a>
-						<a class="p-2 text-muted dropdown-toggle" data-toggle="dropdown" href="#" id="blog" aria-haspopup="true" aria-expanded="false">博客</a>
-						<div class="dropdown-menu" aria-labelledby="blog">
-							<a class="p-3 text-muted dropdown-item" href="#">浩瀚猫</a>
-							<a class="p-3 text-muted dropdown-item" href="#">约翰·SG</a>
-							<a class="p-3 text-muted dropdown-item" href="#">杀出黎明</a>
+						<div class="dropdown">
+  							<button class="btn btn-nav" type="button" id="blog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="p-2 text-muted dropdown-toggle">个人博客</a>
+							</button>
+							<div class="dropdown-menu" aria-labelledby="blog">
+								<a class="p-3 text-muted dropdown-item" href="#">浩瀚猫</a>
+								<a class="p-3 text-muted dropdown-item" href="#">约翰·SG</a>
+								<a class="p-3 text-muted dropdown-item" href="#">杀出黎明</a>
+							</div>
 						</div>
-						<a class="p-2 text-muted" href="#">笔记</a>
-						<a class="p-2 text-muted" href="#">编程</a>
-						<a class="p-2 text-muted" href="#">项目</a>
-						<a class="p-2 text-muted" href="#">论文</a>
-						<a class="p-2 text-muted" href="#">口琴</a>
-						<a class="p-2 text-muted" href="#">游戏</a>
-						<a class="p-2 text-muted" href="#">绘画</a>
+						<div class="dropdown">
+  							<button class="btn btn-nav" type="button" id="note" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="p-2 text-muted dropdown-toggle">学习笔记</a>
+							</button>
+							<div class="dropdown-menu" aria-labelledby="note">
+								<a class="p-3 text-muted dropdown-item" href="#">南林课程</a>
+								<a class="p-3 text-muted dropdown-item" href="#">UNB课程</a>
+								<a class="p-3 text-muted dropdown-item" href="#">筑波课程</a>
+								<a class="p-3 text-muted dropdown-item" href="#">网络课程</a>
+							</div>
+						</div>
+						<div class="dropdown">
+  							<button class="btn btn-nav" type="button" id="research" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="p-2 text-muted dropdown-toggle">科研项目</a>
+							</button>
+							<div class="dropdown-menu" aria-labelledby="research">
+								<a class="p-3 text-muted dropdown-item" href="#">照片取胸径</a>
+								<a class="p-3 text-muted dropdown-item" href="#">全景郁闭度</a>
+								<a class="p-3 text-muted dropdown-item" href="#">为知时间记录</a>
+								<a class="p-3 text-muted dropdown-item" href="#">认植物软件</a>
+								<a class="p-3 text-muted dropdown-item" href="https://www.uav-hirap.org">UAV影像平台</a>
+								<a class="p-3 text-muted dropdown-item" href="#">食品工程</a>
+							</div>
+						</div>
+						<div class="dropdown">
+  							<button class="btn btn-nav" type="button" id="art" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="p-2 text-muted dropdown-toggle">艺术爱好</a>
+							</button>
+							<div class="dropdown-menu" aria-labelledby="art">
+								<a class="p-3 text-muted dropdown-item" href="#">绘画</a>
+								<a class="p-3 text-muted dropdown-item" href="#">口琴</a>
+							</div>
+						</div>
+						<div class="dropdown">
+  							<button class="btn btn-nav" type="button" id="game" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="p-2 text-muted dropdown-toggle">神镜传说</a>
+							</button>
+							<div class="dropdown-menu" aria-labelledby="game">
+								<a class="p-3 text-muted dropdown-item" href="https://tieba.baidu.com/f?fr=wwwt&kw=%E7%A5%9E%E9%95%9C%E4%BC%A0%E8%AF%B4" target="_blank">百度贴吧</a>
+								<a class="p-3 text-muted dropdown-item" href="#">网游策划</a>
+							</div>
+						</div>
 					</nav>
 				</div>
 			</header>
@@ -72,11 +110,8 @@
 			function test(h){
 				document.getElementById("test").style.height = h+"px"
 			}
-			//在父级操作容器高度，这有个问题就是在iframe中的页面有高度改变的时候这里并不会改变
-			/*document.getElementById("ifr").onload = function(){
-				document.getElementById("test").style.height = this.contentWindow.document.body.clientHeight+"px";
-			};*/
 		</script>
+		
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
