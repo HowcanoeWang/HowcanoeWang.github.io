@@ -43,7 +43,12 @@ h6 {
 .nav-scroller .nav-link {
 	padding-top: 0.75rem; padding-bottom: 0.75rem; font-size: 0.87rem;
 }
-
+/*
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}*/
 
 .card-img-right {
 	border-radius: 0px 3px 3px 0px; height: 100%;
@@ -103,12 +108,8 @@ h6 {
 	margin-bottom: 0px;
 }
 
-.btn-nav, 
-.btn-nav:hover, 
-.btn-nav:active, 
-.btn-nav:visited
-.btn-nav:visited {
-    background-color:white;
+.btn-nav {
+	background-color:white;
     border-color:white;
-    box-shadow:none;
+	box-shadow:white;
 }

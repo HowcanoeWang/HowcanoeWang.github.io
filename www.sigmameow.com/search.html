@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+	<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="images/home.ico" rel="icon"> 
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+		
+		<title>合喵站内搜</title>
+		
+		<!-- Custom styles for this page -->
+		<link rel="stylesheet" href="css/search.css">
+		
+		<script>
+			function setHeight(){
+				var h = document.body.clientHeight;
+				window.parent.test(h);
+			}
+			setHeight();
+			//页面高度有改变的时候再次调用 setHeight 重置外层容器的高度
+			window.onresize = function() { //监听窗口变化
+				setHeight();
+			}
+			
+			document.getElementById("test").onclick = function(){
+				this.style.height = "500px";
+				setHeight();
+			}
+		</script>
+		
+	</head>
+	<body class="text-center">
+		<form class="form-signin">
+			<img width="128" height="128" class="mb-4 rounded" alt="" src="images/search.jpg">
+			<h1 class="h3 mb-3 font-weight-normal">合喵站内搜</h1>
+			<!--<label class="sr-only text-center" for="inputkeys"></label>-->
+			<input class="form-control text-center" id="inputkeys" name="searchStr" type="text" accept="" placeholder="多个关键字请以空格分隔">
+			<!--
+			<label class="sr-only" for="inputPassword">Password</label>
+			<input class="form-control" id="inputPassword" required="" type="password" placeholder="Password">
+			<div class="checkbox mb-3"></div>-->
+			<a class="btn btn-lg btn-primary btn-block disabled" type="submit" href="http://www.baidu.com" target="ifm">搜索</a> 
+			<p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+		</form>
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script>
+			function setHeight(){
+				var h = document.body.clientHeight;
+				window.parent.test(h);
+			}
+			setHeight();
+			//页面高度有改变的时候再次调用 setHeight 重置外层容器的高度
+			/*
+			document.getElementById("test").onclick = function(){
+				this.style.height = "500px";
+				setHeight();
+			}*/
+			window.onresize = function() { //监听窗口变化
+				setHeight();
+			}
+			
+		</script>
+		
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</body>
+</html>
