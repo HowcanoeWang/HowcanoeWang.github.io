@@ -3,8 +3,14 @@
 html *{margin:0;padding:0;}
 .layout > div{min-height:100px;}
 
+p {
+  line-height: 1.5;
+  margin: 30px 0;
+}
+
 .middle{
-	background:white
+	background:white;
+	padding-left: 20px;
 }
 
 .left{
@@ -130,4 +136,59 @@ header.masthead .post-heading .meta a {
   header.masthead .post-heading .subheading {
     font-size: 30px;
   }
+}
+
+/* post */
+.post-preview > a {
+  color: #212529;
+}
+
+.post-preview > a:focus, .post-preview > a:hover {
+  text-decoration: none;
+  color: lightgrey;
+}
+
+.post-preview > a > .post-title {
+  font-size: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.post-preview > a > .post-subtitle {
+  font-weight: 300;
+  margin: 0 0 20px;
+}
+
+.post-preview > .post-meta {
+  font-size: 18px;
+  margin-top: 0;
+  color:gray;
+}
+
+.post-preview > .post-meta > a {
+  text-decoration: none;
+  color: black;
+}
+
+.post-preview > .post-meta > a:focus, .post-preview > .post-meta > a:hover {
+  text-decoration: underline;
+  color: lightslategray;
+}
+
+@media only screen and (min-width: 768px) {
+  .post-preview > a > .post-title {
+    font-size: 36px;
+  }
+}
+
+/* blog contents */
+blockquote {
+  font-style: italic;
+  color: #868e96;
+}
+
+.section-heading {
+  font-size: 36px;
+  font-weight: 700;
+  margin-top: 60px;
 }
