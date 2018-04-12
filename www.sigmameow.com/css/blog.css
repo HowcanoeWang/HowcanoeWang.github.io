@@ -1,29 +1,22 @@
 /* CSS Document */
 
-html *{margin:0;padding:0;}
-.layout > div{min-height:100px;}
-
 p {
   line-height: 1.5;
   margin: 30px 0;
 }
 
-.middle{
-	background:white;
-	padding-left: 20px;
+
+.sidebar a,a:hover{
+    text-decoration: none;
 }
 
-.left{
-	position:relative;
-	background:white;
-	width:20%; 
-	height: 100%;
-	min-width:150px;
-	float:left;
-}
-.left a{
-    text-decoration: none;
+.sidebar a {
 	color: #696969;
+}
+	
+.sidebar a:hover {
+  text-decoration: none;
+  color: lightgrey;
 }
 
 .list_menu>.btngroups>.btn{
@@ -33,7 +26,6 @@ p {
 	color:#656567;
 	cursor:pointer;
 }
-/*.right{background:lightgreen; width:100px; float:right}
 
 /* header from clean-blog.css*/
 header.masthead {
