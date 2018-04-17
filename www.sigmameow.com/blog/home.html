@@ -15,17 +15,64 @@
 		<link rel="stylesheet" href="../css/index.css">
 		<link rel="stylesheet" href="../css/blog.css">
 		
+		<!-- jQuery for html code reuse-->
 		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		<script> var $jq1102$ = jQuery.noConflict(true); </script>
+		
+		<!-- jQuery for json load -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script> 
+		<script> var $jq182$ = jQuery.noConflict(true); </script>
+		
+		<script type="text/javascript" src="p/id.js"></script>
+		<script>
+		$jq182$(function (){
+		  var $jq182$jsontip = $jq182$("#jsonTip");
+		  var show = [0,2,1];
+		  var strHtml = "";
+		  $jq182$jsontip.empty();
+		  for (var id in show) {
+		    info = jsdb[show[id]];
+		    strHtml += '<div class="post-preview">';
+		    strHtml += '<a href="templates.html?id=' + info.id + '">';
+		    strHtml += '<h3 class="post-title">' + info.title + '</h3>';
+		    strHtml += '<h5 class="post-subtitle">' + info.subtitle + '</h5></a>';
+		    strHtml += '<p class="post-meta">浏览: ' + info.read + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div><hr>';
+		  };
+		  $jq182$jsontip.html(strHtml);//显示处理后的数据
+		})
+		</script> 
+		<!--script>
+		$jq182$(function (){
+		  $jq182$.getJSON("p/id.json", function (data){
+			var $jq182$jsontip = $jq182$("#jsonTip");
+			var show = ["2","3"];
+			var strHtml = "";
+			//存储数据的变量 
+			$jq182$jsontip.empty();
+			//清空内容 
+			$jq182$.each(data, function (infoIndex, info){
+			if (show.includes(info.id)){
+			  strHtml += '<hr><div class="post-preview">';
+			  strHtml += '<a href="templates.html?id=' + info.id + '">';
+			  strHtml += '<h3 class="post-title">' + info.title + '</h3>';
+			  strHtml += '<h5 class="post-subtitle">' + info.subtitle + '</h5></a>';
+			  strHtml += '<p class="post-meta">浏览: ' + info.read + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div>';}
+			}) 
+			$jq182$jsontip.html(strHtml);//显示处理后的数据 
+		  }) 
+		})
+		</script-->
+		
 	</head>
 	<body>
 		<!--Navigation bar-->
 		<div id="nav-placeholder"></div>
-
 		<script>
-		$(function(){
-		  $("#nav-placeholder").load("../nav.html");
+		$jq1102$(function(){
+		  $jq1102$("#nav-placeholder").load("../nav.html");
 		});
 		</script>
+		<!--Navigation end-->
 		
 		<header class="masthead" style="background-image: url('../images/blog-bg.jpg')">
 			<div class="overlay"></div>
@@ -34,6 +81,7 @@
 					<div class="col-lg-8 col-md-10 mx-auto">
 						<div class="site-heading">
 							<h1>合喵博客</h1>
+							<hr>
 							<span class="subheading">我扑在书上，宛如吃撑的人扑在面包上</span>
 						</div>
 					</div>
@@ -47,8 +95,8 @@
 					<!--side bar-->
 					<div id="left-sidebar" class="sidebar"></div>
 					<script>
-					$(function(){
-					  $("#left-sidebar").load("sidebar.html");
+					$jq1102$(function(){
+					  $jq1102$("#left-sidebar").load("sidebar.html");
 					});
 					</script>
 				</div>
@@ -56,6 +104,10 @@
 					<div class="mx-auto container">
 						<a class="text-center text-muted col-1"><h1>作者推荐</h1></a>
 						<hr>
+						<div id="jsonTip">
+							<!--script type="text/javascript">document.write(strHtml)</script-->
+						</div> 
+						<!--
 						<div class="post-preview">
 							<a href="p/1.html">
 							<h3 class="post-title">
@@ -66,43 +118,17 @@
 							</h5>
 							</a>
 						<p class="post-meta">浏览: 12 | 作者: 浩瀚猫 | 更新: 2015.09.19</p>
-						</div>
-						<hr>
-						<div class="post-preview">
-							<a href="p/1.html">
-							<h3 class="post-title">
-							生死随行，偿逝之殇
-							</h3>
-							<h5 class="post-subtitle">
-							——《挪威的森林》读后感<br>
-							 人生好比舞台，有人会与你同台，也会有人提前退场，无需纠结谁会与你同台到最后，因为这是一个没有剧本的舞台，所能做的就是，到最后落幕的时候，演出了真正的自己，演出了让自己不会后悔的一出精彩的戏
-							</h5>
-							</a>
-						<p class="post-meta">浏览: 12 | 作者: 浩瀚猫 | 更新: 2015.03.22</p>
-						</div>
-						<hr>
-						<div class="post-preview">
-							<a href="p/1.html">
-							<h3 class="post-title">
-							以爱之名，葬汝所幸
-							</h3>
-							<h5 class="post-subtitle">
-							——《穆斯林的葬礼》读后感<br>
-							如果他们继续阻挠你的选择，不妨告诉他们，不要以爱的名义去阻挠你的选择，因为，你的人生是你自己的，你的后悔也是你自己承受的，他们无法代替你自己去后悔。
-							</h5>
-							</a>
-						<p class="post-meta">浏览: 12 | 作者: 浩瀚猫 | 更新: 2015.11.16</p>
-						</div>
+						-->
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Bootstrap core JavaScript -->
-    	<!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script-->
+    	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     	<!-- Custom scripts for this template -->
-    	<script src="js/clean-blog.js"></script>
+    	<script src="/js/clean-blog.js"></script>
 	</body>
 </html>
