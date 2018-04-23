@@ -17,11 +17,13 @@
 	<script> var $jq1102$ = jQuery.noConflict(true); </script>
 	
 	<!-- jQuery for json load -->
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script> 
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.min.js"></script> 
 	<script> var $jq182$ = jQuery.noConflict(true); </script>
 	
+	<!-- load json database -->
 	<script type="text/javascript" src="p/id.js"></script> 
 	
+	<!-- read param in url -->
 	<script type="text/javascript">
 	  var id = getQueryVariable("id");
 	  if (typeof id == 'string') {
@@ -61,7 +63,7 @@
 		for (var id in show) {
 		  page = jsdb[show[id]];
 		  recommandHtml += '<div class="post-preview">';
-		  recommandHtml += '<a href="templates.html?id=' + page.id + '">';
+		  recommandHtml += '<a href="page.html?id=' + page.id + '">';
 		  recommandHtml += '<h3 class="post-title">' + page.title + '</h3>';
 		  recommandHtml += '<h5 class="post-subtitle">' + page.subtitle + '</h5></a>';
 		  recommandHtml += '<p class="post-meta">浏览: ' + page.read + ' | 作者: ' + page.author+ ' | 更新: ' + page.date + '</p></div><hr>';
@@ -71,6 +73,17 @@
 	</script>
 	
 	<title>合喵博客</title>
+	<script type="text/javascript">
+		document.title= info.title;
+
+		$jq1102$('meta[itemprop=name]').attr('content', info.title);
+		$jq1102$('meta[itemprop=image]').attr('content', "http://www.sigmameow.com/images/logo.gif");
+		$jq1102$('meta[itemprop=description]').attr('content', info.subtitle);
+		
+		var meta = document.getElementsByTagName('meta');
+		alert(String(meta["itemprop"]))
+		/*meta["XXX"].setAttribute('content',"abcdef");*/
+	</script>
 </head>
 	<!--Navigation bar-->
 	<div id="nav-placeholder"></div>
@@ -104,6 +117,15 @@
     <article>
       	<div class="container">
         	<div class="row">
+				<div class="col-md-2 mx-auto">
+					<!--side bar-->
+					<div id="left-sidebar" class="sidebar"></div>
+					<script>
+					$jq1102$(function(){
+					  $jq1102$("#left-sidebar").load("sidebar.html");
+					});
+					</script>
+				</div>
           		<div class="col-md-10 mx-auto">
 					<!-- contents page -->
 					<div id="page-placeholder"></div>

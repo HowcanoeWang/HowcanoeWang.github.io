@@ -20,20 +20,20 @@
 		<script> var $jq1102$ = jQuery.noConflict(true); </script>
 		
 		<!-- jQuery for json load -->
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script> 
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.min.js"></script> 
 		<script> var $jq182$ = jQuery.noConflict(true); </script>
 		
 		<script type="text/javascript" src="p/id.js"></script>
 		<script>
 		$jq182$(function (){
 		  var $jq182$jsontip = $jq182$("#jsonTip");
-		  var show = [0,2,1];
+		  var show = section["home"];
 		  var strHtml = "";
 		  $jq182$jsontip.empty();
 		  for (var id in show) {
 		    info = jsdb[show[id]];
 		    strHtml += '<div class="post-preview">';
-		    strHtml += '<a href="templates.html?id=' + info.id + '">';
+		    strHtml += '<a href="page.html?id=' + info.id + '">';
 		    strHtml += '<h3 class="post-title">' + info.title + '</h3>';
 		    strHtml += '<h5 class="post-subtitle">' + info.subtitle + '</h5></a>';
 		    strHtml += '<p class="post-meta">浏览: ' + info.read + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div><hr>';
@@ -104,9 +104,7 @@
 					<div class="mx-auto container">
 						<a class="text-center text-muted col-1"><h1>作者推荐</h1></a>
 						<hr>
-						<div id="jsonTip">
-							<!--script type="text/javascript">document.write(strHtml)</script-->
-						</div> 
+						<div id="jsonTip"></div> 
 						<!--
 						<div class="post-preview">
 							<a href="p/1.html">

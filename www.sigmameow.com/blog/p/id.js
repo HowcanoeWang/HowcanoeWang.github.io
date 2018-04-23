@@ -1,3 +1,23 @@
+var section = {
+	"home":[0,2,1],
+	"读书杂记":{
+		"文学小说":[0,1],
+		"歌戏影视":[],
+		"奇技赢巧":[2]
+	},
+	"学习笔记":{
+		"南林笔记":[],
+		"UNB笔记":[],
+		"筑波笔记":[],
+		"网课笔记":[]
+	},
+	"科研技巧":{
+		"科研作图":[],
+		"数据处理":[],
+		"统计分析":[]
+	}
+};
+
 var jsdb = [
 {
 "id":"0",
@@ -6,7 +26,6 @@ var jsdb = [
 "author":"浩瀚猫",
 "read":"12",
 "date":"2015.11.16",
-"type":["读书杂记","文学小说"],
 "img":"../images/page-heading/musilin.jpg",
 "recommend":[1,2]
 },
@@ -17,7 +36,6 @@ var jsdb = [
 "author":"浩瀚猫",
 "read":"14",
 "date":"2015.03.22",
-"type":["读书杂记","文学小说"],
 "img":"../images/page-heading/norway_forest.jpg",
 "recommend":[0,2]
 },
@@ -28,7 +46,6 @@ var jsdb = [
 "author":"浩瀚猫",
 "read":"11",
 "date":"2015.09.19",
-"type":["读书杂记","奇技赢巧"],
 "img":"../images/page-heading/IELTS.jpg",
 "recommend":[0,1]
 }
