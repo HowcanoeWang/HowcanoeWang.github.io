@@ -24,10 +24,25 @@
 		<script> var $jq182$ = jQuery.noConflict(true); </script>
 		
 		<script type="text/javascript" src="p/id.js"></script>
-		<script>
+		<script type="text/javascript">
+		/*get ?section string in url*/
+		var sid = decodeURI(getQueryVariable('section'));
+		if (typeof sid !== 'string') {
+		  var sid = "作者推荐";
+	    };
+		var show = section[sid];
+		function getQueryVariable(variable){
+       	  var query = window.location.search.substring(1);
+       	  var vars = query.split("&");
+       		for (var i=0;i<vars.length;i++) {
+              var pair = vars[i].split("=");
+              if(pair[0] == variable){return pair[1];}
+       		}
+       		return(false);
+	  	};
+		/* rendering the page html code */
 		$jq182$(function (){
 		  var $jq182$jsontip = $jq182$("#jsonTip");
-		  var show = section["home"];
 		  var strHtml = "";
 		  $jq182$jsontip.empty();
 		  for (var id in show) {
@@ -39,7 +54,7 @@
 		    strHtml += '<p class="post-meta">浏览: ' + info.read + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div><hr>';
 		  };
 		  $jq182$jsontip.html(strHtml);//显示处理后的数据
-		})
+		});
 		</script> 
 		<!--script>
 		$jq182$(function (){
@@ -91,7 +106,7 @@
 		
 		<div class="container py-3">
 			<div class="row">
-				<div class="col-sm-2">
+				<div class="col-lg-2">
 					<!--side bar-->
 					<div id="left-sidebar" class="sidebar"></div>
 					<script>
@@ -100,12 +115,12 @@
 					});
 					</script>
 				</div>
-				<div class="col-sm-10">
+				<div class="col-lg-10">
 					<div class="mx-auto container">
-						<a class="text-center text-muted col-1"><h1>作者推荐</h1></a>
+						<a class="text-center text-muted col-1"><h1><script type="text/javascript">document.write(sid);</script></h1></a>
 						<hr>
 						<div id="jsonTip"></div> 
-						<!--
+						<!-- example code
 						<div class="post-preview">
 							<a href="p/1.html">
 							<h3 class="post-title">

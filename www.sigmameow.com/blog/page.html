@@ -3,6 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta itemprop="name" content="合喵博客分享测试"/>
+	<meta itemprop="image" content="http://www.sigmameow.com/images/logo.gif" />
+	<meta itemprop="description" content="这是要分享的内容测试" />
+
 	<link href="../../images/home.ico" rel="icon"> 
 	
 	<!-- Bootstrap CSS -->
@@ -80,11 +84,12 @@
 		$jq1102$('meta[itemprop=image]').attr('content', "http://www.sigmameow.com/images/logo.gif");
 		$jq1102$('meta[itemprop=description]').attr('content', info.subtitle);
 		
-		var meta = document.getElementsByTagName('meta');
+		/*var meta = document.getElementsByTagName('meta');
 		alert(String(meta["itemprop"]))
-		/*meta["XXX"].setAttribute('content',"abcdef");*/
+		meta["XXX"].setAttribute('content',"abcdef");*/
 	</script>
 </head>
+<body>
 	<!--Navigation bar-->
 	<div id="nav-placeholder"></div>
 
@@ -115,7 +120,7 @@
 	
 	<!-- Post Content -->
     <article>
-      	<div class="container">
+      	<div class="container py-3">
         	<div class="row">
 				<div class="col-md-2 mx-auto">
 					<!--side bar-->
@@ -157,6 +162,5 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<!-- Custom scripts for this template -->
     <script src="../js/clean-blog.js"></script>
-<body>
 </body>
 </html>
