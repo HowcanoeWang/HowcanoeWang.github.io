@@ -15,8 +15,9 @@ var section = {
 	"筑波笔记":[],
 	"网课笔记":[],
 	/*=================*/
-	"科研技巧":[],
+	"科研技能":[3],
 	/*-----------------*/
+	"Py点云库":[3],
 	"科研作图":[],
 	"数据处理":[],
 	"统计分析":[]
@@ -30,7 +31,7 @@ var jsdb = [
 "author":"浩瀚猫",
 "read":"12",
 "date":"2015.11.16",
-"img":"../images/page-heading/musilin.jpg",
+"img":"img/page-heading/musilin.jpg",
 "recommend":[1,2]
 },
 {
@@ -40,7 +41,7 @@ var jsdb = [
 "author":"浩瀚猫",
 "read":"14",
 "date":"2015.03.22",
-"img":"../images/page-heading/norway_forest.jpg",
+"img":"img/page-heading/norway_forest.jpg",
 "recommend":[0,2]
 },
 {
@@ -50,7 +51,17 @@ var jsdb = [
 "author":"浩瀚猫",
 "read":"11",
 "date":"2015.09.19",
-"img":"../images/page-heading/IELTS.jpg",
-"recommend":[0,1]
+"img":"img/page-heading/IELTS.jpg",
+"recommend":[3]
+},
+{
+"id":"3",
+"title":"起步：python-pcl环境搭建",
+"subtitle":"开源带来了商业软件所不具有的免费优势，但是带来的就是复杂的调试过程和看作者心情的说明文档，开源带来的最明显变化，即从商业公司里程序员头发逐渐消失，变为所有用户头发一起逐渐消失。",
+"author":"浩瀚猫",
+"read":"5",
+"date":"2018.05.08",
+"img":"img/page-heading/point_cloud0.png",
+"recommend":[2]
 }
 ];

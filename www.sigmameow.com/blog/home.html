@@ -27,7 +27,7 @@
 		<script type="text/javascript">
 		/*get ?section string in url*/
 		var sid = decodeURI(getQueryVariable('section'));
-		if (typeof sid !== 'string') {
+		if (sid == 'false') {
 		  var sid = "作者推荐";
 	    };
 		var show = section[sid];

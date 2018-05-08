@@ -10,6 +10,16 @@ p {
   margin: 30px 0;
 }
 
+a {
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  text-overflow:ellipsis;
+}
+a:focus, a:hover {
+  color:lightgray;
+}
+
 
 .sidebar a,a:hover{
     text-decoration: none;
@@ -189,3 +199,114 @@ blockquote {
   font-weight: 700;
   margin-top: 60px;
 }
+
+.section-heading.h3 {
+  font-size: 30px;
+  margin-top: 30px;
+}
+
+.section-heading.h5 {
+  font-size: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
+
+.caption {
+    font-size: 14px;
+    /*font-style: italic;*/
+    display: block;
+    margin: 0;
+    /*padding: 10px;*/
+    text-align: center;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.img-fluid {
+  margin-left: auto; 
+  margin-right:auto; 
+  display:block;
+  margin-top: 10px;
+  margin-bottom:10px;
+  border-radius:5px;
+  /*box-shadow: 0 0 10px black;*/
+  max-width: 100%;
+  height: auto;
+  /*vertical-align: middle;
+  border-style: none;*/
+}
+
+/* wiz-tag*/
+.wiz_toc_layer {
+    background-color:rgba(250,250,250,1.00);
+    padding: 20px 25px;
+    word-break: break-word;
+	border-radius:15px;
+	box-shadow: 0 0 10px rgba(250,250,250,1.00);
+}
+
+.wiz_toc {
+    text-decoration: none;
+    display: inline-block;
+	font-size: 20px;
+    /*line-height: 27px;*/
+}
+.wiz_toc:hover{
+    text-decoration: underline;
+}
+.wiz_toc.h1 {
+    margin-left: 0;
+}
+.wiz_toc.h2 {
+    margin-left: 10px;
+}
+.wiz_toc.h3 {
+    margin-left: 20px;
+}
+.wiz_toc.h4 {
+    margin-left: 30px;
+}
+.wiz_toc.h5 {
+    margin-left: 40px;
+}
+.wiz_toc.h6 {
+    margin-left: 50px;
+}
+
+code {
+	background: #272822; 
+	color: #f8f8f2;
+	border-radius:2px;
+	box-shadow: 0 0 5px black;
+}
+.codeblock {
+	margin-top:15px;
+	margin-bottom: 15px;
+	display:block;
+	overflow-y:hidden;
+	overflow-x:auto;
+	border-radius:5px;
+	box-shadow: 0 0 10px black;
+	/*	word-wrap: break-word;
+	word-break: break-all;*/
+	white-space:nowrap;
+}
+
+/* comment */
+cm {
+	color: greenyellow;
+	font-style: normal;
+}
+kbd {
+	color:gold;
+}
+samp {
+	color:skyblue;
+}
+var {
+	color: hotpink;
+	font-style:normal;
+}
+
+    
