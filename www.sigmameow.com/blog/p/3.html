@@ -1,5 +1,5 @@
 <p>本文主要讲解Python-PCL库的背景知识与搭建步骤，主要内容有：</p>
-<div class="wiz_toc_layer"><a class="wiz_toc h1" href="#背景知识">背景知识</a><br><a class="wiz_toc h3" href="#Python">Python</a><br><a class="wiz_toc h3" href="#点云">点云</a><br><a class="wiz_toc h3" href="#PCL库">PCL库</a><br><a class="wiz_toc h3" href="#Python虚拟环境">Python虚拟环境</a><br><a class="wiz_toc h5" href="#1.创建目录">1.创建目录</a><br><a class="wiz_toc h5" href="#2.创建命名为XXX的独立虚拟环境">2.创建命名为XXX的独立虚拟环境</a><br><a class="wiz_toc h5" href="#3.进入虚拟环境:\Scripts\activate">3.进入虚拟环境:\Scripts\activate</a><br><a class="wiz_toc h5" href="#4.安装各种包">4.安装各种包</a><br><a class="wiz_toc h5" href="#5.退出当前虚拟环境">5.退出当前虚拟环境</a><br><a class="wiz_toc h5" href="#6.删除虚拟环境">6.删除虚拟环境</a><br><a class="wiz_toc h3" href="#PyCharm编辑器(IDE)">PyCharm编辑器(IDE)</a><br><a class="wiz_toc h1" href="#Python-pcl开发环境搭建">Python-pcl开发环境搭建</a><br><a class="wiz_toc h3" href="#准备材料">准备材料</a><br><a class="wiz_toc h3" href="#安装">安装</a><br><a class="wiz_toc h5" href="#0. PyCharm于VS2017的安装">0. PyCharm于VS2017的安装</a><br><a class="wiz_toc h5" href="#1. Python3.6.5的安装">1. Python3.6.5的安装</a><br><a class="wiz_toc h5" href="#2. 安装PCL-1.8.1-AllInOne-msvc2017-win64.exe">2. 安装PCL-1.8.1-AllInOne-msvc2017-win64.exe</a><br><a class="wiz_toc h5" href="#3. 修改系统环境变量">3. 修改系统环境变量</a><br><a class="wiz_toc h5" href="#4. 创建虚拟环境">4. 创建虚拟环境</a><br><a class="wiz_toc h5" href="#4.1 检查环境变量是否修改成功">4.1 检查环境变量是否修改成功</a><br><a class="wiz_toc h5" href="#5. setup.py的准备工作">5. setup.py的准备工作</a><br><a class="wiz_toc h5" href="#6. 尝试安装python-pcl">6. 尝试安装python-pcl</a><br><a class="wiz_toc h5" href="#7. 功能测试">7. 功能测试</a></div>
+<div class="wiz_toc_layer"><a class="wiz_toc h1" href="#背景知识">背景知识</a><br><a class="wiz_toc h3" href="#Python">Python</a><br><a class="wiz_toc h3" href="#点云">点云</a><br><a class="wiz_toc h3" href="#PCL库">PCL库</a><br><a class="wiz_toc h3" href="#Python虚拟环境">Python虚拟环境</a><br><a class="wiz_toc h5" href="#1.创建目录">1.创建目录</a><br><a class="wiz_toc h5" href="#2.创建命名为XXX的独立虚拟环境">2.创建命名为XXX的独立虚拟环境</a><br><a class="wiz_toc h5" href="#3.进入虚拟环境:\Scripts\activate">3.进入虚拟环境:\Scripts\activate</a><br><a class="wiz_toc h5" href="#4.安装各种包">4.安装各种包</a><br><a class="wiz_toc h5" href="#5.退出当前虚拟环境">5.退出当前虚拟环境</a><br><a class="wiz_toc h5" href="#6.删除虚拟环境">6.删除虚拟环境</a><br><a class="wiz_toc h3" href="#PyCharm编辑器(IDE)">PyCharm编辑器(IDE)</a><br><a class="wiz_toc h1" href="#Python-pcl开发环境搭建">Python-pcl开发环境搭建</a><br><a class="wiz_toc h3" href="#准备材料">准备材料</a><br><a class="wiz_toc h3" href="#安装">安装</a><br><a class="wiz_toc h5" href="#0. PyCharm与VS2017的安装">0. PyCharm与VS2017的安装</a><br><a class="wiz_toc h5" href="#1. Python3.6.5的安装">1. Python3.6.5的安装</a><br><a class="wiz_toc h5" href="#2. 安装PCL-1.8.1-AllInOne-msvc2017-win64.exe">2. 安装PCL-1.8.1-AllInOne-msvc2017-win64.exe</a><br><a class="wiz_toc h5" href="#3. 修改系统环境变量">3. 修改系统环境变量</a><br><a class="wiz_toc h5" href="#4. 创建虚拟环境">4. 创建虚拟环境</a><br><a class="wiz_toc h5" href="#4.1 检查环境变量是否修改成功">4.1 检查环境变量是否修改成功</a><br><a class="wiz_toc h5" href="#5. setup.py的准备工作">5. setup.py的准备工作</a><br><a class="wiz_toc h5" href="#6. 尝试安装python-pcl">6. 尝试安装python-pcl</a><br><a class="wiz_toc h5" href="#7. 功能测试">7. 功能测试</a></div>
 
 <a href="#wizToc"></a>
 
@@ -7,7 +7,7 @@
 
 <h1 class="section-heading text-center" id="背景知识">背景知识</h1>
 
-<p>【说些废话，主要是看，不要实际操作】</p>
+<p>【说些废话与基础知识，主要是理解，为后面实际操作做准备】</p>
 
 <h3 class="section-heading h3" id="Python">Python</h3>
 
@@ -28,7 +28,7 @@
 <h3 class="section-heading h3" id="PCL库">PCL库</h3>
 
 <p><img class="img-fluid" src="img/3/0.866720435492875.png" alt="PCL-logo"> <br>
-PCL (Point Cloud Libray) 是大型跨平台开源C++编程库，实现了大量点云相关的通用算法和高效数据结构，涉及到点云获取、滤波、分割、配准、特征提取、曲面重建及可视化等功能，PCL在3D信息获取于处理上和OpenCV在2D信息获取上有着同样的地位。其采用BSD证书，可免费进行商业和学术应用。</p>
+PCL (Point Cloud Libray) 是大型跨平台开源C++编程库，实现了大量点云相关的通用算法和高效数据结构，涉及到点云获取、滤波、分割、配准、特征提取、曲面重建及可视化等功能，PCL在3D信息获取与处理上和OpenCV在2D信息获取上有着同样的地位。其采用BSD证书，可免费进行商业和学术应用。</p>
 
 <p>作为优秀的胶水语言，python-pcl封装了部分PCL库的接口，截至2018年5月，主要包括基于PointXYZ点云类型的5个操作：</p>
 
@@ -40,7 +40,7 @@ PCL (Point Cloud Libray) 是大型跨平台开源C++编程库，实现了大量�
 <li>配准操作 (Registration)</li>
 </ul>
 
-<p>可以说很非常基础了，没有完全发挥出来C++平台上的威力，不过该python库也在18个贡献者的努力下不断扩建中。</p>
+<p>可以说非常基础了，没有完全发挥出来它在C++平台上的威力，不过该python库也在18个贡献者的努力下不断扩建中。</p>
 
 <hr>
 
@@ -48,9 +48,9 @@ PCL (Point Cloud Libray) 是大型跨平台开源C++编程库，实现了大量�
 
 <p>Python发展至今，版本迭代十分迅速；就算相同的Python版本下，各个库也有不同的版本，对于开发人员来说，解决开发不同应用的版本冲突问题尤为重要，虚拟环境的出现，相当于给每个应用一个单独的房间，互相之间不会影响。</p>
 
-<p>拿笔者举例子，常用Python3.6是最常用的一个Python版本，科研数据处理主要要用到最新版本的Numpy、Matplatlib、Pandas三件套，但是很多种情况下，一些库的开发人员更喜欢的是成熟版本的稳定性，因此很多库都不是基于最新版本开发的。如本文的主角，他就要求Python版本号不得高于3.5，Cython版本号不得高于0.25.2；这与笔者的科研数据处理需求就起了很严重的冲突。</p>
+<p>对于笔者来说，Python3.6是最常用(甚至是默认)的一个Python版本，科研数据处理中主要要用到最新版本的Numpy、Matplotlib、Pandas三件套，但是很多种情况下，很多库的开发人员是“御姐控”，更喜欢老版本的成熟稳定，如本文的主角，他就要求Python版本号最好不高于3.5，Cython版本号不得高于0.25.2；这与笔者的科研数据处理需求就起了很严重的版本冲突。</p>
 
-<p>更重要的是，这种独立隔开的房间，可以保证处女座程序员对开发环境的整洁的需求。像笔者这种各个方向乱捯饬的反面例子，常用的科研数据处理，就安装了10多个库；然后数据展示的Jupyter Notebook这个应用，又安装了几十个库；前不久又跑去学爬虫，又装了近10个爬虫库；Python动态网页开发，又装了一大堆Flask库，导致现在每次一输入<code>pip list</code>进行库管理时，列出来乱七八糟的近百行库列表令人头大。如果每个方向专门开一个房间，那可就就清爽多了 ￣へ￣</p>
+<p>这种独立隔开的房间，一方面可以解决版本冲突问题，另一方面可以保证处女座程序员对开发环境的整洁的需求。像笔者这种各个方向乱捯饬的反面例子，常用的科研数据处理，就安装了10多个库；然后数据展示的Jupyter Notebook这个应用，又安装了几十个库；前不久又跑去学爬虫，又装了近10个爬虫库；Python动态网页开发，又装了一大堆Flask库，导致现在每次一输入<code>pip list</code>进行库管理时，列出来乱七八糟的近百行库列表令人头大。如果每个方向专门开一个房间，那可不就清爽多了。</p>
 
 <p>虚拟环境的安装很简单，打开命令控制行(Win+R&gt;输入cmd 或 右键开始菜单的Win图标&gt;选择Windows Powershel 管理员)，输入</p>
 
@@ -87,7 +87,7 @@ PCL (Point Cloud Libray) 是大型跨平台开源C++编程库，实现了大量�
 
 <p>以下是栗子，成功的建立一个名叫pcl的Python3.5的虚拟环境</p>
 
-<code class="codeblock">D:\Virtualenv&gt; <kvd>virtualenv pcl --python=D:\Applications\Python35\python.exe</kvd> </code>
+<code class="codeblock">D:\Virtualenv&gt; <kbd>virtualenv pcl --python=D:\Applications\Python35\python.exe</kbd> </code>
 
 <h5 class="section-heading h5" id="3.进入虚拟环境:\Scripts\activate">3.进入虚拟环境:\Scripts\activate</h5>
 
@@ -97,24 +97,24 @@ PCL (Point Cloud Libray) 是大型跨平台开源C++编程库，实现了大量�
 
 <code class="codeblock">(pcl) D:\Virtualenv&gt; </code>
 
-<p>注意到前面虚拟环境的小括号了没有，这就说明进独立的虚拟环境啦</p>
+<p>注意到前面虚拟环境的小括号了没有，这就说明进独立的虚拟环境啦。</p>
 
 <h5 class="section-heading h5" id="4.安装各种包">4.安装各种包</h5>
 
-<p>然后安装包就和普通的操作一模一样啦，顺便在这里补充一下安装包的3种姿势</p>
+<p>虚拟环境里安装包和普通的操作一模一样，顺便在这里补充一下安装包的3种姿势：</p>
 
 <p><strong>第一种，也是最普遍的</strong></p>
 
-<p><code>pip install <var>包名</var>  --version=<var>版本号</var></code> <br>
+<p><code class="codeblock">pip install <var>包名</var>  --version=<var>版本号</var></code> <br>
 Python的基本操作啊，必须要会的，后面特定版本的Cython就是用这种方法（敲黑板</p>
 
 <p><strong>第二种，进阶了一点，wheel安装法</strong></p>
 
-<p>这种方法主要出现在默认的Pip安装的包有些问题，需要找第三方平台放出来的修改版本，最最常见的就是Intel的CPU基本都有mkl，这种情况下默认安装的numpy和scipy不能正常运行，需要安装第三方拓展包啦，网址：<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
+<p>这种方法主要出现在默认的Pip安装的包有些问题，需要找第三方平台放出来的修改版本，最最常见的就是Intel的CPU基本都有mkl架构，这种情况下默认安装的numpy和scipy不能正常运行，需要安装第三方拓展包啦，网址：<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
 
-<p>没错，你猜中了，用Intel CPU的小伙伴的numpy+mkl就要用这种方法安装，要不为啥说农企AMD很优秀呢→_→</p>
+<p>用Intel CPU的小伙伴的numpy+mkl就要用这种方法安装，要不为啥说农企AMD很优秀呢→_→</p>
 
-<p>此外，mkl还要建立在微软C++运行库上面，记得根据自己的Python版本安装对应的版本号 <br>
+<p>此外，mkl还要建立在微软C++运行库上面，记得根据自己的Python版本安装对应的版本号： <br>
 Visual C++ 2008 (x64, x86, and SP1 for CPython 2.7) redistributable packages <br>
 Visual C++ 2010 (x64, x86, for CPython 3.4) redistributable packages <br>
 Visual C++ 2017 (x64 or x86 for CPython 3.5, 3.6, and 3.7) redistributable packages <br>
@@ -123,11 +123,11 @@ Visual C++ 2017 (x64 or x86 for CPython 3.5, 3.6, and 3.7) redistributable packa
 <p>下载地址就在上面那个链接里面，点对应的超链接就能下载啦。</p>
 
 <p>安装完了之后，下载对应版本的numpy+mkl.whl文件，然后依然是命令行里面 <br>
-<code>pip install <var>下载地址\numpy+mkl.whl</var></code></p>
+<code class="codeblock">pip install <var>下载地址\numpy+mkl.whl</var></code></p>
 
 <p><strong>第三种，伪开发人员安装法</strong></p>
 
-<p>既没有在pypi上注册名字(即不能pip install 包名)，也没有官方或第三方打包好的whl轮子文件，但是他的源文件，有个叫setup.py 的东西，就要用这个文件来安装</p>
+<p>这种方法适用于，开发人员既没有在pypi上注册名字(即不能pip install 包名)，也没有打包好的whl轮子文件，但是他的源文件，有个叫setup.py的东西，就要用这个文件来安装。</p>
 
 <code class="codeblock">
 	python setup.py build_ext -i    <cm># 测试可行性，一定要测试通了再进行下一步</cm> <br>
@@ -137,13 +137,13 @@ Visual C++ 2017 (x64 or x86 for CPython 3.5, 3.6, and 3.7) redistributable packa
 
 <h5 class="section-heading h5" id="5.退出当前虚拟环境">5.退出当前虚拟环境</h5>
 
-<p>捯饬完了之后，就可以退出虚拟环境了，方法很简单，直接不如deactivate即可</p>
+<p>捯饬完了之后，就可以退出虚拟环境了，方法很简单，直接输入deactivate即可。</p>
 
-<code class="codeblock">(pcl) D:\Virtualenv&gt; deactivate</code>
+<code class="codeblock">(pcl) D:\Virtualenv&gt; <kbd>deactivate</kbd></code>
 
 <h5 class="section-heading h5" id="6.删除虚拟环境">6.删除虚拟环境</h5>
 
-<p>这步是最简单的，一个不当心把虚拟环境玩废了咋办，直接对着文件夹delete即可，然后再重复上面的步骤新建一个就行辣</p>
+<p>这步是最简单的，一个不当心把虚拟环境玩废了咋办，直接对着虚拟环境文件夹delete即可，然后再重复上面的步骤新建一个就行辣。</p>
 
 <hr>
 
@@ -152,14 +152,14 @@ Visual C++ 2017 (x64 or x86 for CPython 3.5, 3.6, and 3.7) redistributable packa
 <p><img class="img-fluid" src="img/3/0.7155608837550615.png" alt="PyCharmlogo"> <br>
 对于厉害的人来说，编辑器这玩意根本就不存在，打开一个记事本就开始撸代码，撸完改个文件名后缀一遍就调试通了，拍拍手就走了。</p>
 
-<p>但是对于我们这些凡人来说，写的代码无外乎也就两种：一是动不起来，二是停不下来╮（╯＿╰）╭所以一个趁手的编辑器还是对于写bug很有好处的。</p>
+<p>但是对于凡人来说，写的代码无外乎也就两种：一是动不起来，二是停不下来╮（╯＿╰）╭所以一个趁手的编辑器还是对于写bug很有好处的。</p>
 
 <p>按照国内主流的Python教程，看到这篇文章的小伙伴们无外乎有两种流派</p>
 
 <ol class="wiz-list-level1">
 <li>科研数据分析派的Anaconda一套打天下（我导师） <br>
 毫无疑问，此流派的IDE多半是用Spyder了</li>
-<li>爬虫网页产品开发实战派的独立Python侠（我） <br>
+<li>爬虫网页产品开发实战派的独版Python侠（我） <br>
 这类的进化路线多半为：Python自带的IDLE =&gt; PyCharm等 =&gt; Vim大法</li>
 </ol>
 
@@ -167,9 +167,9 @@ Visual C++ 2017 (x64 or x86 for CPython 3.5, 3.6, and 3.7) redistributable packa
 
 <p>其实用什么编辑器都是无所谓的，能码出代码的才是最终目的，笔者也是上面的各类编辑器都涉猎过，这里选用PyCharm的主要原因还是，切换虚拟环境相对来说比较方便，当然知道自己熟练的IDE怎么切换虚拟环境就OK，这不是重点。</p>
 
-<p>顺便说一嘴，PyCharm也支持搭建虚拟环境，操作当然比上面敲的命令行方便些，但是经过本人测试，PyCharm生成别的版本Python虚拟环境时，生成的pip和setuptool版本老旧，而且更新的时候很容易出错，而且它没有把wheel装进去，最后我还是用命令行搭建虚拟环境了。</p>
+<p>顺便说一嘴，PyCharm也支持搭建虚拟环境，操作当然比上面敲命令行要方便些，但是经过本人测试，PyCharm生成别的版本Python虚拟环境时，生成的pip和setuptool版本老旧，而且手动更新的时候很容易出错，而且它没有把wheel装进去，最后我还是用命令行搭建虚拟环境了。</p>
 
-<p>到此为止，该说的废话也说的差不多了，该补得知识点也补得差不多，然后就让我们进入重头戏：环境搭建</p>
+<p>到此为止，该说的废话也说的差不多了，该补得知识点也补得差不多，然后就让我们进入重头戏：环境搭建。</p>
 
 <hr>
 
@@ -193,10 +193,10 @@ python 3.5 =&gt; msvc 2015 of PCL-1.8.1. <br>
 python 3.6 =&gt; msvc 2017 of PCL-1.8.1 + 升级setuptools到最新版 <br>
 请安装对应的版本！</p>
 
-<p>由于前面提到的原因，我的电脑已经装上了VS2017，所以VS2015就装不上了，于是本攻略的侧重于VS2017，因此，主要的材料为：</p>
+<p>由于前面提到的原因，我的电脑已经装上了VS2017，所以VS2015就装不上了，于是本攻略的侧重于VS2017+Python3.6，因此，主要的材料为：</p>
 
 <ul>
-<li>Windows10 64位操作系统 (强烈要求64位操作系统，32位操作系统最大内存上限4GB，处理个毛线的点云数据啊)</li>
+<li>Windows10 64位操作系统 (强烈要求64位操作系统，32位操作系统最大内存上限4GB，处理点云数据是个很好的冷笑话XD)</li>
 <li>Microsoft Visual C++ Redistributable for Visual Studio 2017 x64版本 <br>
 或者省心点，直接下载Build Tools for Visual Studio 2017也行 <br>
 <img class="img-fluid" src="img/3/_M[38K]KGDL22[]CL]OM(EJ.png" style="color: inherit; font-size: 1rem; line-height: 1.6; vertical-align: bottom;"> <br>
@@ -214,15 +214,16 @@ python 3.6 =&gt; msvc 2017 of PCL-1.8.1 + 升级setuptools到最新版 <br>
 把源码解压到PCL_Project文件夹里面，应该获得了python-pcl-master文件夹</li>
 </ul>
 
+<p>有可能随着版本的更新迭代，又不知道从哪里蹦出来神秘的Bug，笔者已经偷偷把目前调试通的所有安装包备份了，如果链接上新了安装失败，可以试试联系我用老版本的看看，800MB全活不打折，放服务器上是不可能放服务器上的，带宽这么低，上传的慢下载的也慢＞︿＜</p>
 <hr>
 
 <h3 class="section-heading h3" id="安装">安装</h3>
 
-<h5 class="section-heading h5" id="0. PyCharm于VS2017的安装">0. PyCharm于VS2017的安装</h5>
+<h5 class="section-heading h5" id="0. PyCharm与VS2017的安装">0. PyCharm与VS2017的安装</h5>
 
 <p>此处从略，一路next下去就行了</p>
 
-<p><strong><em>建议在硬盘的根目录下，专门建立一个文件夹加PCL_Project，所有的东西都往里面安装</em></strong></p>
+<p><strong><em>建议在硬盘的根目录下，专门建立一个文件夹加PCL_Project，所有的东西都往里面安装。</em></strong></p>
 
 <h5 class="section-heading h5" id="1. Python3.6.5的安装">1. Python3.6.5的安装</h5>
 
@@ -236,7 +237,7 @@ python 3.6 =&gt; msvc 2017 of PCL-1.8.1 + 升级setuptools到最新版 <br>
 下一步，所有的框框都不要勾上，然后自定义路径，避免C:\Program Files\ 等默认的系统路径，不然新建虚拟环境就会提示没有权限执行操作，就算你用管理员模式启动命令提示行，新建的虚拟环境每次也都要用管理员权限启动才行（血的教训1） <br>
 <img class="img-fluid" src="img/3/da0f9926-af5e-4eb7-b5db-5771883a9948.jpg" style="vertical-align: bottom; max-width: 100%;"></p>
 
-<p>然后点安装就可以啦</p>
+<p>然后点安装就可以啦。</p>
 
 <h5 class="section-heading h5" id="2. 安装PCL-1.8.1-AllInOne-msvc2017-win64.exe">2. 安装PCL-1.8.1-AllInOne-msvc2017-win64.exe</h5>
 
@@ -249,7 +250,7 @@ python 3.6 =&gt; msvc 2017 of PCL-1.8.1 + 升级setuptools到最新版 <br>
 装到一半，不出意外会弹出来这个对话框，让你选择OpenNI2的拓展包，一定不要安装到系统的默认路径C:\Program Files\ 统统装到新建的PCL文件夹里面，如果装到系统路径里了，那么除非你用管理员权限启动命令提示行，否则在IDE里面import pcl就会报找不到DLL文件的错误（血的教训） <br>
 <img class="img-fluid" src="img/3/1BBF0B32376235B6ACF012218C60C293.jpg" width="620" height="482" style="vertical-align: bottom; max-width: 100%;"></p>
 
-<h5 class="section-heading h5" id="3. 修改系统环境变量">3. 修改系统环境变量</h5>
+<h5 class="section-heading h5" id="3. 修改系统环境变量">3.修改系统环境变量</h5>
 
 <p>此电脑&gt;右键&gt;更多&gt;属性 <br>
 <img class="img-fluid" src="img/3/6ef43f4d-add6-4986-b69e-90ee9d5ebceb.png" style="vertical-align: bottom; max-width: 100%;"> <br>
@@ -321,7 +322,7 @@ Type "help", "copyright", "credits" or "license" for more information.</samp><br
 
 <h5 class="section-heading h5" id="5. setup.py的准备工作">5. setup.py的准备工作</h5>
 
-<p>打开python-pcl-master文件夹，打开pkg-config文件夹，里面应该有只有3个文件 <br>
+<p>打开python-pcl-master文件夹，打开pkg-config文件夹，里面应该有只有3个文件。 <br>
 <img class="img-fluid" src="img/3/8bbdc4e99c692127413f361772db4ca8.png" style="vertical-align: bottom; max-width: 100%;"> <br>
 打开gtk+-bundle_3.10.4-20131202_win64.zip，把bin文件夹里面的所有<strong>文件</strong>(86个)，都复制到pkg-config文件夹下面。(注意是复制文件，而不是拷贝文件夹，血的教训3) <br>
 复制完成后，pkg-config文件夹应该是乱糟糟的一团（89个文件，而不是pkg-config里面多了个bin文件夹）</p>
@@ -346,7 +347,7 @@ Generating code<br>
 Finished generating code</samp><br>
 (pcl) PS D:\PCL_Project\python-pcl-master&gt;</code>
 	
-<p>那就恭喜你了，没有任何问题的编译完成，接下来只要</p>
+<p>那就恭喜你了，没有任何问题的编译完成，接下来只要输入以下命令：</p>
 
 <code class="codeblock">
 (pcl) PS D:\PCL_Project\python-pcl-master&gt; <kbd>python setup.py install </kbd><br>
@@ -377,12 +378,12 @@ error: command 'C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\BIN\\
 <img class="img-fluid" src="img/3/0.11665567522866538.png" alt="image"> <br>
 很明显，是vc140和vc141的文件名出错，然后我们打开那个文件路径 <br>
 D:\PCL_Project\PCL 1.8.1\3rdParty\Boost\lib <br>
-就会发现 <br>
+就会发现： <br>
 <img class="img-fluid" src="img/3/7c32717d-37d8-4228-91be-b6af131ac647.png" style="vertical-align: bottom; max-width: 100%;"></p>
 
 <p>他喵的好像文件名全都不对啊，然后你就把原来的lib文件夹复制一份，改名位lib.old文件夹，然后用鼠标+键盘，把所有的vc141都改成vc140即可</p>
 
-<p>不出意外应该就八打包完成啦。</p>
+<p>不出意外应该就打包完成啦。</p>
 
 <h5 class="section-heading h5" id="7. 功能测试">7. 功能测试</h5>
 
@@ -427,4 +428,11 @@ ImportError: DLL load failed: 找不到指定的模块。</samp>
 
 <p>开源带来了商业软件所不具有的免费优势，但是带来的就是复杂的调试过程和看作者心情的说明文档，开源带来的最明显变化，即从商业公司里程序员头发逐渐消失，变为所有用户头发一起逐渐消失</p>
 
-<p>如有任何问题，欢迎联系笔者whz@sigmameow.com，携手共同解决问题！</p>
+<p>如有任何问题，欢迎联系笔者<a href="mailto:whz@sigmameow.com">whz@sigmameow.com</a>，携手共同解决问题！</p>
+
+<p>如果这篇文章成功的帮你解决了一个难题，请不要吝啬一瓶防脱护发素的钱哦(￣▽￣)"</p>
+
+<div class="text-center">
+	<img width="256" class="img-fluid" alt="" src="../../images/alipay.jpg">
+	<img width="256" class="img-fluid" alt="" src="../../images/wechat.png">
+</div>
