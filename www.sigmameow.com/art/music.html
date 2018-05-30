@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>合喵云音乐</title>
+	<!-- Custom styles for this page -->
+	<link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/music.css">
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script> var $jq1102$ = jQuery.noConflict(true); </script>
+  
+  <!-- left column button active js-->
+  <script type="text/javascript">
+    $jq1102$('.btn').click(function() {
+      $jq1102$(this).toggleClass('active');
+    });
+  </script>
+</head>
+<body>
+	<!--Navigation bar-->
+	<div id="nav-placeholder"></div>
+	<script>
+	$jq1102$(function(){
+	  $jq1102$("#nav-placeholder").load("../nav.html");
+	});
+	</script>
+	<!--end of Navigation bar-->
+	
+	<div class="container" style="margin-bottom: 10vh;">
+		<div class="row navbar-expand-md">
+			<div class="navbar-collapse col-md-3 collapse text-center" id="song_list"> <!--d-none d-lg-block-->
+				<!--div class="page_list">
+          <div class="list_container" id="listcontainer" -->
+        <div class="song_list">
+        <!-- 口琴歌单 -->
+        <div class="list">
+          <p class="title text-left">口琴歌单</p>
+          <div class="btngroups">
+            <p class="btn active"><i class="fa fa-music" aria-hidden="true"></i>&nbsp;&nbsp;动漫歌曲</p>
+            <p class="btn"><i class="fa fa-music" aria-hidden="true"></i>&nbsp;&nbsp;古典名曲</p>
+          </div>
+        </div>
+        <!-- 口琴歌单 -->
+        <div class="list">
+          <p class="title text-left">Remix</p>
+          <div class="btngroups">
+            <p class="btn"><i class="fa fa-music" aria-hidden="true"></i>&nbsp;&nbsp;动漫串烧</p>
+            <p class="btn"><i class="fa fa-music" aria-hidden="true"></i>&nbsp;&nbsp;自制音乐</p>
+          </div>
+        </div>
+        </div>
+      </div>
+			<div class="col-md-9 text-center align-middle">
+        <!-- 手机端歌单弹出按钮 -->
+        <button class="navbar-toggler bg-light navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+        <p>歌单界面</p>
+			</div>
+		</div>
+	</div>
+
+  <div class="fixed-bottom nav-footer">
+    <div class="container bg-white" style="border-top: 1px solid #dadadc;">
+      <div class="row progress" style="border-bottom: 1px solid #dadadc; height:2.5vh;">
+        <div class="progress-bar bg-secondary progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="20"
+  aria-valuemin="0" aria-valuemax="100" style="width:20%">01:23</div>
+        <div id="processBtn" class="btn btn-sm bg-white"></div>
+      </div>
+      <div class="control_panel"  style="width:100%">
+        <div class="poster text-center" id="btnExpandPlayBox">
+          <img src="./img/SecretBase.png" alt="cover" id="albumPic"/>
+          <div class="poster_hoverback"><i class="fa fa-expand" aria-hidden="true"></i></div>
+        </div>
+        <div class="info align-middle">
+          <p>Secret Base复音口琴<br>浩瀚猫</p>
+        </div>
+        <div class="control_btn text-center">
+          <audio class="mb-4" controls>
+            <source src="audio/180327Secret Base新式单音.mp3" type="audio/mpeg">Your browser does not support the audio tag.
+          </audio>
+        </div>
+      </div>
+      <!-- 全屏小窗 
+      <div class="playlist_smallwindow clearfix">
+        <div class="poster" id="btnExpandPlayBox">
+          <img src="./img/SecretBase.png" alt="" height="42" width="42" id="smallwindow_albumPic" />
+          <div class="poster_hoverback"><i class="fa fa-expand" aria-hidden="true"></i></div>
+        </div>
+        <div class="info">
+          <p class="songname" id="smallwindow_songName">Secret Base复音口琴</p>
+          <p class="singername" id="smallwindow_singerName">浩瀚猫</p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
