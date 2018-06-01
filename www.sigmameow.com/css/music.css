@@ -1,5 +1,5 @@
 /* CSS Document */
-/* -----------------------page_logos------------------------------- */
+/* ==================== page_logos ==================== */
 @font-face {
     font-family: 'FontAwesome';
     src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
@@ -15,23 +15,36 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
 .fa-music:before {
     content: "\f001"}
-
 .fa-expand:before {
     content: "\f065"}
+.fa-step-backward:before {
+    content: "\f048"}
+.fa-step-forward:before {
+    content: "\f051"}
+.fa-play:before {
+    content: "\f04b"}
+.fa-pause:before {
+    content: "\f04c"}
+.fa-stop:before {
+    content: "\f04d"}
 
-/* ------------------------song_list------------------------------- */
-.song_list{
-  max-height: 71vh;
-  height:71vh;
-  overflow-y:scroll;
+/* ==================== Content ==================== */
+.page_content {
+  padding-bottom: 100px;
 }
-@media (max-width:979px) {
+
+/* -------------------- song_list -------------------- */
+.song_list{
+  height:calc(100vh - 250px);
+  border-right: 1px solid #dadadc;
+  overflow-y:auto;
+}
+@media (max-width:768px) {
   .song_list{
-    max-height:none;
     height:auto;
+    border-left: 1px solid #dadadc;
     overflow:hidden;
   }
 }
@@ -47,7 +60,7 @@
 	position:relative;
 }
 .list>.btngroups>.btn{
-	padding-left:20px;
+	/*padding-left:10px;*/
 	line-height:2rem;
 	border-left:3px solid transparent;
 	color:#656567;
@@ -64,31 +77,35 @@
 	color:#111;
 }
 
-/* ------------------------page_footer------------------------------- */
-.nav-footer {
-  max-height: 10vh;
+/* ==================== footer ==================== */
+.progress {
+  border-top: 1px solid #dadadc;
+  border-bottom: 1px solid #dadadc;
+  height:20px;
 }
 
 .control_panel {
-  height:10vh;
-  max-height: 10vh;
+  width:100%;
+  height:80px;
+  max-height: 80px;
 }
 
 .control_panel>.poster {
-  padding-top: 1vh;
+  padding-top: 5px;
   float:left;
   position:relative;
 	overflow:hidden;
 }
 .poster>img{
-	width:6vh;
-	height:6vh;
-  border-radius:2px;
+	width:70px;
+	height:70px;
+  border-radius:5px;
 }
 .poster>.poster_hoverback{
 	display:none;
 	position:absolute;
-	top:1vh;left:0;
+  border-radius:5px;
+	top:5px;left:0;
 	width:100%;
 	height:100%;
 	background-color:rgba(0,0,0,0.5);
@@ -100,7 +117,7 @@
 	top:30%;left:20%;
 	-webkit-transform:translate(-30%,-20%);
 	transform:translate(-30%,-20%);
-	font-size:2rem;
+	font-size:3rem;
 	font-weight:lighter;
 }
 .poster:hover>.poster_hoverback{
@@ -108,22 +125,39 @@
 }
 
 .control_panel>.info {
+  max-width: 30vw;
   float:left;
-  padding-top: 0.5vh;
-  padding-left: 1vw;
+  padding-top: 10px;
+  padding-left: 20px;
 }
-
-.control_panel>.info>.p{
-  font-size:30px;
+.info> p {
+  font-size:20px;
+  line-height:20px;
 	white-space:nowrap;
 	text-overflow:ellipsis;
 	overflow:hidden;
 }
 .control_panel>.control_btn{
-  /*float:right;*/
-  padding-top: 2vh;
-  float:left;
+  float:right;
+  padding-top: 15px;
 }
+.control_btn>.btn{
+  display:inline-block;
+  font-size:1.5rem;
+  width:50px;
+	height:50px;
+	margin-left:15px;
+	border-radius:50%;
+	position:relative;
+	/*top:50%;left:50%;*/
+	/*-webkit-transform:translate(0,-50%);
+	transform:translate(0,-50%);*/
+	background-color:gray;
+	color:#f7f7f7;
+	/*cursor:pointer;*/
+}
+
+
 /*
 .page_list>.playlist_smallwindow{
 	position:absolute;
@@ -198,7 +232,7 @@
 }*/
 
 
-/* -------------------- history style ------------------
+/* ==================== history style ====================
 .page_list{
 	width:220px;
 	height:100%;
