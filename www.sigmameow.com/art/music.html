@@ -13,13 +13,29 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script> var $jq1102$ = jQuery.noConflict(true); </script>
   
+  <script src="https://code.jquery.com/jquery-1.8.3.js"></script>
+	<script> var $jq183$ = jQuery.noConflict(true); </script>
+  
   <!-- left column button active js-->
   <script type="text/javascript">
     $jq1102$('.btn').click(function() {
       $jq1102$(this).toggleClass('active');
     });
   </script>
+  
+  <script type="text/javascript">
+    function switch2song() {
+      $('#musictab a[href="#tab-song"]').tab('show');
+    };
+    function switch2songlist() {
+      $('#musictab a[href="#tab-songlist"]').tab('show');
+    };
+    function switch2playlist() {
+      $('#musictab a[href="#tab-playlist"]').tab('show');
+    };
+  </script>
 </head>
+  
 <body>
 	<!--Navigation bar-->
 	<div id="nav-placeholder"></div>
@@ -56,11 +72,28 @@
         <!-- 手机端歌单弹出按钮 -->
         <button class="navbar-toggler bg-light navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-          </button>
-        <p>歌单界面</p>
-        <audio class="mb-4" controls>
-          <source src="audio/180327Secret Base新式单音.mp3" type="audio/mpeg">Your browser does not support the audio tag.
-        </audio>
+        </button>
+        <!-- tab 切换网页 -->
+        <ul class="nav nav-tabs" role="tablist" id="musictab">
+          <li role="presentation" class="btn active"><a href="#tab-songlist" aria-controls="tab-songlist" role="tab" data-toggle="tab">歌单</a></li>
+          <li role="presentation" class="btn"><a href="#tab-song" aria-controls="tab-song" role="tab" data-toggle="tab">歌曲</a></li>
+          <li role="presentation" class="btn"><a href="#tab-playlist" aria-controls="tab-playlist" role="tab" data-toggle="tab">播放列表</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="tab-songlist">
+            <p>歌单界面</p>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="tab-song">
+            <p>歌曲界面</p>
+            <button class="btn" type="button" onclick="switch2songlist()">收起</button>
+            <audio class="mb-4" controls>
+              <source src="audio/180327Secret Base新式单音.mp3" type="audio/mpeg">Your browser does not support the audio tag.
+            </audio>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="tab-playlist">
+            播放列表
+          </div>
+        </div>
 			</div>
 		</div>
 	</div>
@@ -74,7 +107,7 @@ aria-valuemin="0" aria-valuemax="100" style="width:20%">01:23</div>
     <div class="control_panel">
       <div class="poster text-center" id="btnExpandPlayBox">
         <img src="./img/SecretBase.png" alt="cover" id="albumPic"/>
-        <div class="poster_hoverback"><i class="fa fa-expand" aria-hidden="true"></i></div>
+        <div class="poster_hoverback" onclick="switch2song()"><i class="fa fa-expand" aria-hidden="true"></i></div>
       </div>
       <div class="info">
         <p>Secret Base复音口琴</p>
@@ -87,17 +120,6 @@ aria-valuemin="0" aria-valuemax="100" style="width:20%">01:23</div>
         </div>
       </div>
     </div>
-    <!-- 全屏小窗 
-    <div class="playlist_smallwindow clearfix">
-      <div class="poster" id="btnExpandPlayBox">
-        <img src="./img/SecretBase.png" alt="" height="42" width="42" id="smallwindow_albumPic" />
-        <div class="poster_hoverback"><i class="fa fa-expand" aria-hidden="true"></i></div>
-      </div>
-      <div class="info">
-        <p class="songname" id="smallwindow_songName">Secret Base复音口琴</p>
-        <p class="singername" id="smallwindow_singerName">浩瀚猫</p>
-      </div>
-    </div> -->
   </div>
 
   <!-- Bootstrap core JavaScript -->
