@@ -68,30 +68,46 @@
           </div>
         </div>
       </div>
-			<div class="col-md-9 text-center align-middle">
+			<div class="col-md-9">
         <!-- 手机端歌单弹出按钮 -->
-        <button class="navbar-toggler bg-light navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler bg-white navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation" style="position:absolute;">
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- tab 切换网页 -->
-        <ul class="nav nav-tabs" role="tablist" id="musictab">
+        <ul class="nav nav-tabs mytabs" role="tablist" id="musictab">
           <li role="presentation" class="btn active"><a href="#tab-songlist" aria-controls="tab-songlist" role="tab" data-toggle="tab">歌单</a></li>
           <li role="presentation" class="btn"><a href="#tab-song" aria-controls="tab-song" role="tab" data-toggle="tab">歌曲</a></li>
           <li role="presentation" class="btn"><a href="#tab-playlist" aria-controls="tab-playlist" role="tab" data-toggle="tab">播放列表</a></li>
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="tab-songlist">
-            <p>歌单界面</p>
+            <div class="list_container">
+              <div class="list_info container py-2 align-content-between">
+                <div class="list_img d-inline-block">
+                    <img id="playlist_listPic" alt="list_img" src="img/SecretBase.png" height="150px" width="150px">
+                </div>
+                <div class="list_detail d-inline-block">
+                  <div class="detail_name">
+                    <span class="listtag">口琴歌单</span>
+                    <span class="listname" id="playlist_listName">动漫歌曲</span>
+                  </div>
+                  <div class="detail_time"></div>
+                  <div class="detail_btns"></div>
+                </div>
+              </div>
+              <div class="music_list">
+              </div>
+            </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="tab-song">
+          <div role="tabpanel" class="tab-pane text-center" id="tab-song">
             <p>歌曲界面</p>
             <button class="btn" type="button" onclick="switch2songlist()">收起</button>
             <audio class="mb-4" controls>
               <source src="audio/180327Secret Base新式单音.mp3" type="audio/mpeg">Your browser does not support the audio tag.
             </audio>
           </div>
-          <div role="tabpanel" class="tab-pane" id="tab-playlist">
-            播放列表
+          <div role="tabpanel" class="tab-pane text-center" id="tab-playlist">
+            <h4>播放列表</h4>
           </div>
         </div>
 			</div>
@@ -117,6 +133,8 @@ aria-valuemin="0" aria-valuemax="100" style="width:20%">01:23</div>
         <div class="btn prev d-none d-sm-inline-block"><i class="fa fa-step-backward" aria-hidden="true"></i></div>
         <div class="btn play"><i class="fa fa-play" aria-hidden="true"></i></div>
         <div class="btn next d-none d-sm-inline-block"><i class="fa fa-step-forward" aria-hidden="true"></i>
+        </div>
+        <div class="btn nowplaylist" onclick="switch2playlist()"><i class="fa fa-th-list" aria-hidden="true"></i>
         </div>
       </div>
     </div>

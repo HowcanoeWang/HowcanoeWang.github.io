@@ -29,6 +29,8 @@
     content: "\f04c"}
 .fa-stop:before {
     content: "\f04d"}
+.fa-th-list:before {
+    content: "\f00b"}
 
 /* ==================== Content ==================== */
 .page_content {
@@ -76,6 +78,52 @@
 	background-color:#e3e3e5;
 	color:#111;
 }
+
+/* -------------------- switch tabs -------------------- */
+.mytabs{
+  display:none;
+}
+
+/* -------------------- song_list -------------------- */
+.list_container{
+  /*width:100%;
+	overflow:hidden;*/
+}
+
+.list_container>.list_info {
+  padding-left: 60px;
+}
+.list_container>.list_info>.list_img {
+  padding-right: 1vw;
+  padding-bottom: 1vw;
+}
+.list_container>.list_info>.list_detail {
+  vertical-align: top;
+  /*font-size: 25px;*/
+}
+@media (max-width:768px) {
+  .list_container>.list_info {
+    text-align: center;
+  }
+}
+
+.detail_name>.listtag{
+	display:inline-block;
+	padding:5px 10px;
+	background-color:#c52f30;
+	color:#f1f1f1;
+}
+.detail_name>.listname{
+	margin:0 5px;
+	font-size:1.5rem;
+}
+.list_container>.music_list{
+  
+}
+
+/* -------------------- now_play -------------------- */
+
+/* -------------------- play_list -------------------- */
 
 /* ==================== footer ==================== */
 .progress {
