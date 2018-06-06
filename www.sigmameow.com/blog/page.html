@@ -81,15 +81,11 @@
 		document.title= info.title;
 
 		$jq1102$('meta[itemprop=name]').attr('content', info.title);
-		$jq1102$('meta[itemprop=image]').attr('content', "http://www.sigmameow.com/images/logo.gif");
+		$jq1102$('meta[itemprop=image]').attr('content', info.img);
 		$jq1102$('meta[itemprop=description]').attr('content', info.subtitle);
-		
-		/*var meta = document.getElementsByTagName('meta');
-		alert(String(meta["itemprop"]))
-		meta["XXX"].setAttribute('content',"abcdef");*/
 	</script>
 </head>
-<body oncontextmenu='return false' ondragstart='return false' onselectstart ='return false' onselect='document.selection.empty()' oncopy='document.selection.empty()' onbeforecopy='return false' onmouseup='document.selection.empty()'>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart ="return false" onselect="document.selection.empty()" oncopy="document.selection.empty()" onbeforecopy="return false" onmouseup="document.selection.empty()">
 	<!--Navigation bar-->
 	<div id="nav-placeholder"></div>
 
@@ -161,6 +157,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<!-- Custom scripts for this template -->
-    <script src="../js/clean-blog.js"></script>
+  <script src="../js/clean-blog.js"></script>
 </body>
 </html>

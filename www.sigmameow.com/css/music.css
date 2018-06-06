@@ -31,7 +31,14 @@
     content: "\f04d"}
 .fa-th-list:before {
     content: "\f00b"}
-
+.fa-play-circle-o:before {
+    content: "\f01d"}
+.fa-share-square-o:before {
+    content: "\f045"}
+.fa-download:before {
+    content: "\f019"}
+.fa-heart-o:before {
+    content: "\f08a"}
 /* ==================== Content ==================== */
 .page_content {
   padding-bottom: 100px;
@@ -85,40 +92,96 @@
 }
 
 /* -------------------- song_list -------------------- */
-.list_container{
-  /*width:100%;
-	overflow:hidden;*/
-}
-
-.list_container>.list_info {
-  padding-left: 60px;
-}
-.list_container>.list_info>.list_img {
-  padding-right: 1vw;
-  padding-bottom: 1vw;
-}
-.list_container>.list_info>.list_detail {
-  vertical-align: top;
-  /*font-size: 25px;*/
-}
-@media (max-width:768px) {
+/*@media (max-width:768px) {
   .list_container>.list_info {
-    text-align: center;
+    padding-left: 30px;
   }
+}*/
+.list_container>.list_info>.list_img {
+  min-width: 150px;
+  padding-bottom: 5px;
 }
 
-.detail_name>.listtag{
+.list_container>.list_info>.list_detail {
+}
+.list_container>.list_info>.list_detail>.detail_name>.listtag{
 	display:inline-block;
 	padding:5px 10px;
-	background-color:#c52f30;
+	background-color:darkgray;
 	color:#f1f1f1;
 }
-.detail_name>.listname{
+.list_container>.list_info>.list_detail>.detail_name>.listname{
 	margin:0 5px;
-	font-size:1.5rem;
+	font-size:1.2rem;
 }
+
+.list_container>.list_info>.list_detail>.detail_discribe{
+  font-size:15px;
+  max-width: auto;
+}
+.list_container>.list_info>.list_detail>.detail_btns>.btn{
+	display:inline-block;
+	/*margin:0 5px;*/
+	/*padding:5px 10px;*/
+	border:1px solid #dadadc;
+	border-radius:5px;
+	cursor:pointer;
+}
+.list_container>.list_info>.list_detail>.detail_btns>span>i{
+  color:gray;
+}
+
 .list_container>.music_list{
-  
+  margin-top: 15px;
+  border-top: 1px solid #dadadc;
+}
+.music_list>table{
+	width:100%;
+	text-align:left;
+	vertical-align:middle;
+	background-color:#fafafa;
+	color:#313131;
+}
+.music_list>table td,
+.music_list>table th{
+	/*padding-left:10px;*/
+	max-width:30vw;
+	height:2rem;
+	font-weight:normal;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow:hidden;
+}
+.music_list>table td>i{
+  color:gray;
+}
+.music_list>table th{
+	border-right:1px solid #e0e0e0;
+	box-sizing:border-box;
+	color:#6d7172;
+}
+.music_list>table th:last-of-type{
+	border:none;
+}
+.music_list>table td>img{
+	width:100%;
+	height:auto;
+}
+.music_list>table>tbody>tr:nth-of-type(odd){
+	background-color:#f5f5f7;
+}
+.music_list>table>tbody>tr:hover,
+.music_list>table>tbody>tr.active{
+	background-color:#e3e3e5;
+}
+.music_list>table>tbody>tr>td:first-of-type{
+	/*padding-right:5px;*/
+	text-align:right;
+	color:#9c9c9c;
+}
+.music_list>table>tbody>tr>td.index.active{
+	font-size:0.8rem;
+	color:#c52f30;
 }
 
 /* -------------------- now_play -------------------- */

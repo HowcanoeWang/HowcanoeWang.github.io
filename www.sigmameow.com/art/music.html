@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+  <meta itemprop="description" content="合喵云音乐，个人ACG复音口琴与Remix音乐站">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>合喵云音乐</title>
@@ -70,7 +71,7 @@
       </div>
 			<div class="col-md-9">
         <!-- 手机端歌单弹出按钮 -->
-        <button class="navbar-toggler bg-white navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation" style="position:absolute;">
+        <button class="navbar-toggler bg-white navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation" style="position: absolute; z-index:99999;">
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- tab 切换网页 -->
@@ -81,21 +82,60 @@
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="tab-songlist">
-            <div class="list_container">
-              <div class="list_info container py-2 align-content-between">
-                <div class="list_img d-inline-block">
-                    <img id="playlist_listPic" alt="list_img" src="img/SecretBase.png" height="150px" width="150px">
+            <div class="container list_container text-center">
+              <div class="row py-2 list_info ">
+                <div class="list_img col-md-4 align-self-center">
+                    <img id="playlist_listPic" alt="list_img" src="img/harmonica_animation.png" height="150px" width="150px">
                 </div>
-                <div class="list_detail d-inline-block">
+                <div class="list_detail col-md-8">
                   <div class="detail_name">
                     <span class="listtag">口琴歌单</span>
                     <span class="listname" id="playlist_listName">动漫歌曲</span>
                   </div>
-                  <div class="detail_time"></div>
-                  <div class="detail_btns"></div>
+                  <div class="detail_discribe text-muted  text-left">
+                    <p>动画中的BGM，时而轻快，时而忧伤，包含了绮丽多彩的情愫，牵动着剧情的发展。天空之城、Secret Base都是口琴的入门歌曲，吹奏的同时脑海中不断浮现出的剧情，倾听清亮的琴音，让时间静静流逝，让旋律在心中流淌。</p>
+                  </div>
+                  <div class="detail_btns">
+                    <span class="btn playall"><i class="fa fa-play-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;播放全部</span>
+                    <span class="btn playall"><i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;分享</span>
+                    <span class="btn playall"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;下载全部</span>
+                  </div>
                 </div>
               </div>
               <div class="music_list">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>&nbsp;&nbsp;</th>
+                      <th>操作</th>
+                      <th>标题</th>
+                      <th>歌手</th>
+                      <th>时长</th>
+                    </tr>
+                  </thead>
+                  <tbody class="infolist" id="infoList_playlist">
+                    <tr>
+                      <td class="index">01</td>
+                      <td>
+                        <i class="fa fa-play-circle-o btn btn-sm" aria-hidden="true"></i>
+                        <i class="fa fa-download btn btn-sm" aria-hidden="true"></i>
+                      </td>
+                      <td>Secret Base（动画《未闻花名》ed）</td>
+                      <td>浩瀚猫</td>
+                      <td>05:36</td>
+                    </tr>
+                    <tr>
+                      <td class="index">02</td>
+                      <td>
+                        <i class="fa fa-play-circle-o btn btn-sm" aria-hidden="true"></i>
+                        <i class="fa fa-download btn btn-sm" aria-hidden="true"></i>
+                      </td>
+                      <td>Innocent（动画《天空之城》主题曲）</td>
+                      <td>浩瀚猫 | 飘零</td>
+                      <td>02:07</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
