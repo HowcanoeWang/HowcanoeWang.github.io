@@ -52,33 +52,11 @@
 		    strHtml += '<a href="page.html?id=' + info.id + '">';
 		    strHtml += '<h3 class="post-title">' + info.title + '</h3>';
 		    strHtml += '<h5 class="post-subtitle">' + info.subtitle + '</h5></a>';
-		    strHtml += '<p class="post-meta">浏览: ' + info.read + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div><hr>';
+		    strHtml += '<p class="post-meta">字数: ' + info.word + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div><hr>';
 		  };
 		  $jq182$jsontip.html(strHtml);//显示处理后的数据
 		});
 		</script> 
-		<!--script>
-		$jq182$(function (){
-		  $jq182$.getJSON("p/id.json", function (data){
-			var $jq182$jsontip = $jq182$("#jsonTip");
-			var show = ["2","3"];
-			var strHtml = "";
-			//存储数据的变量 
-			$jq182$jsontip.empty();
-			//清空内容 
-			$jq182$.each(data, function (infoIndex, info){
-			if (show.includes(info.id)){
-			  strHtml += '<hr><div class="post-preview">';
-			  strHtml += '<a href="templates.html?id=' + info.id + '">';
-			  strHtml += '<h3 class="post-title">' + info.title + '</h3>';
-			  strHtml += '<h5 class="post-subtitle">' + info.subtitle + '</h5></a>';
-			  strHtml += '<p class="post-meta">浏览: ' + info.read + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div>';}
-			}) 
-			$jq182$jsontip.html(strHtml);//显示处理后的数据 
-		  }) 
-		})
-		</script-->
-		
 	</head>
 	<body>
 		<!--Navigation bar-->

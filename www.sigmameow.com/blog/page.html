@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta itemprop="name" content="合喵博客分享测试"/>
+	<meta itemprop="name" content="合喵博客"/>
 	<meta itemprop="image" content="http://www.sigmameow.com/images/logo.gif" />
-	<meta itemprop="description" content="这是要分享的内容测试" />
+	<meta name="description" itemprop="description" content="浩瀚猫及基友们的博客集散地" />
 
 	<link href="../../images/home.ico" rel="icon"> 
 	
@@ -15,6 +15,9 @@
 	<!-- Custom styles for this page -->
 	<link rel="stylesheet" href="../css/index.css">
 	<link rel="stylesheet" href="../css/blog.css">
+
+  <!--  share.js -->
+  <link rel="stylesheet" href="../css/share.min.css">
 		
 	<!-- jQuery for html code reuse-->
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -37,7 +40,7 @@
 				    "title":"主标题",
 				    "subtitle":"副标题",
 				    "author":"浩瀚猫",
-				    "read":"10",
+				    "word":"1k",
 				    "date":"2018.11.16",
 				    "type":["读书杂记","文学小说"],
 				    "recommend":[1],
@@ -70,7 +73,7 @@
 		  recommandHtml += '<a href="page.html?id=' + page.id + '">';
 		  recommandHtml += '<h3 class="post-title">' + page.title + '</h3>';
 		  recommandHtml += '<h5 class="post-subtitle">' + page.subtitle + '</h5></a>';
-		  recommandHtml += '<p class="post-meta">浏览: ' + page.read + ' | 作者: ' + page.author+ ' | 更新: ' + page.date + '</p></div><hr>';
+		  recommandHtml += '<p class="post-meta">字数: ' + page.word + ' | 作者: ' + page.author+ ' | 更新: ' + page.date + '</p></div><hr>';
 		};
 		$jq182$jsontip.html(recommandHtml);//显示处理后的数据
 		});
@@ -79,7 +82,6 @@
 	<title>合喵博客</title>
 	<script type="text/javascript">
 		document.title= info.title;
-
 		$jq1102$('meta[itemprop=name]').attr('content', info.title);
 		$jq1102$('meta[itemprop=image]').attr('content', info.img);
 		$jq1102$('meta[itemprop=description]').attr('content', info.subtitle);
@@ -106,7 +108,7 @@
 			  <h1><script type="text/javascript">document.write(info.title)</script></h1>
               <h5 class="subheading"><script type="text/javascript">document.write(info.subtitle)</script></h5>
               <span class="meta">
-				<a href="#"><script type="text/javascript">document.write(info.author)</script></a> | 阅读: <script type="text/javascript">document.write(info.read)</script> | 更新于:  
+				<a href="#"><script type="text/javascript">document.write(info.author)</script></a> | 字数: <script type="text/javascript">document.write(info.word)</script> | 更新于:  
 				<script type="text/javascript">document.write(info.date)</script></span>
             </div>
           </div>
@@ -115,31 +117,34 @@
     </header>
 	
 	<!-- Post Content -->
-    <article>
-      	<div class="container py-3">
-        	<div class="row">
-				<div class="col-md-2 mx-auto">
-					<!--side bar-->
-					<div id="left-sidebar" class="sidebar"></div>
-					<script>
-					$jq1102$(function(){
-					  $jq1102$("#left-sidebar").load("sidebar.html");
-					});
-					</script>
-				</div>
-          		<div class="col-md-10 mx-auto">
-					<!-- contents page -->
-					<div id="page-placeholder"></div>
-					<script>
-					$jq1102$(function(){
-					  $jq1102$("#page-placeholder").load("p/"+info.id+".html");
-					});
-					</script>
-					<!-- contents page end-->
-				</div>
-        	</div>
-      	</div>
-    </article>
+  <article>
+    <div class="container py-3">
+      <div class="row">
+        <div class="col-md-2 mx-auto">
+          <!--side bar-->
+          <div id="left-sidebar" class="sidebar"></div>
+          <script>
+          $jq1102$(function(){
+            $jq1102$("#left-sidebar").load("sidebar.html");
+          });
+          </script>
+        </div>
+        <div class="col-md-10 mx-auto">
+          <!-- contents page -->
+          <div id="page-placeholder"></div>
+          <script>
+          $jq1102$(function(){
+            $jq1102$("#page-placeholder").load("p/"+info.id+".html");
+          });
+          </script>
+          <!-- contents page end-->
+          
+          <!-- share -->
+          <div class="social-share text-center"></div>
+        </div>
+      </div>
+    </div>
+  </article>
 	
 	<!-- recommends -->
 	<div class="container">
@@ -158,5 +163,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<!-- Custom scripts for this template -->
   <script src="../js/clean-blog.js"></script>
+  <script src="../js/social-share.min.js"></script>
 </body>
 </html>

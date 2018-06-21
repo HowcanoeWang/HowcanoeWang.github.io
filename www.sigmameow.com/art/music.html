@@ -71,7 +71,7 @@
       </div>
 			<div class="col-md-9">
         <!-- 手机端歌单弹出按钮 -->
-        <button class="navbar-toggler bg-white navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation" style="position: absolute; z-index:99999;">
+        <button class="navbar-toggler bg-white navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation" style="position: absolute; z-index:1;">
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- tab 切换网页 -->
@@ -82,7 +82,7 @@
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="tab-songlist">
-            <div class="container list_container text-center">
+            <div class="list_container text-center">
               <div class="row py-2 list_info ">
                 <div class="list_img col-md-4 align-self-center">
                     <img id="playlist_listPic" alt="list_img" src="img/harmonica_animation.png" height="150px" width="150px">
@@ -96,13 +96,13 @@
                     <p>动画中的BGM，时而轻快，时而忧伤，包含了绮丽多彩的情愫，牵动着剧情的发展。天空之城、Secret Base都是口琴的入门歌曲，吹奏的同时脑海中不断浮现出的剧情，倾听清亮的琴音，让时间静静流逝，让旋律在心中流淌。</p>
                   </div>
                   <div class="detail_btns">
-                    <span class="btn playall"><i class="fa fa-play-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;播放全部</span>
-                    <span class="btn playall"><i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;分享</span>
-                    <span class="btn playall"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;下载全部</span>
+                    <span class="btn playall"><i class="fa fa-play-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;播放全部</span><span class="btn plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                    <span class="btn share"><i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;分享</span>
+                    <!--span class="btn download"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;下载全部</span-->
                   </div>
                 </div>
               </div>
-              <div class="music_list">
+              <div class="music_list row">
                 <table>
                   <thead>
                     <tr>
@@ -139,16 +139,32 @@
               </div>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane text-center" id="tab-song">
-            <p>歌曲界面</p>
-            <button class="btn" type="button" onclick="switch2songlist()">收起</button>
-            <audio class="mb-4" controls>
-              <source src="audio/180327Secret Base新式单音.mp3" type="audio/mpeg">Your browser does not support the audio tag.
-            </audio>
+          <div role="tabpanel" class="tab-pane" id="tab-song" style="postion:relative;">
+            <div title="收起音乐详情页" class="compressbtn btn btn-sm bg-white" id="btnCompressPlayBox" onclick="switch2songlist()">
+              <i class="fa fa-compress" aria-hidden="true"></i>
+            </div>
+            <!-- 模糊背景-->
+            <!--div class="bg_blur" style="background-image: url(img/SecretBase.png)"></div-->
+            <div class="container">
+              <div class="title_section" id="songDetail">
+                <marquee class="info_song">Secret Base（动画《未闻花名》ed）</marquee>
+                <p class="info_singer">歌手：浩瀚猫</p>
+              </div>
+              <div class="disc_section"></div>
+              <h4>歌曲界面</h4>
+              <audio class="mb-4" controls>
+                <source src="audio/180327Secret Base新式单音.mp3" type="audio/mpeg">Your browser does not support the audio tag.
+              </audio>
+            </div>
+
           </div>
           <div role="tabpanel" class="tab-pane text-center" id="tab-playlist">
+            <div title="返回" class="compressbtn btn btn-sm" onclick="switch2songlist()">
+              <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </div>
             <h4>播放列表</h4>
           </div>
+          
         </div>
 			</div>
 		</div>

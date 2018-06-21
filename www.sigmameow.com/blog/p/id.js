@@ -29,7 +29,7 @@ var jsdb = [
 "title":"以爱之名，葬汝所幸",
 "subtitle":"——《穆斯林的葬礼》读后感<br>如果他们继续阻挠你的选择，不妨告诉他们，不要以爱的名义去阻挠你的选择，因为，你的人生是你自己的，你的后悔也是你自己承受的，他们无法代替你自己去后悔。",
 "author":"浩瀚猫",
-"read":"22",
+"word":"2.6k",
 "date":"2015.11.16",
 "img":"img/page-heading/musilin.jpg",
 "recommend":[1,4]
@@ -39,7 +39,7 @@ var jsdb = [
 "title":"生死随行，偿逝之殇",
 "subtitle":"——《挪威的森林》读后感<br>人生好比舞台，有人会与你同台，也会有人提前退场，无需纠结谁会与你同台到最后，因为这是一个没有剧本的舞台，所能做的就是，到最后落幕的时候，演出了真正的自己，演出了让自己不会后悔的一出精彩的戏",
 "author":"浩瀚猫",
-"read":"34",
+"word":"1.1k",
 "date":"2015.03.22",
 "img":"img/page-heading/norway_forest.jpg",
 "recommend":[0,4]
@@ -49,7 +49,7 @@ var jsdb = [
 "title":"我的雅思备考方法",
 "subtitle":"有志者，事竟成，破釜沉舟，百二秦关终属楚；<br>苦心人，天不负，卧薪尝胆，三千越甲可吞吴。",
 "author":"浩瀚猫",
-"read":"21",
+"word":"4.6k",
 "date":"2015.09.19",
 "img":"img/page-heading/IELTS.jpg",
 "recommend":[3]
@@ -59,7 +59,7 @@ var jsdb = [
 "title":"起步：Win10平台python-pcl环境搭建",
 "subtitle":"开源带来的最明显变化，就是从公司开发人员头发逐渐消失，变为所有用户头发一起逐渐消失。",
 "author":"浩瀚猫",
-"read":"56",
+"word":"5.4k",
 "date":"2018.05.08",
 "img":"img/page-heading/point_cloud0.png",
 "recommend":[2]
@@ -69,7 +69,7 @@ var jsdb = [
 "title":"娱乐尽头，皆是虚妄", 
 "subtitle":"——《头号玩家》影评<br>不要被麻醉剂麻痹了神经，不断提高自身能力与打磨心性，利用越来越窄的阶级上升通道向上攀爬，毕竟短短的人类文明还没有把弱肉强食从漫长的生物进化过程中抹去的能力。",
 "author":"浩瀚猫",
-"read":"35",
+"word":"2k",
 "date":"2018.05.10",
 "img":"img/page-heading/ready_player_one.jpg",
 "recommend":[0,1]
