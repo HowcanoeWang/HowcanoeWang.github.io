@@ -1,26 +1,25 @@
 ﻿var section = {
 	/*home default index*/
-	"作者推荐":[4,3,2,0,1], 
+	"作者推荐":[9,11,4,3,2,0,1], 
 	/*=================*/
-	"读书杂记":[4,2,0,1],
+	"读书杂记":[4,2,0,5,1],
 	/*-----------------*/
-	"文学小说":[0,1],
+	"文学小说":[0,1,5],
 	"歌戏影视":[4],
 	"奇技赢巧":[2],
-	/*=================*/
-	"学习笔记":[],
-	/*-----------------*/
-	"南林笔记":[],
-	"UNB笔记":[],
-	"筑波笔记":[],
-	"网课笔记":[],
 	/*=================*/
 	"科研技能":[3],
 	/*-----------------*/
 	"Py点云库":[3],
 	"科研作图":[],
 	"数据处理":[],
-	"统计分析":[]
+	"统计分析":[],
+	/*=================*/
+	"兴趣爱好":[9,11],
+	/*-----------------*/
+	"诗词歌赋":[9,11,10,8,7,6],
+	"音乐乐理":[],
+	"游戏心得":[]
 };
 
 var jsdb = [
@@ -32,7 +31,7 @@ var jsdb = [
 "word":"2.6k",
 "date":"2015.11.16",
 "img":"img/page-heading/musilin.jpg",
-"recommend":[1,4]
+"recommend":[1,4,5]
 },
 {
 "id":"1",
@@ -42,7 +41,7 @@ var jsdb = [
 "word":"1.1k",
 "date":"2015.03.22",
 "img":"img/page-heading/norway_forest.jpg",
-"recommend":[0,4]
+"recommend":[0,4,5]
 },
 {
 "id":"2",
@@ -72,6 +71,69 @@ var jsdb = [
 "word":"2k",
 "date":"2018.05.10",
 "img":"img/page-heading/ready_player_one.jpg",
-"recommend":[0,1]
+"recommend":[0,1,5]
+},
+{"id":"5",
+"title":"守望者究竟在麦田守望啥", 
+"subtitle":"——《麦田里的守望者》读后感<br>学校教育除了能让你变得博学谦逊之外，慢慢的，你就会发现你的脑子对什么合适，这可以节省你不少时间，免得你去瞎试一些对你不合适、不贴切的思想，慢慢就会知道如何恰如其分的把你的头脑武装起来。",
+"author":"浩瀚猫",
+"word":"835",
+"date":"2015.03.26",
+"img":"img/page-heading/wheatland.jpg",
+"recommend":[0,1,4]
+},
+{"id":"6",
+"title":"咏梅●藏头", 
+"subtitle":"——致黄艳梅与唐雨琦",
+"author":"浩瀚猫",
+"word":"28",
+"date":"2014.05.26",
+"img":"img/page-heading/wintersweet.jpg",
+"recommend":[9,7,8]
+},
+{"id":"7",
+"title":"与君勉●藏头", 
+"subtitle":"——致肖雨芯十九诞辰",
+"author":"浩瀚猫",
+"word":"28",
+"date":"2014.05.18",
+"img":"img/page-heading/swan.jpg",
+"recommend":[9,6,8]
+},
+{"id":"8",
+"title":"燕●藏头", 
+"subtitle":"——谢敏譞唐雨琦，跟吾三人诞辰之日相连也，遂成诗",
+"author":"浩瀚猫",
+"word":"96",
+"date":"2014.08.20",
+"img":"img/page-heading/birthday.jpg",
+"recommend":[9,6,7]
+},
+{"id":"9",
+"title":"水调歌头●中秋", 
+"subtitle":"乙未中秋，与友操场赏月畅谈，返室饮酒微醺，作此篇。",
+"author":"浩瀚猫",
+"word":"349",
+"date":"2015.09.27",
+"img":"img/page-heading/mid-autumn.jpg",
+"recommend":[11]
+},
+{"id":"10",
+"title":"绝句", 
+"subtitle":"——“可是跟你走的那一段路好短，短到我来不及鼓起勇气告诉你这份可爱可恨的小情愫”",
+"author":"浩瀚猫",
+"word":"28",
+"date":"2015.10.08",
+"img":"img/page-heading/jiao5.jpg",
+"recommend":[9]
+},
+{"id":"11",
+"title":"江城子●结荃一载", 
+"subtitle":"轻轻的你走了，正如你轻轻的来。",
+"author":"浩瀚猫",
+"word":"131",
+"date":"2016.10.29",
+"img":"img/page-heading/farewell.jpg",
+"recommend":[9]
 }
 ];
