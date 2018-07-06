@@ -61,7 +61,7 @@ var jsdb = [
 "author":"浩瀚猫",
 "word":"5.4k",
 "date":"2018.05.08",
-"img":"img/page-heading/point_cloud0.png",
+"img":"img/page-heading/point_cloud0.jpg",
 "recommend":[2]
 },
 {
