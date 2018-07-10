@@ -147,14 +147,33 @@
             <!--div class="bg_blur" style="background-image: url(img/SecretBase.png)"></div-->
             <div class="container">
               <div class="title_section" id="songDetail">
-                <marquee class="info_song">Secret Base（动画《未闻花名》ed）</marquee>
+                <!--marquee class="info_song">Secret Base（动画《未闻花名》ed）</marquee-->
+                <p class="info_song">
+                  <span class="songname">Secret Base（动画《未闻花名》ed）</span>
+                  <span class="label mv"><a href="#" target="_blank">MV</a></span>
+                </p>
                 <p class="info_singer">歌手：浩瀚猫</p>
               </div>
-              <div class="disc_section"></div>
-              <h4>歌曲界面</h4>
+              <div class="disc_section">
+                <div class="disc_needle" id="discNeedle">
+                  <img alt="" src="./img/needle.png">
+                </div>
+                <div class="disc_arc mx-auto d-block" id="bgDisc" style="background-image:url('./img/SecretBase.png');">
+                  <div class="poster">
+                    <img alt="" src="./img/disc-o.png">
+                  </div>
+                </div>
+                <div class="disc_btns text-center">
+                  <span class="btn playall"><i class="fa fa-play-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;播放</span>
+                  <span class="btn playall"><i class="fa fa-folder" aria-hidden="true"></i>&nbsp;&nbsp;乐谱</span>
+                  <span class="btn playall"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;下载</span>
+                  <span class="btn playall"><i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;分享</span>
+                </div>
+              </div>
+              <!--h4>歌曲界面</h4>
               <audio class="mb-4" controls>
                 <source src="audio/180327Secret Base新式单音.mp3" type="audio/mpeg">Your browser does not support the audio tag.
-              </audio>
+              </audio-->
             </div>
 
           </div>
