@@ -71,7 +71,7 @@
       </div>
 			<div class="col-md-9">
         <!-- 手机端歌单弹出按钮 -->
-        <button class="navbar-toggler bg-white navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation" style="position: absolute; z-index:1;">
+        <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#song_list" aria-controls="song_list" aria-expanded="false" aria-label="Toggle navigation" style="position: absolute; z-index:1;background-color: transparent;">
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- tab 切换网页 -->
@@ -144,7 +144,7 @@
               <i class="fa fa-compress" aria-hidden="true"></i>
             </div>
             <!-- 模糊背景-->
-            <!--div class="bg_blur" style="background-image: url(img/SecretBase.png)"></div-->
+            <div class="bg_blur" style="background-image: url(img/SecretBase.png)"></div>
             <div class="container">
               <div class="title_section" id="songDetail">
                 <!--marquee class="info_song">Secret Base（动画《未闻花名》ed）</marquee-->
@@ -167,7 +167,7 @@
                   <span class="btn playall"><i class="fa fa-play-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;播放</span>
                   <span class="btn playall"><i class="fa fa-folder" aria-hidden="true"></i>&nbsp;&nbsp;乐谱</span>
                   <span class="btn playall"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;下载</span>
-                  <span class="btn playall"><i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;分享</span>
+                  <!--span class="btn playall"><i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;分享</span-->
                 </div>
               </div>
               <!--h4>歌曲界面</h4>
@@ -181,7 +181,12 @@
             <div title="返回" class="compressbtn btn btn-sm" onclick="switch2songlist()">
               <i class="fa fa-angle-left" aria-hidden="true"></i>
             </div>
-            <h4>播放列表</h4>
+            <div class="playlist_section">
+              <h4>播放列表</h4>
+              <hr>
+              
+            </div>
+            
           </div>
           
         </div>
