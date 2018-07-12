@@ -47,6 +47,8 @@
     content: "\f104"}
 .fa-folder:before {
     content: "\f07b"}
+.fa-trash:before {
+    content: "\f1f8"}
 /* ==================== Content ==================== */
 .page_content {
   padding-bottom: 100px;
@@ -54,12 +56,14 @@
 
 /* -------------------- song_list -------------------- */
 .song_list{
-  height:calc(100vh - 250px);
+  height:100%;
+  min-height:calc(100vh - 250px);
   border-right: 1px solid #dadadc;
   overflow-y:auto;
 }
 @media (max-width:768px) {
   .song_list{
+    min-height: auto;
     height:auto;
     border-left: 1px solid #dadadc;
     overflow:hidden;
@@ -190,7 +194,7 @@
 	height:auto;
 }
 .music_list>table>tbody>tr:nth-of-type(odd){
-	background-color:#f5f5f7;
+	background-color:white;
 }
 .music_list>table>tbody>tr:hover,
 .music_list>table>tbody>tr.active{
@@ -240,13 +244,13 @@
 
 .compressbtn{
   position:absolute;
-  right:0;
+  right:15px;
   /*top:0; left:90%;*/
 	padding:5px 10px;
 	border:1px solid #dee2e3;
 	border-radius:5px;
 	font-size:1rem;
-	background-color:#f8f9fb;
+	background-color:transparent;
 	cursor:pointer;
   z-index:1;
 }
@@ -305,26 +309,33 @@
 
 .disc_section{
   position: relative;
-  height: 55vh;
+  /*height: calc(100vh - 250px);*/
   width:100%;
   overflow: hidden;
 }
 
 .disc_section>.disc_needle{
 	position:absolute;
-  left:47%;
-	/*top:-72px;left:30%;*/
-	-webkit-transform:rotate(-40deg);
-	transform:rotate(-40deg);
+	left:47%;
+	/*-webkit-transform:rotate(-40deg);
+	transform:rotate(-40deg);*/
 	transform-origin:16px 16px;
 	-webkit-transition:all 0.3s ease;
 	transition:all 0.3s ease;
-  z-index:1;
+	z-index:1;
 }
 
 .disc_section>.disc_needle>img {
   position: absolute;
   top: -20px;
+}
+
+.pause-needle {
+    transform: rotateZ(-40deg);
+}
+ 
+.resume-needle {
+    transform: rotateZ(-10deg);
 }
 
 .disc_section>.disc_arc{
@@ -351,9 +362,17 @@
 	height:100%;
 }
 
+.disk-cover-animation {
+    animation: rotate-disk 20s infinite normal linear;
+    animation-play-state: paused;
+    -webkit-animation: rotate-disk 20s infinite normal linear;
+    -webkit-animation-play-state: paused;
+}
+
 .disc_section>.disc_btns{
   /*postion:relative;*/
   margin-top:10px;
+  margin-bottom: 20px;
   bottom:0;left:0;
 	width:100%;
 }
@@ -371,32 +390,63 @@
 }
 
 /* animation */
-.disc_section>.disc_needle.play{
-	-webkit-transform:rotate(-8deg);
-	transform:rotate(-8deg);
-}
-.disc_section>.disc_arc{
-  margin-top: 50px;
-	-webkit-animation:rotateARC linear 20s infinite normal;
-	animation:rotateARC linear 20s infinite normal;
-	-webkit-animation-play-state:paused;
-	animation-play-state:paused;
-  z-index: -1;
-}
-@keyframes rotateARC{
-	0%{
-		-webkit-transform:rotate(0deg);
-		transform:rotate(0deg);
-	}
-	100%{
-		-webkit-transform:rotate(360deg);
-		transform:rotate(360deg);
-	}
+
+@keyframes rotate-disk {
+    100% {
+        transform: rotateZ(360deg);
+    }
 }
 
-.playlist_section>h4{
-  padding-top:10px;
-  padding-bottom: 10px;
+@-webkit-keyframes rotate-disk {
+    100% {
+        -webkit-transform: rotateZ(360deg);
+    }
+}
+
+
+ 
+/*@keyframes rotate-needle-pause {
+    100% {
+        transform: rotateZ(-40deg);
+    }
+}
+ 
+@keyframes rotate-needle-resume {
+    0% {
+        transform: rotateZ(-40deg);
+    }
+    100% {
+        transform: rotateZ(-10deg);
+    }
+}*/
+
+
+.nowplay_section>.list_head{
+  border-bottom: 1px solid #dadadc;
+}
+.nowplay_section>table{
+	width:100%;
+	text-align:left;
+	vertical-align:middle;
+	background-color:#fafafa;
+	color:#313131;
+
+}
+.nowplay_section>table td{
+	max-width:30vw;
+	height:2rem;
+	font-weight:normal;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow:hidden;
+  padding-right:5px;
+}
+.nowplay_section>.list_head>p>span>i,
+.nowplay_section>table td>i{
+  color:gray;
+}
+.nowplay_section>table>tbody>tr:nth-of-type(odd){
+	background-color:white;
 }
 /* -------------------- play_list -------------------- */
 
@@ -464,7 +514,8 @@
   float:right;
   padding-top: 15px;
 }
-.control_btn>.btn{
+.control_btn>.btn,
+.control_btn>.btn_group{
   display:inline-block;
   font-size:1.5rem;
   width:50px;
@@ -573,3 +624,37 @@
 	height:100%;
 	overflow-y:scroll;
 }
+
+/* =================== animation of needle =================
+/*.disc_section>.disc_needle.play{
+	-webkit-transform:rotate(-8deg);
+	transform:rotate(-8deg);
+}
+.disc_section>.disc_arc{
+  margin-top: 50px;
+	-webkit-animation:rotateARC linear 20s infinite normal;
+	animation:rotateARC linear 20s infinite normal;
+	-webkit-animation-play-state:paused;
+	animation-play-state:paused;
+  z-index: -1;
+}
+@keyframes rotateARC{
+	0%{
+		-webkit-transform:rotate(0deg);
+		transform:rotate(0deg);
+	}
+	100%{
+		-webkit-transform:rotate(360deg);
+		transform:rotate(360deg);
+	}
+}*/
+/*.play-needle {
+    position: absolute;
+    top: -23px;
+    left: 50%;
+    margin: 0px -12px;
+    z-index: 10;
+    width: 100px;
+    transform-origin: 20px 20px;
+    transition: transform 0.8s;
+}*/

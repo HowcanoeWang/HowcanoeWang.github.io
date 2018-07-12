@@ -17,6 +17,10 @@
   <script src="https://code.jquery.com/jquery-1.8.3.js"></script>
 	<script> var $jq183$ = jQuery.noConflict(true); </script>
   
+  <!-- this is for musicplayer.js -->
+  <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.js"></script>
+  <script> var $jq22$ = jQuery.noConflict(true); </script>
+  
   <!-- left column button active js-->
   <script type="text/javascript">
     $jq1102$('.btn').click(function() {
@@ -31,9 +35,89 @@
     function switch2songlist() {
       $('#musictab a[href="#tab-songlist"]').tab('show');
     };
-    function switch2playlist() {
+    /*function switch2playlist() {
       $('#musictab a[href="#tab-playlist"]').tab('show');
+    };*/
+  </script>
+  
+  <!--musicplayer -->
+  <script type="text/javascript">
+    var ctx ={
+      isPlaying:false,
+      playList:null,
+      currentIndex:null, /*playlist 里面的ID*/
+      currentSong:null,
+      player:null, /* audio tag
+      /*id of html*/
+      $jq22$needle:null,
+      $jq22$discCover:null, /*封面图url*/
+      $jq22$playBtn:null,
+      $jq22$pauseBtn:null
     };
+    
+    ctx.init = function(){
+      ctx._initData();
+      /*ctx._initState();*/
+      /* ctx._initPlayList();
+      ctx.updateSong();
+      ctx.setInterval();
+      ctx._initProcessBtn(ctx.$processBtn);
+      ctx.updateCoverState(0);*/
+    };
+    
+    ctx._initData = function(){
+      /*ctx.currentIndex = +localStorage.getItem("currentSongIndex") || 0;
+      ctx.currentIndex >= ctx.playList.length ? ctx.currentIndex = 0 : '';
+      ctx.currentSong = ctx.playList[ctx.currentIndex];*/
+      ctx.player = $jq22$('#player').get(0);
+      ctx.$jq22$needle = $jq22$('#discNeedle');
+      ctx.$jq22$discCover = $jq22$('#bgDisc');
+      ctx.$jq22$playBtn = $jq22$('#controls .play');
+      ctx.$jq22$pauseBtn = $jq22$('#controls .pause');
+    };
+    
+    ctx._initState = function(){
+      alert('initstate');
+    };
+    
+    ctx.play = function () {
+      ctx.player.play();
+      ctx.isPlaying = true;
+      ctx.changeAnimationState(ctx.$jq22$discCover, 'running');
+      ctx.moveNeedle(true);
+      ctx.$jq22$playBtn.hide();
+      ctx.$jq22$pauseBtn.show();
+      /*alert('play');*/
+    };
+
+    ctx.pause = function () {
+      ctx.player.pause();
+      ctx.isPlaying = false;
+      ctx.moveNeedle(false);
+      ctx.changeAnimationState(ctx.$jq22$discCover, 'paused');
+      ctx.$jq22$playBtn.show();
+      ctx.$jq22$pauseBtn.hide();
+      /*alert('pause');*/
+    };
+
+    ctx.moveNeedle = function (play) {
+      if (play) {
+          ctx.$jq22$needle.removeClass("pause-needle").addClass("resume-needle");
+      } else {
+          ctx.$jq22$needle.removeClass("resume-needle").addClass("pause-needle");
+      }
+    };
+    
+    ctx.changeAnimationState = function ($ele, state) {
+      $ele.css({
+          'animation-play-state': state,
+          '-webkit-animation-play-state': state
+      });
+    };
+    
+    $jq22$(function () {
+      ctx.init();
+    });
   </script>
 </head>
   
@@ -59,7 +143,6 @@
               <p class="btn"><i class="fa fa-music" aria-hidden="true"></i>&nbsp;&nbsp;古典名曲</p>
             </div>
           </div>
-          <!-- 口琴歌单 -->
           <div class="list">
             <p class="title text-left">Remix</p>
             <div class="btngroups">
@@ -78,7 +161,7 @@
         <ul class="nav nav-tabs mytabs" role="tablist" id="musictab">
           <li role="presentation" class="btn active"><a href="#tab-songlist" aria-controls="tab-songlist" role="tab" data-toggle="tab">歌单</a></li>
           <li role="presentation" class="btn"><a href="#tab-song" aria-controls="tab-song" role="tab" data-toggle="tab">歌曲</a></li>
-          <li role="presentation" class="btn"><a href="#tab-playlist" aria-controls="tab-playlist" role="tab" data-toggle="tab">播放列表</a></li>
+          <!--li role="presentation" class="btn"><a href="#tab-playlist" aria-controls="tab-playlist" role="tab" data-toggle="tab">播放列表</a></li-->
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="tab-songlist">
@@ -104,35 +187,36 @@
               </div>
               <div class="music_list row">
                 <table>
-                  <thead>
-                    <tr>
-                      <th>&nbsp;&nbsp;</th>
-                      <th>操作</th>
-                      <th>标题</th>
-                      <th>歌手</th>
-                      <th>时长</th>
-                    </tr>
-                  </thead>
                   <tbody class="infolist" id="infoList_playlist">
                     <tr>
                       <td class="index">01</td>
-                      <td>
+                      <td class="text-center">
                         <i class="fa fa-play-circle-o btn btn-sm" aria-hidden="true"></i>
                         <i class="fa fa-download btn btn-sm" aria-hidden="true"></i>
                       </td>
-                      <td>Secret Base（动画《未闻花名》ed）</td>
+                      <td onClick="switch2song()" style="cursor:pointer">Secret Base（动画《未闻花名》ed）</td>
                       <td>浩瀚猫</td>
                       <td>05:36</td>
                     </tr>
                     <tr>
                       <td class="index">02</td>
-                      <td>
+                      <td class="text-center">
                         <i class="fa fa-play-circle-o btn btn-sm" aria-hidden="true"></i>
                         <i class="fa fa-download btn btn-sm" aria-hidden="true"></i>
                       </td>
-                      <td>Innocent（动画《天空之城》主题曲）</td>
+                      <td onClick="switch2song()" style="cursor:pointer">Innocent（动画《天空之城》主题曲）</td>
                       <td>浩瀚猫 | 飘零</td>
                       <td>02:07</td>
+                    </tr>
+                    <tr>
+                      <td class="index">03</td>
+                      <td class="text-center">
+                        <i class="fa fa-play-circle-o btn btn-sm" aria-hidden="true"></i>
+                        <i class="fa fa-download btn btn-sm" aria-hidden="true"></i>
+                      </td>
+                      <td onClick="switch2song()" style="cursor:pointer">青い栞（动画《未闻花名》op）</td>
+                      <td>浩瀚猫</td>
+                      <td>05:40</td>
                     </tr>
                   </tbody>
                 </table>
@@ -140,14 +224,13 @@
             </div>
           </div>
           <div role="tabpanel" class="tab-pane" id="tab-song" style="postion:relative;">
-            <div title="收起音乐详情页" class="compressbtn btn btn-sm bg-white" id="btnCompressPlayBox" onclick="switch2songlist()">
+            <div title="收起音乐详情页" class="compressbtn btn btn-sm" id="btnCompressPlayBox" onclick="switch2songlist()">
               <i class="fa fa-compress" aria-hidden="true"></i>
             </div>
             <!-- 模糊背景-->
             <div class="bg_blur" style="background-image: url(img/SecretBase.png)"></div>
             <div class="container">
               <div class="title_section" id="songDetail">
-                <!--marquee class="info_song">Secret Base（动画《未闻花名》ed）</marquee-->
                 <p class="info_song">
                   <span class="songname">Secret Base（动画《未闻花名》ed）</span>
                   <span class="label mv"><a href="#" target="_blank">MV</a></span>
@@ -155,10 +238,10 @@
                 <p class="info_singer">歌手：浩瀚猫</p>
               </div>
               <div class="disc_section">
-                <div class="disc_needle" id="discNeedle">
+                <div class="disc_needle pause-needle" id="discNeedle">
                   <img alt="" src="./img/needle.png">
                 </div>
-                <div class="disc_arc mx-auto d-block" id="bgDisc" style="background-image:url('./img/SecretBase.png');">
+                <div class="disc_arc mx-auto d-block disk-cover-animation" id="bgDisc" style="background-image:url('./img/SecretBase.png'); animation-play-state:paused;">
                   <div class="poster">
                     <img alt="" src="./img/disc-o.png">
                   </div>
@@ -174,21 +257,10 @@
               <audio class="mb-4" controls>
                 <source src="audio/180327Secret Base新式单音.mp3" type="audio/mpeg">Your browser does not support the audio tag.
               </audio-->
+              <audio id="player" src="audio/180327Secret Base新式单音.mp3"></audio>
             </div>
 
           </div>
-          <div role="tabpanel" class="tab-pane text-center" id="tab-playlist">
-            <div title="返回" class="compressbtn btn btn-sm" onclick="switch2songlist()">
-              <i class="fa fa-angle-left" aria-hidden="true"></i>
-            </div>
-            <div class="playlist_section">
-              <h4>播放列表</h4>
-              <hr>
-              
-            </div>
-            
-          </div>
-          
         </div>
 			</div>
 		</div>
@@ -209,12 +281,39 @@ aria-valuemin="0" aria-valuemax="100" style="width:20%">01:23</div>
         <p>Secret Base复音口琴</p>
         <p>浩瀚猫</p>
       </div>
-      <div class="control_btn">
+      <div class="control_btn" id="controls">
         <div class="btn prev d-none d-sm-inline-block"><i class="fa fa-step-backward" aria-hidden="true"></i></div>
-        <div class="btn play"><i class="fa fa-play" aria-hidden="true"></i></div>
+        <div class="btn play" onClick="ctx.play()"><i class="fa fa-play" aria-hidden="true"></i></div>
+        <div class="btn pause" onClick="ctx.pause()" style="display:none"><i class="fa fa-pause" aria-hidden="true"></i></div>
         <div class="btn next d-none d-sm-inline-block"><i class="fa fa-step-forward" aria-hidden="true"></i>
         </div>
-        <div class="btn nowplaylist" onclick="switch2playlist()"><i class="fa fa-th-list" aria-hidden="true"></i>
+        <!--正在播放列表-->
+        <!--div class="btn nowplaylist" onclick="switch2playlist()"><i class="fa fa-th-list" aria-hidden="true"></i></div-->
+        <div class="btn dropup" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="nowplay_section">
+          <i class="fa fa-th-list" aria-hidden="true"></i>
+        </div>
+        <div class="dropdown-menu w-75" aria-labelledby="nowplay_section" style="height:50vh;max-height: 50vh;overflow-y: scroll">
+          <div class="container nowplay_section">
+            <div class="list_head">
+              <p style="vertical-align: middle;">播放列表<span id="clear_all" onclick="alert('rua')" style="float: right;cursor:pointer"><i class="fa fa-trash" aria-hidden="true"></i>清空全部</span></p>
+            </div>
+            <table>
+              <tbody id="nowplaylist">
+                <tr>
+                  <td class="text-center"></td>
+                  <td>Secret Base（动画《未闻花名》ed）</td>
+                  <td class="text-muted">浩瀚猫</td>
+                  <td>05:36</td>
+                </tr>
+                <tr>
+                  <td class="text-center"><i class="fa fa-play" aria-hidden="true"></i></td>
+                  <td>Innocent（动画《天空之城》主题曲）</td>
+                  <td class="text-muted">浩瀚猫 | 飘零</td>
+                  <td>02:07</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
