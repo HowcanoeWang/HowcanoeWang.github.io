@@ -327,7 +327,7 @@
 
 .disc_section>.disc_needle>img {
   position: absolute;
-  top: -20px;
+  top: -30px;
 }
 
 .pause-needle {
@@ -339,7 +339,7 @@
 }
 
 .disc_section>.disc_arc{
-  margin-top: 50px;
+	margin-top: 50px;
 	width:320px;
 	height:320px;
 	border-radius:50%;
@@ -387,6 +387,10 @@
 }
 .disc_section>.disc_btns>.btn:hover{
 	background-color:#f5f5f7;
+}
+.disc_section>.disc_btns>.btn>a{
+  text-decoration: none;
+  color:black;
 }
 
 /* animation */

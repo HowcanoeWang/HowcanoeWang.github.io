@@ -21,6 +21,9 @@
   bottom: 3rem;
   z-index: 10;
 }
+.carousel-caption > .text-shadow{
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
@@ -32,7 +35,8 @@
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 100%;
+  width:100%;
+  /*height: 100%;*/
 }
 
 .carousel-inner {
@@ -42,6 +46,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
 }
+
 
 
 /* MARKETING CONTENT
