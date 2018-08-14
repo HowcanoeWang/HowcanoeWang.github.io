@@ -29,6 +29,12 @@
 .carousel-item {
   height: 32rem;
   background-color: white;
+  background:  no-repeat center center;
+  background-attachment: scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .carousel-item > img {
   position: absolute;

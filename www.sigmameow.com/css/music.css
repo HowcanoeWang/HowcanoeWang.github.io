@@ -49,6 +49,8 @@
     content: "\f07b"}
 .fa-trash:before {
     content: "\f1f8"}
+.fa-book:before {
+    content: "\f02d"}
 /* ==================== Content ==================== */
 .page_content {
   padding-bottom: 100px;
@@ -181,6 +183,11 @@
 .music_list>table td>i{
   color:gray;
 }
+.music_list>table td>a{
+  color:gray;
+  text-decoration: none;
+}
+
 .music_list>table th{
 	border-right:1px solid #e0e0e0;
 	box-sizing:border-box;
@@ -209,7 +216,20 @@
 	font-size:0.8rem;
 	color:#c52f30;
 }
-
+.music_list>table>tbody>tr>td>.mv-label{
+	display:inline-block;
+	/*margin:0 0px;
+	padding:5px;*/
+	border:1px solid darkgray;
+	color:darkgray;
+  font-size:12px;
+}
+.music_list>table>tbody>tr>td>.mv-label>a:link,
+.music_list>table>tbody>tr>td>.mv-label>a:visited,
+.music_list>table>tbody>tr>td>.mv-label>a:hover{
+  color:darkgray;
+  text-decoration: none;
+}
 /* -------------------- now_play -------------------- */
 .bg_blur{
   /*position:fixed;
@@ -289,16 +309,16 @@
     margin-left:50px;
   }
 }
-.title_section>.info_song>.label{
+.title_section>.info_song>.mv-label{
 	display:inline-block;
 	margin:0 6px;
 	padding:2px;
 	border:1px solid darkgray;
 	color:darkgray;
 }
-.title_section>.info_song>.label>a:link,
-.title_section>.info_song>.label>a:visited,
-.title_section>.info_song>.label>a:hover{
+.title_section>.info_song>.mv-label>a:link,
+.title_section>.info_song>.mv-label>a:visited,
+.title_section>.info_song>.mv-label>a:hover{
   color:darkgray;
   text-decoration: none;
 }
@@ -502,7 +522,7 @@
 }
 
 .control_panel>.info {
-  max-width: 30vw;
+  max-width: calc(100vw - 260px);
   float:left;
   padding-top: 10px;
   padding-left: 20px;
