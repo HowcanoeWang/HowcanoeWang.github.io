@@ -1,15 +1,30 @@
+<script type="text/javascript">
+    // count article number
+    document.getElementById("wxxs").innerHTML = section["文学小说"].length;
+    document.getElementById("gxys").innerHTML = section["歌戏影视"].length;
+    document.getElementById("qjyq").innerHTML = section["奇技赢巧"].length;
+    document.getElementById("pydyk").innerHTML = section["Py点云库"].length
+    document.getElementById("pyswk").innerHTML = section["Py三维库"].length
+    document.getElementById("kyzt").innerHTML = section["科研作图"].length
+    document.getElementById("sjcl").innerHTML = section["数据处理"].length
+    document.getElementById("tjfx").innerHTML = section["统计分析"].length
+    document.getElementById("lwxz").innerHTML = section["论文写作"].length
+    document.getElementById("scgf").innerHTML = section["诗词歌赋"].length
+    document.getElementById("yyyl").innerHTML = section["音乐乐理"].length
+    document.getElementById("yxxd").innerHTML = section["游戏心得"].length
+</script>
 <ul class="list-group list_menu">
 	<li class="list-group-item text-muted"><b><a href="home.html?section=读书杂记">读书杂记</a></b></li>
 	<li class="list-group-item list-group-item-light">
 		<div class="btngroups text-center">
 			<a class="btn" href="home.html?section=文学小说">文学小说
-				<span class="badge badge-secondary badge-pill">3</span>
+				<span class="badge badge-secondary badge-pill" id="wxxs">0</span>
 			</a>
 			<a class="btn" href="home.html?section=歌戏影视">歌戏影视
-				<span class="badge badge-secondary badge-pill">1</span>
+				<span class="badge badge-secondary badge-pill" id="gxys">0</span>
 			</a>
-			<a class="btn" href="home.html?section=奇技赢巧">奇技嬴巧
-				<span class="badge badge-secondary badge-pill">2</span>
+			<a class="btn" href="home.html?section=奇技赢巧">奇技赢巧
+				<span class="badge badge-secondary badge-pill" id="qjyq">0</span>
 			</a>
 		</div>
 	</li>
@@ -17,19 +32,22 @@
 	<li class="list-group-item text-muted">
 		<div class="btngroups text-center">
 			<a class="btn" href="home.html?section=Py点云库">Py点云库
-				<span class="badge badge-secondary badge-pill">1</span>
+				<span class="badge badge-secondary badge-pill" id="pydyk">0</span>
+			</a>
+            <a class="btn" href="home.html?section=Py三维库">Py三维库
+				<span class="badge badge-secondary badge-pill" id="pyswk">0</span>
 			</a>
 			<a class="btn" href="home.html?section=科研作图">科研作图
-				<span class="badge badge-secondary badge-pill">0</span>
+				<span class="badge badge-secondary badge-pill" id="kyzt">0</span>
 			</a>
 			<a class="btn" href="home.html?section=数据处理">数据处理
-				<span class="badge badge-secondary badge-pill">0</span>
+				<span class="badge badge-secondary badge-pill" id="sjcl">0</span>
 			</a>
 			<a class="btn" href="home.html?section=统计分析">统计分析
-				<span class="badge badge-secondary badge-pill">0</span>
+				<span class="badge badge-secondary badge-pill" id="tjfx">0</span>
 			</a>
       <a class="btn" href="home.html?section=论文写作">论文写作
-				<span class="badge badge-secondary badge-pill">0</span>
+				<span class="badge badge-secondary badge-pill" id="lwxz">0</span>
 			</a>
 		</div>
 	</li>
@@ -37,13 +55,13 @@
 	<li class="list-group-item list-group-item-light">
 		<div class="btngroups text-center">
 			<a class="btn" href="home.html?section=诗词歌赋">诗词歌赋
-				<span class="badge badge-secondary badge-pill">6</span>
+				<span class="badge badge-secondary badge-pill" id="scgf">0</span>
 			</a>
 			<a class="btn" href="home.html?section=音乐乐理">音乐乐理
-				<span class="badge badge-secondary badge-pill">0</span>
+				<span class="badge badge-secondary badge-pill" id="yyyl">0</span>
 			</a>
 			<a class="btn" href="home.html?section=游戏心得">游戏心得
-				<span class="badge badge-secondary badge-pill">0</span>
+				<span class="badge badge-secondary badge-pill" id="yxxd">0</span>
 			</a>
 		</div>
 	</li>

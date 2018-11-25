@@ -15,20 +15,33 @@
 	<!-- Custom styles for this page -->
 	<link rel="stylesheet" href="../css/index.css">
 	<link rel="stylesheet" href="../css/blog.css">
+  <link rel="stylesheet" href="../css/codehilite.css">
 
   <!--  share.js -->
   <link rel="stylesheet" href="../css/share.min.css">
 		
 	<!-- jQuery for html code reuse-->
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script> var $jq1102$ = jQuery.noConflict(true); </script>
 	
 	<!-- jQuery for json load -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.min.js"></script> 
 	<script> var $jq182$ = jQuery.noConflict(true); </script>
+  
+  <script type="text/javascript">
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+  </script>
 	
 	<!-- load json database -->
-	<script type="text/javascript" src="p/id.js"></script> 
+	<script type="text/javascript" src="id.js"></script> 
 	
 	<!-- read param in url -->
 	<script type="text/javascript">
@@ -87,7 +100,7 @@
 		$jq1102$('meta[itemprop=description]').attr('content', info.subtitle);
 	</script>
 </head>
-<body oncontextmenu="return false" ondragstart="return false" onselectstart ="return false" onselect="document.selection.empty()" oncopy="document.selection.empty()" onbeforecopy="return false" onmouseup="document.selection.empty()">
+<body oncontextmenu="return false" ondragstart="return false" onselectstart ="return false" onselect="return false" oncopy="return false" onbeforecopy="return false" onmouseup="return false">
 	<!--Navigation bar-->
 	<div id="nav-placeholder"></div>
 
@@ -99,22 +112,24 @@
 	<!--end of Navigation bar-->
 	
 	<!-- Page Header -->
-    <header class="masthead" id="header-img">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-10 mx-auto">
-            <div class="post-heading">
-			  <h1><script type="text/javascript">document.write(info.title)</script></h1>
-              <h5 class="subheading"><script type="text/javascript">document.write(info.subtitle)</script></h5>
-              <span class="meta">
-				<a href="#"><script type="text/javascript">document.write(info.author)</script></a> | 字数: <script type="text/javascript">document.write(info.word)</script> | 更新于:  
-				<script type="text/javascript">document.write(info.date)</script></span>
-            </div>
+  <header class="masthead" id="header-img">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <div class="post-heading">
+      <h1><script type="text/javascript">document.write(info.title)</script></h1>
+            <h5 class="subheading"><script type="text/javascript">document.write(info.subtitle)</script></h5>
+            <span class="meta">
+      <a href="#"><script type="text/javascript">document.write(info.author)</script></a> | 字数: <script type="text/javascript">document.write(info.word)</script> | 更新于:  
+      <script type="text/javascript">document.write(info.date)</script></span>
           </div>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
+  
+  <a href="#header-img" class="btn btn-dark btn-sm to-top" id="myBtn">Top</a>
 	
 	<!-- Post Content -->
   <article>
