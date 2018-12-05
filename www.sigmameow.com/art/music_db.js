@@ -36,7 +36,7 @@ var song = [
     "singer":"浩瀚猫",
     "length":"05:40",
     "cover":"img/蓝书签.jpg",
-    "mv":"https://www.bilibili.com",
+    "mv":"https://www.bilibili.com/video/av32135131",
     "mp3":"audio/Blue Bookmark.mp3",
     "score":"score/青い栞.pdf"
   }

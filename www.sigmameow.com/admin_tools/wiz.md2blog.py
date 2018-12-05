@@ -33,7 +33,7 @@ def convert(ziw_path, p_id, overwrite=False):
     html = html.replace('<h1', '<h1 class="section-heading text-center"')
     html = html.replace('<h3', '<h1 class="section-heading h3"')
     html = html.replace('<h5', '<h1 class="section-heading h5"')
-    html = html.replace('<h6', '<h1 class="section-heading h6"')
+    html = html.replace('<h6', '<h1 class="section-heading h6 text-muted"')
     html = html.replace('<blockquote', '<blockquote class="blockquote"')
     html = html.replace('<img', '<img class="img-fluid"')
 
@@ -63,8 +63,11 @@ def read_ziw(ziw_path):
     html = zfile.open('index.html')
     zfile.close()
     soup = BS(html.read(), "html5lib")
-    for match in soup.findAll('span'):
-        match.unwrap()
+    
+    # drop wiz unuseful tags
+    for tag_rm in ['span', 'blockquote']:
+        for match in soup.findAll(tag_rm):
+            match.unwrap()
 
     for tag in soup():
         for attribute in ["class", "id", "name", "style", "align", "valign", "width", "height"]:
