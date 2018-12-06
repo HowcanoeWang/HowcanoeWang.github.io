@@ -1,26 +1,23 @@
-<p>本文基于《Python科学计算三维可视化》MOOC课程第一周内容结合个人理解所整理的笔记</p>
+<p>本文基于《Python科学计算三维可视化》MOOC课程第一周与第二周内容结合个人理解所整理的笔记</p>
 <blockquote class="blockquote">
 <p>https://www.icourse163.org/course/BIT-1001871001</p>
+<ul>
+<li>
+<p>【第一周】三维可视之基础运用</p>
+</li>
+<li>
+<p>【第二周】三维可视之基础实战</p>
+</li>
+</ul>
 </blockquote>
 <p>主要内容有：</p>
 <div class="toc">
 <ul>
-<li><a href="#1">1 背景知识</a><ul>
-<li><a href="#11">1.1 三维可视化的主要方法</a></li>
-<li><a href="#12">1.2 环境搭建</a><ul>
-<li><a href="#121">1.2.1 基础库的下载与安装</a></li>
-<li><a href="#122-tvtk">1.2.2 TVTK库安装测试</a></li>
-<li><a href="#123-tvtk">1.2.3 TVTK帮助资源</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#2-tvtk">2 TVTK基础</a><ul>
-<li><a href="#21-data-flow-systempipeline">2.1 数据流系统(Data Flow System):管线(Pipeline)</a><ul>
-<li><a href="#211">2.1.1 看歌剧小故事</a></li>
-<li><a href="#212">2.1.2 故事分析</a></li>
-<li><a href="#213">2.1.3 编程流程</a></li>
-<li><a href="#215-ivtk">2.1.5 用ivtk工具观察管线</a><ul>
+<li><a href="#1-data-flow-systempipeline">1 数据流系统(Data Flow System):管线(Pipeline)</a><ul>
+<li><a href="#11">1.1 看歌剧小故事</a></li>
+<li><a href="#12">1.2 故事分析</a></li>
+<li><a href="#13">1.3 编程流程</a></li>
+<li><a href="#15-ivtk">1.5 用ivtk工具观察管线</a><ul>
 <li><a href="#openglcamera">照相机属性(OpenGLCamera)</a></li>
 <li><a href="#actor">Actor属性</a></li>
 <li><a href="#_1">场景属性</a></li>
@@ -28,102 +25,33 @@
 </li>
 </ul>
 </li>
-<li><a href="#22">2.2 数据集(剧本格式)</a><ul>
-<li><a href="#221-imagedata">2.2.1 ImageData</a></li>
-<li><a href="#222-rectlineargrid">2.2.2 RectlinearGrid</a></li>
-<li><a href="#223-structuregrid">2.2.3 StructureGrid</a></li>
-<li><a href="#224-polydata">2.2.4 PolyData</a></li>
+<li><a href="#2">2 数据集(剧本格式)</a><ul>
+<li><a href="#21-imagedata">2.1 ImageData</a></li>
+<li><a href="#22-rectlineargrid">2.2 RectlinearGrid</a></li>
+<li><a href="#23-structuregrid">2.3 StructureGrid</a></li>
+<li><a href="#24-polydata">2.4 PolyData</a></li>
 </ul>
 </li>
-<li><a href="#23">2.3 数据加载(获取改编权的过程)</a><ul>
-<li><a href="#231-stl">2.3.1 读取STL文件</a></li>
-<li><a href="#232-plot3dnasa">2.3.2 Plot3D(NASA)</a></li>
+<li><a href="#3">3 数据加载(获取改编权的过程)</a><ul>
+<li><a href="#31-stl">3.1 读取STL文件</a></li>
+<li><a href="#32-plot3dnasa">3.2 Plot3D(NASA)</a></li>
 </ul>
 </li>
-<li><a href="#24">2.4 数据可视化</a><ul>
-<li><a href="#241">2.4.1 标量可视化</a></li>
-<li><a href="#242">2.4.2 矢量可视化</a></li>
-<li><a href="#243">2.4.3 空间轮廓线可视化</a></li>
-</ul>
-</li>
+<li><a href="#4">4 数据可视化</a><ul>
+<li><a href="#41">4.1 标量可视化</a></li>
+<li><a href="#42">4.2 矢量可视化</a></li>
+<li><a href="#43">4.3 空间轮廓线可视化</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <hr />
-<h1 class="section-heading text-center" id="1">1 背景知识</h1>
-<h1 class="section-heading h3" id="11">1.1 三维可视化的主要方法</h3>
-<div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td colspan="3" rowspan="1">1.二维标量数据场</td><td colspan="2" rowspan="1">2.三维标量数据场<br/></td><td colspan="2" rowspan="1">3.矢量数据场<br/></td></tr><tr><td>颜色映射方法<br/></td><td>等值线法<br/></td><td>立体图法&amp;层次分割法<br/></td><td>面绘制法<br/></td><td>体绘制法<br/></td><td>直接法<br/></td><td>流线法<br/></td></tr><tr><td><img class="img-fluid" src="img/13/0.28797075946292616.png"/><br/></td><td><img class="img-fluid" src="img/13/0.4341302545898902.png"/><br/></td><td><img class="img-fluid" src="img/13/789705140.png"/><br/></td><td><img class="img-fluid" src="img/13/453459421.png"/><br/></td><td><img class="img-fluid" src="img/13/453478453.png"/><br/></td><td><div><img class="img-fluid" src="img/13/453601953.png"/></div></td><td><div><img class="img-fluid" src="img/13/453628281.png"/></div></td></tr></tbody></table></div>
-
-<h1 class="section-heading h3" id="12">1.2 环境搭建</h3>
-<p>Python3.6(64位)+Pycharm Community安装过程略</p>
-<h1 class="section-heading h5" id="121">1.2.1 基础库的下载与安装</h5>
-<p>https://www.lfd.uci.edu/~gohlke/pythonlibs，记得找对应的Python版本(3.6)和对应的系统位数(32位没有<code>_amd64.whl</code>)</p>
-<ul>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy" target="_blank">numpy‑1.15.4+mkl‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyqt4" target="_blank">PyQt4‑4.11.4‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#vtk" target="_blank">VTK‑8.1.2‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#mayavi" target="_blank">mayavi‑4.6.2+vtk81‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#traits" target="_blank">traits‑4.6.0‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-</ul>
-<p>建议先建立虚拟环境(我建立一个一个py3d的虚拟环境)，创建虚拟环境的基础操作可以百度或者参考<a href="https://www.sigmameow.com/blog/page.html?id=3#Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83">这篇文章</a></p>
-<p>使用cmd进入虚拟环境之后，请按照上面的顺序进行安装(后面的包依赖前面的包)</p>
-<div class="codehilite"><pre><span></span>(py3d) D:\...\Python\py3d&gt;pip install 下载地址\xxx.whl
-</pre></div>
-
-
-<h1 class="section-heading h5" id="122-tvtk">1.2.2 TVTK库安装测试</h5>
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">CubeSource</span><span class="p">(</span><span class="n">x_length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y_length</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">z_length</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>    <span class="c1"># 创建三维长方体对象</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="n">vtkCubeSource</span> <span class="p">(</span><span class="mo">00000240</span><span class="n">C5BCC350</span><span class="p">)</span>
-  <span class="n">Debug</span><span class="p">:</span> <span class="n">Off</span>
-  <span class="n">Modified</span> <span class="n">Time</span><span class="p">:</span> <span class="mi">99</span>
-  <span class="n">Reference</span> <span class="n">Count</span><span class="p">:</span> <span class="mi">2</span>
-  <span class="o">...</span>
-  <span class="n">Progress</span> <span class="n">Text</span><span class="p">:</span> <span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-  <span class="n">X</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">1</span>
-  <span class="n">Y</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">2</span>
-  <span class="n">Z</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">3</span>
-  <span class="n">Center</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-  <span class="n">Output</span> <span class="n">Points</span> <span class="n">Precision</span><span class="p">:</span> <span class="mi">0</span>
-</pre></div>
-
-
-<h1 class="section-heading h5" id="123-tvtk">1.2.3 TVTK帮助资源</h5>
-<p>http://www.vtk.org/doc/nightly/html/annotated.html
-看的过程中注意，上面的文档是VTK的文档，在转成python库的过程中，变量名进行了以下的变更：</p>
-<ul>
-<li>
-<p>TVTK库中的类名去除了前缀vtk</p>
-</li>
-<li>
-<p>函数名按照Python的惯例，采用下划线连接单词
-    &gt; AddItem -&gt; add_item</p>
-</li>
-<li>
-<p>VTK对象的方法在TVTK中用Trait属性替代
-    如在VTK中<code>m.SetInputConnection(c.GetOutputPort())</code>变成了<code>m.input_connection(c.output_port)</code></p>
-</li>
-</ul>
-<hr />
-<h1 class="section-heading text-center" id="2-tvtk">2 TVTK基础</h1>
-<h1 class="section-heading h3" id="21-data-flow-systempipeline">2.1 数据流系统(Data Flow System):管线(Pipeline)</h3>
+<h1 class="section-heading text-center" id="1-data-flow-systempipeline">1 数据流系统(Data Flow System):管线(Pipeline)</h1>
 <p><img class="img-fluid" src="img/13/463578140.png"/>
 <img class="img-fluid" src="img/13/466222343.png"/></p>
-<h1 class="section-heading h5" id="211">2.1.1 看歌剧小故事</h5>
+<h1 class="section-heading h3" id="11">1.1 看歌剧小故事</h3>
 <p>有一天，家里有个矿的小虎想去看自己最喜欢的《四体》歌剧，但是都没有一个剧团排练了这个小说，于是地主家的傻儿子立马决定从零开始组建一个剧团完成自己想要的《四体》歌剧。在咨询了诸多业界砖家后，大体确定了组建流程：联系《四体》的作者小四获得了作品改编权，找知名导演夏岛把小说改成了舞台剧本，包括台词、背景和人物装扮等，找道具师设计道具和衣服。然后去把从艺校里请来的演员按照人物装扮换衣服、化妆、背台词，最后把演员送上舞台，灯光师负责打光，小虎就躺在自己的豪华软床，用对讲机联系摄像师去移动和镜头拉近拉远，"哎对对对，镜头再低点，再低点，再低点，卧槽，为啥自带圣光，摄像师你的鸡腿没了！"</p>
-<h1 class="section-heading h5" id="212">2.1.2 故事分析</h5>
+<h1 class="section-heading h3" id="12">1.2 故事分析</h3>
 <p>上面的例子，模拟了VTK三维可视化过程中从数据到图像的数据流。如图中所示，管线分为了可视化管线和图形管线，可视化管线是将原视数据<strong>[小说]</strong>加工成图形数据<strong>[剧本]</strong>的过程， 而图形管线是将图形数据加工<strong>[剧本]</strong>为我们<strong>[小虎]</strong>所看到的图像过程。</p>
 <p>图中主要涉及到5个部分：</p>
 <ul>
@@ -153,7 +81,7 @@
 </ul>
 <p>实际操作中，往往还要用到另外两个东西，一个是RenderWindow，即小虎躺在床上从屏幕里看到的摄像机传回的画面，另一个是RenderWindowInteractor，提供了与用户进行交互的功能，如旋转，缩放等，即小虎操控摄影师走位的对讲机。
 <img class="img-fluid" src="img/13/196fc472-c042-4e72-bc9a-1dea8ac78038.jpg"/></p>
-<h1 class="section-heading h5" id="213">2.1.3 编程流程</h5>
+<h1 class="section-heading h3" id="13">1.3 编程流程</h3>
 <p>这个简单的例子中，一一对应，用到了下面的几个对象
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td><br/></td><td>TVTK对象</td><td>说明</td><td>例子</td></tr><tr><td colspan="1" rowspan="2">可视化管线</td><td>CubeSource</td><td>通过程序内部计算输出一组描述长方体的数据(PolyData)</td><td>有改编权的小说</td></tr><tr><td>PolyDataMapper</td><td>PolyData通过该映射器将数据映射为图像数据(mapper)</td><td>演员衣服道具</td></tr><tr><td colspan="1" rowspan="4">图形管线</td><td>Actor</td><td>场景中的一个实体，包括一个图形数据(mapper)，具有描述该实体的位置、方向、大小的属性<br/></td><td>穿上衣服拿上道具的演员</td></tr><tr><td>Renderer</td><td>渲染的场景， 包括多个需要渲染的Actor</td><td>舞台，包含灯光师和摄像师</td></tr><tr><td>RenderWindow</td><td>渲染用的图形窗口，包括一个或多个Render</td><td>摄像机传出的屏幕</td></tr><tr><td>RenderWindowInteractor</td><td>给图形窗口提供一些用户交互功能，如平移、旋转、放大缩小。这些操作并不改变Actor或者图像数据的属性，只是调整场景中的照相机或</td><td>小虎操控摄像师的对讲机</td></tr></tbody></table></div></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
@@ -181,7 +109,7 @@
 </pre></div>
 
 
-<h1 class="section-heading h5" id="215-ivtk">2.1.5 用ivtk工具观察管线</h5>
+<h1 class="section-heading h3" id="15-ivtk">1.5 用ivtk工具观察管线</h3>
 <p>mayavi包里面自带了一个小界面来查看三维模型
 <a href="https://www.sigmameow.com/blog/files/13/view_pipeline.py" download="view_pipeline.py">view_pipeline.py</a>:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
@@ -218,19 +146,20 @@
 <img class="img-fluid" src="img/13/035d2b28d5a7899c5384f6f13c7f05d9.png"/>
 我们观察管线主要看管线浏览器
 <img class="img-fluid" src="img/13/517596125.png"/></p>
-<h1 class="section-heading h6 text-muted" id="openglcamera">照相机属性(OpenGLCamera)</h6>
+<h1 class="section-heading h5" id="openglcamera">照相机属性(OpenGLCamera)</h5>
 <p>点击，会出来一个属性面板
 <img class="img-fluid" src="img/13/523543062.png"/>
 其中比较重要的有(稍作了解)：
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td>属性</td><td>说明</td></tr><tr><td>clipping_range</td><td>有两个元素，分别表示照相机到近、远两个裁剪平面的距离。在这两个距离之外将不会显示</td></tr><tr><td>position</td><td>照相机在三维空间中的坐标</td></tr><tr><td>focal_point</td><td>照相机所聚焦的焦点坐标</td></tr><tr><td>view_up</td><td>照相机的上方向矢量</td></tr></tbody></table></div></p>
-<h1 class="section-heading h6 text-muted" id="actor">Actor属性</h6>
+<h1 class="section-heading h5" id="actor">Actor属性</h5>
 <p><img class="img-fluid" src="img/13/523765750.png"/></p>
-<h1 class="section-heading h6 text-muted" id="_1">场景属性</h6>
+<h1 class="section-heading h5" id="_1">场景属性</h5>
 <p>点击<strong>场景工具条</strong>最后一个齿轮图标出来这个面板
 <img class="img-fluid" src="img/13/3e00868a-ab7e-4b07-8fc1-5971efa9c7d3.png"/>
 <img class="img-fluid" src="img/13/632a3491-51cc-49ec-9ba4-23e3a94c2adf.png"/>
 可以提供打光师的光颜色角度，舞台背景等设置</p>
-<h1 class="section-heading h3" id="22">2.2 数据集(剧本格式)</h3>
+<hr />
+<h1 class="section-heading text-center" id="2">2 数据集(剧本格式)</h1>
 <p><img class="img-fluid" src="img/13/528160921.png"/>
 数据集(dataset)由点(point)和数据(data)组成</p>
 <ul>
@@ -246,7 +175,7 @@
 </ul>
 <p>TVTK中主要有5种数据集：
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td><br/></td><td>描述</td><td>连结性</td><td>适用于</td></tr><tr><td>ImageData</td><td>点位于正交等距的网格上</td><td>隐式</td><td>体积和面</td></tr><tr><td>RectilinearGrid</td><td>间距不均匀的网格，所有点都在正交的网格上</td><td>隐式</td><td>体积和面</td></tr><tr><td>StructuredGrid</td><td>创建任意形状的网格，需要指定点的坐标</td><td>隐式</td><td>体积和面</td></tr><tr><td>UnstructruedGrid</td><td><br/></td><td>显示</td><td>体积和面</td></tr><tr><td>PolyData<br/></td><td>由一系列点、点之间的联系以及由点构成的多边形组成<br/></td><td>显示</td><td>点线面</td></tr></tbody></table></div></p>
-<h1 class="section-heading h5" id="221-imagedata">2.2.1 ImageData</h5>
+<h1 class="section-heading h3" id="21-imagedata">2.1 ImageData</h3>
 <p>点位于正交等距的网格上
 <img class="img-fluid" src="img/13/529432937.png"/>
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td>参数</td><td>说明</td></tr><tr><td>origin</td><td>三维网格数据的起点坐标</td></tr><tr><td>spacing</td><td>三维网格数据在X，Y，Z轴上的间距</td></tr><tr><td>dimensions</td><td>X，Y，Z轴上的网格数</td></tr></tbody></table></div></p>
@@ -257,7 +186,7 @@
 </pre></div>
 
 
-<h1 class="section-heading h5" id="222-rectlineargrid">2.2.2 RectlinearGrid</h5>
+<h1 class="section-heading h3" id="22-rectlineargrid">2.2 RectlinearGrid</h3>
 <p>间距不均匀的网格，所有点都在正交的网格上
 <img class="img-fluid" src="img/13/529448531.png"/></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
@@ -274,11 +203,11 @@
 </pre></div>
 
 
-<h1 class="section-heading h5" id="223-structuregrid">2.2.3 StructureGrid</h5>
+<h1 class="section-heading h3" id="23-structuregrid">2.3 StructureGrid</h3>
 <p>创建任意形状的网格，需要指定点的坐标
 <img class="img-fluid" src="img/13/529467296.png"/>
 需要points、dimensions、point_data.scalars等属性进行初始化</p>
-<h1 class="section-heading h5" id="224-polydata">2.2.4 PolyData</h5>
+<h1 class="section-heading h3" id="24-polydata">2.4 PolyData</h3>
 <p>由一系列点、点之间的联系以及由点构成的多边形组成
 <img class="img-fluid" src="img/13/529534859.png"/>
 例如我们创建的长方体，tvtk.CubeSource()就是这种
@@ -291,9 +220,10 @@
 </pre></div>
 
 
-<h1 class="section-heading h3" id="23">2.3 数据加载(获取改编权的过程)</h3>
+<hr />
+<h1 class="section-heading text-center" id="3">3 数据加载(获取改编权的过程)</h1>
 <p>直接读取别的软件建立好的三维模型</p>
-<h1 class="section-heading h5" id="231-stl">2.3.1 读取STL文件</h5>
+<h1 class="section-heading h3" id="31-stl">3.1 读取STL文件</h3>
 <p>可以从这里下载<a href="https://www.sigmameow.com/blog/files/13/python.stl" download="python.stl">python.stl</a>文件
 <img class="img-fluid" src="img/13/530951687.png"/></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
@@ -310,7 +240,7 @@
 
 
 <p><img class="img-fluid" src="img/13/6d02c55c-91e7-4617-8e8d-ff3fdbc04211.png"/></p>
-<h1 class="section-heading h5" id="232-plot3dnasa">2.3.2 Plot3D(NASA)</h5>
+<h1 class="section-heading h3" id="32-plot3dnasa">3.2 Plot3D(NASA)</h3>
 <ul>
 <li>
 <p>网格文件(XYZ文件) <a href="https://www.sigmameow.com/blog/files/13/combxyz.bin" download="combxyz.bin">combxyz.bin</a></p>
@@ -332,9 +262,10 @@
 </pre></div>
 
 
-<h1 class="section-heading h3" id="24">2.4 数据可视化</h3>
+<hr />
+<h1 class="section-heading text-center" id="4">4 数据可视化</h1>
 <p><img class="img-fluid" src="img/13/146405156.png"/></p>
-<h1 class="section-heading h5" id="241">2.4.1 标量可视化</h5>
+<h1 class="section-heading h3" id="41">4.1 标量可视化</h3>
 <p><a href="https://www.sigmameow.com/blog/files/13/plot3d_contours.py" download="plot3d_contours.py">plot3d_contours.py</a></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
 <span class="kn">from</span> <span class="nn">tvtkfunc</span> <span class="kn">import</span> <span class="n">ivtk_scene</span><span class="p">,</span> <span class="n">event_loop</span>
@@ -386,7 +317,7 @@
 <img class="img-fluid" src="img/13/146212140.png"/>
 set_value()参数调节效果
 <img class="img-fluid" src="img/13/146344328.png"/></p>
-<h1 class="section-heading h5" id="242">2.4.2 矢量可视化</h5>
+<h1 class="section-heading h3" id="42">4.2 矢量可视化</h3>
 <p>主要用到两个工具：tvtk.Glyph3D()符号化技术 和 tvtk.MaskPoints()降采样</p>
 <p><a href="https://www.sigmameow.com/blog/files/13/plot3d_arrow.py" download="plot3d_arrow.py">plot3d_arrow.py</a></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
@@ -424,7 +355,7 @@ set_value()参数调节效果
 如果把代码中的箭头<code>glyph_source = tvtk.ArrowSource()</code>改成圆锥<code>glyph_source_tvtk.ConeSource()</code>并设置缩放系数<code>tvtk.Glyph3D(..., Scale_factor=2)</code>
 会出来这样的效果
 <img class="img-fluid" src="img/13/147464140.png"/></p>
-<h1 class="section-heading h5" id="243">2.4.3 空间轮廓线可视化</h5>
+<h1 class="section-heading h3" id="43">4.3 空间轮廓线可视化</h3>
 <p>使用tvtk.StructuredGridOutlineFilter()计算PolyData对象的外边框</p>
 <p><a href="https://www.sigmameow.com/blog/files/13/plot3d_outline.py" download="plot3d_outline.py">plot3d_outline.py</a></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>

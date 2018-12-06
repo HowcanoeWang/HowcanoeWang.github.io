@@ -46,7 +46,7 @@ def convert(ziw_path, p_id, overwrite=False):
             contents = js.read()
             id = p_id
             filename = ziw_path.split('/')[-1][:-7]
-            modify_time = datetime.datetime.fromtimestamp(os.path.getctime(ziw_path)).strftime("%Y.%m.%d")
+            modify_time = datetime.datetime.fromtimestamp(os.path.getmtime(ziw_path)).strftime("%Y.%m.%d")
             replace_word = f'}},\n{{"id":"{id}",\n"title":"{filename}",\n"subtitle":"",\n"author":"浩瀚猫",\n"word":"",\n' \
                 f'"date":"{modify_time}",\n"img":"img/page-heading/xxx.jpg",\n"recommend":[]\n}}\n];'
             contents = contents.replace('}\n];', replace_word)
@@ -133,5 +133,5 @@ if __name__ == '__main__':
                     convert(ziw_path, p_id, overwrite=True)
                     loop=False
             else:
-                convert(ziw_path, 13)
+                convert(ziw_path, p_id)
                 loop=False

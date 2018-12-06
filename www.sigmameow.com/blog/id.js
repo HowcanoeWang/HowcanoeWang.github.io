@@ -8,10 +8,10 @@ var section = {
 	"歌戏影视":[4],
 	"奇技赢巧":[2,12],
 	/*=================*/
-	"科研技能":[3,13],
+	"科研技能":[3,14,13,15], /*note: article 14 and 13 顺序乱了*/
 	/*-----------------*/
 	"Py点云库":[3],
-  "Py三维库":[13],
+  "Py三维库":[14,13,15],
 	"科研作图":[],
 	"数据处理":[],
 	"统计分析":[],
@@ -148,12 +148,30 @@ var jsdb = [
 "recommend":[2,3]
 },
 {"id":"13",
-"title":"三维可视之基础运用与实战", 
-"subtitle":"有一天，家里有个矿的小虎想去看自己最喜欢的《四体》歌剧，但是都没有一个剧团排练了这个小说，于是地主家的傻儿子立马决定从零开始组建一个剧团完成自己想要的《四体》歌剧。在咨询了诸多业界砖家后，大体确定了组建流程……",
+"title":"第二章 三维可视之TVTK基础", 
+"subtitle":"用一个看歌剧小故事类比TVTK库的工作流程(管线)，介绍了TVTK支持的数据格式与数据加载，以及简单的TVTK可视化范例。",
 "author":"浩瀚猫",
-"word":"3.1k",
-"date":"2018.11.23",
+"word":"3.9k",
+"date":"2018.12.05",
 "img":"img/page-heading/three_d_visualization.jpg",
-"recommend":[2,3]
+"recommend":[14,15]
+},
+{"id":"14",
+"title":"第一章 三维可视之前奏",
+"subtitle":"主要介绍了三维可视化基础，以及三维可视化的Python环境搭建。",
+"author":"浩瀚猫",
+"word":"707",
+"date":"2018.12.06",
+"img":"img/page-heading/three_d_visualization.jpg",
+"recommend":[13,15]
+},
+{"id":"15",
+"title":"第三章 三维可视之Mayavi基础",
+"subtitle":"待续",
+"author":"浩瀚猫",
+"word":"142",
+"date":"2018.12.09",
+"img":"img/page-heading/three_d_visualization.jpg",
+"recommend":[14,13]
 }
 ];
