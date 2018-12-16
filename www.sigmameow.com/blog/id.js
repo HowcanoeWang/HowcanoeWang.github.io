@@ -151,7 +151,7 @@ var jsdb = [
 "title":"第二章 三维可视之TVTK基础", 
 "subtitle":"用一个看歌剧小故事类比TVTK库的工作流程(管线)，介绍了TVTK支持的数据格式与数据加载，以及简单的TVTK可视化范例。",
 "author":"浩瀚猫",
-"word":"3.9k",
+"word":"3.3k",
 "date":"2018.12.05",
 "img":"img/page-heading/three_d_visualization.jpg",
 "recommend":[14,15]
@@ -167,10 +167,10 @@ var jsdb = [
 },
 {"id":"15",
 "title":"第三章 三维可视之Mayavi基础",
-"subtitle":"待续",
+"subtitle":"介绍了利用MayaVi库里面的Mlab模块，实现了科学数据(就是通过一堆复杂的一逼的数学公式算出来的数据)的三维可视化和使用三维模型(非科学数据)的应用级交互操作",
 "author":"浩瀚猫",
-"word":"142",
-"date":"2018.12.09",
+"word":"6.8k",
+"date":"2018.12.15",
 "img":"img/page-heading/three_d_visualization.jpg",
 "recommend":[14,13]
 }

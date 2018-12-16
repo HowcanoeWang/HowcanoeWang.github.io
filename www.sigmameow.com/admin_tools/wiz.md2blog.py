@@ -21,8 +21,8 @@ def convert(ziw_path, p_id, overwrite=False):
     md = soup2markdown(soup)
 
     md = md.replace('src="index_files', f'src="img/{p_id}')
+    md = md.replace(' ', ' ')    # wiz tab = '&nbsp;' + ' ' + '&nbsp;&nbsp;', what the fuck!!!!!!!!!!!!
     md = md.replace('[toc]', '\n[TOC]\n')
-    md = md.replace('* ', '\n* ')
 
     md_ext = markdown.Markdown(extensions=['extra', 'codehilite', 'tables', 'toc'])
     html = md_ext.convert(md)
@@ -37,6 +37,7 @@ def convert(ziw_path, p_id, overwrite=False):
     html = html.replace('<blockquote', '<blockquote class="blockquote"')
     html = html.replace('<img', '<img class="img-fluid"')
 
+
     if overwrite:
         os.remove(html_dir)
         if os.path.exists(img_dir):
@@ -48,7 +49,7 @@ def convert(ziw_path, p_id, overwrite=False):
             filename = ziw_path.split('/')[-1][:-7]
             modify_time = datetime.datetime.fromtimestamp(os.path.getmtime(ziw_path)).strftime("%Y.%m.%d")
             replace_word = f'}},\n{{"id":"{id}",\n"title":"{filename}",\n"subtitle":"",\n"author":"浩瀚猫",\n"word":"",\n' \
-                f'"date":"{modify_time}",\n"img":"img/page-heading/xxx.jpg",\n"recommend":[]\n}}\n];'
+                f'"date":"{modify_time}",\n"img":"img/page-heading/blog-bg.jpg",\n"recommend":[]\n}}\n];'
             contents = contents.replace('}\n];', replace_word)
             js.seek(0)
             js.write(contents)
@@ -57,6 +58,7 @@ def convert(ziw_path, p_id, overwrite=False):
     outfile = open(html_dir, 'w', encoding="utf-8")
     outfile.write(html)
     outfile.close()
+
 
 def read_ziw(ziw_path):
     zfile = zipfile.ZipFile(ziw_path, 'r')
@@ -72,12 +74,16 @@ def read_ziw(ziw_path):
     for tag in soup():
         for attribute in ["class", "id", "name", "style", "align", "valign", "width", "height"]:
             del tag[attribute]
+
     return soup
 
 def soup2markdown(soup):
     markdown_text = ''
     for child in soup.body.children:  # 遍历儿子节点
-        child_text = contents_extract(child)
+        if str(child) == "<div><br/></div>":
+            child_text = '\n'
+        else:
+            child_text = contents_extract(child)
         markdown_text += child_text + '\n'
 
     return markdown_text

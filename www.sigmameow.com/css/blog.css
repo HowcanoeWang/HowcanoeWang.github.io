@@ -15,6 +15,10 @@ p {
   /*word-break:break-all; */
 }
 
+td {
+  word-wrap:normal;
+}
+
 li {
   word-wrap:break-word; 
   /*word-break:break-all; */

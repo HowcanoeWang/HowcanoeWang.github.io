@@ -1,13 +1,9 @@
 <p>本文基于《Python科学计算三维可视化》MOOC课程第一周与第二周内容结合个人理解所整理的笔记</p>
 <blockquote class="blockquote">
-<p>https://www.icourse163.org/course/BIT-1001871001</p>
+<p><a href="https://www.icourse163.org/course/BIT-1001871001">https://www.icourse163.org/course/BIT-1001871001</a></p>
 <ul>
-<li>
-<p>【第一周】三维可视之基础运用</p>
-</li>
-<li>
-<p>【第二周】三维可视之基础实战</p>
-</li>
+<li>【第一周】三维可视之基础运用</li>
+<li>【第二周】三维可视之基础实战</li>
 </ul>
 </blockquote>
 <p>主要内容有：</p>
@@ -17,7 +13,7 @@
 <li><a href="#11">1.1 看歌剧小故事</a></li>
 <li><a href="#12">1.2 故事分析</a></li>
 <li><a href="#13">1.3 编程流程</a></li>
-<li><a href="#15-ivtk">1.5 用ivtk工具观察管线</a><ul>
+<li><a href="#14-ivtk">1.4 用ivtk工具观察管线</a><ul>
 <li><a href="#openglcamera">照相机属性(OpenGLCamera)</a></li>
 <li><a href="#actor">Actor属性</a></li>
 <li><a href="#_1">场景属性</a></li>
@@ -55,29 +51,16 @@
 <p>上面的例子，模拟了VTK三维可视化过程中从数据到图像的数据流。如图中所示，管线分为了可视化管线和图形管线，可视化管线是将原视数据<strong>[小说]</strong>加工成图形数据<strong>[剧本]</strong>的过程， 而图形管线是将图形数据加工<strong>[剧本]</strong>为我们<strong>[小虎]</strong>所看到的图像过程。</p>
 <p>图中主要涉及到5个部分：</p>
 <ul>
-<li>
-<p>Source：一个连接外部数据的接口，可以获取外部的数据；<em>在上面的例子中是联系《四体》作者取得改编权的这条路径</em>。</p>
+<li>Source：一个连接外部数据的接口，可以获取外部的数据；<em>在上面的例子中是联系《四体》作者取得改编权的这条路径</em>。</li>
+<li>Filter：转换输入的数据，即通过一些图像算法，把数据变为优化的内部数据结构，称之为<strong>数据预处理</strong>；<em>例子中是改编成剧本的这个过程</em>。</li>
+<li>Mapper： 把数据转换为原始图像，称之为<strong>数据映射</strong>，<em>例子中是指道具师设计衣服等道具</em>。</li>
+<li>Actor：表示可视数据或对象，即<em>例子中穿上衣服化好妆的演员，具有站位、衣服颜色、面朝方向、身高等属性</em>。<ul>
+<li>对象的属性(颜色，阴影种类等)</li>
+<li>几何形状</li>
+<li>转换</li>
+</ul>
 </li>
-<li>
-<p>Filter：转换输入的数据，即通过一些图像算法，把数据变为优化的内部数据结构，称之为<strong>数据预处理</strong>；<em>例子中是改编成剧本的这个过程</em>。</p>
-</li>
-<li>
-<p>Mapper： 把数据转换为原始图像，称之为<strong>数据映射</strong>，<em>例子中是指道具师设计衣服等道具</em>。</p>
-</li>
-<li>
-<p>Actor：表示可视数据或对象，即<em>例子中穿上衣服化好妆的演员，具有站位、衣服颜色、面朝方向、身高等属性</em>。
-    </p>
-</li>
-<li>对象的属性(颜色，阴影种类等)
-    </li>
-<li>几何形状
-    </li>
-<li>
-<p>转换</p>
-</li>
-<li>
-<p>Rendener：<em>例子中的舞台，提供场景(Scene)来供演员表演，以及打光师(光源vtkLights)和摄像师(视角vtkCamera)</em>。</p>
-</li>
+<li>Rendener：<em>例子中的舞台，提供场景(Scene)来供演员表演，以及打光师(光源vtkLights)和摄像师(视角vtkCamera)</em>。</li>
 </ul>
 <p>实际操作中，往往还要用到另外两个东西，一个是RenderWindow，即小虎躺在床上从屏幕里看到的摄像机传回的画面，另一个是RenderWindowInteractor，提供了与用户进行交互的功能，如旋转，缩放等，即小虎操控摄影师走位的对讲机。
 <img class="img-fluid" src="img/13/196fc472-c042-4e72-bc9a-1dea8ac78038.jpg"/></p>
@@ -86,11 +69,13 @@
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td><br/></td><td>TVTK对象</td><td>说明</td><td>例子</td></tr><tr><td colspan="1" rowspan="2">可视化管线</td><td>CubeSource</td><td>通过程序内部计算输出一组描述长方体的数据(PolyData)</td><td>有改编权的小说</td></tr><tr><td>PolyDataMapper</td><td>PolyData通过该映射器将数据映射为图像数据(mapper)</td><td>演员衣服道具</td></tr><tr><td colspan="1" rowspan="4">图形管线</td><td>Actor</td><td>场景中的一个实体，包括一个图形数据(mapper)，具有描述该实体的位置、方向、大小的属性<br/></td><td>穿上衣服拿上道具的演员</td></tr><tr><td>Renderer</td><td>渲染的场景， 包括多个需要渲染的Actor</td><td>舞台，包含灯光师和摄像师</td></tr><tr><td>RenderWindow</td><td>渲染用的图形窗口，包括一个或多个Render</td><td>摄像机传出的屏幕</td></tr><tr><td>RenderWindowInteractor</td><td>给图形窗口提供一些用户交互功能，如平移、旋转、放大缩小。这些操作并不改变Actor或者图像数据的属性，只是调整场景中的照相机或</td><td>小虎操控摄像师的对讲机</td></tr></tbody></table></div></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
 
+
 <span class="c1">## 可视化管线 ##</span>
 <span class="c1"># 创建一个长方体数据源，并同时设置其长宽高</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">CubeSource</span><span class="p">(</span><span class="n">x_length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y_length</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">z_length</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
 <span class="c1"># 使用PolyDataMapper将数据转换为图形数据</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">PolyDataMapper</span><span class="p">(</span><span class="n">input_connection</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">output_port</span><span class="p">)</span>
+
 
 <span class="c1">## 图形管线 ##</span>
 <span class="c1"># 创建一个Actor</span>
@@ -109,7 +94,7 @@
 </pre></div>
 
 
-<h1 class="section-heading h3" id="15-ivtk">1.5 用ivtk工具观察管线</h3>
+<h1 class="section-heading h3" id="14-ivtk">1.4 用ivtk工具观察管线</h3>
 <p>mayavi包里面自带了一个小界面来查看三维模型
 <a href="https://www.sigmameow.com/blog/files/13/view_pipeline.py" download="view_pipeline.py">view_pipeline.py</a>:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
@@ -117,16 +102,19 @@
 <span class="kn">from</span> <span class="nn">tvtk.tools</span> <span class="kn">import</span> <span class="n">ivtk</span>
 <span class="kn">from</span> <span class="nn">pyface.api</span> <span class="kn">import</span> <span class="n">GUI</span>
 
+
 <span class="c1"># 创建三维模型</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">CubeSource</span><span class="p">(</span><span class="n">x_length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y_length</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">z_length</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">PolyDataMapper</span><span class="p">(</span><span class="n">input_connection</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">output_port</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">Actor</span><span class="p">(</span><span class="n">mapper</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+
 
 <span class="c1"># 创建一个带Crust(Python Shell)的窗口</span>
 <span class="n">gui</span> <span class="o">=</span> <span class="n">GUI</span><span class="p">()</span>
 <span class="n">win</span> <span class="o">=</span> <span class="n">ivtk</span><span class="o">.</span><span class="n">IVTKWithCrustAndBrowser</span><span class="p">()</span>
 <span class="n">win</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
 <span class="n">win</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">add_actor</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
 
 <span class="c1"># 开启界面消息循环</span>
 <span class="n">gui</span><span class="o">.</span><span class="n">start_event_loop</span><span class="p">()</span>
@@ -136,7 +124,7 @@
 <p>运行之后，会弹出一个这样的菜单
 <img class="img-fluid" alt="tim 20181108085454" src="img/13/0.4816472319245173.png"/></p>
 <blockquote class="blockquote">
-<p>如果使用mayavi‑4.6.2这个版本，有很大的可能会出现这个<a href="https://github.com/enthought/mayavi/issues/734" target="_blank">issue</a>里面的报错，即AttributeError: 'PipelineBrowser' object has no attribute 'ui'与Pipeline Browser弹出的bug. 
+<p>如果使用mayavi‑4.6.2这个版本，有很大的可能会出现这个<a href="https://github.com/enthought/mayavi/issues/734" target="_blank">issue</a>里面的报错，即AttributeError: 'PipelineBrowser' object has no attribute 'ui'与Pipeline Browser弹出的bug. 
 <img class="img-fluid" alt="tim 20181108084520" src="img/13/0.9640163157990207.png"/>
 该问题已经在最新版中修复了，如果安装的版本没有修复的话，可以下载<a href="https://www.sigmameow.com/blog/files/13/browser.py" download="browser.py">browser.py</a>和<a href="https://www.sigmameow.com/blog/files/13/ivtk.py" download="ivtk.py">ivtk.py</a>这两个文件，分别替换虚拟环境中py3d\Lib\site-packages\tvtk\tools\ivtk.py和py3d\Lib\site-packages\tvtk\pipeline\browser.py文件即可。</p>
 </blockquote>
@@ -163,15 +151,9 @@
 <p><img class="img-fluid" src="img/13/528160921.png"/>
 数据集(dataset)由点(point)和数据(data)组成</p>
 <ul>
-<li>
-<p>点之间可以是连接或者非连接，连接包括显示(explicit)和隐式(implecit)</p>
-</li>
-<li>
-<p>数据可以是标量(scalar)或者矢量(vector)</p>
-</li>
-<li>
-<p>多个相关的点构成了单元(cell)</p>
-</li>
+<li>点之间可以是连接或者非连接，连接包括显示(explicit)和隐式(implecit)</li>
+<li>数据可以是标量(scalar)或者矢量(vector)</li>
+<li>多个相关的点构成了单元(cell)</li>
 </ul>
 <p>TVTK中主要有5种数据集：
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td><br/></td><td>描述</td><td>连结性</td><td>适用于</td></tr><tr><td>ImageData</td><td>点位于正交等距的网格上</td><td>隐式</td><td>体积和面</td></tr><tr><td>RectilinearGrid</td><td>间距不均匀的网格，所有点都在正交的网格上</td><td>隐式</td><td>体积和面</td></tr><tr><td>StructuredGrid</td><td>创建任意形状的网格，需要指定点的坐标</td><td>隐式</td><td>体积和面</td></tr><tr><td>UnstructruedGrid</td><td><br/></td><td>显示</td><td>体积和面</td></tr><tr><td>PolyData<br/></td><td>由一系列点、点之间的联系以及由点构成的多边形组成<br/></td><td>显示</td><td>点线面</td></tr></tbody></table></div></p>
@@ -181,7 +163,7 @@
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td>参数</td><td>说明</td></tr><tr><td>origin</td><td>三维网格数据的起点坐标</td></tr><tr><td>spacing</td><td>三维网格数据在X，Y，Z轴上的间距</td></tr><tr><td>dimensions</td><td>X，Y，Z轴上的网格数</td></tr></tbody></table></div></p>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">img</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">ImageData</span><span class="p">(</span><span class="n">spacing</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">origin</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">img</span><span class="o">.</span><span class="n">get_point</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># 获取第一个点</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">img</span><span class="o">.</span><span class="n">get_point</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># 获取第一个点</span>
 <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
 </pre></div>
 
@@ -191,6 +173,7 @@
 <img class="img-fluid" src="img/13/529448531.png"/></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span> <span class="p">,</span><span class="mi">15</span><span class="p">])</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">[)</span>
@@ -215,7 +198,7 @@
 一些基本的三维对象
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td>三维对象</td><td>说明</td></tr><tr><td>CubeSource</td><td>立方体三维对象数据源</td></tr><tr><td>ConeSource<br/></td><td>圆锥三维对象数据源</td></tr><tr><td>CylinderSource</td><td>圆柱三维对象数据源</td></tr><tr><td>ArcSource</td><td>圆弧三维对象数据源</td></tr><tr><td>ArrowSource</td><td>箭头三维对象数据源</td></tr></tbody></table></div>
 例如创建一个圆锥数据源</p>
-<div class="codehilite"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">ConeSource</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">resolution36</span><span class="p">)</span> 
+<div class="codehilite"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">ConeSource</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">resolution36</span><span class="p">)</span> 
 <span class="c1">#设定圆锥的高度，底面半径，分辨率</span>
 </pre></div>
 
@@ -228,11 +211,11 @@
 <img class="img-fluid" src="img/13/530951687.png"/></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
 <span class="kn">from</span> <span class="nn">tvtkfunc</span> <span class="kn">import</span> <span class="n">ivtk_scene</span><span class="p">,</span><span class="n">event_loop</span>
- 
+
 <span class="n">s</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">STLReader</span><span class="p">(</span><span class="n">file_name</span> <span class="o">=</span> <span class="s2">&quot;python.stl&quot;</span><span class="p">)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">PolyDataMapper</span><span class="p">(</span><span class="n">input_connection</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">output_port</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">Actor</span><span class="p">(</span><span class="n">mapper</span> <span class="o">=</span> <span class="n">m</span><span class="p">)</span>
- 
+
 <span class="n">win</span> <span class="o">=</span> <span class="n">ivtk_scene</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="n">win</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">isometric_view</span><span class="p">()</span>
 <span class="n">event_loop</span><span class="p">()</span>
@@ -242,23 +225,17 @@
 <p><img class="img-fluid" src="img/13/6d02c55c-91e7-4617-8e8d-ff3fdbc04211.png"/></p>
 <h1 class="section-heading h3" id="32-plot3dnasa">3.2 Plot3D(NASA)</h3>
 <ul>
-<li>
-<p>网格文件(XYZ文件) <a href="https://www.sigmameow.com/blog/files/13/combxyz.bin" download="combxyz.bin">combxyz.bin</a></p>
-</li>
-<li>
-<p>空气动力学结果文件(Q文件) <a href="https://www.sigmameow.com/blog/files/13/combq.bin" download="combq.bin">combq.bin</a></p>
-</li>
-<li>
-<p>通用结果</p>
-</li>
+<li>网格文件(XYZ文件) <a href="https://www.sigmameow.com/blog/files/13/combxyz.bin" download="combxyz.bin">combxyz.bin</a></li>
+<li>空气动力学结果文件(Q文件) <a href="https://www.sigmameow.com/blog/files/13/combq.bin" download="combq.bin">combq.bin</a></li>
+<li>通用结果</li>
 </ul>
 <div class="codehilite"><pre><span></span><span class="n">plot3d</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">MultiBlockPLOT3DReader</span><span class="p">(</span>
-        <span class="n">xyz_file_name</span><span class="o">=</span><span class="s2">&quot;combxyz.bin&quot;</span><span class="p">,</span>   <span class="c1"># 网格文件</span>
-        <span class="n">q_file_name</span><span class="o">=</span><span class="s2">&quot;combq.bin&quot;</span><span class="p">,</span>   <span class="c1"># 空气动力学结果文件</span>
-        <span class="n">scalar_function_number</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>   <span class="c1"># 设置标量数据数量</span>
-        <span class="n">vector_function_number</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>   <span class="c1"># 设置矢量数据数量</span>
-<span class="n">plot3d</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>    <span class="c1"># 让Plot3D计算其输出数据</span>
-<span class="n">grid</span> <span class="o">=</span> <span class="n">plot3d</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_block</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># 获取读入的数据集对象</span>
+        <span class="n">xyz_file_name</span><span class="o">=</span><span class="s2">&quot;combxyz.bin&quot;</span><span class="p">,</span>   <span class="c1"># 网格文件</span>
+        <span class="n">q_file_name</span><span class="o">=</span><span class="s2">&quot;combq.bin&quot;</span><span class="p">,</span>   <span class="c1"># 空气动力学结果文件</span>
+        <span class="n">scalar_function_number</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>   <span class="c1"># 设置标量数据数量</span>
+        <span class="n">vector_function_number</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>   <span class="c1"># 设置矢量数据数量</span>
+<span class="n">plot3d</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>    <span class="c1"># 让Plot3D计算其输出数据</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">plot3d</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_block</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># 获取读入的数据集对象</span>
 </pre></div>
 
 
@@ -270,21 +247,25 @@
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
 <span class="kn">from</span> <span class="nn">tvtkfunc</span> <span class="kn">import</span> <span class="n">ivtk_scene</span><span class="p">,</span> <span class="n">event_loop</span>
 
+
 <span class="c1"># 读取Plot3D数据</span>
 <span class="n">plot3d</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">MultiBlockPLOT3DReader</span><span class="p">(</span>
 <span class="o">...</span><span class="p">(</span><span class="err">见</span><span class="mf">2.3</span><span class="o">.</span><span class="mi">2</span><span class="err">，</span> <span class="err">从略</span><span class="p">)</span>
-<span class="n">grid</span> <span class="o">=</span> <span class="n">plot3d</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_block</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  
+<span class="n">grid</span> <span class="o">=</span> <span class="n">plot3d</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_block</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  
+
 
 <span class="c1"># 创建等值面</span>
-<span class="n">con</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">ContourFilter</span><span class="p">()</span>   <span class="c1"># 创建等值面对象</span>
+<span class="n">con</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">ContourFilter</span><span class="p">()</span>   <span class="c1"># 创建等值面对象</span>
 <span class="n">con</span><span class="o">.</span><span class="n">set_input_data</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
-<span class="n">con</span><span class="o">.</span><span class="n">generate_values</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">point_data</span><span class="o">.</span><span class="n">scalars</span><span class="o">.</span><span class="n">range</span><span class="p">)</span>   <span class="c1"># 指定轮廓数和数据范围</span>
+<span class="n">con</span><span class="o">.</span><span class="n">generate_values</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">point_data</span><span class="o">.</span><span class="n">scalars</span><span class="o">.</span><span class="n">range</span><span class="p">)</span>   <span class="c1"># 指定轮廓数和数据范围</span>
+
 
 <span class="c1"># 绘制数据</span>
 <span class="c1">## 设定映射器的变量范围属性</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">PolyDataMapper</span><span class="p">(</span><span class="n">scalar_range</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">point_data</span><span class="o">.</span><span class="n">scalars</span><span class="o">.</span><span class="n">range</span><span class="p">,</span> <span class="n">input_connection</span><span class="o">=</span><span class="n">con</span><span class="o">.</span><span class="n">output_port</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">Actor</span><span class="p">(</span><span class="n">mapper</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
-<span class="n">a</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.5</span>   <span class="c1"># 设定透明度为0.5</span>
+<span class="n">a</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.5</span>   <span class="c1"># 设定透明度为0.5</span>
+
 
 <span class="c1"># 窗口绘制</span>
 <span class="n">win</span> <span class="o">=</span> <span class="n">ivtk_scene</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -323,10 +304,12 @@ set_value()参数调节效果
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
 <span class="kn">from</span> <span class="nn">tvtkfunc</span> <span class="kn">import</span> <span class="n">ivtk_scene</span><span class="p">,</span> <span class="n">event_loop</span>
 
+
 <span class="c1"># 读取Plot3D数据</span>
 <span class="n">plot3d</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">MultiBlockPLOT3DReader</span><span class="p">(</span>
 <span class="o">...</span><span class="p">(</span><span class="err">略</span><span class="p">)</span>
-<span class="n">grid</span> <span class="o">=</span> <span class="n">plot3d</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_block</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># 获取读入的数据集对象</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">plot3d</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_block</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># 获取读入的数据集对象</span>
+
 
 <span class="c1"># 数据随机选取</span>
 <span class="c1">## 对数据集中的数据进行随机选取，每50个点选择一个点</span>
@@ -334,6 +317,7 @@ set_value()参数调节效果
 <span class="n">mask</span><span class="o">.</span><span class="n">set_input_data</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
 <span class="c1">## 创建表示箭头的PolyData数据集</span>
 <span class="n">glyph_source</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">ArrowSource</span><span class="p">()</span>
+
 
 <span class="c1"># 绘制箭头</span>
 <span class="c1">## 在Mask采样后的PolyData数据集每个点上放置一个箭头</span>
@@ -343,6 +327,7 @@ set_value()参数调节效果
 <span class="c1">## 绘制数据</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">PolyDataMapper</span><span class="p">(</span><span class="n">scalar_range</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">point_data</span><span class="o">.</span><span class="n">scalars</span><span class="o">.</span><span class="n">range</span><span class="p">,</span> <span class="n">input_connection</span><span class="o">=</span><span class="n">glyph</span><span class="o">.</span><span class="n">output_port</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">Actor</span><span class="p">(</span><span class="n">mapper</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+
 
 <span class="c1"># 窗口绘制</span>
 <span class="n">win</span> <span class="o">=</span> <span class="n">ivtk_scene</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -359,21 +344,24 @@ set_value()参数调节效果
 <p>使用tvtk.StructuredGridOutlineFilter()计算PolyData对象的外边框</p>
 <p><a href="https://www.sigmameow.com/blog/files/13/plot3d_outline.py" download="plot3d_outline.py">plot3d_outline.py</a></p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
-<span class="kn">from</span> <span class="nn">tvtk.common</span> <span class="kn">import</span> <span class="n">configure_input</span>   <span class="c1"># 注意这里调用了一个新模块</span>
+<span class="kn">from</span> <span class="nn">tvtk.common</span> <span class="kn">import</span> <span class="n">configure_input</span>   <span class="c1"># 注意这里调用了一个新模块</span>
 <span class="kn">from</span> <span class="nn">tvtkfunc</span> <span class="kn">import</span> <span class="n">ivtk_scene</span><span class="p">,</span> <span class="n">event_loop</span>
+
 
 <span class="c1"># 读取Plot3D数据</span>
 <span class="n">plot3d</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">MultiBlockPLOT3DReader</span><span class="p">(</span>
 <span class="o">...</span><span class="p">(</span><span class="err">略</span><span class="p">)</span>
-<span class="n">grid</span> <span class="o">=</span> <span class="n">plot3d</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_block</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># 获取读入的数据集对象</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">plot3d</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get_block</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># 获取读入的数据集对象</span>
+
 
 <span class="c1"># 计算轮廓线</span>
-<span class="n">outline</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">StructuredGridOutlineFilter</span><span class="p">()</span>   <span class="c1"># 计算表示外边框的PolyData对象</span>
-<span class="n">configure_input</span><span class="p">(</span><span class="n">outline</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>   <span class="c1"># 调用tvtk.common.configure_input()</span>
+<span class="n">outline</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">StructuredGridOutlineFilter</span><span class="p">()</span>   <span class="c1"># 计算表示外边框的PolyData对象</span>
+<span class="n">configure_input</span><span class="p">(</span><span class="n">outline</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>   <span class="c1"># 调用tvtk.common.configure_input()</span>
 <span class="c1"># 绘制</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">PolyDataMapper</span><span class="p">(</span><span class="n">input_connection</span><span class="o">=</span><span class="n">outline</span><span class="o">.</span><span class="n">output_port</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">Actor</span><span class="p">(</span><span class="n">mapper</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span>
+
 
 <span class="c1"># 窗口绘制</span>
 <span class="n">win</span> <span class="o">=</span> <span class="n">ivtk_scene</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>

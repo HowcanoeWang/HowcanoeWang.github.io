@@ -1,6 +1,6 @@
 <p>本文基于《Python科学计算三维可视化》MOOC课程第〇周内容结合个人理解所整理的笔记</p>
 <blockquote class="blockquote">
-<p>https://www.icourse163.org/course/BIT-1001871001</p>
+<p><a href="https://www.icourse163.org/course/BIT-1001871001">https://www.icourse163.org/course/BIT-1001871001</a></p>
 <ul>
 <li>【第〇周】三维可视化之前奏</li>
 </ul>
@@ -27,24 +27,13 @@
 <h1 class="section-heading text-center" id="2">2. 环境搭建</h1>
 <p>Python3.6(64位)+Pycharm Community安装过程略</p>
 <h1 class="section-heading h3" id="21">2.1 基础库的下载与安装</h3>
-<p>https://www.lfd.uci.edu/~gohlke/pythonlibs，记得找对应的Python版本(3.6)和对应的系统位数(32位没有<code>_amd64.whl</code>)</p>
-<ul>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy" target="_blank">numpy‑1.15.4+mkl‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyqt4" target="_blank">PyQt4‑4.11.4‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#vtk" target="_blank">VTK‑8.1.2‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#mayavi" target="_blank">mayavi‑4.6.2+vtk81‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-<li>
-<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#traits" target="_blank">traits‑4.6.0‑cp36‑cp36m‑win_amd64.whl</a></p>
-</li>
-</ul>
+<p><img class="img-fluid" src="img/14/6f8e33e2-ce6c-4183-8e76-c038d9965eb2.jpg"/>
+<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs">https://www.lfd.uci.edu/~gohlke/pythonlibs</a>，记得找对应的Python版本(3.6)和对应的系统位数(32位没有<code>_amd64.whl</code>)
+<em> <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy" target="_blank">numpy‑1.15.4+mkl‑cp36‑cp36m‑win_amd64.whl</a>
+</em> <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyqt4" target="_blank">PyQt4‑4.11.4‑cp36‑cp36m‑win_amd64.whl</a>
+<em> <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#vtk" target="_blank">VTK‑8.1.2‑cp36‑cp36m‑win_amd64.whl</a>
+</em> <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#mayavi" target="_blank">mayavi‑4.6.2+vtk81‑cp36‑cp36m‑win_amd64.whl</a>
+* <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#traits" target="_blank">traits‑4.6.0‑cp36‑cp36m‑win_amd64.whl</a></p>
 <p>建议先建立虚拟环境(我建立一个一个py3d的虚拟环境)，创建虚拟环境的基础操作可以百度或者参考<a href="https://www.sigmameow.com/blog/page.html?id=3#Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83">这篇文章</a></p>
 <p>使用cmd进入虚拟环境之后，请按照上面的顺序进行安装(后面的包依赖前面的包)</p>
 <div class="codehilite"><pre><span></span>(py3d) D:\...\Python\py3d&gt;pip install 下载地址\xxx.whl
@@ -54,46 +43,38 @@
 <p>【如果安装的过程中报错】
 如果电脑第一次安装python，并且之前没有从事过编程的活动的话，Windows系统上很有可能提示没有安装Microsoft Visual C++ compiler，可以参考下面的连接下载安装对应的VS版本</p>
 <blockquote class="blockquote">
-<p>https://wiki.python.org/moin/WindowsCompilers</p>
+<p><a href="https://wiki.python.org/moin/WindowsCompilers">https://wiki.python.org/moin/WindowsCompilers</a></p>
 </blockquote>
 <p>由于我们用的是python3.6，所以下载Visual C++ 14.0 版本即可；详细的安装教程见连接</p>
 <h1 class="section-heading h3" id="22-tvtk">2.2 TVTK库安装测试</h3>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tvtk.api</span> <span class="kn">import</span> <span class="n">tvtk</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">CubeSource</span><span class="p">(</span><span class="n">x_length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y_length</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">z_length</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>    <span class="c1"># 创建三维长方体对象</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">tvtk</span><span class="o">.</span><span class="n">CubeSource</span><span class="p">(</span><span class="n">x_length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y_length</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">z_length</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>    <span class="c1"># 创建三维长方体对象</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="n">vtkCubeSource</span> <span class="p">(</span><span class="mo">00000240</span><span class="n">C5BCC350</span><span class="p">)</span>
-  <span class="n">Debug</span><span class="p">:</span> <span class="n">Off</span>
-  <span class="n">Modified</span> <span class="n">Time</span><span class="p">:</span> <span class="mi">99</span>
-  <span class="n">Reference</span> <span class="n">Count</span><span class="p">:</span> <span class="mi">2</span>
-  <span class="o">...</span>
-  <span class="n">Progress</span> <span class="n">Text</span><span class="p">:</span> <span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-  <span class="n">X</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">1</span>
-  <span class="n">Y</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">2</span>
-  <span class="n">Z</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">3</span>
-  <span class="n">Center</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-  <span class="n">Output</span> <span class="n">Points</span> <span class="n">Precision</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="n">Debug</span><span class="p">:</span> <span class="n">Off</span>
+  <span class="n">Modified</span> <span class="n">Time</span><span class="p">:</span> <span class="mi">99</span>
+  <span class="n">Reference</span> <span class="n">Count</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="o">...</span>
+  <span class="n">Progress</span> <span class="n">Text</span><span class="p">:</span> <span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+  <span class="n">X</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="n">Y</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="n">Z</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="n">Center</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">Output</span> <span class="n">Points</span> <span class="n">Precision</span><span class="p">:</span> <span class="mi">0</span>
 </pre></div>
 
 
 <h1 class="section-heading h5" id="tvtk">TVTK帮助资源</h5>
-<p>http://www.vtk.org/doc/nightly/html/annotated.html
-看的过程中注意，上面的文档是VTK的文档，在转成python库的过程中，变量名进行了以下的变更：</p>
-<ul>
-<li>
-<p>TVTK库中的类名去除了前缀vtk</p>
-</li>
-<li>
-<p>函数名按照Python的惯例，采用下划线连接单词
-    &gt; AddItem -&gt; add_item</p>
-</li>
-<li>
-<p>VTK对象的方法在TVTK中用Trait属性替代
-    如在VTK中<code>m.SetInputConnection(c.GetOutputPort())</code>变成了<code>m.input_connection(c.output_port)</code></p>
-</li>
-</ul>
+<p><a href="http://www.vtk.org/doc/nightly/html/annotated.html">http://www.vtk.org/doc/nightly/html/annotated.html</a>
+看的过程中注意，上面的文档是VTK的文档，在转成python库的过程中，变量名进行了以下的变更：
+<em> TVTK库中的类名去除了前缀vtk
+</em> 函数名按照Python的惯例，采用下划线连接单词
+    &gt; AddItem -&gt; add_item
+* VTK对象的方法在TVTK中用Trait属性替代
+    如在VTK中<code>m.SetInputConnection(c.GetOutputPort())</code>变成了<code>m.input_connection(c.output_port)</code></p>
 <h1 class="section-heading h3" id="23-mayavi">2.3 Mayavi库的安装测试</h3>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-<span class="o">&gt;&gt;&gt;</span> 
+<span class="o">&gt;&gt;&gt;</span> 
 </pre></div>
 
 
