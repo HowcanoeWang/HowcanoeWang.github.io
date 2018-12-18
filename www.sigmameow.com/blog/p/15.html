@@ -515,15 +515,30 @@
 <td>draw</td>
 <td>重新绘制当前图像<code>mlab.close(figure=None)</code></td>
 </tr>
+<tr>
+<td><strong>figure</strong></td>
+<td>建立一个新的Scene或者访问一个存在的Scene <code>mlab.figure(figure=None,bgcolor=None,fgcolor=None, engine=None,size=(400,350))</code></td>
+</tr>
+<tr>
+<td><strong>gcf</strong></td>
+<td>返回当前图像的handle <code>mlab.gcf(figure=None)</code></td>
+</tr>
+<tr>
+<td>savefig</td>
+<td>存储当前的前景，输出为一个文件，如png、jpg、bmp、tiff、 pdf、obj、vrml等</td>
+</tr>
+<tr>
+<td><strong>show</strong></td>
+<td>与当前图像开始交互 <code>mlab.show(func=None, stop=False)</code></td>
+</tr>
+<tr>
+<td><strong>show_pipeline</strong></td>
+<td>显示mayavi的管线对话框，可一进行场景属性的设置和编辑</td>
+</tr>
 </tbody>
 </table></div>
-<p>|<strong>figure</strong> | 建立一个新的Scene或者访问一个存在的Scene <code>mlab.figure(figure=None,bgcolor=None,fgcolor=None, engine=None,size=(400,350))</code>|<br />
-|<strong>gcf</strong> | 返回当前图像的handle <code>mlab.gcf(figure=None)</code>|<br />
-|savefig | 存储当前的前景，输出为一个文件，如png、jpg、bmp、tiff、 pdf、obj、vrml等|  </p>
-<p>|<strong>show</strong> | 与当前图像开始交互 <code>mlab.show(func=None, stop=False)</code>|<br />
-|<strong>show_pipeline</strong> | 显示mayavi的管线对话框，可一进行场景属性的设置和编辑|  </p>
-<p>其中，figure用来修改背景颜色、场景大小等参数  </p>
-<p>show()函数往往被用来收尾，即告诉mlab要弹出来一个窗口展示我们的三维模型<br />
+<p>其中，figure用来修改背景颜色、场景大小等参数<br />
+show()函数往往被用来收尾，即告诉mlab要弹出来一个窗口展示我们的三维模型<br />
 gcf往往被用来获取某一个对象，并修改其对应的属性，属于高级的应用<br />
 show_pipeline()用来弹出管线查看工具，可以用来手动修改相关的模型参数，也是高级的应用  </p>
 <h1 class="section-heading h3" id="23">2.3 图像修饰函数</h3>

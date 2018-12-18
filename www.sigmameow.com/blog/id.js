@@ -154,7 +154,7 @@ var jsdb = [
 "word":"4.2K",
 "date":"2018.12.18",
 "img":"img/page-heading/three_d_visualization.jpg",
-"recommend":[14,15]
+"recommend":[14,15,16]
 },
 {"id":"14",
 "title":"第一章 三维可视之前奏",
@@ -163,7 +163,7 @@ var jsdb = [
 "word":"1.1K",
 "date":"2018.12.18",
 "img":"img/page-heading/three_d_visualization.jpg",
-"recommend":[13,15]
+"recommend":[13,15,16]
 },
 {"id":"15",
 "title":"第三章 三维可视之Mayavi基础",
@@ -172,7 +172,7 @@ var jsdb = [
 "word":"8.6K",
 "date":"2018.12.17",
 "img":"img/page-heading/three_d_visualization.jpg",
-"recommend":[14,13]
+"recommend":[14,13,16]
 },
 {"id":"16",
 "title":"第四章 三维可视之Traits基础",
@@ -181,6 +181,6 @@ var jsdb = [
 "word":"2.0K",
 "date":"2018.12.18",
 "img":"img/page-heading/three_d_visualization.jpg",
-"recommend":[13,15]
+"recommend":[14,13,15]
 }
 ];;

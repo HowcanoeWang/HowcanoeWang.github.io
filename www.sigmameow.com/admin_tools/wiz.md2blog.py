@@ -113,7 +113,7 @@ def ziw2html(ziw_path, p_id):
             if in_code:
                 md += f'{l}\n'
             else:
-                contain_list = pattern.search(l) is not None
+                contain_list = pattern.search(l) is not None and l.count('*') <= 1  # only have one * can be viewed as list
                 # add two spaces in the end of a sentence, pymarkdown need two space to present a new line, but wiz note :)
                 if contain_list and not in_list:
                     in_list = True
