@@ -1,12 +1,10 @@
-<p>本文基于《Python科学计算三维可视化》MOOC课程第三周与第四周内容结合个人理解所整理的笔记</p>
+<p>本文基于《Python科学计算三维可视化》MOOC课程第三周与第四周内容结合个人理解所整理的笔记  </p>
 <blockquote class="blockquote">
-<p><a href="https://www.icourse163.org/course/BIT-1001871001">https://www.icourse163.org/course/BIT-1001871001</a></p>
-<ul>
-<li>【第三周】三维可视之高级进阶</li>
-<li>【第四周】三维可视之进阶实战  </li>
-</ul>
+<p><a href="https://www.icourse163.org/course/BIT-1001871001">https://www.icourse163.org/course/BIT-1001871001</a><br />
+【第三周】三维可视之高级进阶<br />
+【第四周】三维可视之进阶实战  </p>
 </blockquote>
-<p>主要内容有：</p>
+<p>主要内容有：  </p>
 <div class="toc">
 <ul>
 <li><a href="#1">1. 先睹为快</a><ul>
@@ -56,6 +54,7 @@
 </li>
 </ul>
 </li>
+<li><a href="#26">2.6 其他函数(动画)</a></li>
 </ul>
 </li>
 <li><a href="#3">3. 三维编程应用(三维模型，非科学计算数据)</a><ul>
@@ -70,11 +69,12 @@
 </li>
 </ul>
 </div>
+<hr />
 <h1 class="section-heading text-center" id="1">1. 先睹为快</h1>
-<p>通过几个基本例子，先对MayaVi可视化库有一个基本了解，最后会详细讲解MayaVi各个控制与绘图部分</p>
+<p>通过几个基本例子，先对MayaVi可视化库有一个基本了解，最后会详细讲解MayaVi各个控制与绘图部分  </p>
 <h1 class="section-heading h3" id="11">1.1 绘制立方体</h3>
-<p><img class="img-fluid" src="img/15/10e37da2-1269-4538-a334-7668dc8b7bc7.jpg"/>
-定义4个线段， 两两组合成为4个面
+<p><img class="img-fluid" src="img/15/10e37da2-1269-4538-a334-7668dc8b7bc7.jpg"/><br />
+定义4个线段， 两两组合成为4个面<br />
 面1：A1A2B2B1<br />
 面2：B1B2C2C1<br />
 面3：C1C2D2D1<br />
@@ -109,40 +109,36 @@
 </tr>
 </tbody>
 </table></div>
-<p>代码实现：<a href="https://www.sigmameow.com/blog/files/15/ex1.py" download="ex1.py">ex1.py</a></p>
+<p>代码实现：<a href="https://www.sigmameow.com/blog/files/15/ex1.py" download="ex1.py">ex1.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="c1"># 数据准备</span>
 <span class="n">x</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 <span class="n">z</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 
-
 <span class="c1"># 绘制mayavi的面</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">mesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-
 
 <span class="c1"># 显示图像</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/ex1.gif"/></p>
+<p><img class="img-fluid" src="img/15/ex1.gif"/>  </p>
 <h1 class="section-heading h5" id="_1">[附] 窗口的基本操作</h5>
-<p>键盘鼠标对场景进行操作</p>
+<p>键盘鼠标对场景进行操作  </p>
 <ul>
-<li>旋转场景：左键拖动或键盘的方向键</li>
-<li>平移场景：按住Shift键并使用左键拖动，shift+方向键盘</li>
-<li>缩放场景：鼠标右键上下拖动或使用“+”和“-”按键</li>
-<li>滚动相机：按住CTRL键并用左键拖动</li>
-<li>工具栏：从坐标轴6个方向观察场景、等角投影、切换平行透视 和成角透视等</li>
+<li>旋转场景：左键拖动或键盘的方向键  </li>
+<li>平移场景：按住Shift键并使用左键拖动，shift+方向键盘  </li>
+<li>缩放场景：鼠标右键上下拖动或使用“+”和“-”按键  </li>
+<li>滚动相机：按住CTRL键并用左键拖动  </li>
+<li>工具栏：从坐标轴6个方向观察场景、等角投影、切换平行透视 和成角透视等  </li>
 </ul>
 <h1 class="section-heading h3" id="12">1.2 绘制齿轮体</h3>
-<p>点此下载<a href="https://www.sigmameow.com/blog/files/15/ex2.py" download="ex2.py">ex2.py</a></p>
+<p>点此下载<a href="https://www.sigmameow.com/blog/files/15/ex2.py" download="ex2.py">ex2.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">mgrid</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="c1"># 数据准备</span>
 <span class="n">dphi</span><span class="p">,</span> <span class="n">dtheta</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">250.0</span><span class="p">,</span> <span class="n">pi</span><span class="o">/</span><span class="mf">250.0</span>
@@ -154,43 +150,43 @@
 <span class="n">y</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
 
-
 <span class="c1"># 绘制与显示</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">mesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/ex2.gif"/></p>
+<p><img class="img-fluid" src="img/15/ex2.gif"/>  </p>
+<hr />
 <h1 class="section-heading text-center" id="2-mlab">2. Mlab基础(科学计算数据可视化)</h1>
-<p>Mlab是MayaVi库中，最经常用到的一个部分，内置丰富的函数，可以方便的进行数据可视化，Mlab的函数，主要可以分成以下几大类：</p>
+<p>Mlab是MayaVi库中，最经常用到的一个部分，内置丰富的函数，可以方便的进行数据可视化，Mlab的函数，主要可以分成以下几大类：  </p>
 <ol>
-<li>绘图函数
-    针对0维、1维、2维、和3维数据的绘图函数，形式简单粗暴，数据-函数调用-三维图，可以是为对matplotlib二维绘图库的一个有力的三维补充（matplotlib也可以绘制三维图形，但是绘制之后的图已经转为2维了，并不是可以用鼠标拖拽查看的三维模型）</li>
-<li>图像控制函数
-    &gt; 对窗口的一个控制，可以清屏、重新绘制、(截屏)保存为图像等</li>
-<li>图像修饰函数
-    &gt; 对三维模型的配色、标注、刻度线等等的修改与控制</li>
-<li>相机控制函数
-    &gt; 通过代码来达到鼠标、键盘的控制效果</li>
-<li>管线控制函数
-    &gt; 对模型的详细属性的高级自由化定制</li>
-<li>其他函数
-    &gt; 用来控制动画等<code>mlab.animate(func=None, delay=500, ui=True)</code></li>
+<li>绘图函数  <br />
+    针对0维、1维、2维、和3维数据的绘图函数，形式简单粗暴，数据-函数调用-三维图，可以是为对matplotlib二维绘图库的一个有力的三维补充（matplotlib也可以绘制三维图形，但是绘制之后的图已经转为2维了，并不是可以用鼠标拖拽查看的三维模型）  </li>
+<li>图像控制函数<br />
+    对窗口的一个控制，可以清屏、重新绘制、(截屏)保存为图像等  </li>
+<li>图像修饰函数<br />
+    对三维模型的配色、标注、刻度线等等的修改与控制  </li>
+<li>相机控制函数<br />
+    通过代码来达到鼠标、键盘的控制效果  </li>
+<li>管线控制函数<br />
+    对模型的详细属性的高级自由化定制  </li>
+<li>其他函数<br />
+    用来控制动画等<code>mlab.animate(func=None, delay=500, ui=True)</code>  </li>
 </ol>
 <h1 class="section-heading h3" id="21">2.1 绘图函数</h3>
-<p>Mlab中，主要有以下的绘图函数
-<div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr>  <td>维度</td><td colspan="1" rowspan="1">函数名称</td>    <td colspan="1" rowspan="1">说明</td></tr><tr>    <td>0维</td><td colspan="1" rowspan="1">points3d</td>    <td colspan="1" rowspan="1">基于0维Numpy数组x、y、z提供的三维点坐标，绘制点图形</td></tr><tr><td>1维</td><td colspan="1" rowspan="1">plot3d</td>  <td colspan="1" rowspan="1">基于1维Numpy数组x、y、z提供的三维坐标数据，绘制线 图形<br/></td></tr><tr><td colspan="1" rowspan="4">2维</td><td colspan="1" rowspan="1">imshow<br/></td>  <td colspan="1" rowspan="1">将2维数组可视化为一张图像<br/></td></tr><tr><td colspan="1" rowspan="1">surf<br/></td>  <td colspan="1" rowspan="1">将2维数组可视化为一个平面，Z轴描述了数组点的高度<br/></td></tr><tr><td colspan="1" rowspan="1">contour_surf<br/></td>  <td colspan="1" rowspan="1">将2维数组可视化为等高线，高度值由数组点的值来确定</td></tr><tr><td colspan="1" rowspan="1">mesh<br/></td>   <td colspan="1" rowspan="1">绘制由三个2维数组x、y、z描述坐标点的网格平面</td></tr><tr><td colspan="1" rowspan="5">3维</td><td colspan="1" rowspan="1">barchart<br/></td> <td colspan="1" rowspan="1">根据2维、3维或者点云数据绘制的三维柱状图</td></tr><tr><td colspan="1" rowspan="1">triangular_mesh<br/></td>    <td colspan="1" rowspan="1">绘制由x、y、z坐标点描述的三角网格面</td></tr><tr><td colspan="1" rowspan="1">contour3d</td> <td colspan="1" rowspan="1">3维数组定义的体数据的等值面可视化</td></tr><tr><td colspan="1" rowspan="1">quiver3d</td>    <td colspan="1" rowspan="1">3维矢量数据的可视化，箭头表示在该点的矢量数据</td></tr><tr><td colspan="1" rowspan="1">flow</td>  <td colspan="1" rowspan="1">绘制3维数组描述的向量场的粒子轨迹</td></tr></tbody></table></div></p>
-<p>一般用于科研数据的快速三维可视化，该部分以numpy为核心，因此需要一定的numpy数据处理基础，mlab模块内部，对numpy进行了以下三个操作：</p>
+<p>Mlab中，主要有以下的绘图函数<br />
+<div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr>  <td>维度</td><td colspan="1" rowspan="1">函数名称</td>    <td colspan="1" rowspan="1">说明</td></tr><tr>    <td>0维</td><td colspan="1" rowspan="1">points3d</td>    <td colspan="1" rowspan="1">基于0维Numpy数组x、y、z提供的三维点坐标，绘制点图形</td></tr><tr><td>1维</td><td colspan="1" rowspan="1">plot3d</td>  <td colspan="1" rowspan="1">基于1维Numpy数组x、y、z提供的三维坐标数据，绘制线 图形<br/></td></tr><tr><td colspan="1" rowspan="4">2维</td><td colspan="1" rowspan="1">imshow<br/></td>  <td colspan="1" rowspan="1">将2维数组可视化为一张图像<br/></td></tr><tr><td colspan="1" rowspan="1">surf<br/></td>  <td colspan="1" rowspan="1">将2维数组可视化为一个平面，Z轴描述了数组点的高度<br/></td></tr><tr><td colspan="1" rowspan="1">contour_surf<br/></td>  <td colspan="1" rowspan="1">将2维数组可视化为等高线，高度值由数组点的值来确定</td></tr><tr><td colspan="1" rowspan="1">mesh<br/></td>   <td colspan="1" rowspan="1">绘制由三个2维数组x、y、z描述坐标点的网格平面</td></tr><tr><td colspan="1" rowspan="5">3维</td><td colspan="1" rowspan="1">barchart<br/></td> <td colspan="1" rowspan="1">根据2维、3维或者点云数据绘制的三维柱状图</td></tr><tr><td colspan="1" rowspan="1">triangular_mesh<br/></td>    <td colspan="1" rowspan="1">绘制由x、y、z坐标点描述的三角网格面</td></tr><tr><td colspan="1" rowspan="1">contour3d</td> <td colspan="1" rowspan="1">3维数组定义的体数据的等值面可视化</td></tr><tr><td colspan="1" rowspan="1">quiver3d</td>    <td colspan="1" rowspan="1">3维矢量数据的可视化，箭头表示在该点的矢量数据</td></tr><tr><td colspan="1" rowspan="1">flow</td>  <td colspan="1" rowspan="1">绘制3维数组描述的向量场的粒子轨迹</td></tr></tbody></table></div>  </p>
+<p>一般用于科研数据的快速三维可视化，该部分以numpy为核心，因此需要一定的numpy数据处理基础，mlab模块内部，对numpy进行了以下三个操作：  </p>
 <ol>
-<li>建立数据源</li>
-<li>使用Filter(可选)</li>
-<li>添加可视化模块</li>
+<li>建立数据源  </li>
+<li>使用Filter(可选)  </li>
+<li>添加可视化模块  </li>
 </ol>
-<p>上面的过程是Mlab库在后台自动做的，并不需要太详细的了解，作为使用者，只需要了解到每个函数的具体使用方法即可。</p>
+<p>上面的过程是Mlab库在后台自动做的，并不需要太详细的了解，作为使用者，只需要了解到每个函数的具体使用方法即可。  </p>
 <h1 class="section-heading h5" id="0-points3d">[0维] points3d()</h5>
-<p>基于Numpy数组x、y、z提供的三维点坐标，绘制点图形
-函数形式：<code>points3d(x, y, z, s, f, ...)</code></p>
+<p>基于Numpy数组x、y、z提供的三维点坐标，绘制点图形<br />
+函数形式：<code>points3d(x, y, z, s, f, ...)</code>  </p>
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center">
 <thead>
 <tr>
@@ -273,11 +269,10 @@
 </tr>
 </tbody>
 </table></div>
-<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#points3d">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#points3d</a></p>
-<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/points3d.py" download="points3d.py">points3d.py</a></p>
+<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#points3d">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#points3d</a>  </p>
+<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/points3d.py" download="points3d.py">points3d.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="c1"># 建立数据</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>   <span class="c1"># 从0到4pi, 生成20个等差数列的数</span>
@@ -286,17 +281,16 @@
 <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
 <span class="n">s</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
-
 <span class="c1"># 对数据进行可视化</span>
 <span class="n">points</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">points3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/points3d.gif"/></p>
+<p><img class="img-fluid" src="img/15/points3d.gif"/>  </p>
 <h1 class="section-heading h5" id="1-plot3d">[1维] plot3d()</h5>
-<p>基于1维Numpy数组x、y、z提供的三维坐标数据，绘制线 图形
-函数形式：<code>plot3d(x, y, z, s, ...)</code></p>
+<p>基于1维Numpy数组x、y、z提供的三维坐标数据，绘制线 图形<br />
+函数形式：<code>plot3d(x, y, z, s, ...)</code>  </p>
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center">
 <thead>
 <tr>
@@ -319,11 +313,10 @@
 </tr>
 </tbody>
 </table></div>
-<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#plot3d">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#plot3d</a></p>
-<p><strong>例子：</strong><a href="https://www.sigmameow.com/blog/files/15/plot3d.py" download="plot3d.py">plot3d.py</a></p>
+<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#plot3d">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#plot3d</a>  </p>
+<p><strong>例子：</strong><a href="https://www.sigmameow.com/blog/files/15/plot3d.py" download="plot3d.py">plot3d.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="n">n_mer</span><span class="p">,</span> <span class="n">n_long</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span>
 <span class="n">dphi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">1000.0</span>
@@ -332,7 +325,6 @@
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">n_long</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">/</span> <span class="n">n_mer</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">n_long</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">/</span> <span class="n">n_mer</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n_long</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">/</span> <span class="n">n_mer</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
-
 
 <span class="n">l</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">plot3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">mu</span><span class="p">),</span> <span class="n">tube_radius</span><span class="o">=</span><span class="mf">0.025</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;Spectral&#39;</span><span class="p">)</span> 
 <span class="c1"># x,y,z表示numpy数组，给出了线上连续的点的位置</span>
@@ -343,10 +335,10 @@
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/plot3d.gif"/></p>
+<p><img class="img-fluid" src="img/15/plot3d.gif"/>  </p>
 <h1 class="section-heading h5" id="2-imshow">[2维] imshow()</h5>
-<p>将二维数组可视化为一张图像
-函数形式：<code>imshow(s, …)</code></p>
+<p>将二维数组可视化为一张图像<br />
+函数形式：<code>imshow(s, …)</code>  </p>
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center">
 <thead>
 <tr>
@@ -369,58 +361,50 @@
 </tr>
 </tbody>
 </table></div>
-<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#imshow">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#imshow</a></p>
-<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/imshow.py" download="imshow.py">imshow.py</a></p>
+<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#imshow">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#imshow</a>  </p>
+<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/imshow.py" download="imshow.py">imshow.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
 
-
 <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>   <span class="c1"># 随机生成一个20*20的矩阵</span>
-
 
 <span class="n">img</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;gist_earth&#39;</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/097cf807-b6c5-48c7-ba28-7e45d08693d1.jpg"/></p>
+<p><img class="img-fluid" src="img/15/097cf807-b6c5-48c7-ba28-7e45d08693d1.jpg"/>  </p>
 <h1 class="section-heading h5" id="2-surf">[2维] surf()</h5>
-<p>将二维数组可视化为一个平面，Z轴描述了数组点的高度
-函数形式：<code>surf(s, …)</code> 或 <code>surf(x, y, s, …)</code> 或 <code>surf(x, y, f, …)</code>
-其中s是一个高程矩阵，用二维数组表示
-文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#surf">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#surf</a></p>
-<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/surf.py" download="surf.py">surf.py</a></p>
+<p>将二维数组可视化为一个平面，Z轴描述了数组点的高度<br />
+函数形式：<code>surf(s, …)</code> 或 <code>surf(x, y, s, …)</code> 或 <code>surf(x, y, f, …)</code><br />
+其中s是一个高程矩阵，用二维数组表示<br />
+文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#surf">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#surf</a>  </p>
+<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/surf.py" download="surf.py">surf.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
 
-
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="o">-</span><span class="mf">7.0</span><span class="p">:</span><span class="mf">7.05</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">:</span><span class="mf">5.05</span><span class="p">:</span><span class="mf">0.05</span><span class="p">]</span>
-
 
 <span class="n">s</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">surf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/surf.gif"/></p>
+<p><img class="img-fluid" src="img/15/surf.gif"/>  </p>
 <h1 class="section-heading h5" id="2-contour_surf">[2维] contour_surf()</h5>
-<p>将二维数组可视化为等高线，高度值由数组点的值来确定，与surf()类似，但求解的是等值线
-文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#contour_surf">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#contour_surf</a></p>
-<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/contour_surf.py" download="contour_surf.py">contour_surf.py</a></p>
+<p>将二维数组可视化为等高线，高度值由数组点的值来确定，与surf()类似，但求解的是等值线<br />
+文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#contour_surf">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#contour_surf</a>  </p>
+<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/contour_surf.py" download="contour_surf.py">contour_surf.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
 
-
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="o">-</span><span class="mf">7.0</span><span class="p">:</span><span class="mf">7.05</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">:</span><span class="mf">5.05</span><span class="p">:</span><span class="mf">0.05</span><span class="p">]</span>
-
 
 <span class="c1"># s = mlab.surf(x, y, f) =&gt;</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">contour_surf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
@@ -428,10 +412,10 @@
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/contour_surf.gif"/></p>
+<p><img class="img-fluid" src="img/15/contour_surf.gif"/>  </p>
 <h1 class="section-heading h5" id="3-contour3d">[3维] contour3d()</h5>
-<p>三维数组定义的体数据的等值面可视化<br />
-函数形式：<code>contour3d(scalars, ...)</code> 和 <code>contour3d(x, y, z, scalars, ...)</code></p>
+<p>三维数组定义的体数据的等值面可视化  <br />
+函数形式：<code>contour3d(scalars, ...)</code> 和 <code>contour3d(x, y, z, scalars, ...)</code>  </p>
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center">
 <thead>
 <tr>
@@ -454,25 +438,23 @@
 </tr>
 </tbody>
 </table></div>
-<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#contour3d">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#contour3d</a></p>
-<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/contour3d.py" download="contour3d.py">contour3d.py</a></p>
+<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#contour3d">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#contour3d</a>  </p>
+<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/contour3d.py" download="contour3d.py">contour3d.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
 
-
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">64j</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">64j</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">64j</span><span class="p">]</span>
 <span class="n">scalars</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span> <span class="o">*</span> <span class="n">z</span>
-
 
 <span class="n">obj</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">contour3d</span><span class="p">(</span><span class="n">scalars</span><span class="p">,</span> <span class="n">contours</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/contour3d.gif"/></p>
+<p><img class="img-fluid" src="img/15/contour3d.gif"/>  </p>
 <h1 class="section-heading h5" id="3-quiver3d">[3维] quiver3d()</h5>
-<p>三维矢量数据的可视化，箭头表示在该点的矢量数据<br />
-函数形式：<code>quiver3d(u, v, w, ...)</code> 或 <code>quiver3d(x, y, z, u, v, w, ...)</code> 或 <code>quiver3d(x, y, z, f)</code></p>
+<p>三维矢量数据的可视化，箭头表示在该点的矢量数据  <br />
+函数形式：<code>quiver3d(u, v, w, ...)</code> 或 <code>quiver3d(x, y, z, u, v, w, ...)</code> 或 <code>quiver3d(x, y, z, f)</code>  </p>
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center">
 <thead>
 <tr>
@@ -495,11 +477,10 @@
 </tr>
 </tbody>
 </table></div>
-<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#quiver3d">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#quiver3d</a></p>
-<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/quiver3e.py" download="quiver3d.py">quiver3d.py</a></p>
+<p>文档见：<a href="http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#quiver3d">http://docs.enthought.com/mayavi/mayavi/auto/mlab_helper_functions.html#quiver3d</a>  </p>
+<p><strong>例子</strong>：<a href="https://www.sigmameow.com/blog/files/15/quiver3e.py" download="quiver3d.py">quiver3d.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">4</span><span class="p">)</span>
@@ -507,13 +488,12 @@
 <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mf">0.001</span><span class="p">)</span>
 <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 
-
 <span class="n">obj</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">quiver3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">u</span> <span class="p">,</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/quiver3d.gif"/></p>
+<p><img class="img-fluid" src="img/15/quiver3d.gif"/>  </p>
 <h1 class="section-heading h3" id="22">2.2 图像控制函数</h3>
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center">
 <thead>
@@ -535,32 +515,17 @@
 <td>draw</td>
 <td>重新绘制当前图像<code>mlab.close(figure=None)</code></td>
 </tr>
-<tr>
-<td><strong>figure</strong></td>
-<td>建立一个新的Scene或者访问一个存在的Scene <code>mlab.figure(figure=None,bgcolor=None,fgcolor=None, engine=None,size=(400,350))</code></td>
-</tr>
-<tr>
-<td><strong>gcf</strong></td>
-<td>返回当前图像的handle <code>mlab.gcf(figure=None)</code></td>
-</tr>
-<tr>
-<td>savefig</td>
-<td>存储当前的前景，输出为一个文件，如png、jpg、bmp、tiff、 pdf、obj、vrml等</td>
-</tr>
-<tr>
-<td><strong>show</strong></td>
-<td>与当前图像开始交互 <code>mlab.show(func=None, stop=False)</code></td>
-</tr>
-<tr>
-<td><strong>show_pipeline</strong></td>
-<td>显示mayavi的管线对话框，可一进行场景属性的设置和编辑</td>
-</tr>
 </tbody>
 </table></div>
-<p>其中，figure用来修改背景颜色、场景大小等参数
-show()函数往往被用来收尾，即告诉mlab要弹出来一个窗口展示我们的三维模型
-gcf往往被用来获取某一个对象，并修改其对应的属性，属于高级的应用
-show_pipeline()用来弹出管线查看工具，可以用来手动修改相关的模型参数，也是高级的应用</p>
+<p>|<strong>figure</strong> | 建立一个新的Scene或者访问一个存在的Scene <code>mlab.figure(figure=None,bgcolor=None,fgcolor=None, engine=None,size=(400,350))</code>|<br />
+|<strong>gcf</strong> | 返回当前图像的handle <code>mlab.gcf(figure=None)</code>|<br />
+|savefig | 存储当前的前景，输出为一个文件，如png、jpg、bmp、tiff、 pdf、obj、vrml等|  </p>
+<p>|<strong>show</strong> | 与当前图像开始交互 <code>mlab.show(func=None, stop=False)</code>|<br />
+|<strong>show_pipeline</strong> | 显示mayavi的管线对话框，可一进行场景属性的设置和编辑|  </p>
+<p>其中，figure用来修改背景颜色、场景大小等参数  </p>
+<p>show()函数往往被用来收尾，即告诉mlab要弹出来一个窗口展示我们的三维模型<br />
+gcf往往被用来获取某一个对象，并修改其对应的属性，属于高级的应用<br />
+show_pipeline()用来弹出管线查看工具，可以用来手动修改相关的模型参数，也是高级的应用  </p>
 <h1 class="section-heading h3" id="23">2.3 图像修饰函数</h3>
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center">
 <thead>
@@ -614,18 +579,17 @@ show_pipeline()用来弹出管线查看工具，可以用来手动修改相关�
 </table></div>
 <h1 class="section-heading h5" id="colormap">Colormap</h5>
 <h1 class="section-heading h6 text-muted" id="lut-table">LUT Table</h6>
-<p>colormap定义的颜色，为Loop Up Table(LUT)，常见的有与matplotlib定义的colormap相同
-<img class="img-fluid" src="img/15/b274f19e-58ef-49e0-882b-d6e07c6138df.png"/>
-<img class="img-fluid" src="img/15/089dbb14-846f-495c-be79-de78388c04e3.png"/>
-<img class="img-fluid" src="img/15/a3952aea-d7e2-42e4-b3bc-3ce30981e74f.png"/>
-<img class="img-fluid" src="img/15/09cca563-83b9-4805-a7db-1030f809849a.png"/>
-<img class="img-fluid" src="img/15/dff14546-f68f-493f-87dc-8a854f619376.png"/>
-<img class="img-fluid" src="img/15/5142c68e-ff19-45c3-ab46-20a1803a4c94.png"/></p>
+<p>colormap定义的颜色，为Loop Up Table(LUT)，常见的有与matplotlib定义的colormap相同<br />
+<img class="img-fluid" src="img/15/b274f19e-58ef-49e0-882b-d6e07c6138df.png"/><br />
+<img class="img-fluid" src="img/15/089dbb14-846f-495c-be79-de78388c04e3.png"/><br />
+<img class="img-fluid" src="img/15/a3952aea-d7e2-42e4-b3bc-3ce30981e74f.png"/><br />
+<img class="img-fluid" src="img/15/09cca563-83b9-4805-a7db-1030f809849a.png"/><br />
+<img class="img-fluid" src="img/15/dff14546-f68f-493f-87dc-8a854f619376.png"/><br />
+<img class="img-fluid" src="img/15/5142c68e-ff19-45c3-ab46-20a1803a4c94.png"/>  </p>
 <h1 class="section-heading h6 text-muted" id="colormap_1">使用colormap为模型着色</h6>
-<p>示例代码：<a href="https://www.sigmameow.com/blog/files/15/colormap.py" download="colormap.py">colormap.py</a></p>
+<p>示例代码：<a href="https://www.sigmameow.com/blog/files/15/colormap.py" download="colormap.py">colormap.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="c1"># 建立数据</span>
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">200j</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">200j</span><span class="p">]</span>
@@ -638,12 +602,11 @@ show_pipeline()用来弹出管线查看工具，可以用来手动修改相关�
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/colormap.gif"/></p>
+<p><img class="img-fluid" src="img/15/colormap.gif"/>  </p>
 <h1 class="section-heading h6 text-muted" id="colormap_2">自定义colormap</h6>
-<p>示例代码：<a href="https://www.sigmameow.com/blog/files/15/colormap_lut.py" download="colormap_lut.py">colormap_lut.py</a></p>
+<p>示例代码：<a href="https://www.sigmameow.com/blog/files/15/colormap_lut.py" download="colormap_lut.py">colormap_lut.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="c1"># 建立数据</span>
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">200j</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">200j</span><span class="p">]</span>
@@ -664,7 +627,7 @@ show_pipeline()用来弹出管线查看工具，可以用来手动修改相关�
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/colormap_lut.gif"/></p>
+<p><img class="img-fluid" src="img/15/colormap_lut.gif"/>  </p>
 <h1 class="section-heading h3" id="24">2.4 相机控制函数</h3>
 <div class="table-responsive"><table class="table table-striped table-bordered" align="center">
 <thead>
@@ -697,21 +660,21 @@ show_pipeline()用来弹出管线查看工具，可以用来手动修改相关�
 </tbody>
 </table></div>
 <h1 class="section-heading h3" id="25-mlab">2.5 Mlab管线控制函数</h3>
-<p>在了解管线控制函数之前，需要先补充一下Mayavi的管线</p>
+<p>在了解管线控制函数之前，需要先补充一下Mayavi的管线  </p>
 <h1 class="section-heading h5" id="251-mayavi">2.5.1 Mayavi管线</h5>
-<p><img class="img-fluid" src="img/15/82abd612-4aed-44b4-8dc1-107264e49ce6.jpg"/></p>
-<p>Mayavi管线分为以下5个层级：</p>
+<p><img class="img-fluid" src="img/15/82abd612-4aed-44b4-8dc1-107264e49ce6.jpg"/>  </p>
+<p>Mayavi管线分为以下5个层级：  </p>
 <ul>
-<li>Engine：建立和销毁Scenes</li>
-<li>Scenes：多个数据集合Sources</li>
-<li>Filters：对数据进行变换</li>
-<li>Module Manager：控制颜色，Colors and Legends</li>
-<li>Modules：最终数据的表示，如线条、平面等</li>
+<li>Engine：建立和销毁Scenes  </li>
+<li>Scenes：多个数据集合Sources  </li>
+<li>Filters：对数据进行变换  </li>
+<li>Module Manager：控制颜色，Colors and Legends  </li>
+<li>Modules：最终数据的表示，如线条、平面等  </li>
 </ul>
 <h1 class="section-heading h6 text-muted" id="scene">Scene</h6>
-<p>位于树的最顶层对象，表示场景
-<img class="img-fluid" src="img/15/ed93661a-7dfb-4b49-bc81-6079b595841a.png"/></p>
-<p>获取该元素的方式为：</p>
+<p>位于树的最顶层对象，表示场景<br />
+<img class="img-fluid" src="img/15/ed93661a-7dfb-4b49-bc81-6079b595841a.png"/>  </p>
+<p>获取该元素的方式为：  </p>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
 <span class="o">&lt;</span><span class="n">mayavi</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">Scene</span> <span class="nb">object</span><span class="o">&gt;</span>
@@ -721,8 +684,8 @@ show_pipeline()用来弹出管线查看工具，可以用来手动修改相关�
 
 
 <h1 class="section-heading h6 text-muted" id="gridsource">GridSource</h6>
-<p><img class="img-fluid" src="img/15/21bd84ac-02e8-49cb-81cd-7e9acb3f2069.png"/></p>
-<p>获取该元素的方式为：</p>
+<p><img class="img-fluid" src="img/15/21bd84ac-02e8-49cb-81cd-7e9acb3f2069.png"/>  </p>
+<p>获取该元素的方式为：  </p>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">source</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
 <span class="o">&lt;</span><span class="n">mayavi</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">vtk_data_source</span><span class="o">.</span><span class="n">VTKDataSource</span> <span class="nb">object</span><span class="o">&gt;</span>
@@ -736,8 +699,8 @@ show_pipeline()用来弹出管线查看工具，可以用来手动修改相关�
 
 
 <h1 class="section-heading h6 text-muted" id="polydatanormalsfilters">PolyDataNormals(filters)</h6>
-<p>该对象为数据源的法向量，具有以下的属性
-<img class="img-fluid" src="img/15/1a764ec1-e0b1-4036-bd4f-613e7311c774.png"/></p>
+<p>该对象为数据源的法向量，具有以下的属性<br />
+<img class="img-fluid" src="img/15/1a764ec1-e0b1-4036-bd4f-613e7311c774.png"/>  </p>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">manager</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">manager</span><span class="p">)</span>
 <span class="o">&lt;</span><span class="n">mayavi</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">poly_data_normals</span><span class="o">.</span><span class="n">PolyDataNormals</span> <span class="nb">object</span><span class="o">&gt;</span>
@@ -745,56 +708,68 @@ show_pipeline()用来弹出管线查看工具，可以用来手动修改相关�
 
 
 <h1 class="section-heading h6 text-muted" id="colors-and-legend-module-manager">Colors and legend (Module Manager)</h6>
-<p>调整三维模型的颜色和图例显示
-<img class="img-fluid" src="img/15/e3ebba2b-ff03-4b11-a4b8-b4243527a937.png"/>
-如果通过以下的代码修改manager属性的话</p>
+<p>调整三维模型的颜色和图例显示<br />
+<img class="img-fluid" src="img/15/e3ebba2b-ff03-4b11-a4b8-b4243527a937.png"/><br />
+如果通过以下的代码修改manager属性的话  </p>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">colors</span><span class="o">.</span><span class="n">scalar_lut_manager</span><span class="o">.</span><span class="n">lut_mode</span> <span class="o">=</span> <span class="s1">&#39;Blues&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">color</span><span class="o">.</span><span class="n">scalar_lut_manager</span><span class="o">.</span><span class="n">show_legend</span> <span class="o">=</span> <span class="bp">True</span>
 </pre></div>
 
 
-<p>显示的三维模型就会改变
-<img class="img-fluid" src="img/15/192899625.png"/></p>
+<p>显示的三维模型就会改变<br />
+<img class="img-fluid" src="img/15/192899625.png"/>  </p>
 <h1 class="section-heading h6 text-muted" id="surface-modules">Surface (Modules)</h6>
-<p>最终数据的表示，如线条、平面等
-<img class="img-fluid" src="img/15/d3f6f83f-1461-4ea0-bbf6-da69c04bb087.png"/>
-可以通过以下方式修改属性：</p>
+<p>最终数据的表示，如线条、平面等<br />
+<img class="img-fluid" src="img/15/d3f6f83f-1461-4ea0-bbf6-da69c04bb087.png"/><br />
+可以通过以下方式修改属性：  </p>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">surface</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">surface</span><span class="o">.</span><span class="n">actor</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">representation</span> <span class="o">=</span> <span class="s1">&#39;wireframe&#39;</span>  <span class="c1"># 设置为网格框架表示</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">surface</span><span class="o">.</span><span class="n">actor</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.6</span>   <span class="c1"># 设置透明度为60%</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/193353968.png"/></p>
+<p><img class="img-fluid" src="img/15/193353968.png"/>  </p>
 <h1 class="section-heading h6 text-muted" id="_2">小结</h6>
-<p>修改属性有两种方式，一种是在弹出的选项卡里面直接修改，但是这样不利于编程的定制化，另一种是用代码操作直接修改属性，主要的流程如下</p>
+<p>修改属性有两种方式，一种是在弹出的选项卡里面直接修改，但是这样不利于编程的定制化，另一种是用代码操作直接修改属性，主要的流程如下  </p>
 <ol>
-<li>获得场景对象， <code>mlab.gcf()</code></li>
-<li>通过children属性，一层层在管线中找到需要修改的对象</li>
-<li>界面上文字与对象属性名的转换关系：首字母变大写，下划线变空格</li>
+<li>获得场景对象， <code>mlab.gcf()</code>  </li>
+<li>通过children属性，一层层在管线中找到需要修改的对象  </li>
+<li>界面上文字与对象属性名的转换关系：首字母变大写，下划线变空格  </li>
 </ol>
-<p>备注：Mayavi的API
-|类别|说明|
-|---|---|
-|管线基础对象|Scene、Source、Filter、ModuleManager、Model、PipelineBase、Engine|
-|主视窗和UI对象|DecoratedScene、MayaviScene、SceneEditor、MlabSceneModel、EngineView、EngineRichView|</p>
+<p>备注：Mayavi的API  </p>
+<div class="table-responsive"><table class="table table-striped table-bordered" align="center">
+<thead>
+<tr>
+<th>类别</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管线基础对象</td>
+<td>Scene、Source、Filter、ModuleManager、Model、PipelineBase、Engine</td>
+</tr>
+<tr>
+<td>主视窗和UI对象</td>
+<td>DecoratedScene、MayaviScene、SceneEditor、MlabSceneModel、EngineView、EngineRichView</td>
+</tr>
+</tbody>
+</table></div>
 <h1 class="section-heading h5" id="252">2.5.2 控制函数正文</h5>
-<p>调用方式：<code>mlab.pipeline.xxxx</code>
-<div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td>模块</td><td>函数名</td><td>说明</td></tr><tr><td colspan="1" rowspan="6">Sources<br/>(数据源)</td><td>grid_source</td><td>建立二维网格数据</td></tr><tr><td>line_source</td><td>建立线数据</td></tr><tr><td>open</td><td>打开一个数据文件</td></tr><tr><td>scalar_field</td><td>建立标量场数据</td></tr><tr><td>vector_field</td><td>建立矢量场数据</td></tr><tr><td>volume_field</td><td>建立体数据</td></tr><tr><td colspan="1" rowspan="10">Filters<br/>(用来数据变换)</td><td>contour</td><td>对输入数据集计算等值面</td></tr><tr><td>cut_plane</td><td>对数据进行切面计算，可以交互的更改和移动切面</td></tr><tr><td>delaunay2D</td><td>执行二维delaunay三角化</td></tr><tr><td>delaunay3D</td><td>执行三维delaunay三角化</td></tr><tr><td>extract_grid</td><td>允许用户选择structured grid的一部分数据</td></tr><tr><td>extract_vector_norm</td><td>计算数据矢量的法向量，特别用于在计算矢量数据的梯度时</td></tr><tr><td>mask_points</td><td>对输入数据进行采样</td></tr><tr><td>threshold</td><td>取一定阈值范围内的数据</td></tr><tr><td>transform_data</td><td>对输入数据执行线性变换</td></tr><tr><td>tube</td><td>将线转成管线数据</td></tr><tr><td colspan="1" rowspan="11">Modules<br/>(用来实现可视化)</td><td>axes</td><td>绘制坐标轴</td></tr><tr><td>glyph</td><td>对输入点绘制不同类型的符号，符号的颜色和方向由该点 的标量和适量数据决定。</td></tr><tr><td>image_plane_widget</td><td>绘制某一平面数据的细节</td></tr><tr><td>iso_surface</td><td>对输入的体数据绘制其等值面</td></tr><tr><td>outline</td><td>对输入数据绘制外轮廓</td></tr><tr><td>scalar_cut_plane</td><td>对输入的标量数据绘制特定位置的切平面</td></tr><tr><td>streamline</td><td>对矢量数据绘制流线</td></tr><tr><td>surface</td><td>对数据（VTK dataset，mayavi sources）建立外表面</td></tr><tr><td>text</td><td>绘制一段文本</td></tr><tr><td>vector_cut_plane</td><td>对输入的矢量数据绘制特定位置的切平面</td></tr><tr><td>volume</td><td>对标量场数据进行体绘制</td></tr></tbody></table></div></p>
+<p>调用方式：<code>mlab.pipeline.xxxx</code><br />
+<div class="table-responsive"><table class="table table-striped table-bordered" align="center"><tbody><tr><td>模块</td><td>函数名</td><td>说明</td></tr><tr><td colspan="1" rowspan="6">Sources<br/>(数据源)</td><td>grid_source</td><td>建立二维网格数据</td></tr><tr><td>line_source</td><td>建立线数据</td></tr><tr><td>open</td><td>打开一个数据文件</td></tr><tr><td>scalar_field</td><td>建立标量场数据</td></tr><tr><td>vector_field</td><td>建立矢量场数据</td></tr><tr><td>volume_field</td><td>建立体数据</td></tr><tr><td colspan="1" rowspan="10">Filters<br/>(用来数据变换)</td><td>contour</td><td>对输入数据集计算等值面</td></tr><tr><td>cut_plane</td><td>对数据进行切面计算，可以交互的更改和移动切面</td></tr><tr><td>delaunay2D</td><td>执行二维delaunay三角化</td></tr><tr><td>delaunay3D</td><td>执行三维delaunay三角化</td></tr><tr><td>extract_grid</td><td>允许用户选择structured grid的一部分数据</td></tr><tr><td>extract_vector_norm</td><td>计算数据矢量的法向量，特别用于在计算矢量数据的梯度时</td></tr><tr><td>mask_points</td><td>对输入数据进行采样</td></tr><tr><td>threshold</td><td>取一定阈值范围内的数据</td></tr><tr><td>transform_data</td><td>对输入数据执行线性变换</td></tr><tr><td>tube</td><td>将线转成管线数据</td></tr><tr><td colspan="1" rowspan="11">Modules<br/>(用来实现可视化)</td><td>axes</td><td>绘制坐标轴</td></tr><tr><td>glyph</td><td>对输入点绘制不同类型的符号，符号的颜色和方向由该点 的标量和适量数据决定。</td></tr><tr><td>image_plane_widget</td><td>绘制某一平面数据的细节</td></tr><tr><td>iso_surface</td><td>对输入的体数据绘制其等值面</td></tr><tr><td>outline</td><td>对输入数据绘制外轮廓</td></tr><tr><td>scalar_cut_plane</td><td>对输入的标量数据绘制特定位置的切平面</td></tr><tr><td>streamline</td><td>对矢量数据绘制流线</td></tr><tr><td>surface</td><td>对数据（VTK dataset，mayavi sources）建立外表面</td></tr><tr><td>text</td><td>绘制一段文本</td></tr><tr><td>vector_cut_plane</td><td>对输入的矢量数据绘制特定位置的切平面</td></tr><tr><td>volume</td><td>对标量场数据进行体绘制</td></tr></tbody></table></div>  </p>
 <h1 class="section-heading h6 text-muted" id="_3">切平面(标量可视化)</h6>
-<p>image_plane_widget():生成一个可以拖动的切面对数据进行可视化
-<img class="img-fluid" src="img/15/1477156.png"/>
-iso_surface():生成一个三维等值面
-<img class="img-fluid" src="img/15/1601265.png"/></p>
-<p>例子：<a href="https://www.sigmameow.com/blog/files/15/scalar.py" download="scalar.py">scalar.py</a></p>
+<p>image_plane_widget():生成一个可以拖动的切面对数据进行可视化<br />
+<img class="img-fluid" src="img/15/1477156.png"/><br />
+iso_surface():生成一个三维等值面<br />
+<img class="img-fluid" src="img/15/1601265.png"/>  </p>
+<p>例子：<a href="https://www.sigmameow.com/blog/files/15/scalar.py" download="scalar.py">scalar.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
 
-
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">20j</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">20j</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">20j</span><span class="p">]</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span>
-
 
 <span class="n">src</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">scalar_field</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">iso_surface</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">contours</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">s</span><span class="o">.</span><span class="n">ptp</span><span class="p">(),</span> <span class="p">],</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
@@ -806,9 +781,9 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/scalar.gif"/></p>
+<p><img class="img-fluid" src="img/15/scalar.gif"/>  </p>
 <h1 class="section-heading h6 text-muted" id="_4">矢量可视化</h6>
-<p>原数据：</p>
+<p>原数据：  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">20j</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">20j</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">20j</span><span class="p">]</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span>
@@ -817,16 +792,16 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/2236531.png"/></p>
-<p>两种降采样的方式：
-1.<code>pipeline.vector_field()</code>+<code>pipeline.vectors</code></p>
+<p><img class="img-fluid" src="img/15/2236531.png"/>  </p>
+<p>两种降采样的方式：<br />
+1.<code>pipeline.vector_field()</code>+<code>pipeline.vectors</code>  </p>
 <div class="codehilite"><pre><span></span><span class="n">src</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">vectors</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">mask_points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
 </pre></div>
 
 
-<p>上面的等价于：
-2.直接修改quiver3d()参数</p>
+<p>上面的等价于：<br />
+2.直接修改quiver3d()参数  </p>
 <div class="codehilite"><pre><span></span><span class="n">vectors</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">quiver3d</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
 <span class="n">vectors</span><span class="o">.</span><span class="n">glyph</span><span class="o">.</span><span class="n">mask_input_points</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">vectors</span><span class="o">.</span><span class="n">glyph</span><span class="o">.</span><span class="n">mask_points</span><span class="o">.</span><span class="n">on_ratio</span> <span class="o">=</span> <span class="mi">10</span>
@@ -834,44 +809,42 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/2556000.png"/></p>
-<p>vector_cut_plane(): 对矢量数据进行切面观察</p>
+<p><img class="img-fluid" src="img/15/2556000.png"/>  </p>
+<p>vector_cut_plane(): 对矢量数据进行切面观察  </p>
 <div class="codehilite"><pre><span></span><span class="n">src</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">vector_cut_plane</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">mask_points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/2675609.png"/></p>
-<p>extract_vector_norm(): 提取级数的等值面</p>
+<p><img class="img-fluid" src="img/15/2675609.png"/>  </p>
+<p>extract_vector_norm(): 提取级数的等值面  </p>
 <div class="codehilite"><pre><span></span><span class="n">src</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
 <span class="n">magnitude</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">extract_vector_nrom</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>   <span class="c1"># 制作所有的等值面</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">iso_surface</span><span class="p">(</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">contours</span><span class="o">=</span><span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>   <span class="c1"># 只选取这两个等值面</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/2917640.png"/></p>
-<p>mlab.flow():流线法显示，<strong>注意这个方法不是pipeline里面的</strong></p>
+<p><img class="img-fluid" src="img/15/2917640.png"/>  </p>
+<p>mlab.flow():流线法显示，<strong>注意这个方法不是pipeline里面的</strong>  </p>
 <div class="codehilite"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">flow</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">seed_scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed_resolution</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">integration_direction</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">)</span>
 </pre></div>
 
 
-<p>等价于pipeline里面的streamline, 不过streamline需要预先处理出一个magnitude</p>
+<p>等价于pipeline里面的streamline, 不过streamline需要预先处理出一个magnitude  </p>
 <div class="codehilite"><pre><span></span>flow = mlab.pipeline.streamline(magnitude, seedtype=&#39;plane&#39;, seed_visible=False, 
                                 seed_scale=0.5, seed_resolution=1, linetype=&#39;ribbon&#39;)
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/3102375.png"/></p>
-<p>酷炫的组合拳：<a href="https://www.sigmameow.com/blog/files/15/vector.py" download="vector.py">vector.py</a></p>
+<p><img class="img-fluid" src="img/15/3102375.png"/>  </p>
+<p>酷炫的组合拳：<a href="https://www.sigmameow.com/blog/files/15/vector.py" download="vector.py">vector.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">20j</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">20j</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">20j</span><span class="p">]</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span>
 <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span>
 <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span>
-
 
 <span class="n">src</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
 <span class="n">magnitude</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">extract_vector_norm</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
@@ -887,64 +860,118 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/vector.gif"/></p>
-<h1 class="section-heading text-center" id="3">3. 三维编程应用(三维模型，非科学计算数据)</h1>
-<h1 class="section-heading h3" id="31">3.1 鼠标选取小球</h3>
-<p><strong>主要任务</strong>：</p>
-<ul>
-<li>选取一个物体，查看数据</li>
-<li>选取物体上一点，查看数据</li>
-</ul>
-<blockquote class="blockquote">
-<p>用到的函数: <code>on_mouse_pick(callback, type="point", button="left", Remove=False)</code></p>
-<ul>
-<li>Type: point, cell, world</li>
-<li>Button: Left, Middle, Right</li>
-<li>Remove: 如果值为True，则callback函数不起作用</li>
-</ul>
-<p>return vtk.picker Object
-<img class="img-fluid" src="img/15/135945203.png"/></p>
-</blockquote>
-<p><strong>主要流程</strong>：</p>
-<ul>
-<li>建议一个figure</li>
-<li>随机生成红、白小球</li>
-<li>初始化红色小球选取外框</li>
-<li>鼠标选取任意红色小球，外框移动到该小球上(callback)</li>
-<li>建立on_mouse_pick()</li>
-</ul>
-<p><strong>程序框架</strong></p>
-<ul>
-<li>场景初始化</li>
-<li>用mlab.points3d建立红色和白色小球集合</li>
-<li>处理选取事件<ul>
-<li>计算那个小球被选取</li>
-<li>确定该小球的ID</li>
-<li>找到与此小球相关的坐标</li>
-<li>把选取外框移到该小球上</li>
-</ul>
-</li>
-<li>建立相应机制</li>
-</ul>
-<p><strong>相关优化</strong>：
-1. 所有的数据都准备好了之后，再一起绘制减少初始化卡顿
-1. 增加鼠标选取的容忍度，提高选取精度</p>
-<p>完整代码：<a href="https://www.sigmameow.com/blog/files/15/select_balls.py" download="select_balls.py">select_balls.py</a></p>
+<p><img class="img-fluid" src="img/15/vector.gif"/>  </p>
+<h1 class="section-heading h3" id="26">2.6 其他函数(动画)</h3>
+<p>动画的原理：不停的更新当前的视图，因此需要写一个循环:  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
 
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># 创建原始数据</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">surf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)</span>   <span class="c1"># 绘制图像</span>
+<span class="c1"># 开始循环</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">mlab_source</span><span class="o">.</span><span class="n">scalars</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># 更新数据</span>
+</pre></div>
+
+
+<p>但是按照上面的步骤弄下来，并不会有一个动画，因为它会把数据全部更新完了之后再显示，如果再这个过程中，用savefig()函数去做截屏，其实截的照片是变化的，为了能做到在屏幕上出现动画效果，需要用一个@装饰器(decorator)和yield发生器(generator)，操作方法很简单：  </p>
+<div class="codehilite"><pre><span></span><span class="c1"># 开始循环</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">mlab_source</span><span class="o">.</span><span class="n">scalars</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># 更新数据</span>
+</pre></div>
+
+
+<p>先把循环改成函数里面，然后把该函数用<code>@mlab.animate</code>去修饰，然后在函数的末尾，增加<code>yield</code>，然后在<code>mlab.show()</code>之前调用该函数即可  </p>
+<div class="codehilite"><pre><span></span><span class="nd">@mlab.animate</span>
+<span class="k">def</span> <span class="nf">anim</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">xxxx</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">mlab_source</span><span class="o">.</span><span class="n">xxxx</span>
+        <span class="k">yield</span>
+
+<span class="n">anim</span><span class="p">()</span>
+<span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>        
+</pre></div>
+
+
+<p>完整的代码：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">surf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">))</span>
+
+<span class="nd">@mlab.animate</span>
+<span class="k">def</span> <span class="nf">anim</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">mlab_source</span><span class="o">.</span><span class="n">scalars</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mf">0.1</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>
+        <span class="c1"># the same as</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">mlab_source</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">scalars</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mf">0.1</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;d&#39;</span><span class="p">))</span>
+        <span class="k">yield</span>
+
+<span class="n">anim</span><span class="p">()</span>
+<span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img class="img-fluid" src="img/15/animate.gif"/>  </p>
+<p>注意使上面的set方法，可视化仅重新计算一次。 在这种情况下，新数组的形状没有改变，只有它们的值变了(始终都是3x3的矩阵，但是变得只有矩阵里面的值)。 如果数组的形状发生变化(3x3矩阵变成了4x4矩阵等)，那么应该使用reset()方法来更新  </p>
+<hr />
+<h1 class="section-heading text-center" id="3">3. 三维编程应用(三维模型，非科学计算数据)</h1>
+<h1 class="section-heading h3" id="31">3.1 鼠标选取小球</h3>
+<p><strong>主要任务</strong>：  </p>
+<ul>
+<li>选取一个物体，查看数据  </li>
+<li>选取物体上一点，查看数据  </li>
+</ul>
+<blockquote class="blockquote">
+<p>用到的函数: <code>on_mouse_pick(callback, type="point", button="left", Remove=False)</code>  </p>
+<ul>
+<li>Type: point, cell, world  </li>
+<li>Button: Left, Middle, Right  </li>
+<li>Remove: 如果值为True，则callback函数不起作用  </li>
+</ul>
+<p>return vtk.picker Object  </p>
+<p><img class="img-fluid" src="img/15/135945203.png"/>  </p>
+</blockquote>
+<p><strong>主要流程</strong>：  </p>
+<ul>
+<li>建议一个figure  </li>
+<li>随机生成红、白小球  </li>
+<li>初始化红色小球选取外框  </li>
+<li>鼠标选取任意红色小球，外框移动到该小球上(callback)  </li>
+<li>建立on_mouse_pick()  </li>
+</ul>
+<p><strong>程序框架</strong>  </p>
+<ul>
+<li>场景初始化  </li>
+<li>用mlab.points3d建立红色和白色小球集合  </li>
+<li>处理选取事件  <ul>
+<li>计算那个小球被选取  </li>
+<li>确定该小球的ID  </li>
+<li>找到与此小球相关的坐标  </li>
+<li>把选取外框移到该小球上  </li>
+</ul>
+</li>
+<li>建立相应机制  </li>
+</ul>
+<p><strong>相关优化</strong>：  </p>
+<ol>
+<li>所有的数据都准备好了之后，再一起绘制减少初始化卡顿  </li>
+<li>增加鼠标选取的容忍度，提高选取精度  </li>
+</ol>
+<p>完整代码：<a href="https://www.sigmameow.com/blog/files/15/select_balls.py" download="select_balls.py">select_balls.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
 
 <span class="c1">######场景初始化######</span>
 <span class="n">figure</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>  
 <span class="n">figure</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">disable_render</span> <span class="o">=</span> <span class="bp">True</span> <span class="c1"># [优化] 暂时关闭绘制功能</span>
-
 
 <span class="c1"># 用mlab.points3d建立红色、白色小球集合</span>
 <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">red_glyphs</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">points3d</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">white_glyphs</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">points3d</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-
 
 <span class="c1"># 绘制选取框，默认放在第一个小球上</span>
 <span class="n">outline</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">outline</span><span class="p">(</span><span class="n">line_width</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -953,11 +980,9 @@ iso_surface():生成一个三维等值面
                   <span class="n">y1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">y1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span>
                   <span class="n">z1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">z1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
 
-
 <span class="c1">#####处理选取事件#####</span>
 <span class="c1"># 获取红色小球的顶点列表</span>
 <span class="n">glyph_points</span> <span class="o">=</span> <span class="n">red_glyphs</span><span class="o">.</span><span class="n">glyph</span><span class="o">.</span><span class="n">glyph_source</span><span class="o">.</span><span class="n">glyph_source</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
-
 
 <span class="c1"># 当选取事件发生时，调用此函数</span>
 <span class="k">def</span> <span class="nf">picker_callback</span><span class="p">(</span><span class="n">picker</span><span class="p">):</span>
@@ -969,9 +994,7 @@ iso_surface():生成一个三维等值面
             <span class="c1"># 将外框移到小球上</span>
             <span class="n">outline</span><span class="o">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">z</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">z</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
 
-
 <span class="n">figure</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">disable_render</span> <span class="o">=</span> <span class="bp">False</span> <span class="c1"># [优化] 准备工作完成，最后绘制图形</span>
-
 
 <span class="n">picker</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">on_mouse_pick</span><span class="p">(</span><span class="n">picker_callback</span><span class="p">)</span>
 <span class="n">picker</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># [优化] 让选取更精准</span>
@@ -980,15 +1003,14 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/select_balls.gif"/></p>
+<p><img class="img-fluid" src="img/15/select_balls.gif"/>  </p>
 <h1 class="section-heading h3" id="32">3.2 读取外部模型</h3>
 <h1 class="section-heading h5" id="321-ply">3.2.1 读取模型PLY数据</h5>
-<p>模型下载：<a href="https://www.sigmameow.com/blog/files/15/dargon.tar.gz" download="dargon.tar.gz">dargon.tar.gz</a><br />
-代码下载：<a href="https://www.sigmameow.com/blog/files/15/dargon.py" download="dargon.py">dargon.py</a></p>
+<p>模型下载：<a href="https://www.sigmameow.com/blog/files/15/dargon.tar.gz" download="dargon.tar.gz">dargon.tar.gz</a>  <br />
+代码下载：<a href="https://www.sigmameow.com/blog/files/15/dargon.py" download="dargon.py">dargon.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">tarfile</span>
-
 
 <span class="c1"># 读取tar压缩文件</span>
 <span class="c1"># 这里有个玄学，直接读取自己解压的ply会出现vtk错误，但是在代码里解压就不报错</span>
@@ -1001,11 +1023,9 @@ iso_surface():生成一个三维等值面
 <span class="n">dragon_tar_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 <span class="n">dragon_ply_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;dragon_data&#39;</span><span class="p">,</span> <span class="s1">&#39;dragon_recon&#39;</span><span class="p">,</span> <span class="s1">&#39;dragon_vrip.ply&#39;</span><span class="p">)</span>
 
-
 <span class="c1"># 渲染dragon ply文件</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">surface</span><span class="p">(</span><span class="n">mlab</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">dragon_ply_file</span><span class="p">))</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
 
 <span class="c1"># 删除解压的文件夹</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
@@ -1013,15 +1033,14 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/dargon.gif"/></p>
+<p><img class="img-fluid" src="img/15/dargon.gif"/>  </p>
 <h1 class="section-heading h5" id="322">3.2.2 读取地形数据</h5>
-<p>地形下载：<a href="https://www.sigmameow.com/blog/files/15/canyon.zip" download="canyon.zip">canyon.zip</a>
-该地形是北纬36-37度，西经113-114度，为帕里亚峡谷的地形数据
-代码下载：<a href="https://www.sigmameow.com/blog/files/15/canyon.py" download="canyon.py">canyon.py</a></p>
+<p>地形下载：<a href="https://www.sigmameow.com/blog/files/15/canyon.zip" download="canyon.zip">canyon.zip</a><br />
+该地形是北纬36-37度，西经113-114度，为帕里亚峡谷的地形数据<br />
+代码下载：<a href="https://www.sigmameow.com/blog/files/15/canyon.py" download="canyon.py">canyon.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="c1"># 读取压缩文件</span>
 <span class="n">hgt</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;canyon.zip&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;N36W113.hgt&#39;</span><span class="p">)</span>
@@ -1031,12 +1050,10 @@ iso_surface():生成一个三维等值面
 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">900</span><span class="p">:</span><span class="mi">1900</span><span class="p">]</span>
 <span class="n">data</span><span class="p">[</span><span class="n">data</span> <span class="o">==</span> <span class="o">-</span><span class="mi">32768</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 
-
 <span class="c1"># 渲染地形hgt的数据data</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">320</span><span class="p">),</span> <span class="n">bgcolor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">,</span> <span class="mf">0.46</span><span class="p">))</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">surf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;gist_earth&#39;</span><span class="p">,</span> <span class="n">warp_scale</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
           <span class="n">vmin</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1610</span><span class="p">)</span>
-
 
 <span class="c1"># 清空内存</span>
 <span class="k">del</span> <span class="n">data</span>
@@ -1046,45 +1063,41 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/canyon.gif"/></p>
+<p><img class="img-fluid" src="img/15/canyon.gif"/>  </p>
 <h1 class="section-heading h3" id="33">3.3 绘制透明地球</h3>
-<p>流程</p>
+<p>流程  </p>
 <ol>
-<li>数据准备<ol>
-<li>输入城市的经纬度坐标</li>
-<li>把经纬度坐标转换为xyz三维坐标</li>
+<li>数据准备  <ol>
+<li>输入城市的经纬度坐标  </li>
+<li>把经纬度坐标转换为xyz三维坐标  </li>
 </ol>
 </li>
-<li>绘制<ol>
-<li>设置背景</li>
-<li>绘制球体，修改效果</li>
-<li>绘制城市名字</li>
-<li>绘制大洲边界</li>
-<li>绘制赤道</li>
+<li>绘制  <ol>
+<li>设置背景  </li>
+<li>绘制球体，修改效果  </li>
+<li>绘制城市名字  </li>
+<li>绘制大洲边界  </li>
+<li>绘制赤道  </li>
 </ol>
 </li>
-<li>显示可交互窗口</li>
+<li>显示可交互窗口  </li>
 </ol>
-<p>代码下载:<a href="https://www.sigmameow.com/blog/files/15/earth.py" download="earth.py">earth.py</a></p>
+<p>代码下载:<a href="https://www.sigmameow.com/blog/files/15/earth.py" download="earth.py">earth.py</a>  </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
 
 <span class="c1"># 数据准备</span>
 <span class="n">city</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BeiJing&#39;</span><span class="p">,</span><span class="s1">&#39;HongKong&#39;</span><span class="p">,</span><span class="s1">&#39;Sao Paulo&#39;</span><span class="p">,</span><span class="s1">&#39;Toronto&#39;</span><span class="p">,</span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span><span class="s1">&#39;Sydney&#39;</span><span class="p">]</span>
 <span class="nb">long</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">116.23</span><span class="p">,</span> <span class="mf">114.19</span><span class="p">,</span> <span class="o">-</span><span class="mf">46.63</span><span class="p">,</span> <span class="o">-</span><span class="mf">79.38</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.45</span><span class="p">,</span> <span class="mf">151.21</span><span class="p">])</span>
 <span class="n">lat</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">39.54</span><span class="p">,</span> <span class="mf">22.38</span><span class="p">,</span> <span class="o">-</span><span class="mf">23.53</span><span class="p">,</span> <span class="mf">43.65</span><span class="p">,</span> <span class="mf">37.77</span><span class="p">,</span> <span class="o">-</span><span class="mf">33.87</span><span class="p">])</span>
 
-
 <span class="c1"># 将经纬度转换为三维坐标</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lat</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="nb">long</span><span class="p">))</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lat</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="nb">long</span><span class="p">))</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lat</span><span class="p">))</span>
 
-
 <span class="c1"># 建立窗口</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">bgcolor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.48</span><span class="p">,</span> <span class="mf">0.48</span><span class="p">,</span> <span class="mf">0.48</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">))</span>
-
 
 <span class="c1"># 绘制半透明体地球</span>
 <span class="n">sphere</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">points3d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>   <span class="c1"># 地球中心点为原点</span>
@@ -1099,7 +1112,7 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/10629640.png"/></p>
+<p><img class="img-fluid" src="img/15/10629640.png"/>  </p>
 <div class="codehilite"><pre><span></span><span class="c1"># 绘制城市</span>
 <span class="n">points</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">points3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>   <span class="c1"># 城市位置用点表示</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">city_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">city</span><span class="p">):</span>   <span class="c1"># 对每一个城市名</span>
@@ -1110,7 +1123,7 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/10695671.png"/></p>
+<p><img class="img-fluid" src="img/15/10695671.png"/>  </p>
 <div class="codehilite"><pre><span></span><span class="c1"># 绘制大洲边界</span>
 <span class="kn">from</span> <span class="nn">mayavi.sources.builtin_surface</span> <span class="kn">import</span> <span class="n">BuiltinSurface</span>
 <span class="n">continents_src</span> <span class="o">=</span> <span class="n">BuiltinSurface</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;earth&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Continents&#39;</span><span class="p">)</span>   <span class="c1"># 导入自带的大洲边界</span>
@@ -1119,7 +1132,7 @@ iso_surface():生成一个三维等值面
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/10734859.png"/></p>
+<p><img class="img-fluid" src="img/15/10734859.png"/>  </p>
 <div class="codehilite"><pre><span></span><span class="c1"># 绘制赤道</span>
 <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>   <span class="c1"># 平分360度为100份</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
@@ -1127,11 +1140,10 @@ iso_surface():生成一个三维等值面
 <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">plot3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">tube_radius</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 
-
 <span class="c1">#  显示可交互窗口</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 
-<p><img class="img-fluid" src="img/15/earth.gif"/></p>
+<p><img class="img-fluid" src="img/15/earth.gif"/>  </p>

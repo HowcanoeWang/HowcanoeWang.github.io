@@ -4,25 +4,131 @@ import markdown
 import zipfile
 import datetime
 import shutil
+import pickle
+import time
+import re
 from bs4 import BeautifulSoup as BS
 from bs4 import NavigableString
+from pandas import DataFrame, read_csv
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 from tkinter.simpledialog import askinteger
-from tkinter.messagebox import askyesno
+from tkinter.messagebox import askyesno, showinfo
+from word_count import countCharacters
 
 
-def convert(ziw_path, p_id, overwrite=False):
-    to_folder = r'../blog/img/'
-    html_dir = f'../blog/p/{p_id}.html'
-    img_dir = os.path.join(to_folder, str(p_id))
+def add_new():
+    id_list = [int(i[:-5]) for i in p_list]
+    p_id = max(id_list) + 1   # next id
 
+    if mode=='test':
+        ziw_path = 'test.md.ziw'
+    else:
+        ziw_path = askopenfilename(parent=root, initialdir=wiz_path, filetypes=[("ziw files", "*.ziw")])
+
+    if ziw_path is not None:
+        word_count = ziw2html(ziw_path, p_id)
+
+        extract_imgs(ziw_path, p_id)
+
+        filename = ziw_path.split('/')[-1][:-4].split('.md')[0]
+        modify_time = datetime.datetime.fromtimestamp(os.path.getmtime(ziw_path)).strftime("%Y.%m.%d")
+        edit_js(p_id, filename, modify_time, word_count, way="add")
+
+        # update pickle
+        ref_df.loc[ref_df.index.max() + 1] = [p_id, filename, ziw_path]
+        reference_dict(ref_df)
+        showinfo(parent=root, title='Success', message='Convert Successfully')
+
+
+def update_old():
+    loop = True
+    while loop:
+        p_id = askinteger(parent=root, title='La',
+                          prompt='Type Updated article id, currently have \n' + str(ref_df[['id','title']]))
+        if p_id in ref_df['id'].values:
+            loop = False
+            search_df = ref_df.loc[ref_df['id'] == p_id]
+            df_id = search_df.index[0]
+            title = search_df['title'].values[0]
+            ziw_path = search_df['path'].values[0]
+
+            if not os.path.exists(ziw_path):
+                showinfo(title='Error', message=f'Can not Find {title}, please redirect it!')
+                ziw_path = askopenfilename(parent=root, title=f'Redirect [{title}]',
+                                           initialdir=wiz_path, filetypes=[("ziw files", "*.ziw")])
+                if ziw_path:
+                    title = ziw_path.split('/')[-1][:-4].split('.md')[0]
+                    ref_df.loc[df_id, 'title'] = title
+                    ref_df.loc[df_id, 'path'] = ziw_path
+                    reference_dict(ref_df)
+
+            modify_time = datetime.datetime.fromtimestamp(os.path.getmtime(ziw_path)).strftime("%Y.%m.%d")
+            word_count = ziw2html(ziw_path, p_id)
+            extract_imgs(ziw_path, p_id)
+
+            edit_js(p_id, title, modify_time, word_count, way="update")
+            showinfo(parent=root, title='Success', message='Convert Successfully')
+
+        else:
+            showinfo(title='Opps', message='Only ' + str(ref_df['id'].values) + 'are supported!')
+
+
+
+def ziw2html(ziw_path, p_id):
     soup = read_ziw(ziw_path)
     md = soup2markdown(soup)
 
     md = md.replace('src="index_files', f'src="img/{p_id}')
     md = md.replace(' ', ' ')    # wiz tab = '&nbsp;' + ' ' + '&nbsp;&nbsp;', what the fuck!!!!!!!!!!!!
     md = md.replace('[toc]', '\n[TOC]\n')
+
+    '''
+    Add \n in the beginning and end of list block
+    PyMarkdown only accept list dependent from other part (unlike wiz accept list connected from other sentence)
+    [WizNote]          | [PyMarkdown]
+    xxxxxxxxxxxxxx     | xxxxxxxxxxxxxxxxxxx
+    1. xxx             |
+    2. xxx             | 1. xxx
+    3. xxx             | 2. xxx
+    '''
+    md_line = md.splitlines()
+    md = ''
+    in_list = False
+    in_code = False
+    black_line = False
+    pattern = re.compile(r'\d{1,2}\. |\* ')  # find all '1. ' or '* ' which means list in markdown
+    for l in md_line:
+        if l == '':
+            black_line = True
+            continue
+        else:
+            if black_line:
+                md += '\n'
+                black_line = False
+            # in code block
+            if '```' in l:
+                in_code = not in_code
+
+            if in_code:
+                md += f'{l}\n'
+            else:
+                contain_list = pattern.search(l) is not None
+                # add two spaces in the end of a sentence, pymarkdown need two space to present a new line, but wiz note :)
+                if contain_list and not in_list:
+                    in_list = True
+                    md += f'\n{l}  \n'
+                elif contain_list and in_list:
+                    md += f'{l}  \n'
+                elif not contain_list and in_list:
+                    # line start with four spaces means it is the sub contents of that list
+                    if l[:4] == '    ':
+                        md += f'{l}  \n'
+                    else:
+                        in_list = False
+                        md += f'{l}  \n\n'
+                else:   # common sentence
+                    md += f'{l}  \n'
 
     md_ext = markdown.Markdown(extensions=['extra', 'codehilite', 'tables', 'toc'])
     html = md_ext.convert(md)
@@ -37,27 +143,80 @@ def convert(ziw_path, p_id, overwrite=False):
     html = html.replace('<blockquote', '<blockquote class="blockquote"')
     html = html.replace('<img', '<img class="img-fluid"')
 
+    # write html
+    if mode == 'test':
+        html_dir = f'test/{p_id}.html'
+    else:
+        html_dir = f'../blog/p/{p_id}.html'
+    outfile = open(html_dir, 'w', encoding="utf-8")
+    outfile.write(html)
+    outfile.close()
 
-    if overwrite:
-        os.remove(html_dir)
-        if os.path.exists(img_dir):
-            shutil.rmtree(img_dir)
-    else:  # add records to id.js file
-        with open('../blog/id.js', 'r+', encoding='utf-8') as js:
+    # count word
+    word= countCharacters(md)
+    if  word < 1000:
+        word_str = str(word)
+    else:
+        word_str = str(round(word / 1000,1)) + 'K'
+
+    return word_str
+
+def reference_dict(*args):
+    if mode == 'test':
+        csv_path = 'test/ref.csv'
+    else:
+        csv_path = 'ref.csv'
+    if len(args) == 0:
+        if os.path.exists(csv_path):
+            ref = read_csv(csv_path)
+        else:
+            ref = DataFrame(columns=['id', 'title', 'path'])
+            ref.to_csv(csv_path, index=False)
+        return ref
+    if len(args) == 1:
+        args[0].to_csv(csv_path, index=False)
+
+
+def edit_js(id, filename, modify_time, word_count, way="add"):
+    now_time = datetime.datetime.now().strftime("%m.%d_%H.%M")
+    if mode == 'test':
+        shutil.copyfile('../blog/id.js', 'test/id.js')
+        js_dir = 'test/id.js'
+    else:
+        shutil.copyfile('../blog/id.js', f'../blog/id_{now_time}.js')
+        js_dir = '../blog/id.js'
+
+    with open(js_dir, 'r+', encoding='utf-8') as js:
+        if way == 'add':
             contents = js.read()
-            id = p_id
-            filename = ziw_path.split('/')[-1][:-7]
-            modify_time = datetime.datetime.fromtimestamp(os.path.getmtime(ziw_path)).strftime("%Y.%m.%d")
-            replace_word = f'}},\n{{"id":"{id}",\n"title":"{filename}",\n"subtitle":"",\n"author":"浩瀚猫",\n"word":"",\n' \
+            replace_word = f'}},\n{{"id":"{id}",\n"title":"{filename}",\n"subtitle":"",\n"author":"浩瀚猫",\n"word":"{word_count}",\n' \
                 f'"date":"{modify_time}",\n"img":"img/page-heading/blog-bg.jpg",\n"recommend":[]\n}}\n];'
             contents = contents.replace('}\n];', replace_word)
             js.seek(0)
             js.write(contents)
+        else:  # update js
+            contents = js.readlines()
+            updated_contents = ''
+            inline = -1
+            for line in contents:
+                if inline >= 0:
+                    inline += 1
+                # get into the part need to edit
+                if f'"id":"{id}",' in line:
+                    inline = 0
 
-    extract_imgs(ziw_path, to_folder, p_id)
-    outfile = open(html_dir, 'w', encoding="utf-8")
-    outfile.write(html)
-    outfile.close()
+                if inline not in [1, 4, 5]:  # only edit line 1, 4, 5
+                    updated_contents += line
+                else:
+                    if inline == 1:
+                        updated_contents += f'"title":"{filename}",\n'
+                    elif inline == 4:
+                        updated_contents += f'"word":"{word_count}",\n'
+                    elif inline == 5:
+                        updated_contents += f'"date":"{modify_time}",\n'
+
+            js.seek(0)
+            js.write(updated_contents)
 
 
 def read_ziw(ziw_path):
@@ -105,7 +264,16 @@ def contents_extract(tag):
                     text += contents_extract(t)
     return text
 
-def extract_imgs(ziw_path, to_folder, p_id):
+def extract_imgs(ziw_path, p_id):
+    # clear old img_folder first
+    if mode == 'test':
+        to_folder = r'test/'
+    else:
+        to_folder = r'../blog/img/'
+    img_dir = os.path.join(to_folder, str(p_id))
+    if os.path.exists(img_dir):
+        shutil.rmtree(img_dir)
+
     zfile = zipfile.ZipFile(ziw_path, 'r')
     files = []
     for file in zfile.namelist():
@@ -115,29 +283,33 @@ def extract_imgs(ziw_path, to_folder, p_id):
         pass
     else:
         zfile.extractall(to_folder, members=files)
+        time.sleep(0.1)
         os.rename(os.path.join(to_folder, 'index_files'),
                   os.path.join(to_folder, str(p_id)))
     zfile.close()
 
 
 if __name__ == '__main__':
+    mode = 'test0'
+    if mode == 'test':
+        if os.path.exists('test'):
+            shutil.rmtree('test')
+        time.sleep(0.1)
+        os.mkdir('test')
+        if os.path.exists('ref.csv'):
+            shutil.copyfile('ref.csv', 'test/ref.csv')
+
     root = Tk()
     root.withdraw()
 
     p_list = os.listdir('../blog/p/')
+    p_list.remove('nan.html')
 
     wiz_path = os.path.normpath(os.path.expanduser(r'~/Documents/My Knowledge/Data'))
-    ziw_path = askopenfilename(parent=root, initialdir=wiz_path, filetypes=[("ziw files", "*.ziw")])
+    ref_df = reference_dict()
 
-    if os.path.isfile(ziw_path):
-        loop = True
-        while loop:
-            p_id = askinteger(parent=root, title='La', prompt='Type this article id, currently have ' + str(p_list))
-            if str(p_id)+'.html' in p_list:
-                choice = askyesno(parent=root, title='Confirm', message='There is an exist id, overwrite?')
-                if choice:
-                    convert(ziw_path, p_id, overwrite=True)
-                    loop=False
-            else:
-                convert(ziw_path, p_id)
-                loop=False
+    choice = askyesno(parent=root, title='Mode', message='Add new article [Y] or update old article [N]?')
+    if choice:
+        add_new()
+    else:
+        update_old()

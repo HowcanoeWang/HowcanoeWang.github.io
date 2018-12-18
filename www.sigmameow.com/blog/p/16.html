@@ -1,0 +1,178 @@
+<p>本文基于《Python科学计算三维可视化》MOOC课程第五周与第六周内容结合个人理解所整理的笔记  </p>
+<blockquote class="blockquote">
+<p><a href="https://www.icourse163.org/course/BIT-1001871001">https://www.icourse163.org/course/BIT-1001871001</a><br />
+【第五周】三维可视之交互界面<br />
+【第六周】三维可视之界面实战  </p>
+</blockquote>
+<p>主要内容：  </p>
+<div class="toc">
+<ul>
+<li><a href="#1-traits">1. Traits基础</a><ul>
+<li><a href="#11">1.1 验证功能：检查颜色格式是否合法</a></li>
+<li><a href="#12">1.2 可视化功能</a></li>
+<li><a href="#13">1.3 代理功能：</a></li>
+<li><a href="#14">1.4 监听功能</a></li>
+<li><a href="#traits">Traits的其他方法：</a></li>
+</ul>
+</li>
+<li><a href="#2-traitsui">2. TraitsUI入门</a></li>
+<li><a href="#3-traitsuimayavi">3. TraitsUI与MayaVi实例</a></li>
+</ul>
+</div>
+<hr />
+<h1 class="section-heading text-center" id="1-traits">1. Traits基础</h1>
+<p>Traits包是用来提供特殊的Python数据类型定义，比如颜色的类型，常见的可以接受的颜色类型可以是<code>(0, 255, 128, 255)</code>表示RGBA的元组，也可以是<code>'red'</code>这样的字符串，也可以是<code>0xff0000</code>这样的整数，但是<code>'rua'</code>这样的字符串就不能表示颜色，如果做软件给用户提供输入的话，需要写好多条代码来判断用户输入是不是一个合法的输入，这样就会很麻烦，这只是一个颜色的例子，还有好多其他奇怪的数据类型，如果都这么写判断的话，工作量是很大的，然后Traits就是这么一个轮子，给你省去了写这些判断语句的麻烦，拿过来直接用，这个包它自己会帮你判断。  </p>
+<h1 class="section-heading h3" id="11">1.1 验证功能：检查颜色格式是否合法</h3>
+<p>针对上面的颜色的例子，Traits能做到以下三点：  </p>
+<ul>
+<li>接受能表示颜色的各种类型的值  </li>
+<li>赋值为不能表达颜色的值时，如<code>'rua'</code>，能够立刻捕捉到错误，提供一个错误报告，告诉用户什么值是正确的  </li>
+<li>提供一个内部、标准的颜色表达方式  </li>
+</ul>
+<p>实际编程应用：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Color</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>   <span class="c1"># 在Example类中，先定义一个color属性</span>
+<span class="o">...</span>     <span class="n">color</span> <span class="o">=</span> <span class="n">Color</span>   <span class="c1"># Color是一个Trait的颜色类型</span>
+<span class="o">...</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>   <span class="c1"># 继承Example类给e</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">color</span>
+<span class="o">&lt;</span><span class="n">PyQt4</span><span class="o">.</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span> <span class="nb">object</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>   <span class="c1"># 用&#39;red&#39;字符串设置颜色</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">getRgb</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;rua&#39;</span>   <span class="c1"># 用&#39;rua&#39;字符串设置颜色</span>
+</pre></div>
+
+
+<p>这时候就会弹出来一个报错信息<br />
+<img class="img-fluid" src="img/16/167850328.png"/><br />
+来告诉用户，到底那些值的格式是合法的  </p>
+<p>上面的例子只是Traits库的<strong>验证</strong>功能的一个体现，Trais库还拥有以下的功能：  </p>
+<ul>
+<li>初始化：    每个Trait属性都有自己的默认值  </li>
+<li>验证：    Trait属性具有明确的类型定义，满足类型定义的值才能赋给属性  </li>
+<li>代理：    Trait属性值可以代理给其他对象的属性  </li>
+<li>监听：    Trait属性值变化时，运行预先指定的函数  </li>
+<li>可视化：    拥有Trait属性的对象，可以自动生成编辑Trait属性的界面  </li>
+</ul>
+<h1 class="section-heading h3" id="12">1.2 可视化功能</h3>
+<p>继续接上面的例子，Traits还提供了一个强大的可视化功能，可以根据你给定的数据类型，自动生成一个用户交互界面来给用户操作二不用自己编写任何的界面代码  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p>他会弹出来一个可以手动选择颜色的界面，点了确定之后，会自动更新颜色的值<br />
+<img class="img-fluid" src="img/16/select_color_gui_2.gif"/>  </p>
+<div class="codehilite"><pre><span></span><span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">getRgb</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+</pre></div>
+
+
+<h1 class="section-heading h3" id="13">1.3 代理功能：</h3>
+<p>对于其他的功能，我们再举个例子：  </p>
+<p>假如你是一个幼儿园的老师，对于你来说，一共有两类人：家长(Parent)和小孩(Child)，其中有几个基本常识：  </p>
+<ol>
+<li>小孩的姓(last_name)极大概率随父亲的姓（即<strong>继承</strong>了父亲的姓）  </li>
+<li>姓是一个字符串(Str)，不存在用数字作为姓氏的奇葩  </li>
+</ol>
+<p>基于以上的2点常识，你首先可以建立一个如下的模型：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="c1"># 引入整数(Int)、字符串(Str)、验证(Instance)、代理(Delegate)模块</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Str</span><span class="p">,</span>  <span class="n">Delegate</span><span class="p">,</span> <span class="n">Instance</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># 设置家长的模型</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+<span class="o">...</span>     <span class="n">last_name</span> <span class="o">=</span> <span class="n">Str</span>  <span class="c1"># 设置家长的姓为字符串类型</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span>  <span class="c1"># 设置小孩模型</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span> 
+<span class="o">...</span>     <span class="n">father</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="n">Parent</span><span class="p">)</span>   <span class="c1"># 验证：小孩的父亲，只能是家长的模型，而不能是小孩模型或者其他乱七八糟的</span>
+<span class="o">...</span>     <span class="n">last_name</span> <span class="o">=</span> <span class="n">Delegate</span><span class="p">(</span><span class="s1">&#39;father&#39;</span><span class="p">)</span>   <span class="c1"># 代理：小孩模型的姓，代理给家长的模型(即同家长一个姓)</span>
+</pre></div>
+
+
+<p>有了这两个模型的时候，你见到一个家长a领着一个孩子b过来了，于是你的脑海里：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>   <span class="c1"># a属于家长模型</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Child</span><span class="p">()</span>   <span class="c1"># b属于小孩模型</span>
+</pre></div>
+
+
+<p>这个时候如果直接问你家长和小孩姓什么  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">last_name</span>   <span class="c1"># 查看家长的姓</span>
+<span class="s1">&#39;&#39;</span>
+</pre></div>
+
+
+<p>鬼才知道姓什么嘞! 默认是一个空白的字符串(给你一个白眼)<br />
+如果更过分一点，还要问你小孩姓什么  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">last_name</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;input&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;NoneType&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;last_name&#39;</span>
+</pre></div>
+
+
+<p>小孩的父亲都不知道是谁，怎么可能知道孩子姓啥哦！(生气到报错误)<br />
+这时候父亲说话了：“你好，我姓张，旁边这孩子b是我儿子”  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">last_name</span> <span class="o">=</span> <span class="s1">&#39;张&#39;</span>   <span class="c1"># 父亲a姓张</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">father</span> <span class="o">=</span> <span class="n">a</span>   <span class="c1"># 小孩b的父亲是a</span>
+</pre></div>
+
+
+<p>这时候如果查看小孩的姓，那就很ok了  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">last_name</span>
+<span class="s2">&quot;张&quot;</span>
+</pre></div>
+
+
+<p>如果调用Traits的可视化功能  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img class="img-fluid" src="img/16/e6c5433d-738b-41cf-a72c-9f9a98aef83f.png"/><br />
+就会自动生成一个界面，属性按照英文名进行排序。<br />
+由于小孩模型的father属性和家长模型绑定了，因此会出现一个按钮，点击这个按钮，就会出来家长模型的面板  </p>
+<h1 class="section-heading h3" id="14">1.4 监听功能</h3>
+<p>Traits的监听有好几种，包括Trait属性监听和Event监听，接下来依次介绍每种监听的特点：  </p>
+<ul>
+<li>属性监听：当属性值(如年龄、姓名等)发生了变化时，就运行该监听对应的函数，使用有三种方法：  <ul>
+<li>静态命名：命名方式是<code>def _xxxx_changed()</code>，xxxx为你要监听的属性名，只要xxxx的值一改变，就会运行<code>_xxxx_changed()</code>  </li>
+<li>静态修饰：在普通的函数前面加上<code>@on_trait_change(name)</code>修饰符，name可以是字符串<code>'xx, xxxx'</code>或者列表<code>[xx, xxxx]</code>，xx, xxxx为要监听的属性  </li>
+<li>动态监听：调用on_trait_change(func, name='xx')或者on_trait_event()将监听的属性(xx)和处理的函数func()联系起来  </li>
+</ul>
+</li>
+<li>Event监听：只要给Event变量(比如叫xx)赋一个值(例如<code>xx=1</code>)，他就运行对应的函数，但是它本身是没有属性值的，也无法保存你赋的值(<code>print(xx)</code>会报错)，这种监听函数对应的命名方式为<code>def _xx_fired()</code>  </li>
+</ul>
+<p>上面的说明看不懂没关系，来看一下下面生动的例子：  </p>
+<p>同样的，你还是幼儿园老师，入学了家长走了之后，现在就不需要关注小孩的与父母的血缘关系了，更要注重的是小孩的名字、位置、正在做什么等情况，并对此做出相应的反应，生活中这种行为叫做监护、看管、照顾，在编程里面就是所谓的监听。<br />
+基于以上的条件，我们要建立如下的小孩模型，该模型中有：  </p>
+<ul>
+<li>小孩的姓名，字符串类型  </li>
+<li>小孩的位置，把房间里面的地砖编号0-100，用整数来记录他所在的地砖位置  </li>
+<li>小孩正在做什么，用字符串来描述正在做的事情  </li>
+</ul>
+<p>你需要关注以下的事情：  </p>
+<ol>
+<li>小孩位置有没有移动  </li>
+<li>小孩正在做什么  </li>
+<li>你吼一声开饭了，小孩的正在做的事情就变成‘吃饭’  </li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="c1"># 等待更新</span>
+</pre></div>
+
+
+<h1 class="section-heading h3" id="traits">Traits的其他方法：</h3>
+<ol>
+<li>print_traits()<br />
+    输入所有的属性和他们的值<br />
+    <img class="img-fluid" src="img/16/171000140.png"/>  </li>
+<li>get()<br />
+    获得描述对象的trait属性的字典<br />
+    <img class="img-fluid" src="img/16/171047312.png"/>  </li>
+<li>set()<br />
+    设置trait属性的值<br />
+    <img class="img-fluid" src="img/16/171316140.png"/>  </li>
+</ol>
+<h1 class="section-heading text-center" id="2-traitsui">2. TraitsUI入门</h1>
+<h1 class="section-heading text-center" id="3-traitsuimayavi">3. TraitsUI与MayaVi实例</h1>

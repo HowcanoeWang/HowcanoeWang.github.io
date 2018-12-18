@@ -8,10 +8,10 @@ var section = {
 	"歌戏影视":[4],
 	"奇技赢巧":[2,12],
 	/*=================*/
-	"科研技能":[3,14,13,15], /*note: article 14 and 13 顺序乱了*/
+	"科研技能":[3,14,13,15,16], /*note: article 14 and 13 顺序乱了*/
 	/*-----------------*/
 	"Py点云库":[3],
-  "Py三维库":[14,13,15],
+  "Py三维库":[14,13,15,16],
 	"科研作图":[],
 	"数据处理":[],
 	"统计分析":[],
@@ -148,11 +148,11 @@ var jsdb = [
 "recommend":[2,3]
 },
 {"id":"13",
-"title":"第二章 三维可视之TVTK基础", 
+"title":"第二章 三维可视之TVTK基础",
 "subtitle":"用一个看歌剧小故事类比TVTK库的工作流程(管线)，介绍了TVTK支持的数据格式与数据加载，以及简单的TVTK可视化范例。",
 "author":"浩瀚猫",
-"word":"3.3k",
-"date":"2018.12.05",
+"word":"4.2K",
+"date":"2018.12.18",
 "img":"img/page-heading/three_d_visualization.jpg",
 "recommend":[14,15]
 },
@@ -160,8 +160,8 @@ var jsdb = [
 "title":"第一章 三维可视之前奏",
 "subtitle":"主要介绍了三维可视化基础，以及三维可视化的Python环境搭建。",
 "author":"浩瀚猫",
-"word":"707",
-"date":"2018.12.06",
+"word":"1.1K",
+"date":"2018.12.18",
 "img":"img/page-heading/three_d_visualization.jpg",
 "recommend":[13,15]
 },
@@ -169,9 +169,18 @@ var jsdb = [
 "title":"第三章 三维可视之Mayavi基础",
 "subtitle":"介绍了利用MayaVi库里面的Mlab模块，实现了科学数据(就是通过一堆复杂的一逼的数学公式算出来的数据)的三维可视化和使用三维模型(非科学数据)的应用级交互操作",
 "author":"浩瀚猫",
-"word":"6.8k",
-"date":"2018.12.15",
+"word":"8.6K",
+"date":"2018.12.17",
 "img":"img/page-heading/three_d_visualization.jpg",
 "recommend":[14,13]
+},
+{"id":"16",
+"title":"第四章 三维可视之Traits基础",
+"subtitle":"介绍了利用Traits库里面的Traits和TraitsUI模块",
+"author":"浩瀚猫",
+"word":"2.0K",
+"date":"2018.12.18",
+"img":"img/page-heading/three_d_visualization.jpg",
+"recommend":[13,15]
 }
-];
+];;
