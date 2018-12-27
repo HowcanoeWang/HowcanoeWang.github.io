@@ -12,7 +12,8 @@
 <li><a href="#12">1.2 可视化功能</a></li>
 <li><a href="#13">1.3 代理功能：</a></li>
 <li><a href="#14">1.4 监听功能</a></li>
-<li><a href="#traits">Traits的其他方法：</a></li>
+<li><a href="#15-property">1.5 Property属性</a></li>
+<li><a href="#pstraits">PS：Traits的其他方法：</a></li>
 </ul>
 </li>
 <li><a href="#2-traitsui">2. TraitsUI入门</a></li>
@@ -72,9 +73,9 @@
 
 <h1 class="section-heading h3" id="13">1.3 代理功能：</h3>
 <p>对于其他的功能，我们再举个例子：  </p>
-<p>假如你是一个幼儿园的老师，对于你来说，一共有两类人：家长(Parent)和小孩(Child)，其中有几个基本常识：  </p>
+<p>假如你是一个幼儿园的老师，对于你来说，一共有两类人：家长(Parent)和小孩(Child)，其中有几个基本常识：<br />
+1. 小孩的姓(last_name)极大概率随父亲的姓（即<strong>继承</strong>了父亲的姓）  </p>
 <ol>
-<li>小孩的姓(last_name)极大概率随父亲的姓（即<strong>继承</strong>了父亲的姓）  </li>
 <li>姓是一个字符串(Str)，不存在用数字作为姓氏的奇葩  </li>
 </ol>
 <p>基于以上的2点常识，你首先可以建立一个如下的模型：  </p>
@@ -142,7 +143,7 @@
 <li>动态监听：调用on_trait_change(func, name='xx')或者on_trait_event()将监听的属性(xx)和处理的函数func()联系起来  </li>
 </ul>
 </li>
-<li>Event监听：只要给Event变量(比如叫xx)赋一个值(例如<code>xx=1</code>)，他就运行对应的函数，但是它本身是没有属性值的，也无法保存你赋的值(<code>print(xx)</code>会报错)，这种监听函数对应的命名方式为<code>def _xx_fired()</code>  </li>
+<li>Event监听：只要给Event变量(比如叫xx)赋一个值(例如<code>xx=1</code>)，他就运行对应的函数，但是它本身是只写型的，不可读取数据(<code>print(xx)</code>会报错)，这种监听函数对应的命名方式为<code>def _xx_fired()</code>  </li>
 </ul>
 <p>上面的说明看不懂没关系，来看一下下面生动的例子：  </p>
 <p>同样的，你还是幼儿园老师，入学了家长走了之后，现在就不需要关注小孩的与父母的血缘关系了，更要注重的是小孩的名字、位置、正在做什么等情况，并对此做出相应的反应，生活中这种行为叫做监护、看管、照顾，在编程里面就是所谓的监听。<br />
@@ -156,13 +157,150 @@
 <ol>
 <li>小孩位置有没有移动  </li>
 <li>小孩正在做什么  </li>
-<li>你吼一声开饭了，小孩的正在做的事情就变成‘吃饭’  </li>
+<li>你吼一声某小孩的名字，那个小孩会停下来手中的事情，开始看着你  </li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="c1"># 等待更新</span>
+<p>此外，有一个捣蛋鬼需要拎出来重点关注，他的状态如果发生了改变，脑袋里面要比别人多绷一根弦  </p>
+<p>新建一个py文件：<a href="https://www.sigmameow.com/blog/files/16/monitor.py" download="monitor.py">monitor.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Event</span><span class="p">,</span> <span class="n">on_trait_change</span>
+
+<span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 默认0是刚进门的第一块地砖</span>
+    <span class="n">doing</span> <span class="o">=</span> <span class="n">Str</span><span class="p">(</span><span class="s1">&#39;发呆&#39;</span><span class="p">)</span>
+    <span class="n">call</span> <span class="o">=</span> <span class="n">Event</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{self.name}(编号{id(self)})&#39;</span>
+
+    <span class="c1"># 静态监听position属性的变化</span>
+    <span class="k">def</span> <span class="nf">_position_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;[静态命名]:&lt;位置监听&gt;{self}[位置]从{old}变成了{new}&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 静态监听任何属性的变化</span>
+    <span class="k">def</span> <span class="nf">_anytrait_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;[静态命名]:&lt;全面监听&gt;{self}的[{name}]值从{old}变成了{new}&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 静态@修饰，只要doing发生了改变，就调用lalala函数，这边的函数命名就不用遵循监听函数命名规则了</span>
+    <span class="nd">@on_trait_change</span><span class="p">(</span><span class="s2">&quot;doing&quot;</span><span class="p">)</span>  <span class="c1"># 想监听多个属性，把“doing”改成“name, doing”即可</span>
+    <span class="k">def</span> <span class="nf">lalala</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;[静态修饰]:&lt;行为监听&gt;检测到{self}的doing值改变了&#39;</span><span class="p">)</span>
+
+    <span class="c1"># event监听，只要对call进行赋值，就会调用这个函数，并更改行为</span>
+    <span class="k">def</span> <span class="nf">_call_fired</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;&lt;事件监听&gt;{self}意识到你在叫TA&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doing</span> <span class="o">=</span> <span class="s1">&#39;转头看你&#39;</span>
+
+<span class="c1"># 重点关注对象，这里采用动态监听</span>
+<span class="k">def</span> <span class="nf">important</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;[动态监听]:&lt;重点关注&gt;的{obj}的{name}属性，从{old}变成了{new}&#39;</span><span class="p">)</span>
 </pre></div>
 
 
-<h1 class="section-heading h3" id="traits">Traits的其他方法：</h3>
+<p>然后在Shell里面运行上面的代码文件：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">execfile</span><span class="p">(</span><span class="s1">&#39;monitor.py&#39;</span><span class="p">)</span>   <span class="c1"># 适当修改文件的路径</span>
+</pre></div>
+
+
+<p>然后开始如下操作：<br />
+第一个进来的小孩叫张三，进来就呆呆地站在门口<br />
+(位置和状态没改变，采用默认值，只有名字发生了改变，因此只触发了全面监听任何属性的变化)  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Child</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;张三&quot;</span><span class="p">)</span> 
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;张三(编号2253292590536)的[name]值从变成了张三&#39;</span>
+</pre></div>
+
+
+<p>第二个小孩叫李四，进来走了两步就呆呆地站住了<br />
+（名字和位置都发生了改变，因此触发了两次全面监听，然后触发了一次位置监听）  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Child</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;李四&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>   
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;李四(编号2253292590360)的[name]值从变成了李四&#39;</span>
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;李四(编号2253292590360)的[position]值从0变成了2&#39;</span>
+<span class="s1">&#39;[静态命名]:&lt;位置监听&gt;李四(编号2253292590360)[位置]从0变成了2&#39;</span>
+</pre></div>
+
+
+<p>第三个小孩叫王五，直接跑到房间中间，嚎啕大哭<br />
+（名字、位置、状态都发生了改变，名字改变只触发一次全面监听，位置改变触发一次全面监听和一次位置监听，状态改变触发一次全面监听和一次状态监听）  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Child</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;王五&quot;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">doing</span><span class="o">=</span><span class="s2">&quot;嚎啕大哭&quot;</span><span class="p">)</span>
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;王五(编号2253292590800)的[name]值从变成了王五&#39;</span>
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;王五(编号2253292590800)的[position]值从0变成了50&#39;</span>
+<span class="s1">&#39;[静态命名]:&lt;位置监听&gt;王五(编号2253292590800)[位置]从0变成了50&#39;</span>
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;王五(编号2253292590800)的[doing]值从发呆变成了嚎啕大哭&#39;</span>
+<span class="s1">&#39;[静态修饰]:&lt;行为监听&gt;检测到王五(编号2253292590800)的doing值改变了&#39;</span>
+</pre></div>
+
+
+<p>第三个小孩很显然皮的很，因此需要重点关注他做了什么  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">on_trait_change</span><span class="p">(</span><span class="n">important</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;doing&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>王五哭了一会，由嚎啕大哭变成了小声抽泣<br />
+(doing状态发生改变，触发一次全面监听，触发一次行为监听，由于刚刚绑定了重点关注，所以又触发了一次动态监听)  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">doing</span> <span class="o">=</span> <span class="s2">&quot;小声抽泣&quot;</span>
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;王五(编号2253292590800)的[doing]值从嚎啕大哭变成了小声抽泣&#39;</span>
+<span class="s1">&#39;[静态修饰]:&lt;行为监听&gt;检测到王五(编号2253292590800)的doing值改变了&#39;</span>
+<span class="s1">&#39;[动态监听]:&lt;重点关注&gt;的王五(编号2253292590800)的doing属性，从嚎啕大哭变成了小声抽泣&#39;</span>
+</pre></div>
+
+
+<p>从上面的例子可以看出来，监听函数的调用顺序是：全面监听(_anytrait_changed) > 单个属性监听(_xxx_changed) > 动态监听   </p>
+<p>这时候如果你叫了一下张三<br />
+(call的值改变了，触发了一次全面监听，然后启动了event监听函数，这个函数中改变了doing的值，因此触发了一次全面监听，和一次行为监听)  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">call</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;张三(编号2253292590536)的[call]值从&lt;undefined&gt;变成了True&#39;</span>
+<span class="s1">&#39;&lt;事件监听&gt;张三(编号2253292590536)意识到你在叫TA&#39;</span>
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;张三(编号2253292590536)的[doing]值从发呆变成了转头看你&#39;</span>
+<span class="s1">&#39;[静态修饰]:&lt;行为监听&gt;检测到张三(编号2253292590536)的doing值改变了&#39;</span>
+</pre></div>
+
+
+<p>同样的，如果你叫一次王五，同样的效果，然后比张三多触发一次重点关注的动态监听函数  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">call</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># 可以随便赋值</span>
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;王五(编号2253292590800)的[call]值从&lt;undefined&gt;变成了1&#39;</span>
+<span class="s1">&#39;&lt;事件监听&gt;王五(编号2253292590800)意识到你在叫TA&#39;</span>
+<span class="s1">&#39;[静态命名]:&lt;全面监听&gt;王五(编号2253292590800)的[doing]值从小声抽泣变成了转头看你&#39;</span>
+<span class="s1">&#39;[静态修饰]:&lt;行为监听&gt;检测到王五(编号2253292590800)的doing值改变了&#39;</span>
+<span class="s1">&#39;[动态监听]:&lt;重点关注&gt;的王五(编号2253292590800)的doing属性，从小声抽泣变成了转头看你&#39;</span>
+</pre></div>
+
+
+<h1 class="section-heading h3" id="15-property">1.5 Property属性</h3>
+<p>我们希望，我们做出来一个及时交互的软件，即某个值(Y)由几个值(X1, X2)计算而来，当改变X的时候，自动计算Y，但是X值没有改变时，就不计算，这个逻辑看起来可以用判断语句来写，伪代码如下：  </p>
+<div class="codehilite"><pre><span></span>当键盘按下事件发生时：
+    比较改变的值和原来的值
+    if X1 or X2值改变了：
+        调用计算函数，更新Y值
+    else：
+        pass
+</pre></div>
+
+
+<p>这么看起来程序逻辑不复杂，但是如果是几十上百个变量进行交互呢？写起来工程量无疑让人头大，这时候，Traits就给了一个好的轮子，我们只要用一行代码定义Y值依赖于X1和X2，即<code>Y = Property(depends_on=['X1', 'X2'])</code>，并且在计算的函数前用<code>@cached_property</code>进行修饰，他就会自动启用上面介绍过的监听函数，去自动计算，减轻了很多写代码逻辑的时间。下面我们来看一个例子：<a href="https://www.sigmameow.com/blog/files/16/property.py" download="property.py">property.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Property</span><span class="p">,</span> <span class="n">cached_property</span>
+
+<span class="k">class</span> <span class="nc">rectangle</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">Float</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">Float</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="n">depends_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">])</span>   <span class="c1"># 绑定自变量和因变量</span>
+
+    <span class="nd">@cached_property</span>   <span class="c1"># 对计算的函数进行修饰</span>
+    <span class="k">def</span> <span class="nf">_get_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c1"># 函数名要按照这个规则来命名 _get_xxxx(), xxxx就是Y的因变量名</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;computing...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">rectangle</span><span class="p">()</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p>运行的效果如下：<br />
+起始值是W=1，H=2，第一次运行因为并没有面积的值，因此会计算一下<br />
+当把W值改成1（没有变化）时，并没有提示计算，但是改成了11之后，就开始重新计算<br />
+同样的，把H改成2（没有变化），并没有提示计算，但是改了22，222，都重新计算了<br />
+<img class="img-fluid" src="img/16/property.gif"/><br />
+很简短的代码，完成了Tkinter等图形界面可能要一百行代码的工作量  </p>
+<h1 class="section-heading h3" id="pstraits">PS：Traits的其他方法：</h3>
 <ol>
 <li>print_traits()<br />
     输入所有的属性和他们的值<br />
