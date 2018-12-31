@@ -82,6 +82,7 @@ def ziw2html(ziw_path, p_id):
     md = md.replace('src="index_files', f'src="img/{p_id}')
     md = md.replace(' ', ' ')    # wiz tab = '&nbsp;' + ' ' + '&nbsp;&nbsp;', what the fuck!!!!!!!!!!!!
     md = md.replace('[toc]', '\n[TOC]\n')
+    md = replace_download_url(md, p_id)
 
     '''
     Add \n in the beginning and end of list block
@@ -97,7 +98,13 @@ def ziw2html(ziw_path, p_id):
     in_list = False
     in_code = False
     black_line = False
-    pattern = re.compile(r'\d{1,2}\. |\* ')  # find all '1. ' or '* ' which means list in markdown
+    # re: 'a*' match 'a', 'aa', 'aaa', ...  $ to solve sublist '    1. ' problem
+    # re: '\d' match all numbers 0-9
+    # re: 'a{1,2}' match 'a' or 'aa'
+    # re: '\.' match '.'
+    # re: '\*' match '*'
+    pattern = re.compile(r' *\d{1,2}\. | *\* ')  # find all '1. ' or '* ' which means list in markdown
+
     for l in md_line:
         if l == '':
             black_line = True
@@ -113,7 +120,7 @@ def ziw2html(ziw_path, p_id):
             if in_code:
                 md += f'{l}\n'
             else:
-                contain_list = pattern.search(l) is not None and l.count('*') <= 1  # only have one * can be viewed as list
+                contain_list = pattern.match(l) is not None
                 # add two spaces in the end of a sentence, pymarkdown need two space to present a new line, but wiz note :)
                 if contain_list and not in_list:
                     in_list = True
@@ -161,8 +168,23 @@ def ziw2html(ziw_path, p_id):
 
     return word_str
 
+def replace_download_url(md, p_id):
+    # example:
+    # >>> import re
+    # >>> s = "the blue dog and blue cat wore blue hats"
+    # >>> p = re.compile(r"blue (dog|cat)")
+    # >>> p.sub('gray \\1',s)
+    # 'the gray dog and gray cat wore blue hats'
+
+    # replace <download>filename</download> to
+    # <a href="https://www.sigmameow.com/blog/files/16/{filename}" download="{filename}">{filename}/a>
+    pattern = re.compile(r'<download>(.*)</download>')
+    urls = pattern.sub(f'<a href="https://www.sigmameow.com/blog/files/{p_id}/\\1" download="\\1">\\1</a>', md)
+
+    return urls
+
 def reference_dict(*args):
-    if mode == 'test':
+    if mode == 'test1':
         csv_path = 'test/ref.csv'
     else:
         csv_path = 'ref.csv'
@@ -290,7 +312,7 @@ def extract_imgs(ziw_path, p_id):
 
 
 if __name__ == '__main__':
-    mode = 'test0'
+    mode = 'test1'
     if mode == 'test':
         if os.path.exists('test'):
             shutil.rmtree('test')

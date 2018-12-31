@@ -176,10 +176,10 @@ var jsdb = [
 },
 {"id":"16",
 "title":"第四章 三维可视之Traits(UI)基础",
-"subtitle":"介绍了利用Traits库里面的Traits和TraitsUI模块",
+"subtitle":"介绍了利用Traits库里面的Traits和TraitsUI模块，以及使用他们快速构建应用程序的一些例子",
 "author":"浩瀚猫",
-"word":"4.2K",
-"date":"2018.12.27",
+"word":"10.0K",
+"date":"2018.12.31",
 "img":"img/page-heading/three_d_visualization.jpg",
 "recommend":[14,13,15]
 },
@@ -192,4 +192,4 @@ var jsdb = [
 "img":"img/page-heading/blog-bg.jpg",
 "recommend":[2]
 }
-];;
+];

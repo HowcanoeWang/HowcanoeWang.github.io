@@ -16,8 +16,27 @@
 <li><a href="#pstraits">PS：Traits的其他方法：</a></li>
 </ul>
 </li>
-<li><a href="#2-traitsui">2. TraitsUI入门</a></li>
-<li><a href="#3-traitsuimayavi">3. TraitsUI与MayaVi实例</a></li>
+<li><a href="#2-traitsui">2. TraitsUI入门</a><ul>
+<li><a href="#21-view">2.1 View定义界面</a><ul>
+<li><a href="#211-item">2.1.1 Item对象改变元素属性</a></li>
+<li><a href="#212-group">2.1.2 Group对象组织界面</a></li>
+</ul>
+</li>
+<li><a href="#22-menu">2.2 Menu配置按钮</a></li>
+<li><a href="#23">2.3 综合小实践</a><ul>
+<li><a href="#231">2.3.1 文本编辑器</a></li>
+<li><a href="#232">2.3.2 按钮计数器(暴力版)</a></li>
+<li><a href="#233">2.3.3 滑动条</a></li>
+<li><a href="#234">2.3.4 其他控件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-traitsuimayavi">3. TraitsUI与MayaVi实例</a><ul>
+<li><a href="#31-mayavi">3.1 建立简单的MayaVi窗口</a></li>
+<li><a href="#32-mayavi">3.2 基于交互控制的Mayavi窗口</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <hr />
@@ -73,9 +92,9 @@
 
 <h1 class="section-heading h3" id="13">1.3 代理功能：</h3>
 <p>对于其他的功能，我们再举个例子：  </p>
-<p>假如你是一个幼儿园的老师，对于你来说，一共有两类人：家长(Parent)和小孩(Child)，其中有几个基本常识：<br />
-1. 小孩的姓(last_name)极大概率随父亲的姓（即<strong>继承</strong>了父亲的姓）  </p>
+<p>假如你是一个幼儿园的老师，对于你来说，一共有两类人：家长(Parent)和小孩(Child)，其中有几个基本常识：  </p>
 <ol>
+<li>小孩的姓(last_name)极大概率随父亲的姓（即<strong>继承</strong>了父亲的姓）  </li>
 <li>姓是一个字符串(Str)，不存在用数字作为姓氏的奇葩  </li>
 </ol>
 <p>基于以上的2点常识，你首先可以建立一个如下的模型：  </p>
@@ -313,4 +332,927 @@
     <img class="img-fluid" src="img/16/171316140.png"/>  </li>
 </ol>
 <h1 class="section-heading text-center" id="2-traitsui">2. TraitsUI入门</h1>
+<p>Python由很多界面开发库， 包括内置的Tkinter，和拓展的wxPython， PyQt等，但是这些都需要编程的人了解很多的界面编程知识，包括界面设计、逻辑编写，API调用等等，学习的时间成本和编写成本比较高，对于快速开发科学计算的可视化界面，并不是很方便。<br />
+TraitsUI就是一个以我们之前介绍的Traits为基础，以MVC为设计思想的UI设计库，MVC即Model-View-Controller的缩写，代表的是：  </p>
+<ul>
+<li>Model：程序中<strong>储存数据</strong>以及<strong>数据处理</strong>的功能，TraitsUI库采用Traits库的HasTraits的数据模型来保存数据  </li>
+<li>View：程序的<strong>界面</strong>实现数据的可视化、显示，TraitsUI库中，如果没有指定的界面显示方式时，Traits会自动建立默认界面  </li>
+<li>Controller：控制程序的流程，即对上面两个功能的链接与交互。  </li>
+</ul>
+<p>主要的程序框架为：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span>   <span class="c1"># 导入Traits定义数据类型作为Model部分</span>
+<span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span>    <span class="c1"># 添加TraitsUI库，定义视图组织界面等</span>
+
+<span class="k">class</span> <span class="nc">Main</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="c1"># Traits数据类型定义 #</span>
+    <span class="c1"># 视图控制代码 #</span>
+
+<span class="n">main</span> <span class="o">=</span> <span class="n">Main</span><span class="p">()</span>
+<span class="n">main</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p>先看一个没有使用View定义，默认产生的界面例子：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Int</span>
+
+<span class="k">class</span> <span class="nc">ModelManager</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="c1"># vvv Traits数据类型定义 #</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_file</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_number</span> <span class="o">=</span> <span class="n">Int</span>
+    <span class="c1"># ^^^ Traits数据类型定义 #</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ModelManager</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img class="img-fluid" src="img/16/55ff394c-eb54-4e94-81f6-47ca0e74b2d1.png"/><br />
+生成界面的过程中，会自动把首字母大写，然后把下划线转为空格  </p>
+<h1 class="section-heading h3" id="21-view">2.1 View定义界面</h3>
+<p>但是如果并不想用默认的变量名作为标签，并且想修改顺序，就需要用到View来自定义标签了，View函数的使用方法是：<br />
+<code>View(view_childrens, title, width, height, resizable, ...)</code> 其中,view_childrens是TraitsUI的布局设计函数，包括Item，Group等后面会介绍到的设计界面的部分，即下图中空白的部分<br />
+<img class="img-fluid" src="img/16/844c9c9e-a2d0-45a2-9e88-51430101c512.png"/><br />
+其他的属性，就是定义上面图中界面本身，即绿色的部分：  </p>
+<ul>
+<li>title：窗口标题栏  </li>
+<li>width：窗口宽度  </li>
+<li>height：窗口高度  </li>
+<li>resizable：窗口是否可以调节大小，默认是True  </li>
+<li>kind：视图类型，有7种类型（暂时不懂也没关系）  <ul>
+<li>modal：模态窗口，非及时更新  </li>
+<li>live：非模态窗口，及时更新  </li>
+<li>livemodal：模态窗口，及时更新  </li>
+<li>nonmodal：非模态窗口，非及时更新  </li>
+<li>wizard：向导类型(模态窗口，及时更新)  </li>
+<li>panel、subpanel：嵌入到其他窗口的面板，及时更新，非模态  </li>
+</ul>
+</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>模态窗口</strong>：在此窗口关闭之前，其他窗口不能激活，如警告窗口、选择文件窗口等（保证用户的操作锁定到当前的界面）  </p>
+<p><img class="img-fluid" src="img/16/441765437.png"/><br />
+<img class="img-fluid" src="img/16/441839718.png"/><br />
+<strong>及时更新</strong>：修改的内容，立即反应到模型数据上面，如一边拖动滑动条，模型同时跟着一起改变（不停的计算）；非及时更新就是滑动条拖动时模型不变化，但是松开或者点击更新按钮等之后，才更新模型（只计算一次）  </p>
+</blockquote>
+<h1 class="section-heading h5" id="211-item">2.1.1 Item对象改变元素属性</h5>
+<p>在TraitsUI里面，每个输入框+对应的标签可以通过Item来进行修改， Item函数的使用方法是：<br />
+<code>Item(id, name, label, ...)</code> 其中：  </p>
+<div class="table-responsive"><table class="table table-striped table-bordered" align="center">
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>item的唯一id，即你想要修改Traits变量的变量名字符串</td>
+</tr>
+<tr>
+<td>name</td>
+<td>trat属性的名称</td>
+</tr>
+<tr>
+<td>label</td>
+<td>输入框旁边的标签说明</td>
+</tr>
+<tr>
+<td>tootip</td>
+<td>提示文本，当你把鼠标悬浮上去，他会给出提示</td>
+</tr>
+</tbody>
+</table></div>
+<p>把上面两个知识结合起来：  </p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">ModelManager</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_file</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_number</span> <span class="o">=</span> <span class="n">Int</span>
+
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型名称&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_file&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;文件名&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;路径及文件名&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型类型&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_number&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型数量&quot;</span><span class="p">),</span>
+                <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型资料&quot;</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>就可以得到一个“汉♁化”的界面了，把鼠标悬浮在文件名上，还会有个悬浮提示(tooltip)来解释具体的意义<br />
+<img class="img-fluid" src="img/16/5f88c2f6-1be2-4a86-abd6-9fba209978ef.png"/><br />
+注意，和默认生成的界面相比，默认的界面的顺序是定义变量的顺序，而View定义完了之后，顺序就是按照View里面view_children的顺序<br />
+<img class="img-fluid" src="img/16/63fb38c7-d458-488f-882a-f5c37df745da.png"/>  </p>
+<h1 class="section-heading h5" id="212-group">2.1.2 Group对象组织界面</h5>
+<p>Group就类似于一个容器，容器里面还可以嵌套容器，层层的嵌套可以用来更好的排列界面元素。使用的方法为<code>from traitsui.api import Group</code>,其中<code>Group()</code>函数的主要参数有  </p>
+<div class="table-responsive"><table class="table table-striped table-bordered" align="center">
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>orientation</td>
+<td>编辑器的排列方向</td>
+</tr>
+<tr>
+<td>layout</td>
+<td>布局方式normal、flow、split、tabbed</td>
+</tr>
+<tr>
+<td>show_labels</td>
+<td>是否显示这个容器的标签</td>
+</tr>
+<tr>
+<td>columns</td>
+<td>布局的列数，范围(1， 50)</td>
+</tr>
+</tbody>
+</table></div>
+<p>接上面的例子，我们增加一个顶点数量的变量(vertices)，然后把“模型名称”、“文件名”、“模型类型”归类到“模型信息”的容器里，把“模型数量”和“顶点数量”归类到“统计数据”的容器里  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Int</span>
+<span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">Group</span>
+
+<span class="k">class</span> <span class="nc">ModelManager</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_file</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_number</span> <span class="o">=</span> <span class="n">Int</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="n">Int</span>
+
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型名称&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_file&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;文件名&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;路径及文件名&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型类型&quot;</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型信息&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span>
+        <span class="p">),</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_number&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型数量&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;vertices&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;顶点数量&quot;</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;统计数据&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span>
+        <span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型资料&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ModelManager</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p>就可以得到下面的界面：<br />
+<img class="img-fluid" src="img/16/group1.gif"/><br />
+可以看到，他把每一个Group的容器，都视为一个面板，然后用切换标签把他们组合了起来，那么如果并不像用切换标签，而是很简单的把这些分组放在一个界面上呢？就需要用到多层嵌套的知识了  </p>
+<div class="codehilite"><pre><span></span>view1 = View(
+    Group(
+        Group(... ...),
+        Group(... ...),
+    )
+)
+</pre></div>
+
+
+<p>第一层的Group容器，占据了主面板，由于只有这么一层，所以并不会出现切换的标签，然后在这个容器里面再放置两个子容器，就能达到把分组放在一个界面上的目的  </p>
+<p>完整的代码：  </p>
+<div class="codehilite"><pre><span></span>    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Group</span><span class="p">(</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型名称&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_file&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;文件名&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;路径及文件名&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型类型&quot;</span><span class="p">),</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型信息&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+            <span class="n">Group</span><span class="p">(</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_number&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型数量&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;vertices&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;顶点数量&quot;</span><span class="p">),</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;统计数据&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型资料&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+</pre></div>
+
+
+<p><img class="img-fluid" src="img/16/0305ac60-0d78-47e5-ad94-855d57e8eafd.png"/>  </p>
+<p>通过第一层里面嵌套两层，实现了分组显示在同一个界面上，同样的，再第一层定义相应的排列方式，可以达到修改分组的排布，框架如下：  </p>
+<div class="codehilite"><pre><span></span>view1 = View(
+    Group(
+        Group(... ...),
+        Group(... ...),
+        orientation = &#39;horizontal&#39;
+    )
+)
+</pre></div>
+
+
+<p>具体的代码：  </p>
+<div class="codehilite"><pre><span></span>    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Group</span><span class="p">(</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型名称&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_file&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;文件名&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;路径及文件名&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型类型&quot;</span><span class="p">),</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型信息&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+            <span class="n">Group</span><span class="p">(</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_number&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型数量&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;vertices&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;顶点数量&quot;</span><span class="p">),</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;统计数据&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+            <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;horizontal&#39;</span>
+        <span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型资料&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+</pre></div>
+
+
+<p><img class="img-fluid" src="img/16/e66ce9ee-8698-43ea-a0df-9f095b579310.png"/>  </p>
+<p>但是，有没有觉得每次都要写控制的参数很麻烦？TraitsUI已经想到了你这个懒惰的想法，于是基于Group这个类，它还提供了很多衍生的类：  </p>
+<div class="table-responsive"><table class="table table-striped table-bordered" align="center">
+<thead>
+<tr>
+<th>衍生类</th>
+<th>说明</th>
+<th>等价代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HGroup</td>
+<td>内容水平排列</td>
+<td><code>Group(..., orientation='horizontal')</code></td>
+</tr>
+<tr>
+<td>HFlow</td>
+<td>内容水平排列，超过水平宽度时，自动换行，隐藏标签文字</td>
+<td><code>Group(..., orientation='horizontal', layout='flow', show_labels=False)</code></td>
+</tr>
+<tr>
+<td>HSplit</td>
+<td>内容水平分隔，中间插入分隔条</td>
+<td><code>Group(..., orientation='horizontal', layout='flow')</code></td>
+</tr>
+<tr>
+<td>Tabbed</td>
+<td>内容分标签页显示</td>
+<td><code>Group(..., orientation='horizontal', layout='tabber')</code></td>
+</tr>
+<tr>
+<td>VGroup</td>
+<td>内容垂直排列</td>
+<td><code>Group(..., orientation='vertical')</code></td>
+</tr>
+<tr>
+<td>VFlow</td>
+<td>内容垂直排列，超过垂直高度时，自动换列，隐藏标签文字</td>
+<td><code>Group(..., oritentaion='vertical', layout='flow', show_labels=False)</code></td>
+</tr>
+<tr>
+<td>VFold</td>
+<td>内容垂直排列，可折叠</td>
+<td><code>Group(..., orientation='vertical', layout='fold', show_labels=False)</code></td>
+</tr>
+<tr>
+<td>VGrid</td>
+<td>按照多列网格进行垂直排列，columns属性决定了网格的列书</td>
+<td><code>Group(..., orientation='vertical', columns=2)</code></td>
+</tr>
+<tr>
+<td>VSplit</td>
+<td>内容垂直排列，中间插入分隔条</td>
+<td><code>Group(..., orientation='vertical', layout='split')</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>上面的例子中，等价于以下的框架：  </p>
+<div class="codehilite"><pre><span></span>view1 = View(
+    HSplit(
+        VGroup(... ...),
+        VGroup(... ...),
+    )
+)
+</pre></div>
+
+
+<p>具体的代码：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">HSplit</span><span class="p">,</span> <span class="n">VGroup</span>
+<span class="c1"># 重复的代码块 #</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">HSplit</span><span class="p">(</span>
+            <span class="n">VGroup</span><span class="p">(</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型名称&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_file&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;文件名&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;路径及文件名&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型类型&quot;</span><span class="p">),</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型信息&quot;</span><span class="p">),</span>
+            <span class="n">VGroup</span><span class="p">(</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_number&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型数量&quot;</span><span class="p">),</span>
+                <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;vertices&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;顶点数量&quot;</span><span class="p">),</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;统计数据&quot;</span><span class="p">),</span>
+            <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;horizontal&#39;</span>
+        <span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型资料&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+<span class="c1"># 重复的代码块 #</span>
+</pre></div>
+
+
+<p>效果如下：<br />
+<img class="img-fluid" src="img/16/e494fc3d-aec6-4bfd-b406-a32a60a85a23.png"/>  </p>
+<p>如果想进行不同视图的切换，即想做到中英文切换，应该怎么弄呢？其实也很简单，我们做两个视图，view1和view2，然后修改启动的命令：<code>model.configure_traits(view='view1')</code>，即可指定这次运行的时候，采用哪种视图<br />
+完整代码：<a href="https://www.sigmameow.com/blog/files/16/multi_view.py" download="multi_view.py">multi_view.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Int</span>
+<span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">Group</span>
+
+<span class="k">class</span> <span class="nc">ModelManager</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_file</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_number</span> <span class="o">=</span> <span class="n">Int</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="n">Int</span>
+
+    <span class="n">view_cn</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型名称&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_file&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;文件名&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;路径及文件名&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型类型&quot;</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型信息&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_number&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型数量&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;vertices&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;顶点数量&quot;</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;统计数据&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型资料&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+
+    <span class="n">view_en</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;Model Name&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_file&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;File Name&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;Path and File Name&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;Model Type&quot;</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;Model Info&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_number&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;Model Number&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;vertices&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;Vertices Number&quot;</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;Statistics&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;Model Data&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+
+<span class="n">view_jp</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+    <span class="n">Group</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;モデル名&quot;</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_file&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;ファイル名&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;パスとファイル名&quot;</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;モデルの種類&quot;</span><span class="p">),</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;モデル情報&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+    <span class="n">Group</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_number&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;モデル数&quot;</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;vertices&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;頂点数&quot;</span><span class="p">),</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;統計データ&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+    <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;モデルデータ&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ModelManager</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p>注意最后一行，如果一个Class里面有两个视图，但是最后的运行命令没有指定具体用哪个，如<code>model.configure_traits()</code>，那么就会采用默认的效果：<br />
+<img class="img-fluid" src="img/16/59337669-3251-467c-90a9-cf80ed565e70.png"/><br />
+指定采用英文界面：<code>model.configure_traits(view='view_en')</code><br />
+<img class="img-fluid" src="img/16/group_en.gif"/><br />
+甚至可以指定模型外面定义的界面，如日文界面：<code>model.configure_traits(view=view_jp)</code>，注意，这里的view_jp是变量，而不是像之前的字符串了。<br />
+<img class="img-fluid" src="img/16/group_jp.gif"/>  </p>
+<h1 class="section-heading h3" id="22-menu">2.2 Menu配置按钮</h3>
+<p>主要有下面6个标准命令按钮：UndoButton、ApplyButton、RevertButton、OKButton、CancelButton、HelpButton<br />
+然后<code>traitsui.menu</code>还预定义了以下的命令按钮组合：  </p>
+<ul>
+<li>OKCancelButtons=[OKButton, CancelButton]  </li>
+<li>ModalButtons = [ApplyButton, RevertButton, OKButton, CancelButton, HelpButton]  </li>
+<li>LiveButtons = [UndoButton, RevertButton, OKButton, CancelButton]  </li>
+</ul>
+<p>使用的模板为：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traitsui.menu</span> <span class="kn">import</span> <span class="n">ModalButtons</span>
+<span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span><span class="o">...</span> <span class="o">...</span>
+                <span class="n">buttons</span><span class="o">=</span><span class="n">ModalButtons</span><span class="p">)</span>
+</pre></div>
+
+
+<p>示例代码：<a href="https://www.sigmameow.com/blog/files/16/button.py" download="button.py">button.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Int</span>
+<span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">traitsui.menu</span> <span class="kn">import</span> <span class="n">ModalButtons</span>
+
+<span class="k">class</span> <span class="nc">ModelManager</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_file</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">model_number</span> <span class="o">=</span> <span class="n">Int</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="n">Int</span>
+
+    <span class="n">view_cn</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型名称&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_file&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;文件名&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;路径及文件名&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型类型&quot;</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型信息&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="n">Group</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;model_number&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型数量&quot;</span><span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;vertices&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;顶点数量&quot;</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;统计数据&quot;</span><span class="p">,</span> <span class="n">show_border</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="c1"># 添加此处  #</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;modal&quot;</span><span class="p">,</span> <span class="n">buttons</span> <span class="o">=</span> <span class="n">ModalButtons</span><span class="p">,</span>
+        <span class="c1"># 添加此处  #</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;模型资料&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ModelManager</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p>效果如下：<br />
+<img class="img-fluid" src="img/16/0ea6fbfd-1aac-407b-adad-497cf725982f.png"/>  </p>
+<h1 class="section-heading h3" id="23">2.3 综合小实践</h3>
+<h1 class="section-heading h5" id="231">2.3.1 文本编辑器</h5>
+<p>最终效果是：<br />
+<img class="img-fluid" src="img/16/061ee0ed-abc2-447c-8f09-066e2f84e032.png"/>  </p>
+<p>在这个例子里，主要有四个部件组成：  </p>
+<ol>
+<li>一个只读的文本框  </li>
+<li>输入单行文本的输入框  </li>
+<li>输入多行文本的输入框  </li>
+<li>输入密码，并把所有的密码输入都变成隐藏字符的密码输入框(Password)  </li>
+</ol>
+<p>前三个只要再Item里面修改对应的style即可实现，有三个种类，<code>'simple'</code>：单行显示(默认)；<code>'custom'</code>：多行显示；<code>'readonly'</code>：只读(灰框不可修改)  </p>
+<p>密码需要使用Traits的Password:<code>from traits.api import Password</code>  </p>
+<p>完整的代码如下：<a href="https://www.sigmameow.com/blog/files/16/text_editor.py" download="text_editor.py">text_editor.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="c1"># -*- coding:utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Password</span>
+<span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">Item</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">View</span>
+
+<span class="k">class</span> <span class="nc">TextEditor</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="c1"># 定义文本编辑器的变量</span>
+    <span class="n">string_cn</span> <span class="o">=</span> <span class="n">Str</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;快狐跨懒狗&quot;</span><span class="p">)</span>
+    <span class="n">string_en</span> <span class="o">=</span> <span class="n">Str</span><span class="p">(</span><span class="s1">&#39;The quick brown fox jumps over the lazy dog&#39;</span><span class="p">)</span>
+    <span class="n">string_jp</span> <span class="o">=</span> <span class="n">Str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;キツネが怠惰な犬を飛び越える&#39;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">Password</span>
+
+    <span class="c1"># 定义布局</span>
+    <span class="n">layout</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;string_cn&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;simple&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;单行&#39;</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;string_en&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;多行&#39;</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;string_jp&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;readonly&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;只读&#39;</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;simple&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;密码&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># 定义视图</span>
+    <span class="n">traits_view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">layout</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;文本编辑器&#39;</span><span class="p">,</span>
+        <span class="n">buttons</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OK&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="n">TextEditor</span><span class="p">()</span>
+<span class="n">text</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<h1 class="section-heading h5" id="232">2.3.2 按钮计数器(暴力版)</h5>
+<p><img class="img-fluid" src="img/16/button_editor.gif"/><br />
+在这个程序里面，主要有两个部件，一个是按钮，一个是计数器的显示<br />
+在编程之前，我们需要复习一下前面Traits监听部分  </p>
+<div class="table-responsive"><table class="table table-striped table-bordered" align="center">
+<thead>
+<tr>
+<th></th>
+<th>Event监听</th>
+<th>Trait属性监听</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>触发监听事件</td>
+<td>对Event赋值</td>
+<td>值被改变后</td>
+</tr>
+<tr>
+<td>监听函数名</td>
+<td><code>_xxx_fired()</code></td>
+<td><code>_xxx_changed()</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>很显然，这里的按钮使用Event的话，十分的适合，点击即可视为对Event的赋值操作，实际上Button这个控件，也确实是从Event继承过来的。<br />
+于是计数器就可以这么写：  </p>
+<div class="codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">_my_button_fired</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+
+<p>完整的代码如下：<a href="https://www.sigmameow.com/blog/files/16/button_editor.py" download="button_editor.py">button_editor.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Int</span>
+<span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span>
+
+<span class="k">class</span> <span class="nc">ButtonEditor</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="n">my_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;+1s&#39;</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="mi">365</span><span class="o">*</span><span class="mi">80</span><span class="o">*</span><span class="mi">12</span><span class="o">*</span><span class="mi">3600</span><span class="p">)</span>
+
+    <span class="c1"># 创建视图</span>
+    <span class="n">traits_view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;my_button&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;膜一下&#39;</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;counter&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;天命&#39;</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;蛤&#39;</span><span class="p">,</span> <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;OK&#39;</span><span class="p">],</span> <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_my_button_fired</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">button</span> <span class="o">=</span> <span class="n">ButtonEditor</span><span class="p">()</span>
+<span class="n">button</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<h1 class="section-heading h5" id="233">2.3.3 滑动条</h5>
+<p>在这个案例里，我们要做一个滑动条，a，b的值决定了c的值，效果如下：<br />
+<img class="img-fluid" src="img/16/slider.gif"/>  </p>
+<p>我们要回顾一下property绑定的相关知识，除了采用1.5节讲述过的方法，在创建C的时候就指定依赖的自变量：  </p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">xxxx</span><span class="p">():</span>
+    <span class="o">...</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="n">depends_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a, b&#39;</span><span class="p">])</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">_get_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">...</span>
+</pre></div>
+
+
+<p>除此之外，还有另外一种方法，直接把以来写入取值函数<code>_get_xxx()</code>的修饰里面：  </p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">xxxx</span><span class="p">():</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span>
+
+    <span class="nd">@property_depends_on</span><span class="p">(</span><span class="s1">&#39;a, b&#39;</span><span class="p">,</span> <span class="n">settable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">....</span>
+</pre></div>
+
+
+<p>完整的代码：<a href="https://www.sigmameow.com/blog/files/16/slider.py" download="slider.py">slider.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Property</span><span class="p">,</span> <span class="n">property_depends_on</span>
+<span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">RangeEditor</span>
+
+<span class="k">class</span> <span class="nc">RangeDemo</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;_&#39;</span><span class="p">,</span>  <span class="c1"># 添加分割线</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">editor</span><span class="o">=</span><span class="n">RangeEditor</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;slider&#39;</span><span class="p">),),</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;滑动计算器&quot;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.3</span>
+    <span class="p">)</span>
+
+    <span class="nd">@property_depends_on</span><span class="p">(</span><span class="s1">&#39;a,b&#39;</span><span class="p">,</span> <span class="n">settable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;计算中...&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">range_domo</span> <span class="o">=</span> <span class="n">RangeDemo</span><span class="p">()</span>
+<span class="n">range_domo</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<h1 class="section-heading h5" id="234">2.3.4 其他控件</h5>
+<p>除了滑动条、按钮职位，TraitsUI还提供了大量的控件可以使用：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traitsui.menu</span> <span class="kn">import</span> <span class="n">Action</span><span class="p">,</span> <span class="o">...</span>
+</pre></div>
+
+
+<div class="table-responsive"><table class="table table-striped table-bordered" align="center">
+<thead>
+<tr>
+<th>对象</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Action</td>
+<td>在Menu对象中，通过Action对象定义菜单中的每个选项</td>
+</tr>
+<tr>
+<td>ActionGroup</td>
+<td>对菜单中的选项进行分组</td>
+</tr>
+<tr>
+<td>Menu</td>
+<td>定义菜单栏中的一个菜单</td>
+</tr>
+<tr>
+<td>MenuBar</td>
+<td>菜单栏对象，由多个Menu对象组成</td>
+</tr>
+<tr>
+<td>ToolBar</td>
+<td>工具栏对象，它由多个Action对象组成，每个Action对 应工具条中的一个按钮</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>数组空间</td>
+</tr>
+<tr>
+<td>Bool</td>
+<td>单选框、复选框</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>按钮</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>代码编辑器</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>颜色对话框</td>
+</tr>
+<tr>
+<td>Dircetory</td>
+<td>目录控件</td>
+</tr>
+<tr>
+<td>Enum</td>
+<td>枚举控件</td>
+</tr>
+<tr>
+<td>File</td>
+<td>文件控件</td>
+</tr>
+<tr>
+<td>Font</td>
+<td>字体选择控件</td>
+</tr>
+<tr>
+<td>Html</td>
+<td>Html网页控件</td>
+</tr>
+<tr>
+<td>List</td>
+<td>列表框</td>
+</tr>
+<tr>
+<td>Str</td>
+<td>文本框</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>密码控件</td>
+</tr>
+<tr>
+<td>Tuple</td>
+<td>元组控件</td>
+</tr>
+</tbody>
+</table></div>
 <h1 class="section-heading text-center" id="3-traitsuimayavi">3. TraitsUI与MayaVi实例</h1>
+<h1 class="section-heading h3" id="31-mayavi">3.1 建立简单的MayaVi窗口</h3>
+<p>要建立Mayavi窗口，需要以下的几个步骤：  </p>
+<ol>
+<li>建立从HasTraits继承的类  <ol>
+<li>建立MlabSceneModel场景实例scene  </li>
+<li>建立View视图  </li>
+<li>定义初始化方法__init__，生成数据  </li>
+</ol>
+</li>
+<li>建立类的实例，调用configure_traits()方法生成界面  </li>
+</ol>
+<p>程序框架如下所示：  </p>
+<div class="codehilite"><pre><span></span><span class="c1"># 1. 建立从HasTraits继承的类</span>
+<span class="k">class</span> <span class="nc">ActorViewer</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="c1"># 1.1 建立MlabSceneModel场景实例scene</span>
+    <span class="n">scene</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="n">MlabSceneModel</span><span class="p">,</span> <span class="p">())</span>
+    <span class="c1"># 1.2 建立View视图</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;scene&#39;</span><span class="p">,</span> <span class="n">editor</span><span class="o">=</span><span class="n">SceneEditor</span><span class="p">(</span><span class="n">scene_class</span><span class="o">=</span><span class="n">MayaviScene</span><span class="p">)))</span>
+    <span class="c1"># 1.3 定义初始化方法__init__，生成数据</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">traits</span><span class="p">):</span>
+        <span class="n">HasTraits</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">traits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate_data</span><span class="p">()</span>   <span class="c1"># 生成数据并绘制</span>
+
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">():</span>
+        <span class="o">...</span>
+</pre></div>
+
+
+<p><strong>1.1 建立场景实例相关代码</strong>：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">Instance</span>  
+<span class="kn">from</span> <span class="nn">mayavi.tools.mlab_scene_model</span> <span class="kn">import</span> <span class="n">MlabSceneModel</span>   <span class="c1"># Mlab的容器，可以让我们在TraitsUI的视图中使用Mayavi的Scene</span>
+<span class="c1"># class xxxx()</span>
+    <span class="n">scene</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="n">MlabSceneModel</span><span class="p">,</span> <span class="p">())</span>    <span class="c1"># 返回一个MlabSceneModel的实例</span>
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 生成数据部分先跳过</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">mlab</span><span class="o">.</span><span class="n">surf</span><span class="p">()</span>   <span class="c1"># 对数据进行可视化显示</span>
+</pre></div>
+
+
+<p><strong>1.2 提供Mayavi视图窗口代码</strong>:  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span>
+<span class="c1"># 引入视图编辑器模块</span>
+<span class="kn">from</span> <span class="nn">tvtk.pyface.scene_editor</span> <span class="kn">import</span> <span class="n">SceneEditor</span>  <span class="c1"># 基于SceneModel实例的TraitsUI编辑器</span>
+<span class="kn">from</span> <span class="nn">mayavi.core.ui.mayavi_scene</span> <span class="kn">import</span> <span class="n">MayaviScene</span>  <span class="c1"># 提供了Mayavi视图的工具栏、相机视角交互、坐标轴等等</span>
+<span class="c1"># class xxxx()</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;scene&#39;</span><span class="p">,</span>
+                     <span class="n">editor</span><span class="o">=</span><span class="n">SceneEditor</span><span class="p">(</span><span class="n">scene_class</span><span class="o">=</span><span class="n">MayaviScene</span><span class="p">),</span>
+                     <span class="n">show_label</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                     <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                     <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                     <span class="n">width</span><span class="o">=</span><span class="mi">500</span>
+                     <span class="p">),</span> 
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;场景查看器&#39;</span><span class="p">,</span>
+                <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+                <span class="p">)</span>
+</pre></div>
+
+
+<p><strong>1.3 初始化生成数据相关代码</strong>：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">mgrid</span>
+<span class="c1"># class xxxx()</span>
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">mgrid</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">100j</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">100j</span><span class="p">]</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">X</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">/</span> <span class="n">R</span>
+</pre></div>
+
+
+<p>完整代码：<a href="https://www.sigmameow.com/blog/files/16/show_mayavi.py" download="show_mayavi.py">show_mayavi.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">mgrid</span>
+<span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Instance</span>
+<span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span>
+<span class="kn">from</span> <span class="nn">mayavi.tools.mlab_scene_model</span> <span class="kn">import</span> <span class="n">MlabSceneModel</span>  <span class="c1"># Mlab的容器，可以让我们在TraitsUI的视图中使用Mayavi的Scene</span>
+<span class="kn">from</span> <span class="nn">mayavi.core.ui.mayavi_scene</span> <span class="kn">import</span> <span class="n">MayaviScene</span>   <span class="c1"># 提供了Mayavi视图的工具栏、相机视角交互、坐标轴等等</span>
+<span class="kn">from</span> <span class="nn">tvtk.pyface.scene_editor</span> <span class="kn">import</span> <span class="n">SceneEditor</span>  <span class="c1"># 基于SceneModel实例的TraitsUI编辑器</span>
+
+<span class="c1"># 1. 建立从HasTraits继承的类</span>
+<span class="k">class</span> <span class="nc">ActorViewer</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="c1"># 场景模型</span>
+    <span class="n">scene</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="n">MlabSceneModel</span><span class="p">,</span> <span class="p">())</span>  <span class="c1"># 返回一个MlabSceneModel的实例</span>
+    <span class="c1"># 建立View视图</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;scene&#39;</span><span class="p">,</span>
+                     <span class="n">editor</span><span class="o">=</span><span class="n">SceneEditor</span><span class="p">(</span><span class="n">scene_class</span><span class="o">=</span><span class="n">MayaviScene</span><span class="p">),</span>
+                     <span class="n">show_label</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                     <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                     <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                     <span class="n">width</span><span class="o">=</span><span class="mi">500</span>
+                     <span class="p">),</span>
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;场景查看器&#39;</span><span class="p">,</span>
+                <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+                <span class="p">)</span>
+
+    <span class="c1"># 定义初始化方法__init__，生成数据</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">traits</span><span class="p">):</span>
+        <span class="n">HasTraits</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">traits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generate_data</span><span class="p">()</span>  <span class="c1"># 生成数据并绘制</span>
+
+    <span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 准备数据</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">mgrid</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">100j</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">100j</span><span class="p">]</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">X</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">/</span> <span class="n">R</span>
+        <span class="c1"># 显示数据</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">mlab</span><span class="o">.</span><span class="n">surf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;cool&#39;</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">ActorViewer</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img class="img-fluid" src="img/16/a97e2286-4882-45c6-88c6-58808ffa256a.jpg"/>  </p>
+<h1 class="section-heading h3" id="32-mayavi">3.2 基于交互控制的Mayavi窗口</h3>
+<p>类似于上面的案例，我们这个程序的主要步骤有：  </p>
+<ol>
+<li>定义从HasTraits继承的类  <ol>
+<li>定义窗口中的变量  </li>
+<li>定义监听函数、更新视图绘制  </li>
+<li>定义视图的布局  </li>
+</ol>
+</li>
+<li>调用configure_traits()  </li>
+</ol>
+<p><strong>1.1 定义窗口变量</strong>的部分代码：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Instance</span>
+<span class="kn">from</span> <span class="nn">mayavi.core.ui.api</span> <span class="kn">import</span> <span class="n">MlabSceneModel</span>
+
+<span class="n">clas</span> <span class="n">MyModel</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="c1"># 1.1 定义窗口中的变量</span>
+    <span class="n">n_meridional</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>   <span class="c1"># 滑动条</span>
+    <span class="n">n_longitudinal</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="o">-</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>   <span class="c1"># 滑动条</span>
+    <span class="n">scene</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="n">MlabSceneModel</span><span class="p">,</span> <span class="p">())</span>   <span class="c1"># 场景模型实例</span>
+</pre></div>
+
+
+<p><strong>1.2 定义监听函数，更新视图绘制</strong>的部分代码：  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">on_trait_change</span>
+<span class="kn">from</span> <span class="nn">mayavi.core.api</span> <span class="kn">import</span> <span class="n">PipelineBase</span>
+<span class="c1"># class xxxx</span>
+    <span class="n">plot</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="n">PipelineBase</span><span class="p">)</span>   <span class="c1"># 获得管线实例</span>
+
+    <span class="c1"># 当滑动条参数改变(n_*变了)，或场景被激活(scene.activated)，更新图形</span>
+    <span class="nd">@on_trait_change</span><span class="p">(</span><span class="s1">&#39;n_meridional, n_longitudinal, scene.activated&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">update_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 生成数据</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">curve</span><span class="p">(</span><span class="n">n_meridional</span><span class="p">,</span> <span class="n">n_longitudinal</span><span class="p">)</span>   <span class="c1"># 简化表达</span>
+        <span class="c1"># 更新视图</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>   <span class="c1"># 如果是刚刚启动，就用plot这个管线实例接管三维场景</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">mlab</span><span class="o">.</span><span class="n">plot3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tube_radius</span><span class="o">=</span><span class="mf">0.025</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;Spectral&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>   <span class="c1"># 否则直接用plot来控制三维场景，重新绘制</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">mlab_source</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># 生成数据的函数</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
+
+<span class="n">dphi</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mi">300</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dphi</span><span class="p">,</span> <span class="n">dphi</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">curve</span><span class="p">(</span><span class="n">n_mer</span><span class="p">,</span> <span class="n">n_long</span><span class="p">):</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">n_mer</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">n_long</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">/</span> <span class="n">n_mer</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">n_long</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">/</span> <span class="n">n_mer</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">n_long</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">/</span> <span class="n">n_mer</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span>
+</pre></div>
+
+
+<p><strong>1.3 建立视图布局</strong><br />
+<img class="img-fluid" src="img/16/604664265.png"/>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">mayavi.core.ui.api</span> <span class="kn">import</span> <span class="n">MayaviScene</span><span class="p">,</span> <span class="n">SceneEditor</span>
+<span class="c1"># class xxxx</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;scene&#39;</span><span class="p">,</span>
+                     <span class="n">editor</span><span class="o">=</span><span class="n">SceneEditor</span><span class="p">(</span><span class="n">scene_class</span><span class="o">=</span><span class="n">MayaviScene</span><span class="p">),</span>
+                     <span class="n">show_label</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                     <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                     <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                     <span class="n">width</span><span class="o">=</span><span class="mi">500</span>
+                     <span class="p">),</span>
+                <span class="n">Group</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s1">&#39;n_meridional&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;经度&#39;</span><span class="p">),</span>
+                      <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;n_longitudinal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;纬度&#39;</span><span class="p">)),</span>
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;场景查看器&#39;</span><span class="p">,</span>
+                <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+                <span class="p">)</span>
+</pre></div>
+
+
+<p>完整代码：<a href="https://www.sigmameow.com/blog/files/16/edit_mayavi.py" download="edit_mayavi.py">edit_mayavi.py</a>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">HasTraits</span><span class="p">,</span> <span class="n">Instance</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">on_trait_change</span>
+<span class="kn">from</span> <span class="nn">traitsui.api</span> <span class="kn">import</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">mayavi.core.api</span> <span class="kn">import</span> <span class="n">PipelineBase</span>
+<span class="kn">from</span> <span class="nn">mayavi.core.ui.api</span> <span class="kn">import</span> <span class="n">MayaviScene</span><span class="p">,</span> <span class="n">MlabSceneModel</span><span class="p">,</span> <span class="n">SceneEditor</span>    <span class="c1"># 上一个例子的那些导入，其实都在API里面</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
+
+<span class="n">dphi</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">300.</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">dphi</span><span class="p">,</span> <span class="n">dphi</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">curve</span><span class="p">(</span><span class="n">n_mer</span><span class="p">,</span> <span class="n">n_long</span><span class="p">):</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">phi</span><span class="o">*</span><span class="n">n_mer</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">n_long</span> <span class="o">*</span> <span class="n">mu</span><span class="o">/</span><span class="n">n_mer</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">n_long</span> <span class="o">*</span> <span class="n">mu</span><span class="o">/</span><span class="n">n_mer</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">n_long</span><span class="o">*</span><span class="n">mu</span><span class="o">/</span><span class="n">n_mer</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span>
+
+<span class="c1"># 1. 建立从HasTraits继承的类</span>
+<span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">HasTraits</span><span class="p">):</span>
+    <span class="n">n_meridional</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">n_longitudinal</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+    <span class="c1"># 场景模型</span>
+    <span class="n">scene</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="n">MlabSceneModel</span><span class="p">,</span> <span class="p">())</span>  <span class="c1"># 返回一个MlabSceneModel的实例</span>
+    <span class="c1"># 管线实例</span>
+    <span class="n">plot</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="n">PipelineBase</span><span class="p">)</span>
+
+    <span class="c1">#当场景被激活，或者参数发生改变，更新图形</span>
+    <span class="nd">@on_trait_change</span><span class="p">(</span><span class="s1">&#39;n_meridional,n_longitudinal,scene.activated&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">update_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">curve</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_meridional</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_longitudinal</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span><span class="c1">#如果plot未绘制则生成plot3d</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">mlab</span><span class="o">.</span><span class="n">plot3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span>
+                        <span class="n">tube_radius</span><span class="o">=</span><span class="mf">0.025</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;Spectral&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span><span class="c1">#如果数据有变化，将数据更新即重新赋值</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">mlab_source</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># 建立View视图</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;scene&#39;</span><span class="p">,</span>
+                     <span class="n">editor</span><span class="o">=</span><span class="n">SceneEditor</span><span class="p">(</span><span class="n">scene_class</span><span class="o">=</span><span class="n">MayaviScene</span><span class="p">),</span>
+                     <span class="n">show_label</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                     <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                     <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                     <span class="n">width</span><span class="o">=</span><span class="mi">500</span>
+                     <span class="p">),</span>
+                <span class="n">Group</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="s1">&#39;n_meridional&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;经度方向&#39;</span><span class="p">),</span>
+                      <span class="n">Item</span><span class="p">(</span><span class="s1">&#39;n_longitudinal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;纬度方向&#39;</span><span class="p">)),</span>
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;场景查看器&#39;</span><span class="p">,</span>
+                <span class="n">resizable</span><span class="o">=</span><span class="bp">True</span>
+                <span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">MyModel</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">configure_traits</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img class="img-fluid" src="img/16/edit_mayavi.gif"/>  </p>
