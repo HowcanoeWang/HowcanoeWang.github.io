@@ -137,7 +137,7 @@ def ziw2html(ziw_path, p_id):
                 else:   # common sentence
                     md += f'{l}  \n'
 
-    md_ext = markdown.Markdown(extensions=['extra', 'codehilite', 'tables', 'toc'])
+    md_ext = markdown.Markdown(extensions=['extra', 'codehilite', 'tables', 'toc', 'markdown_checklist.extension'])
     html = md_ext.convert(md)
 
     html = html.replace('<table>',
