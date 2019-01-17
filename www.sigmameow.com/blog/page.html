@@ -17,8 +17,55 @@
 	<link rel="stylesheet" href="../css/blog.css">
   <link rel="stylesheet" href="../css/codehilite.css">
 
+
   <!--  share.js -->
   <link rel="stylesheet" href="../css/share.min.css">
+  
+    <!-- latex formular extention-->
+    <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({
+      skipStartupTypeset: true,
+      "HTML-CSS": {
+          preferredFont: "TeX",
+          availableFonts: [
+              "STIX",
+              "TeX"
+          ],
+          linebreaks: {
+              automatic: true
+          },
+          EqnChunk: 10,
+          imageFont: null
+      },
+      SVG: { linebreaks: { automatic: true } },
+      tex2jax: {
+          inlineMath: [["$","$"],["\\\\(","\\\\)"]],
+          displayMath: [["$$","$$"],["\\[","\\]"]],
+          processEscapes: true },
+      TeX: {
+          equationNumbers: {
+              autoNumber: "AMS"
+          },
+          noUndefined: {
+              attributes: {
+                  mathcolor: "red",
+                  mathbackground: "#FFEEEE",
+                  mathsize: "90%"
+              }
+          },
+          Safe: {
+              allow: {
+                  URLs: "safe",
+                  classes: "safe",
+                  cssIDs: "safe",
+                  styles: "safe",
+                  fontsize: "all"
+              }
+          }
+      },
+      messageStyle: "none"
+    });</script>
+    <script type="text/javascript" charset="utf-8" src="./mathjax/MathJax.js?config=TeX-AMS-MML_SVG&amp;v=1.0.11"></script>
+    
 		
 	<!-- jQuery for html code reuse-->
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

@@ -1,0 +1,226 @@
+<div class="toc">
+<ul>
+<li><a href="#1-linearnonlinear">1. 数学基础：线性(linear)与非线性(nonlinear)方程</a></li>
+<li><a href="#2-r">2. R语言实践</a><ul>
+<li><a href="#21">2.1 函数(方程)的建立</a></li>
+<li><a href="#22-r">2.2 R的列表与数列生成</a><ul>
+<li><a href="#c">c()</a></li>
+<li><a href="#seq">seq()</a></li>
+<li><a href="#runif">runif()</a></li>
+</ul>
+</li>
+<li><a href="#23-r">2.3 R的简单绘图</a></li>
+<li><a href="#24-sortorder">2.4 排序sort()与order()</a></li>
+<li><a href="#25-varid">2.5 值的筛选var[id]</a></li>
+<li><a href="#26">2.6 课后习题</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 class="section-heading text-center" id="1-linearnonlinear">1. 数学基础：线性(linear)与非线性(nonlinear)方程</h1>
+<p>回归方程通常含有两部分：<strong>参数</strong>(parameters)和<strong>变量</strong>(perdictor variables), 参数常常就是我们用到的a,b,c,d等等，变量往往用X,Y,Z等等组成。通常上面的两个组合起来的，形如<script type="math/tex">参数\cdot变量(a\cdot X)</script>或者<script type="math/tex">变量^{参数}(x^b)</script>等等。如果一个组合中只有一个参数而没有变量，那么我们就叫这个为<strong>常数</strong>(constant)。  </p>
+<p>对于任何一个方程，如果我们说他是线性的，那么这个方程一定会满足这样的形式：  </p>
+<p>
+<script type="math/tex; mode=display">结果 = 常数 + 参数_1\cdot变量_1 + 参数_2\cdot变量_2 + ... + 参数_n\cdot变量_n</script>
+</p>
+<p>即：<br />
+<script type="math/tex; mode=display">f(X_1, X_2, ..., X_n) = a_0 + b_1\cdot X_1 + b_2\cdot X_2 + ... + b_n\cdot X_n</script>
+</p>
+<p>下面是一些线性方程的例子  </p>
+<ul>
+<li>(1) <script type="math/tex">f(X) = a + b\cdot X</script>
+</li>
+<li>(2) <script type="math/tex">f(X, Y) = a + b\cdot X + c\cdot Y</script>
+</li>
+<li>(3) <script type="math/tex">f(X, Y, Z) = a + b\cdot X + c\cdot Y + d\cdot Z</script>
+</li>
+</ul>
+<p>需要注意的是，对于下面这样的函数：<script type="math/tex">f(X) = a + b\cdot X + c\cdot X^2</script>
+</p>
+<p>虽然第三项<script type="math/tex">c\cdot X^2</script>带有一个指数(幂)，但是这个指数是已知的“2”，而不是未知的参数a,b,c，因此可以令<script type="math/tex">Y=X^2</script>(用一个无参数的变量代替令一个无参数的变量是可行的)，因此就能有转换成上面的方程(2), 只不过<script type="math/tex">Y=X^2</script>，因此这个函数也是线性的。  </p>
+<p>类似的，<script type="math/tex">f(X, Y) = a + b\cdot X + c\cdot Y + d\cdot X \cdot Y</script>，只要令<script type="math/tex">Z=X*Y</script>(无参变量替换，只要没有参数，一个变量能替换好几个变量)，就会变成形如上面的方程(3)，因此也是线性的。  </p>
+<p>但是这个函数：<script type="math/tex">f(X) = a + X^b</script>
+<br />
+他就不是线性的，因为没办法用一个无参变量<script type="math/tex">Y</script>，去替代变量+参数的组合<script type="math/tex">X^b</script>
+</p>
+<p>参考链接：  </p>
+<blockquote class="blockquote">
+<p><a href="http://blog.minitab.com/blog/adventures-in-statistics-2/what-is-the-difference-between-linear-and-nonlinear-equations-in-regression-analysis">http://blog.minitab.com/blog/adventures-in-statistics-2/what-is-the-difference-between-linear-and-nonlinear-equations-in-regression-analysis</a>  </p>
+</blockquote>
+<hr />
+<h1 class="section-heading text-center" id="2-r">2. R语言实践</h1>
+<h1 class="section-heading h3" id="21">2.1 函数(方程)的建立</h3>
+<p>新建一个文件<strong>myline.R</strong>，里面写一个方程：<script type="math/tex">Y = a + b*X</script>，在R里面应该这么操作，首先要告诉它，这个方程(函数)的名字是<code>my.line</code>，然后要用<code>function</code>来说明这是一个函数，并且把变量与参数都写在<code>function()</code>的括号里，用大括号{}把内容包起来：  </p>
+<div class="codehilite"><pre><span></span>my.line <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>X<span class="p">,</span>a<span class="p">,</span>b<span class="p">){}</span>
+</pre></div>
+
+
+<p><code>&lt;-</code>是赋值符号，相当于把后面的东西和前面的东西“连接”上，也可用<code>=</code>号，但在R里面，<code>&lt;-</code>和<code>=</code>有着细微的不同，为了避免奇怪的报错，推荐使用<code>&lt;-</code>进行赋值。  </p>
+<p>在函数内部{}里面，把我们的函数<script type="math/tex">Y = a + b * X</script>打进去即可，然后最后用<code>return()</code>来把Y输出出去。  </p>
+<div class="codehilite"><pre><span></span>my.line <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>X<span class="p">,</span> a<span class="p">,</span> b<span class="p">){</span>
+    Y <span class="o">&lt;-</span> a <span class="o">+</span> b <span class="o">*</span> X
+    <span class="kr">return</span><span class="p">(</span>Y<span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>R语言里面的函数，主要结构如下：  </p>
+<div class="codehilite"><pre><span></span>函数名 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>输入变量<span class="p">){</span>
+    输入变量的一些运算，出来运算结果
+    <span class="kr">return</span><span class="p">(</span>输出结果<span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>由于函数是写在一个R文件里面的，打开一个R语言的会话(Session)想要用上那个R文件，还要把R文件引入。  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> <span class="kn">source</span><span class="p">(</span><span class="s">&#39;myline.R&#39;</span><span class="p">)</span>   <span class="c1"># 这里是文件路径，如果文件不在当前路径下，需要把完整的路径输入如C:\xxxx\myline.R</span>
+</pre></div>
+
+
+<p>然后通过<code>ls()</code>函数来查看目前可以用的变量名和函数名  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> <span class="kp">ls</span><span class="p">()</span>
+<span class="s">&#39;my.line&#39;</span>
+</pre></div>
+
+
+<p>然后调用上面写好的函数来计算：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> my.line<span class="p">(</span>X<span class="o">=</span><span class="m">10</span><span class="p">,</span> a<span class="o">=</span><span class="m">2</span><span class="p">,</span> b<span class="o">=</span><span class="m">6</span><span class="p">)</span>   <span class="c1"># Y = a + b*X</span>
+<span class="m">62</span>
+<span class="o">&gt;</span> my.line<span class="p">(</span>X<span class="o">=</span><span class="m">11</span><span class="p">,</span> a<span class="o">=</span><span class="m">2</span><span class="p">,</span> b<span class="o">=</span><span class="m">6</span><span class="p">)</span>
+<span class="m">68</span>
+</pre></div>
+
+
+<h1 class="section-heading h3" id="22-r">2.2 R的列表与数列生成</h3>
+<p>如果这时候有个问题，要计算X从1一直到100的结果，把上面的代码改上100遍这样的事情还是不要做了，这时就要用R的列表(list)功能了  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> X <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">)</span>
+<span class="o">&gt;</span> my.line<span class="p">(</span>X<span class="o">=</span>X<span class="p">,</span> a<span class="o">=</span><span class="m">2</span><span class="p">,</span> b<span class="o">=</span><span class="m">6</span><span class="p">)</span>
+<span class="m">8</span> <span class="m">14</span> <span class="m">20</span> <span class="m">26</span>
+</pre></div>
+
+
+<h1 class="section-heading h5" id="c">c()</h5>
+<p>上面的<code>c()</code>是combine的缩写，他会把括号里面的所有东西组合在一起成为一个列表(list or vector)，这样就避免了把代码输100遍，但是仍然不可能从1一直写到100，于是就有一个生成器：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> X <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span>
+<span class="o">&gt;</span> X
+<span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span> <span class="m">10</span> <span class="m">11</span> <span class="m">12</span> <span class="m">13</span> <span class="m">14</span> <span class="m">15</span> <span class="m">16</span> <span class="m">17</span> <span class="m">18</span> <span class="m">19</span> <span class="m">20</span> <span class="m">21</span> <span class="m">22</span> <span class="m">23</span> <span class="m">24</span> <span class="m">25</span> <span class="m">26</span> <span class="m">27</span> <span class="m">28</span> <span class="m">29</span> <span class="m">30</span> <span class="m">31</span> <span class="m">32</span> <span class="m">33</span> <span class="m">34</span> <span class="m">35</span> <span class="m">36</span> <span class="m">37</span> <span class="m">38</span> <span class="m">39</span> <span class="m">40</span> <span class="m">41</span> <span class="m">42</span> <span class="m">43</span> <span class="m">44</span> <span class="m">45</span> <span class="m">46</span> <span class="m">47</span> <span class="m">48</span> <span class="m">49</span> <span class="m">50</span> <span class="m">51</span> <span class="m">52</span> <span class="m">53</span> <span class="m">54</span> <span class="m">55</span> <span class="m">56</span> <span class="m">57</span> <span class="m">58</span> <span class="m">59</span> <span class="m">60</span> <span class="m">61</span> <span class="m">62</span> <span class="m">63</span> <span class="m">64</span> <span class="m">65</span> <span class="m">66</span> <span class="m">67</span> <span class="m">68</span> <span class="m">69</span> <span class="m">70</span> <span class="m">71</span> <span class="m">72</span> <span class="m">73</span> <span class="m">74</span> <span class="m">75</span> <span class="m">76</span> <span class="m">77</span> <span class="m">78</span> <span class="m">79</span> <span class="m">80</span> <span class="m">81</span> <span class="m">82</span> <span class="m">83</span> <span class="m">84</span> <span class="m">85</span> <span class="m">86</span> <span class="m">87</span> <span class="m">88</span> <span class="m">89</span> <span class="m">90</span> <span class="m">91</span> <span class="m">92</span> <span class="m">93</span> <span class="m">94</span> <span class="m">95</span> <span class="m">96</span> <span class="m">97</span> <span class="m">98</span> <span class="m">99</span> <span class="m">100</span>
+</pre></div>
+
+
+<h1 class="section-heading h5" id="seq">seq()</h5>
+<p>如果想生成一个间隔为2的1-100的，就要用到<code>seq()</code>（sequence）这个函数，只需要：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> X <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">100</span><span class="p">,</span> by<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="o">&gt;</span> X
+<span class="m">1</span> <span class="m">3</span> <span class="m">5</span> <span class="m">7</span> <span class="m">9</span> <span class="m">11</span> <span class="m">13</span> <span class="m">15</span> <span class="m">17</span> <span class="m">19</span> <span class="m">21</span> <span class="m">23</span> <span class="m">25</span> <span class="m">27</span> <span class="m">29</span> <span class="m">31</span> <span class="m">33</span> <span class="m">35</span> <span class="m">37</span> <span class="m">39</span> <span class="m">41</span> <span class="m">43</span> <span class="m">45</span> <span class="m">47</span> <span class="m">49</span> <span class="m">51</span> <span class="m">53</span> <span class="m">55</span> <span class="m">57</span> <span class="m">59</span> <span class="m">61</span> <span class="m">63</span> <span class="m">65</span> <span class="m">67</span> <span class="m">69</span> <span class="m">71</span> <span class="m">73</span> <span class="m">75</span> <span class="m">77</span> <span class="m">79</span> <span class="m">81</span> <span class="m">83</span> <span class="m">85</span> <span class="m">87</span> <span class="m">89</span> <span class="m">91</span> <span class="m">93</span> <span class="m">95</span> <span class="m">97</span> <span class="m">99</span>
+</pre></div>
+
+
+<p>如果想把1到100五等分，最后生成一个5个值的列表，那么：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> X <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> length.out<span class="o">=</span><span class="m">5</span><span class="p">)</span>
+<span class="o">&gt;</span> X
+<span class="m">1</span> <span class="m">25.75</span> <span class="m">50.5</span> <span class="m">75.25</span> <span class="m">100</span>
+</pre></div>
+
+
+<h1 class="section-heading h5" id="runif">runif()</h5>
+<p>如果想生成一个在0-10之间均匀分布的5个随机数，那么就可以用<code>runif(num, min, max)</code>函数:  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> X <span class="o">&lt;-</span> runif<span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>   <span class="c1"># 5个，最小值为0，最大值为10</span>
+<span class="o">&gt;</span> X
+<span class="m">0.775427292101085</span> <span class="m">9.36623933725059</span> <span class="m">4.94149355450645</span> <span class="m">8.90033767325804</span> <span class="m">4.09801931353286</span>
+</pre></div>
+
+
+<p>文档见：  </p>
+<blockquote class="blockquote">
+<p><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Uniform.html">https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Uniform.html</a>  </p>
+</blockquote>
+<h1 class="section-heading h3" id="23-r">2.3 R的简单绘图</h3>
+<p>基于上面的基础，我们就能画出X和Y的图像了：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> X <span class="o">&lt;-</span> runif<span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+<span class="o">&gt;</span> Y <span class="o">&lt;-</span> my.line<span class="p">(</span>X<span class="o">=</span>X<span class="p">,</span> a<span class="o">=</span><span class="m">2</span><span class="p">,</span> b<span class="o">=</span><span class="m">6</span><span class="p">)</span>
+<span class="o">&gt;</span> plot<span class="p">(</span>X<span class="p">,</span> Y<span class="p">)</span>
+</pre></div>
+
+
+<p><img class="img-fluid" src="data:image/png;base64,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%0AAABJRU5ErkJggg=="/><br />
+可是这是散点图，如果想变成一条直线：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> plot<span class="p">(</span>X<span class="p">,</span> Y<span class="p">,</span> type<span class="o">=</span><span class="s">&#39;l&#39;</span><span class="p">)</span>  <span class="c1"># &#39;l&#39; for line</span>
+</pre></div>
+
+
+<p><img class="img-fluid" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAMAAADKOT/pAAAAMFBMVEUAAABNTU1oaGh8fHyM%0AjIyampqnp6eysrK9vb3Hx8fQ0NDZ2dnh4eHp6enw8PD////QFLu4AAAACXBIWXMAABJ0AAAS%0AdAHeZh94AAAXrklEQVR4nO3da0PquBqA0VYQb4D//9+O4pXZigXepm+StT7M8XxwJ03ybKFl%0AxuEZuNqw9ASgBUKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKC%0AAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKC%0AAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKC%0AAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKC%0AAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKC%0AAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAEKCAAVCGqAyF5zy+HAWGAIiCQkCCAkCFA3p6W59%0AeDm53jzNNQQsomBI+5tvb81WswwBCykY0mYYH7aHr3aP47CZYwhYSMGQxmH7+fV2GOcYAhZS%0AMKSjW+2n77sLicr4iQQByr5HetwdvvIeidaUvP29+nbX7mY/yxCwjLLPkTaH50jj+s5zJNri%0Akw0QIE9IV36UFpZUMqT95vVW3d3NMKweZhoCllEwpN348pNmP/qIEA0qGNLtsN6//ON299LU%0ArdvfNKXoJxv27/94eZXngSxNKf0RoXH49n/Ch4CFFH1pt31+vnv7nND+9JskIVGZgiFth3Gz%0AfV6PLyU93gyPcwwBCyl5+/tx/HpQdDfPELCMsg9kH24P/5bs+m432xAwn98PZp5PNhQeAs52%0A4lwKCSY6dSyFBNNEP7EREh3645PUQoIJ/jqSQoK//XkihQR/+vtACgn+MuE8Cgn+MOU4CglO%0Am3QahQQnTTuMQoJTJp5FIcHvJv8HrYQEv5p+EIUEvznjHAoJfnHOMRQS/OysUygk+NF5h1BI%0A8JMzz6CQ4AfnHkEhwT/O/30oQoL/K1OFkGjbJcdPSHDsotMnJDhy2eETEnx34dkTEnxz8S8t%0A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%0AZ6h46j/IthO7YZVtSrfDdukp/Ov99W+uus+TbJuvsx9WS0/h2GrYZQvpZni+Gw8vhBO5e39p%0Ad7f0RC6XbJuvcz88Lj2FI3fDQ7ofksOwPryvX3oex+5f7zaM90tP4wrJtvkqu3G99BSObId1%0AvlebL+d1+7y/TfaX/93hrl2uOZ0n2TZfYz8me2F383qPOV9Ir++RdsPN0hP57v71pd1L3RX/%0ASEq2zddYpTobr2/rX19o5gvp+/8kcTO8vmfb56r7PKnW8xq7m1Wyx3nX/LL5+aR8UJCy7vNU%0APPUjj9lu2GUN6e7wc3KXa7nebn8ne7h1nlSbfLlkB+ObXBkd3h3tX9+OPCw9ke82w+vn7Da5%0APm5xnmTbfKnbjH/5H6Sb0tsNsmR/76wyTuos2bb5QilfRR3km9LjahjT/dV/+PT30pO4Rrpt%0AhhoJCQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQII%0ACQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIICQIIqUa3778lcjXc%0ALjwT3gmpSuNw//LP+5p/DXhjhFSlp2HYPe/H4WnpifBOSHV6fXG39sIuDyFVahzuvLBLREiV%0Aenlx54VdIkKq1a0XdpkIqVajV3aZCKlSt4N7DZkIqU5PLz+PvElKREh1GocHz2MzEVKVXl7Y%0APfuEUCZCqtHTMOxf/mfnxV0aQqrR20ftfNguESFV6OPD317c5SEkCCAkCCAkCCAkCCAkCCAk%0ACCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAkCCAk%0ACCAkCCAkCCAkCCAkCCAkCCAkCCAkCPAfJYl6K9i5hxsAAAAASUVORK5CYII="/>  </p>
+<h1 class="section-heading h3" id="24-sortorder">2.4 排序sort()与order()</h3>
+<p>首先生成两个随机数列x,y  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> x <span class="o">&lt;-</span> runif<span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">)</span>
+<span class="o">&gt;</span> y <span class="o">&lt;-</span> runif<span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="kp">print</span><span class="p">(</span>x<span class="p">)</span>
+<span class="o">&gt;</span> <span class="kp">print</span><span class="p">(</span>y<span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span>  <span class="m">8.04841</span> <span class="m">29.94738</span> <span class="m">72.83490</span> <span class="m">77.57098</span> <span class="m">32.75849</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">17.79475</span> <span class="m">52.13462</span> <span class="m">11.80097</span> <span class="m">84.83392</span> <span class="m">98.88786</span>
+</pre></div>
+
+
+<p>针对上面x，y的排序有两种，一种是x, y分开，各自从大到小排列；另一种是把x，y看成一个组合（一个点的x，y坐标），排序的过程中，不可以把这个组合打乱（点的坐标不可以改变）  </p>
+<p>如果只是单纯的分开各自排列，用sort即可达成目的：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> <span class="kp">sort</span><span class="p">(</span>x<span class="p">)</span>
+<span class="m">8.04840954951942</span> <span class="m">29.947384330444</span> <span class="m">32.7584934188053</span> <span class="m">72.834899649024</span> <span class="m">77.5709801353514</span>
+<span class="o">&gt;</span> <span class="kp">sort</span><span class="p">(</span>y<span class="p">)</span>
+<span class="m">11.800970742479</span> <span class="m">17.794747906737</span> <span class="m">52.1346204681322</span> <span class="m">84.8339184885845</span> <span class="m">98.8878561416641</span>
+</pre></div>
+
+
+<p>但如果把x，y作为一个点坐标的组合，这么排序点的坐标就乱了，所以组合排序应该用order()，这个函数会返回一个点的顺序：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> <span class="kp">order</span><span class="p">(</span>x<span class="p">)</span>
+<span class="m">1</span> <span class="m">2</span> <span class="m">5</span> <span class="m">3</span> <span class="m">4</span>
+</pre></div>
+
+
+<p>来表明，x序列中，第一个值排第1位，第二个值排第2位，第三个值排第5位等，然后只要把这个排位应用到x上面，即可：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> id <span class="o">=</span> <span class="kp">order</span><span class="p">(</span>x<span class="p">)</span>
+<span class="o">&gt;</span> x<span class="p">[</span>id<span class="p">]</span>
+<span class="m">8.04840954951942</span> <span class="m">29.947384330444</span> <span class="m">32.7584934188053</span> <span class="m">72.834899649024</span> <span class="m">77.5709801353514</span>
+<span class="o">&gt;</span> y<span class="p">[</span>id<span class="p">]</span>
+<span class="m">17.794747906737</span> <span class="m">52.1346204681322</span> <span class="m">98.8878561416641</span> <span class="m">11.800970742479</span> <span class="m">84.8339184885845</span>
+</pre></div>
+
+
+<p>这样就做到了把x，y这个组合，按照x升序来进行排列  </p>
+<h1 class="section-heading h3" id="25-varid">2.5 值的筛选var[id]</h3>
+<p>上面的id是一个排列顺序，通过应用这个id可以把值重新排列，同样地，如果这个id是一个[选择，不选择]这样的列表的话，就能把想要的值给筛选出来  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> id <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">,</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">TRUE</span><span class="p">)</span>   <span class="c1"># TRUE是选上，FALSE是不选，把第一个和最后一个选出来</span>
+<span class="o">&gt;</span> x<span class="p">[</span>id<span class="p">]</span>
+<span class="m">8.04840954951942</span> <span class="m">32.7584934188053</span>
+</pre></div>
+
+
+<p>那么如何把y的值&gt;20的点选出来？只要应用  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> id <span class="o">&lt;-</span> y <span class="o">&gt;</span> <span class="m">20</span>
+<span class="o">&gt;</span> id
+<span class="kc">FALSE</span> <span class="kc">TRUE</span> <span class="kc">FALSE</span> <span class="kc">TRUE</span> <span class="kc">TRUE</span>
+</pre></div>
+
+
+<p>可以看到，返回的id值告诉我们，第2个，第4个和第5个是True，即大于20，然后应用一下：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> x<span class="p">[</span>id<span class="p">]</span>
+<span class="m">29.947384330444</span> <span class="m">77.5709801353514</span> <span class="m">32.7584934188053</span>
+</pre></div>
+
+
+<p>就完成了筛选的目的。<br />
+当然也可以把上面的组合到一起(去掉id的过渡作用)，也能达到同样的效果：  </p>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> x<span class="p">[</span>y<span class="o">&gt;</span><span class="m">20</span><span class="p">]</span>
+<span class="m">29.947384330444</span> <span class="m">77.5709801353514</span> <span class="m">32.7584934188053</span>
+</pre></div>
+
+
+<h1 class="section-heading h3" id="26">2.6 课后习题</h3>
+<p>上面提到的公式，都是要手动把代码写好  </p>
+<div class="codehilite"><pre><span></span>my.line <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>X<span class="p">,</span> a<span class="p">,</span> b<span class="p">){</span>
+    Y <span class="o">&lt;-</span> a <span class="o">+</span> b <span class="o">*</span> X
+    <span class="kr">return</span><span class="p">(</span>Y<span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>有没有什么办法，能写出来一个通用的公式？可以任意数量的参数和变量，以及任意的方程形式？  </p>

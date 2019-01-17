@@ -4,7 +4,7 @@ var section = {
 	/*=================*/
 	"读书杂记":[4,12,2,0,5,1,17],
 	/*-----------------*/
-	"文学小说":[0,1,5],
+	"文学小说":[20,0,1,5],
 	"歌戏影视":[4],
 	"奇技赢巧":[2,12,17,18],
 	/*=================*/
@@ -14,7 +14,7 @@ var section = {
   "Py三维库":[14,13,15,16],
 	"科研作图":[],
 	"数据处理":[],
-	"统计分析":[],
+	"统计分析":[19],
   "论文写作":[],
 	/*=================*/
 	"兴趣爱好":[9,11],
@@ -200,5 +200,23 @@ var jsdb = [
 "date":"2019.01.06",
 "img":"img/page-heading/blog-bg.jpg",
 "recommend":[17]
+},
+{"id":"19",
+"title":"第一课：线性与非线性方程",
+"subtitle":"课程中文笔记，主要内容为线性与非线性方程的定义，以及R语言基础函数、排序和绘图简介<br><span class='badge badge-light badge-pill'>MatchACurve</span>",
+"author":"浩瀚猫",
+"word":"5.3K",
+"date":"2019.01.17",
+"img":"img/page-heading/blog-bg.jpg",
+"recommend":[12]
+},
+{"id":"20",
+"title":"排异游戏",
+"subtitle":"总以为排除异己是自我实现的方式，殊不知对于系统，你本身就是一个需要排除的异类<br><span class='badge badge-light badge-pill'>梦境记录</span>",
+"author":"浩瀚猫",
+"word":"915",
+"date":"2019.01.17",
+"img":"img/page-heading/blog-bg.jpg",
+"recommend":[4,0,1]
 }
 ];

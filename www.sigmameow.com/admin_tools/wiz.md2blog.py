@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 import os
-import markdown
 import zipfile
 import datetime
 import shutil
 import pickle
 import time
 import re
+import markdown
 from bs4 import BeautifulSoup as BS
 from bs4 import NavigableString
 from pandas import DataFrame, read_csv
@@ -137,7 +137,10 @@ def ziw2html(ziw_path, p_id):
                 else:   # common sentence
                     md += f'{l}  \n'
 
-    md_ext = markdown.Markdown(extensions=['extra', 'codehilite', 'tables', 'toc', 'markdown_checklist.extension'])
+    extension_configs = {'mdx_math': {'enable_dollar_delimiter': True}}
+    md_ext = markdown.Markdown(extensions=['extra', 'codehilite', 'tables', 'toc', 'markdown_checklist.extension', 'mdx_math'],
+                               extension_configs=extension_configs)
+
     html = md_ext.convert(md)
 
     html = html.replace('<table>',
