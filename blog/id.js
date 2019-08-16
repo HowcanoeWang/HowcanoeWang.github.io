@@ -214,8 +214,8 @@ var jsdb = [
 "title":"排异游戏",
 "subtitle":"总以为排除异己是自我实现的方式，殊不知对于系统，你本身就是一个需要排除的异类<br><span class='badge badge-light badge-pill'>梦境记录</span>",
 "author":"浩瀚猫",
-"word":"915",
-"date":"2019.01.17",
+"word":"2.0K",
+"date":"2019.01.20",
 "img":"img/page-heading/blog-bg.jpg",
 "recommend":[4,0,1]
 }

@@ -187,7 +187,7 @@ def replace_download_url(md, p_id):
     return urls
 
 def reference_dict(*args):
-    if mode == 'test1':
+    if mode == 'test':
         csv_path = 'test/ref.csv'
     else:
         csv_path = 'ref.csv'
