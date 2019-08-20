@@ -21,20 +21,8 @@
     <link rel="stylesheet" href="../css/share.min.css">
     
     <!-- gittalk comments -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-    <script type="text/javascript">
-    var title = location.pathname;//.substr(-1, 50);
-    var gitalk = new Gitalk({
-        clientID: '3c878c32ef76c778d504',
-        clientSecret: '588c832b887ea6136f4ec6b3ad7380066a829c87',
-        repo: 'HowcanoeWang.github.io',
-        owner: 'HowcanoeWang',
-        admin: ['HowcanoeWang'],
-        id: title,
-        distractionFreeMode: false
-    })
-    </script>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
   
     <!-- latex formular extention-->
     <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({
@@ -224,10 +212,20 @@
     </article>
   
     <!-- comments -->
-    <div class="container">
-		<hr>
-        <div id="gitalk-container"></div>
-	</div>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var title = location.pathname;//.substr(-1, 50);
+        var gitalk = new Gitalk({
+            clientID: '3c878c32ef76c778d504',
+            clientSecret: '588c832b887ea6136f4ec6b3ad7380066a829c87',
+            repo: 'HowcanoeWang.github.io',
+            owner: 'HowcanoeWang',
+            admin: ['HowcanoeWang'],
+            id: title,
+            distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+    </script>
 	
 	<!-- recommends -->
 	<div class="container">
