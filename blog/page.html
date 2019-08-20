@@ -15,11 +15,26 @@
 	<!-- Custom styles for this page -->
 	<link rel="stylesheet" href="../css/index.css">
 	<link rel="stylesheet" href="../css/blog.css">
-  <link rel="stylesheet" href="../css/codehilite.css">
+    <link rel="stylesheet" href="../css/codehilite.css">
 
-
-  <!--  share.js -->
-  <link rel="stylesheet" href="../css/share.min.css">
+    <!--  share.js -->
+    <link rel="stylesheet" href="../css/share.min.css">
+    
+    <!-- gittalk comments -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script type="text/javascript">
+    var title = location.pathname;//.substr(-1, 50);
+    var gitalk = new Gitalk({
+        clientID: '3c878c32ef76c778d504',
+        clientSecret: '588c832b887ea6136f4ec6b3ad7380066a829c87',
+        repo: 'HowcanoeWang.github.io',
+        owner: 'HowcanoeWang',
+        admin: ['HowcanoeWang'],
+        id: title,
+        distractionFreeMode: false
+    })
+    </script>
   
     <!-- latex formular extention-->
     <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({
@@ -75,17 +90,17 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.min.js"></script> 
 	<script> var $jq182$ = jQuery.noConflict(true); </script>
   
-  <script type="text/javascript">
-    window.onscroll = function() {scrollFunction()};
+    <script type="text/javascript">
+      window.onscroll = function() {scrollFunction()};
 
-    function scrollFunction() {
-        if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
-            document.getElementById("myBtn").style.display = "block";
-        } else {
-            document.getElementById("myBtn").style.display = "none";
-        }
-    }
-  </script>
+      function scrollFunction() {
+          if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
+              document.getElementById("myBtn").style.display = "block";
+          } else {
+              document.getElementById("myBtn").style.display = "none";
+          }
+      }
+    </script>
 	
 	<!-- load json database -->
 	<script type="text/javascript" src="id.js"></script> 
@@ -159,54 +174,60 @@
 	<!--end of Navigation bar-->
 	
 	<!-- Page Header -->
-  <header class="masthead" id="header-img">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 mx-auto">
-          <div class="post-heading">
-      <h1><script type="text/javascript">document.write(info.title)</script></h1>
-            <h5 class="subheading"><script type="text/javascript">document.write(info.subtitle)</script></h5>
-            <span class="meta">
-      <a href="#"><script type="text/javascript">document.write(info.author)</script></a> | 字数: <script type="text/javascript">document.write(info.word)</script> | 更新于:  
-      <script type="text/javascript">document.write(info.date)</script></span>
+    <header class="masthead" id="header-img">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 mx-auto">
+            <div class="post-heading">
+        <h1><script type="text/javascript">document.write(info.title)</script></h1>
+              <h5 class="subheading"><script type="text/javascript">document.write(info.subtitle)</script></h5>
+              <span class="meta">
+        <a href="#"><script type="text/javascript">document.write(info.author)</script></a> | 字数: <script type="text/javascript">document.write(info.word)</script> | 更新于:  
+        <script type="text/javascript">document.write(info.date)</script></span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </header>
-  
-  <a href="#header-img" class="btn btn-dark btn-sm to-top" id="myBtn">&nbsp;▲&nbsp;</a>
-	
-	<!-- Post Content -->
-  <article>
-    <div class="container py-3">
-      <div class="row">
-        <div class="col-md-2 mx-auto">
-          <!--side bar-->
-          <div id="left-sidebar" class="sidebar"></div>
-          <script>
-          $jq1102$(function(){
-            $jq1102$("#left-sidebar").load("sidebar.html");
-          });
-          </script>
-        </div>
-        <div class="col-md-10 mx-auto">
-          <!-- contents page -->
-          <div id="page-placeholder"></div>
-          <script>
-          $jq1102$(function(){
-            $jq1102$("#page-placeholder").load("p/"+info.id+".html");
-          });
-          </script>
-          <!-- contents page end-->
-          
-          <!-- share -->
-          <div class="social-share text-center"></div>
+    </header>
+    
+    <a href="#header-img" class="btn btn-dark btn-sm to-top" id="myBtn">&nbsp;▲&nbsp;</a>
+  	
+  	<!-- Post Content -->
+    <article>
+      <div class="container py-3">
+        <div class="row">
+          <div class="col-md-2 mx-auto">
+            <!--side bar-->
+            <div id="left-sidebar" class="sidebar"></div>
+            <script>
+            $jq1102$(function(){
+              $jq1102$("#left-sidebar").load("sidebar.html");
+            });
+            </script>
+          </div>
+          <div class="col-md-10 mx-auto">
+            <!-- contents page -->
+            <div id="page-placeholder"></div>
+            <script>
+            $jq1102$(function(){
+              $jq1102$("#page-placeholder").load("p/"+info.id+".html");
+            });
+            </script>
+            <!-- contents page end-->
+            
+            <!-- share -->
+            <div class="social-share text-center"></div>
+          </div>
         </div>
       </div>
-    </div>
-  </article>
+    </article>
+  
+    <!-- comments -->
+    <div class="container">
+		<hr>
+        <div id="gitalk-container"></div>
+	</div>
 	
 	<!-- recommends -->
 	<div class="container">
