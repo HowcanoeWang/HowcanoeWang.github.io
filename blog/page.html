@@ -212,16 +212,22 @@
     </article>
   
     <!-- comments -->
-    <div id="gitalk-container"></div>
+    <div class="container">
+		<div class="row">
+			<div class="col-md-10 mx-auto">
+				<div id="gitalk-container"></div>
+			</div>
+		</div>
+	</div>
+    
     <script type="text/javascript">
-        var title = location.pathname;//.substr(-1, 50);
         var gitalk = new Gitalk({
             clientID: '3c878c32ef76c778d504',
             clientSecret: '588c832b887ea6136f4ec6b3ad7380066a829c87',
             repo: 'HowcanoeWang.github.io',
             owner: 'HowcanoeWang',
             admin: ['HowcanoeWang'],
-            id: title,
+            id: 'article_' + page.id,
             distractionFreeMode: false
         });
         gitalk.render('gitalk-container');
