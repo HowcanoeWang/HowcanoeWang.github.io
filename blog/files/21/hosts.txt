@@ -1,0 +1,9 @@
+#this is the default hosts file for the dns proxy
+#format: hostname regex -> ip address
+
+# [My Host Entries]
+^hivebedrock\.network$ xxx.xxx.xxx.xxx
+^mco\.mineplex\.com$ xxx.xxx.xxx.xxx
+^play\.inpvp\.net$ xxx.xxx.xxx.xxx
+^mco\.lbsg\.net$ xxx.xxx.xxx.xxx
+^mco\.cubecraft\.net$ xxx.xxx.xxx.xxx 

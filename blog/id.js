@@ -21,7 +21,7 @@ var section = {
 	/*-----------------*/
 	"诗词歌赋":[9,11,10,8,7,6],
 	"音乐乐理":[],
-	"游戏心得":[]
+	"游戏心得":[21]
 };
 
 var jsdb = [
@@ -218,5 +218,14 @@ var jsdb = [
 "date":"2019.01.20",
 "img":"img/page-heading/blog-bg.jpg",
 "recommend":[4,0,1]
+},
+{"id":"21",
+"title":"我的世界(Minecraft)Switch版通过DNS劫持实现连接自建云服务器",
+"subtitle":"官方逼死同人的最佳典范",
+"author":"浩瀚猫",
+"word":"4.3K",
+"date":"2019.12.15",
+"img":"img/page-heading/blog-bg.jpg",
+"recommend":[3]
 }
 ];
