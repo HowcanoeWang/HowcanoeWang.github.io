@@ -53,6 +53,12 @@ h6 {
 .card-img-right {
 	border-radius: 0px 3px 3px 0px; height: 100%;
 }
+.card-text-hide {
+    height: 70px;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
 .flex-auto {
 	flex:0 0 auto; -webkit-box-flex: 0;
 }

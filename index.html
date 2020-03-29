@@ -17,9 +17,83 @@
 		<link rel="stylesheet" href="css/index.css">
 		<link rel="stylesheet" href="css/carousel.css">
 		
+        <!-- jQuery for html code reuse-->
         <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-		<!--script src="https://code.jquery.com/jquery-1.10.2.js"></script-->
 		<script> var $jq1102$ = jQuery.noConflict(true); </script>
+        
+        <!-- jQuery for json load -->
+        <script src="https://cdn.bootcss.com/jquery/1.8.2/jquery.min.js"></script>
+		<script> var $jq182$ = jQuery.noConflict(true); </script>
+        
+        <script type="text/javascript" src="blog/id.js"></script> <!--load var jsdb-->
+        <script type="text/javascript" src="art/music_db.js"></script> <!--load var song-->
+        
+		<script type="text/javascript">
+		/* rendering the page html code */
+		$jq182$(function (){
+          // blog part
+          var blogshow = [jsdb.length-1,jsdb.length-2,jsdb.length-3];
+		  var $jq182$blogtip = $jq182$("#blogTip");
+		  var blogHtml = "";
+		  $jq182$blogtip.empty();
+          // example
+          //<div class="card flex-md-row mb-4 box-shadow h-md-250">
+          //    <div class="card-body d-flex flex-column align-items-start">
+          //        <h4 class="d-inline-block mb-0 text-primary">2019年年终总结</h4>
+          //        <div class="mb-1 text-dark" href="#">2020.01.01</div>
+          //        <div class="mb-2 text-muted">字数: 3.7K</div>
+          //        <p class="card-text mb-auto ">赶着最后一天把论文投了的后劲，一口气把19年终总结写了，不然年后又不知道啥时候用空弄这玩意</p>
+          //        <a class="btn btn-outline-dark" href="https://www.sigmameow.com/blog/page.html?id=22" target="_blank">查看</a>
+          //    </div>
+          //    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="blog/img/page-heading/blog-bg.jpg" data-holder-rendered="true">
+          //</div>
+		  for (var id in blogshow) {
+		    blogInfo = jsdb[blogshow[id]];
+		    blogHtml += '<div class="card flex-md-row mb-4 box-shadow h-md-250">';
+            blogHtml += '  <div class="card-body d-flex flex-column align-items-start">';
+            blogHtml += '    <h4 class="d-inline-block mb-0 text-primary">' + blogInfo.title + '</h4>';
+		    blogHtml += '    <div class="mb-1 text-dark" href="#">' + blogInfo.date + '</div>';
+		    blogHtml += '    <div class="mb-2 text-muted">字数: ' + blogInfo.word + '</div>';
+		    blogHtml += '    <p class="card-text card-text-hide mb-auto">' + blogInfo.subtitle + '</p>';
+            blogHtml += '    <a class="btn btn-outline-dark" href="https://www.sigmameow.com/blog/page.html?id=' + blogInfo.id + '" target="_blank">查看</a>';
+            blogHtml += '  </div>';
+            blogHtml += '  <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="blog/' + blogInfo.img + '" data-holder-rendered="true">';
+		    blogHtml += '</div>';
+		  };
+		  $jq182$blogtip.html(blogHtml);//显示处理后的数据
+          
+          // music part
+          var songshow = [song.length-1,song.length-2,song.length-3];
+          var $jq182$songtip = $jq182$("#songTip");
+          $jq182$songtip.empty();
+          var songHtml = "";
+          // example:
+          //<div class="card flex-md-row mb-4 box-shadow h-md-250">
+          //    <div class="card-body d-flex flex-column align-items-start">
+          //        <h4 class="d-inline-block mb-0 text-primary">青い栞（《未闻花名》op）</h4>
+          //        <div class="mb-1 text-dark" href="#">2020.07.23</div>
+          //        <div class="mb-2 text-muted">时长: 05:04</div>
+          //        <p class="card-text mb-auto ">作者：<span>浩瀚猫</span></p>
+          //        <a class="btn btn-outline-dark" href="http://www.sigmameow.com/art/music.html" target="_blank">查看</a>
+          //    </div>
+          //    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="art/img/蓝书签.jpg" data-holder-rendered="true">
+          //</div>
+          for (var id in songshow) {
+            songInfo = song[songshow[id]];
+            songHtml += '<div class="card flex-md-row mb-4 box-shadow h-md-250">';
+            songHtml += '  <div class="card-body d-flex flex-column align-items-start">';
+            songHtml += '    <h4 class="d-inline-block mb-0 text-primary">'+ songInfo.name +'</h4>';
+            songHtml += '    <div class="mb-1 text-dark" href="#">' + songInfo.date + '</div>';
+            songHtml += '    <div class="mb-2 text-muted">时长: ' + songInfo.time + '</div>';
+            songHtml += '    <p class="card-text mb-auto ">作者：<span>'+ songInfo.singer + '</span></p>';
+            songHtml += '    <a class="btn btn-outline-dark" href="http://www.sigmameow.com/art/music.html" target="_blank">查看</a>';
+            songHtml += '  </div>';
+            songHtml += '  <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="art/' + songInfo.cover + '" data-holder-rendered="true">';
+            songHtml += '</div>';
+          };
+          $jq182$songtip.html(songHtml);//显示处理后的数据
+		});
+		</script> 
 	</head>
 	<body>
 		<!--Navigation bar-->
@@ -91,20 +165,7 @@
 		
 		<main role="main" class="container">
 			<div class="row">
-				<div class="col-md-8 blog-main">
-					<h2 class="pb-3 mb-4 border-bottom">博客更新</h2>
-                    
-                    <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                        <div class="card-body d-flex flex-column align-items-start">
-                            <h4 class="d-inline-block mb-0 text-primary">2019年年终总结</h4>
-                            <div class="mb-1 text-dark" href="#">2020.01.01</div>
-                            <div class="mb-2 text-muted">字数: 3.7K</div>
-                            <p class="card-text mb-auto ">赶着最后一天把论文投了的后劲，一口气把19年终总结写了，不然年后又不知道啥时候用空弄这玩意</p>
-                            <a class="btn btn-outline-dark" href="https://www.sigmameow.com/blog/page.html?id=22" target="_blank">查看</a>
-                        </div>
-                        <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="blog/img/page-heading/blog-bg.jpg" data-holder-rendered="true">
-                    </div>
-
+				<div class="col-md-9 blog-main">
                     <h2 class="pb-3 mb-4 border-bottom">项目更新</h2>
                     
                     <div class="card flex-md-row mb-4 box-shadow h-md-250">
@@ -117,53 +178,24 @@
                         </div>
                         <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="images/location.png" data-holder-rendered="true">
                     </div>
+                
+					<h2 class="pb-3 mb-4 border-bottom">博客更新</h2>
+                    <div id="blogTip"></div>
                     
-                    <h2 class="pb-3 mb-4 border-bottom">娱乐更新</h2>
-                    <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                        <div class="card-body d-flex flex-column align-items-start">
-                            <h4 class="d-inline-block mb-0 text-primary">青い栞（《未闻花名》op）</h4>
-                            <!--div class="mb-1 text-dark" href="#">2018.01.01</div-->
-                            <div class="mb-2 text-muted">时长: 05:04</div>
-                            <p class="card-text mb-auto ">动漫歌曲</p>
-                            <a class="btn btn-outline-dark" href="http://www.sigmameow.com/art/music.html" target="_blank">查看</a>
-                        </div>
-                        <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="art/img/蓝书签.jpg" data-holder-rendered="true">
+                    <div class='container text-center' style='margin-bottom:6px;'>
+                        <!--a class="btn btn-outline-dark" style="width:90px;height:90px;text-align:center;padding:6px 6px; border-radius:45px;" href="https://www.sigmameow.com/blog/page.html?section=作者推荐" target="_blank">•<br>•<br>•</a-->
+                        <p>•<br>•<br>•</p>
                     </div>
                     
+                    <h2 class="pb-3 mb-4 border-bottom">音乐更新</h2>
+                    <div id="songTip"></div> 
                     
-					<!--div class="blog-post">
-						<h2 class="blog-post-title">Sample blog post</h2>
-						<p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-						<p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-						<hr>
-						<p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-						<blockquote>
-							<p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-						</blockquote>
-						<p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-						<h2>Heading</h2>
-						<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-						<h3>Sub-heading</h3>
-						<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-						<pre><code>Example code block</code></pre>
-						<p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-						<h3>Sub-heading</h3>
-						<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-						<ul>
-							<li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-							<li>Donec id elit non mi porta gravida at eget metus.</li>
-							<li>Nulla vitae elit libero, a pharetra augue.</li>
-						</ul>
-						<p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-						<ol>
-							<li>Vestibulum id ligula porta felis euismod semper.</li>
-							<li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-							<li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
-						</ol>
-						<p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
-					</div-->
+                    <div class='container text-center' style='margin-bottom:6px;'>
+                        <p>•<br>•<br>•</p>
+                    </div>
+                    
 				</div>
-				<aside class="col-md-4 blog-sidebar">
+				<aside class="col-md-3 blog-sidebar">
 					<div class="p-3 mb-3 bg-light rounded">
 						<h4 class="font-bold">关于作者</h4>
 						<p class="mb-0">伪林学研究生，B站复音口琴UP主</p>
