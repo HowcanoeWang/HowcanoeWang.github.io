@@ -190,7 +190,7 @@ var jsdb = [
 "author":"浩瀚猫",
 "word":"63",
 "date":"2017.12.31",
-"img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
+"img":"https://i.loli.net/2020/04/01/whtH5e29oWQjviJ.jpg",
 "recommend":[18,22]
 },
 {"id":"18",
@@ -199,7 +199,7 @@ var jsdb = [
 "author":"浩瀚猫",
 "word":"6.5K",
 "date":"2019.01.06",
-"img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
+"img":"https://i.loli.net/2020/04/01/whtH5e29oWQjviJ.jpg",
 "recommend":[17,22]
 },
 {"id":"19",
@@ -226,7 +226,7 @@ var jsdb = [
 "author":"浩瀚猫",
 "word":"4.3K",
 "date":"2020.01.19",
-"img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
+"img":"https://i.loli.net/2020/04/01/YLOmu9o1cnR6T2E.jpg",
 "recommend":[3]
 },
 {"id":"22",
@@ -235,7 +235,7 @@ var jsdb = [
 "author":"浩瀚猫",
 "word":"3.7K",
 "date":"2020.01.01",
-"img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
+"img":"https://i.loli.net/2020/04/01/whtH5e29oWQjviJ.jpg",
 "recommend":[17,18]
 }
 ];
