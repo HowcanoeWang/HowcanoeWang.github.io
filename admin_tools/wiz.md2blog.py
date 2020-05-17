@@ -36,7 +36,8 @@ def add_new():
         edit_js(p_id, filename, modify_time, word_count, way="add")
 
         # update pickle
-        ref_df.loc[ref_df.index.max() + 1] = [p_id, filename, ziw_path]
+        ziw_save_path = r"~/Documents/My Knowledge/Data" + ziw_path.split('/Documents/My Knowledge/Data')[-1]
+        ref_df.loc[ref_df.index.max() + 1] = [p_id, filename, ziw_save_path]
         reference_dict(ref_df)
         showinfo(parent=root, title='Success', message='Convert Successfully')
 
@@ -51,7 +52,7 @@ def update_old():
             search_df = ref_df.loc[ref_df['id'] == p_id]
             df_id = search_df.index[0]
             title = search_df['title'].values[0]
-            ziw_path = search_df['path'].values[0]
+            ziw_path = os.path.normpath(os.path.expanduser(search_df['path'].values[0]))
 
             if not os.path.exists(ziw_path):
                 showinfo(title='Error', message=f'Can not Find {title}, please redirect it!')
@@ -140,6 +141,9 @@ def ziw2html(ziw_path, p_id):
     extension_configs = {'mdx_math': {'enable_dollar_delimiter': True}}
     md_ext = markdown.Markdown(extensions=['extra', 'codehilite', 'tables', 'toc', 'markdown_checklist.extension', 'mdx_math'],
                                extension_configs=extension_configs)
+                               
+    with open("test.txt", "w") as f:
+        f.write(md)
 
     html = md_ext.convert(md)
 

@@ -1,0 +1,4 @@
+python-markdown-math==0.6
+markdown_checklist==0.4.1
+html5lib==1.0.1
+markdown==3.2.2
