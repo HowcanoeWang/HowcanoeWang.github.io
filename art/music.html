@@ -3,56 +3,46 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-  <meta itemprop="description" content="合喵音乐，个人ACG复音口琴与Remix音乐站">
+    <meta itemprop="description" content="合喵音乐，个人ACG复音口琴与Remix音乐站">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>合喵音乐</title>
-  <link href="../images/home.ico" rel="icon"> 
+    <link href="../images/home.ico" rel="icon"> 
 	<!-- Custom styles for this page -->
 	<link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/music.css">
+    <link rel="stylesheet" href="../css/music.css">
 
-	<!--script src="https://code.jquery.com/jquery-1.10.2.js"></script-->
-    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-	<script> var $jq1102$ = jQuery.noConflict(true); </script>
+    <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
   
-  <!--script src="https://code.jquery.com/jquery-1.8.3.js"></script-->
-  <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
-	<script> var $jq183$ = jQuery.noConflict(true); </script>
+    <!-- left column button active js-->
+    <script type="text/javascript">
+        $('.btn').click(function() {
+            $(this).toggleClass('active');
+        });
+    </script>
   
-  <!-- this is for musicplayer.js -->
-  <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.js"></script>
-  <script> var $jq22$ = jQuery.noConflict(true); </script>
+    <script type="text/javascript" src="music_db.js"></script>
   
-  <!-- left column button active js-->
-  <script type="text/javascript">
-    $jq1102$('.btn').click(function() {
-      $jq1102$(this).toggleClass('active');
-    });
-  </script>
-  
-  <script type="text/javascript" src="music_db.js"></script>
-  
-  <script type="text/javascript">
+    <script type="text/javascript">
     function switch2song() {
       $('#musictab a[href="#tab-song"]').tab('show');
     };
     function switch2songlist() {
       /*ctx.showSongInfo(ctx.currentSong);*/
       $('#musictab a[href="#tab-songlist"]').tab('show');
-      /*$jq22$('#play_btn').attr('onClick', "ctx.play()");
-      $jq22$('#score_btn').children('a').attr('href', song[ctx.currentSong].score);
-      $jq22$('#download_btn').children('a').attr('href', song[ctx.currentSong].mp3);
+      /*$('#play_btn').attr('onClick', "ctx.play()");
+      $('#score_btn').children('a').attr('href', song[ctx.currentSong].score);
+      $('#download_btn').children('a').attr('href', song[ctx.currentSong].mp3);
       if (ctx.isPlaying){ctx.play()}
       else {ctx.pause()};*/
     };
     /*function switch2playlist() {
       $('#musictab a[href="#tab-playlist"]').tab('show');
     };*/
-  </script>
+    </script>
   
-  <!--musicplayer -->
-  <script type="text/javascript">
+    <!--musicplayer -->
+    <script type="text/javascript">
     var ctx ={
       isPlaying:false,
       playListId:0,
@@ -61,10 +51,10 @@
       currentSong:null,
       player:null, /* audio tag
       /*id of html*/
-      $jq22$needle:null,
-      $jq22$discCover:null, /*封面图url*/
-      $jq22$playBtn:null,
-      $jq22$pauseBtn:null
+      $needle:null,
+      $discCover:null, /*封面图url*/
+      $playBtn:null,
+      $pauseBtn:null
     };
     
     ctx.init = function(){
@@ -81,16 +71,16 @@
     ctx._initData = function(){
       ctx.currentIndex = 0;
       ctx.currentSong = ctx.playList[ctx.currentIndex];
-      ctx.player = $jq22$('#player').get(0);
-      ctx.$jq22$needle = $jq22$('#discNeedle');
-      ctx.$jq22$discCover = $jq22$('#detail_cover');
-      ctx.$jq22$playBtn = $jq22$('#controls .play');
-      ctx.$jq22$pauseBtn = $jq22$('#controls .pause');
-      ctx.$jq22$nowplaylist = $jq22$('#nowplaylist');
+      ctx.player = $('#player').get(0);
+      ctx.$needle = $('#discNeedle');
+      ctx.$discCover = $('#detail_cover');
+      ctx.$playBtn = $('#controls .play');
+      ctx.$pauseBtn = $('#controls .pause');
+      ctx.$nowplaylist = $('#nowplaylist');
       /* buttom variables*/
-      ctx.$jq22$buttom_pic = $jq22$('#buttom_Pic');
-      ctx.$jq22$buttom_name = $jq22$('#buttom_name');
-      ctx.$jq22$buttom_singer = $jq22$('#buttom_singer');
+      ctx.$buttom_pic = $('#buttom_Pic');
+      ctx.$buttom_name = $('#buttom_name');
+      ctx.$buttom_singer = $('#buttom_singer');
     };
     
     ctx._initPlayList = function(){
@@ -104,10 +94,10 @@
     ctx.play = function () {
       ctx.player.play();
       ctx.isPlaying = true;
-      ctx.changeAnimationState(ctx.$jq22$discCover, 'running');
+      ctx.changeAnimationState(ctx.$discCover, 'running');
       ctx.moveNeedle(true);
-      ctx.$jq22$playBtn.hide();
-      ctx.$jq22$pauseBtn.show();
+      ctx.$playBtn.hide();
+      ctx.$pauseBtn.show();
       /*alert('play');*/
     };
 
@@ -115,17 +105,17 @@
       ctx.player.pause();
       ctx.isPlaying = false;
       ctx.moveNeedle(false);
-      ctx.changeAnimationState(ctx.$jq22$discCover, 'paused');
-      ctx.$jq22$playBtn.show();
-      ctx.$jq22$pauseBtn.hide();
+      ctx.changeAnimationState(ctx.$discCover, 'paused');
+      ctx.$playBtn.show();
+      ctx.$pauseBtn.hide();
       /*alert('pause');*/
     };
 
     ctx.moveNeedle = function (play) {
       if (play) {
-          ctx.$jq22$needle.removeClass("pause-needle").addClass("resume-needle");
+          ctx.$needle.removeClass("pause-needle").addClass("resume-needle");
       } else {
-          ctx.$jq22$needle.removeClass("resume-needle").addClass("pause-needle");
+          ctx.$needle.removeClass("resume-needle").addClass("pause-needle");
       }
     };
     
@@ -138,26 +128,26 @@
     
     ctx.playNewSong = function (songid) {
       /*=====update 音乐详情页 信息=====*/
-      $jq22$('#detail_bg').attr('style', "background-image: url("+song[songid].cover+")");
-      $jq22$('#detail_name').text(song[songid].name);
-      $jq22$('#detail_singer').text(song[songid].singer);
+      $('#detail_bg').attr('style', "background-image: url("+song[songid].cover+")");
+      $('#detail_name').text(song[songid].name);
+      $('#detail_singer').text(song[songid].singer);
       /*[mv] button display*/
       if (typeof song[songid].mv !== 'string'){
-        $jq22$('#detail_mv').hide();
+        $('#detail_mv').hide();
       }
       else {
-        $jq22$('#detail_mv').show();
-        $jq22$('#detail_mv').children('a').attr('href', song[songid].mv)
+        $('#detail_mv').show();
+        $('#detail_mv').children('a').attr('href', song[songid].mv)
       };
       /*改变碟片图片*/
-      $jq22$('#detail_cover').attr('style', "background-image: url("+song[songid].cover+");");
+      $('#detail_cover').attr('style', "background-image: url("+song[songid].cover+");");
       /*改变按钮信息*/
-      $jq22$('#score_btn').children('a').attr('href', song[songid].score);
-      $jq22$('#download_btn').children('a').attr('href', song[songid].mp3);
+      $('#score_btn').children('a').attr('href', song[songid].score);
+      $('#download_btn').children('a').attr('href', song[songid].mp3);
       /*=====update 底栏 信息=====*/
-      $jq22$('#buttom_pic').attr('src', song[songid].cover);
-      $jq22$('#buttom_name').text(song[songid].name);
-      $jq22$('#buttom_singer').text(song[songid].singer);
+      $('#buttom_pic').attr('src', song[songid].cover);
+      $('#buttom_name').text(song[songid].name);
+      $('#buttom_singer').text(song[songid].singer);
       
       ctx.player.src = song[songid].mp3;
       if (ctx.isPlaying) {setTimeout(ctx.play, 500);}
@@ -173,20 +163,21 @@
       alert("增加到播放列表");
     };
     
-    $jq22$(function () {
+    $(function () {
       ctx.init();
     });
-  </script>
+    </script>
+    
+    <script type="text/javascript">
+        $.get('../nav.html', function(data) {
+           $('#nav-placeholder').html(data);
+        });
+    </script>
 </head>
   
 <body>
 	<!--Navigation bar-->
 	<div id="nav-placeholder"></div>
-	<script>
-	$jq1102$(function(){
-	  $jq1102$("#nav-placeholder").load("../nav.html");
-	});
-	</script>
 	<!--end of Navigation bar-->
 	
 	<div class="container page_content">

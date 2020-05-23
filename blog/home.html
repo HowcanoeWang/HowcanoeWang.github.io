@@ -16,15 +16,8 @@
 		<link rel="stylesheet" href="../css/index.css">
 		<link rel="stylesheet" href="../css/blog.css">
 		
-		<!-- jQuery for html code reuse-->
-		<!--script src="https://code.jquery.com/jquery-1.10.2.js"></script-->
-        <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-		<script> var $jq1102$ = jQuery.noConflict(true); </script>
-		
-		<!-- jQuery for json load -->
-		<!--script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.min.js"></script--> 
-        <script src="https://cdn.bootcss.com/jquery/1.8.2/jquery.min.js"></script>
-		<script> var $jq182$ = jQuery.noConflict(true); </script>
+        <!-- jQuery -->
+        <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
 		
 		<script type="text/javascript" src="id.js"></script>
 		<script type="text/javascript">
@@ -44,10 +37,10 @@
        		return(false);
 	  	};
 		/* rendering the page html code */
-		$jq182$(function (){
-		  var $jq182$jsontip = $jq182$("#jsonTip");
+		$(function (){
+		  var $jsontip = $("#jsonTip");
 		  var strHtml = "";
-		  $jq182$jsontip.empty();
+		  $jsontip.empty();
 		  for (var id in show) {
 		    info = jsdb[show[id]];
 		    strHtml += '<div class="post-preview">';
@@ -56,18 +49,22 @@
 		    strHtml += '<h5 class="post-subtitle">' + info.subtitle + '</h5></a>';
 		    strHtml += '<p class="post-meta">字数: ' + info.word + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div><hr>';
 		  };
-		  $jq182$jsontip.html(strHtml);//显示处理后的数据
+		  $jsontip.html(strHtml);//显示处理后的数据
 		});
 		</script> 
+        
+        <script type="text/javascript">
+            $.get('../nav.html', function(data) {
+               $('#nav-placeholder').html(data);
+            });
+            $.get('sidebar.html', function(data) {
+               $('#left-sidebar').html(data);
+            });
+		</script>
 	</head>
 	<body>
 		<!--Navigation bar-->
 		<div id="nav-placeholder"></div>
-		<script>
-		$jq1102$(function(){
-		  $jq1102$("#nav-placeholder").load("../nav.html");
-		});
-		</script>
 		<!--Navigation end-->
 		
 		<header class="masthead" style="background-image: url('https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg')">
@@ -90,11 +87,6 @@
 				<div class="col-lg-2">
 					<!--side bar-->
 					<div id="left-sidebar" class="sidebar"></div>
-					<script>
-					$jq1102$(function(){
-					  $jq1102$("#left-sidebar").load("sidebar.html");
-					});
-					</script>
 				</div>
 				<div class="col-lg-10">
 					<div class="mx-auto container">

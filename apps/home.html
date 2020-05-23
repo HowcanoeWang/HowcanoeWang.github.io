@@ -17,19 +17,20 @@
 		<link rel="stylesheet" href="../css/blog.css">
         <link rel="stylesheet" href="../css/tools.css">
         
-        <!-- jQuery for html code reuse-->
-		<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-		<script> var $jq1102$ = jQuery.noConflict(true); </script>
+        <!-- jQuery -->
+        <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
+        
+        <script type="text/javascript">
+            $.get('../nav.html', function(data) {
+                alert(data);
+                $('#nav-placeholder').html(data);
+            });
+		</script>
         
     </head>
     <body>
         <!--Navigation bar-->
 		<div id="nav-placeholder"></div>
-		<script>
-		$jq1102$(function(){
-		  $jq1102$("#nav-placeholder").load("../nav.html");
-		});
-		</script>
 		<!--Navigation end-->
         
         <header class="masthead text-white text-center">

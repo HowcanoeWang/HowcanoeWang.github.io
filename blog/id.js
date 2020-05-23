@@ -207,7 +207,7 @@ var jsdb = [
 "title":"第一章：线性方程组",
 "subtitle":"《线性代数及其应用(原书第五版)》总结笔记<br><span class='badge badge-secondary badge-pill'>思维导图</span>",
 "author":"浩瀚猫",
-"word":"61.7K",
+"word":"61.8K",
 "date":"2020.05.17",
 "img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
 "recommend":[2]

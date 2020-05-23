@@ -17,25 +17,20 @@
 		<link rel="stylesheet" href="css/index.css">
 		<link rel="stylesheet" href="css/carousel.css">
 		
-        <!-- jQuery for html code reuse-->
-        <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-		<script> var $jq1102$ = jQuery.noConflict(true); </script>
-        
-        <!-- jQuery for json load -->
-        <script src="https://cdn.bootcss.com/jquery/1.8.2/jquery.min.js"></script>
-		<script> var $jq182$ = jQuery.noConflict(true); </script>
+        <!-- jQuery -->
+        <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
         
         <script type="text/javascript" src="blog/id.js"></script> <!--load var jsdb-->
         <script type="text/javascript" src="art/music_db.js"></script> <!--load var song-->
         
 		<script type="text/javascript">
 		/* rendering the page html code */
-		$jq182$(function (){
+		$(function (){
           // blog part
           var blogshow = [jsdb.length-1,jsdb.length-2,jsdb.length-3];
-		  var $jq182$blogtip = $jq182$("#blogTip");
+		  var $blogtip = $("#blogTip");
 		  var blogHtml = "";
-		  $jq182$blogtip.empty();
+		  $blogtip.empty();
           // example
           //<div class="card flex-md-row mb-4 box-shadow h-md-250">
           //    <div class="card-body d-flex flex-column align-items-start">
@@ -60,12 +55,12 @@
             blogHtml += '  <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="' + blogInfo.img + '" data-holder-rendered="true">';
 		    blogHtml += '</div>';
 		  };
-		  $jq182$blogtip.html(blogHtml);//显示处理后的数据
+		  $blogtip.html(blogHtml);//显示处理后的数据
           
           // music part
           var songshow = [song.length-1,song.length-2,song.length-3];
-          var $jq182$songtip = $jq182$("#songTip");
-          $jq182$songtip.empty();
+          var $songtip = $("#songTip");
+          $songtip.empty();
           var songHtml = "";
           // example:
           //<div class="card flex-md-row mb-4 box-shadow h-md-250">
@@ -91,18 +86,20 @@
             songHtml += '  <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="' + songInfo.cover + '" data-holder-rendered="true">';
             songHtml += '</div>';
           };
-          $jq182$songtip.html(songHtml);//显示处理后的数据
+          $songtip.html(songHtml);//显示处理后的数据
 		});
 		</script> 
+        
+        <script type="text/javascript">
+            $.get('nav.html', function(data) {
+               $('#nav-placeholder').html(data);
+            });
+		</script>
+        
 	</head>
 	<body>
 		<!--Navigation bar-->
 		<div id="nav-placeholder"></div>
-		<script>
-		$jq1102$(function(){
-		  $jq1102$("#nav-placeholder").load("nav.html");
-		});
-		</script>
 		<!--end of Navigation bar-->
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">

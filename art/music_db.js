@@ -18,7 +18,7 @@ var song = [
     "time":"05:36",
     "cover":"https://i.loli.net/2020/04/01/3S1KeANhaWdmyJo.jpg",
     "mv":NaN,
-    "mp3":"audio/Secret Base.mp3",
+    "mp3":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/art/audio/Secret Base.mp3",
     "score":"score/secret_base.pdf"
   },
   {
@@ -29,7 +29,7 @@ var song = [
     "time":"02:07",
     "cover":"https://i.loli.net/2020/04/01/DdP5juNI4Bbming.jpg",
     "mv":NaN,
-    "mp3":"audio/天空之城.mp3",
+    "mp3":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/art/audio/天空之城.mp3",
     "score":"score/天空之城.pdf"
   },
   {
@@ -40,7 +40,7 @@ var song = [
     "time":"05:40",
     "cover":"https://i.loli.net/2020/04/01/2X5qBdFjE6tYspe.jpg",
     "mv":"https://www.bilibili.com/video/av32135131",
-    "mp3":"audio/Blue Bookmark.mp3",
+    "mp3":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/art/audio/Blue Bookmark.mp3",
     "score":"score/青い栞.pdf"
   },
   {
@@ -51,7 +51,7 @@ var song = [
     "time":"02:24",
     "cover":"https://i.loli.net/2020/04/01/1vqUbTdIyxOHQ7n.jpg",
     "mv":"https://www.bilibili.com/video/BV1H7411d7t9",
-    "mp3":"audio/Always with me.mp3",
+    "mp3":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/art/audio/Always with me.mp3",
     "score":"score/千与千寻.pdf"
   }
 ];
