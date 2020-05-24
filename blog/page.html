@@ -15,7 +15,11 @@
 	<!-- Custom styles for this page -->
 	<link rel="stylesheet" href="../css/index.css">
 	<link rel="stylesheet" href="../css/blog.css">
-    <link rel="stylesheet" href="../css/codehilite.css">
+    <link rel="stylesheet" href="../css/blog_article.css">
+    
+        <!-- jQuery -->
+    <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
 
     <!--  share.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/css/share.min.css">
@@ -24,61 +28,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     
-    <!-- jQuery -->
-    <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
-  
-    <!-- latex formular extention-->
-    <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({
-      skipStartupTypeset: true,
-      "HTML-CSS": {
-          preferredFont: "TeX",
-          availableFonts: [
-              "STIX",
-              "TeX"
-          ],
-          linebreaks: {
-              automatic: true
-          },
-          EqnChunk: 10,
-          imageFont: null
-      },
-      SVG: { linebreaks: { automatic: true } },
-      tex2jax: {
-          inlineMath: [["$","$"],["\\\\(","\\\\)"]],
-          displayMath: [["$$","$$"],["\\[","\\]"]],
-          processEscapes: true },
-      TeX: {
-          equationNumbers: {
-              autoNumber: "AMS"
-          },
-          noUndefined: {
-              attributes: {
-                  mathcolor: "red",
-                  mathbackground: "#FFEEEE",
-                  mathsize: "90%"
-              }
-          },
-          Safe: {
-              allow: {
-                  URLs: "safe",
-                  classes: "safe",
-                  cssIDs: "safe",
-                  styles: "safe",
-                  fontsize: "all"
-              }
-          }
-      },
-      messageStyle: "none"
-    });</script>
-    <script type="text/javascript" charset="utf-8" src="./mathjax/MathJax.js?config=TeX-AMS-MML_SVG&amp;v=1.0.11"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js"></script-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/highlight.min.js"></script>
     
-    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/mathtex-script-type.min.js" defer></script--> 
+    <!-- latex formular extention-->
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.js"></script-->
 
-    <!--script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script-->
   
     <script type="text/javascript">
       window.onscroll = function() {scrollFunction()};
@@ -109,7 +66,8 @@
 				    "date":"2018.11.16",
 				    "type":["读书杂记","文学小说"],
 				    "recommend":[1],
-				   	"img":"../images/blog-bg.jpg"};
+				   	"img":"../images/blog-bg.jpg",
+                    "file":""};
 	  };
 	  function getQueryVariable(variable){
        var query = window.location.search.substring(1);
@@ -124,7 +82,7 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			 var urlString = 'url("' + info.img+ '")';
+			 var urlString = 'url("' + info.img + '")';
 			 $('#header-img').css('background-image', urlString);
 			 });
 		$(function (){
@@ -133,18 +91,17 @@
 		var recommandHtml = "";
 		$jsontip.empty();
 		for (var id in show) {
-		  page = jsdb[show[id]];
-		  recommandHtml += '<div class="post-preview">';
-		  recommandHtml += '<a href="page.html?id=' + page.id + '">';
-		  recommandHtml += '<h3 class="post-title">' + page.title + '</h3>';
-		  recommandHtml += '<h5 class="post-subtitle">' + page.subtitle + '</h5></a>';
-		  recommandHtml += '<p class="post-meta">字数: ' + page.word + ' | 作者: ' + page.author+ ' | 更新: ' + page.date + '</p></div><hr>';
+            page = jsdb[show[id]];
+            recommandHtml += '<div class="post-preview">';
+            recommandHtml += '<a href="page.html?id=' + page.id + '">';
+            recommandHtml += '<h3 class="post-title">' + page.title + '</h3>';
+            recommandHtml += '<h5 class="post-subtitle">' + page.subtitle + '</h5></a>';
+            recommandHtml += '<p class="post-meta">字数: ' + page.word + ' | 作者: ' + page.author+ ' | 更新: ' + page.date + '</p></div><hr>';
 		};
 		$jsontip.html(recommandHtml);//显示处理后的数据
 		});
 	</script>
 	
-	<title>合喵博客</title>
 	<script type="text/javascript">
 		document.title= info.title;
 		$('meta[itemprop=name]').attr('content', info.title);
@@ -152,6 +109,7 @@
 		$('meta[itemprop=description]').attr('content', info.subtitle);
 	</script>
     
+    <!-- dynamic load nav-bar, side-bar, and article contents -->
     <script type="text/javascript">
         $.get('../nav.html', function(data) {
            $('#nav-placeholder').html(data);
@@ -159,12 +117,99 @@
         $.get('sidebar.html', function(data) {
            $('#left-sidebar').html(data);
         });
-        $.get("p/"+info.id+".html", function(data) {
-           $('#page-placeholder').html(data);
+        // convert markdown
+        $.get("md/"+ info.file, function( md ) {
+            var converter = new showdown.Converter();
+            converter.setOption('parseImgDimensions', true);
+            converter.setOption('simplifiedAutoLink', true);
+            converter.setOption('literalMidWordUnderscores', true);            
+            converter.setOption('strikethrough', true);            
+            converter.setOption('tables', true);
+            converter.setOption('tasklists', true);
+            converter.setOption('simpleLineBreaks', true);
+            converter.setOption('emoji', true);
+            
+            html = converter.makeHtml(md);
+            $('#page-placeholder').html(html);
+            //renderMathInElement(document.body,
+            //                    {delimiters: [
+            //                        {left: "$$", right: "$$", display: true},
+            //                        {left: "\\[", right: "\\]", display: true},
+            //                        {left: "$", right: "$", display: false},
+            //                        {left: "\\(", right: "\\)", display: false}
+            //                        ]}
+            //                    );
+        },'text');
+    </script>
+    
+    <!-- color codes by highlight.js -->
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- Add img title below the img-->
+    <script>
+        window.onload = function () {
+            var anchors = document.getElementsByTagName("img");
+            for (var id in anchors) {
+                var img = anchors.item(id)
+                if (img.hasAttribute('title')){
+                    var imgtitle = document.createElement("div");
+                    imgtitle.classList.add("text-center")
+                    imgtitle.classList.add("text-muted")
+                    imgtitle.innerHTML = img.title;
+                    img.parentNode.insertBefore(imgtitle, img.nextSibling)
+                };
+            };
+        };
+    </script>
+    
+    <!-- Add copy button on code block -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+    <script type="text/javascript">
+        //https://predictablynoisy.com/sphinx-copy-buttons
+        function showCopy(){
+            alert("已复制好，可贴粘。\nHas been copied to clipboard");
+        };
+    
+        function addCopyButtonToCode(){
+            // get all code elements
+            var allCodeBlocksElements = $("pre");
+
+            // For each element, do the following steps
+            allCodeBlocksElements.each(function(ii) {
+                // define a unique id for this element and add it
+                var currentId = "codeblock" + (ii + 1);
+                $(this).attr('id', currentId);
+
+                // create a button that's configured for clipboard.js
+                // point it to the text that's in this code block
+                // add the button just after the text in the code block w/ jquery
+                var clipButton = '<button class="btn copybtn" data-clipboard-target="#' + currentId + '" onclick="showCopy();"><img src="https://clipboardjs.com/assets/images/clippy.svg" width="13" alt="Copy to clipboard"></button>';
+                $(this).before(clipButton); // .after() originally
+            });
+
+            // tell clipboard.js to look for clicks that match this query
+            new Clipboard('.btn');
+        }
+
+        $(document).ready(function () {
+            // Once the DOM is loaded for the page, attach clipboard buttons
+            addCopyButtonToCode();
         });
     </script>
+
+    
+    <!--script>
+    renderMathInElement(document.body,{delimiters: [
+                            {left: "$$", right: "$$", display: true},
+                            {left: "$", right: "$", display: true}
+    ]});
+
+    </script-->
+    
+    <title>合喵博客</title>
 </head>
-<body oncontextmenu="return false" ondragstart="return false" onselectstart ="return false" onselect="return false" oncopy="return false" onbeforecopy="return false" onmouseup="return false">
+<!-- oncontextmenu="return false" ondragstart="return false" onselectstart="return false" onselect="return false" onmouseup="return false" oncopy="return false" onbeforecopy="return false"-->
+<body>
 	<!--Navigation bar-->
 	<div id="nav-placeholder"></div>
 	<!--end of Navigation bar-->
@@ -176,11 +221,11 @@
         <div class="row">
           <div class="col-md-10 mx-auto">
             <div class="post-heading">
-        <h1><script type="text/javascript">document.write(info.title)</script></h1>
+              <h1><script type="text/javascript">document.write(info.title)</script></h1>
               <h5 class="subheading"><script type="text/javascript">document.write(info.subtitle)</script></h5>
               <span class="meta">
-        <a href="#"><script type="text/javascript">document.write(info.author)</script></a> | 字数: <script type="text/javascript">document.write(info.word)</script> | 更新于:  
-        <script type="text/javascript">document.write(info.date)</script></span>
+              <a href="#"><script type="text/javascript">document.write(info.author)</script></a> | 字数: <script type="text/javascript">document.write(info.word)</script> | 更新于:  
+              <script type="text/javascript">document.write(info.date)</script></span>
             </div>
           </div>
         </div>
@@ -199,7 +244,7 @@
           </div>
           <div class="col-md-10 mx-auto">
             <!-- contents page -->
-            <div id="page-placeholder"></div>
+            <div id="page-placeholder" class="mdcss"></div>
             <!-- contents page end-->
             
             <!-- share -->
@@ -244,7 +289,6 @@
 	</div>
 	
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
-	<!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<!-- Custom scripts for this template -->

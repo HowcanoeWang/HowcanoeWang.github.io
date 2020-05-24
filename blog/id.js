@@ -1,18 +1,18 @@
 var section = {
 	/*home default index*/
-	"作者推荐":[21,18,20,9,4,0], 
+	"作者推荐":[21,18,20,9,4], 
 	/*=================*/
 	"读书杂记":[4,12,2,0,5,1,17,18,22],
 	/*-----------------*/
-	"文学小说":[20,0,1,5],
+	"文学小说":[20,1,5],
 	"歌戏影视":[4],
 	"奇技赢巧":[2,12],
     "回顾总结":[17,18,22],
 	/*=================*/
-	"科研技能":[3,14,13,15,16], /*note: article 14 and 13 顺序乱了*/
+	"科研技能":[3], /*note: article 14 and 13 顺序乱了*/
 	/*-----------------*/
 	"Py点云库":[3],
-    "Py三维库":[14,13,15,16],
+    /*"Py三维库":[],*/
 	/*"科研作图":[],
 	"数据处理":[],*/
 	/*"统计分析":[19],*/
@@ -29,13 +29,14 @@ var section = {
 var jsdb = [
 {
 "id":"0",
-"title":"以爱之名，葬汝所幸",
-"subtitle":"——《穆斯林的葬礼》读后感<br>如果他们继续阻挠你的选择，不妨告诉他们，不要以爱的名义去阻挠你的选择，因为，你的人生是你自己的，你的后悔也是你自己承受的，他们无法代替你自己去后悔。",
+"title":"markdown测试页",
+"subtitle":"showmarkdown!",
 "author":"浩瀚猫",
-"word":"2.6k",
+"word":"Error",
 "date":"2015.11.16",
-"img":"https://i.loli.net/2020/04/01/zjIn9uvJB62LHE1.jpg",
-"recommend":[1,4,5]
+"img":"https://tse1-mm.cn.bing.net/th/id/OIP.KLvPfJ6Ui3cZQd4Zj17kJgHaE8?pid=Api&rs=1",
+"file":"000_test.md",
+"recommend":[1,2,3]
 },
 {
 "id":"1",
@@ -45,26 +46,29 @@ var jsdb = [
 "word":"1.1k",
 "date":"2015.03.22",
 "img":"https://i.loli.net/2020/04/01/Md4gRJYNuBUXAVr.jpg",
-"recommend":[0,4,5]
+"file":"001_挪威的森林.md",
+"recommend":[2,4,5]
 },
 {
 "id":"2",
-"title":"我的雅思备考方法",
-"subtitle":"有志者，事竟成，破釜沉舟，百二秦关终属楚；<br>苦心人，天不负，卧薪尝胆，三千越甲可吞吴。",
+"title":"以爱之名，葬汝所幸",
+"subtitle":"——《穆斯林的葬礼》读后感<br>如果他们继续阻挠你的选择，不妨告诉他们，不要以爱的名义去阻挠你的选择，因为，你的人生是你自己的，你的后悔也是你自己承受的，他们无法代替你自己去后悔。",
 "author":"浩瀚猫",
-"word":"4.6k",
-"date":"2015.09.19",
-"img":"https://i.loli.net/2020/04/01/MUq8Ac71zmIGtRC.jpg",
-"recommend":[3]
+"word":"2.6k",
+"date":"2015.11.16",
+"img":"https://i.loli.net/2020/04/01/zjIn9uvJB62LHE1.jpg",
+"file":"002_穆斯林的葬礼.md",
+"recommend":[1,4,5]
 },
 {
 "id":"3",
-"title":"起步：Win10平台python-pcl环境搭建",
+"title":"起步：Win10平台python-pcl环境搭建(内含从源码编译)",
 "subtitle":"开源带来的最明显变化，就是从公司开发人员头发逐渐消失，变为所有用户头发一起逐渐消失。或者你可以选择放弃PCL，拥抱Open3D这个非常简单的库。",
 "author":"浩瀚猫",
 "word":"5.4k",
-"date":"2018.05.08",
+"date":"2020.05.24",
 "img":"https://i.loli.net/2020/04/01/28zgpaBUqk6uNvj.jpg",
+"file":"003_WinPythonPcl.md",
 "recommend":[2,13]
 },
 {
@@ -75,6 +79,7 @@ var jsdb = [
 "word":"2k",
 "date":"2018.05.10",
 "img":"https://i.loli.net/2020/04/01/7XiFgT9KvsY8UE6.jpg",
+"file":"004_头号玩家.md",
 "recommend":[0,1,5]
 },
 {"id":"5",
@@ -84,6 +89,7 @@ var jsdb = [
 "word":"835",
 "date":"2015.03.26",
 "img":"https://i.loli.net/2020/04/01/Ifeaws8465cmdSb.jpg",
+"file":"005_麦田里的守望者.md",
 "recommend":[0,1,4]
 },
 {"id":"6",
@@ -93,6 +99,7 @@ var jsdb = [
 "word":"28",
 "date":"2014.05.26",
 "img":"https://i.loli.net/2020/04/01/HxvdYI1qipusA73.jpg",
+"file":"006_咏梅藏头诗.md",
 "recommend":[9,7,8]
 },
 {"id":"7",
@@ -102,6 +109,7 @@ var jsdb = [
 "word":"28",
 "date":"2014.05.18",
 "img":"https://i.loli.net/2020/04/01/2BWpPUxNu4Xvsjy.jpg",
+"file":"007_与君勉藏头诗.md",
 "recommend":[9,6,8]
 },
 {"id":"8",
@@ -111,6 +119,7 @@ var jsdb = [
 "word":"96",
 "date":"2014.08.20",
 "img":"https://i.loli.net/2020/04/01/n5K2o4gWq7UPEbz.jpg",
+"file":"008_燕藏头诗.md",
 "recommend":[9,6,7]
 },
 {"id":"9",
@@ -120,6 +129,7 @@ var jsdb = [
 "word":"349",
 "date":"2015.09.27",
 "img":"https://i.loli.net/2020/04/01/Qx1G7CbNiOLyc4W.jpg",
+"file":"009_水调歌头中秋.md",
 "recommend":[11]
 },
 {"id":"10",
@@ -129,6 +139,7 @@ var jsdb = [
 "word":"28",
 "date":"2015.10.08",
 "img":"https://i.loli.net/2020/04/01/4YB6KFLN3rS1vaG.jpg",
+"file":"010_绝句.md",
 "recommend":[9]
 },
 {"id":"11",
@@ -138,6 +149,7 @@ var jsdb = [
 "word":"131",
 "date":"2016.10.29",
 "img":"https://i.loli.net/2020/04/01/x3K2VnfFatQuzmj.jpg",
+"file":"011_江城子结荃一载.md",
 "recommend":[9]
 },
 {"id":"12",
@@ -147,43 +159,48 @@ var jsdb = [
 "word":"1.2k",
 "date":"2016.12.8",
 "img":"https://i.loli.net/2020/04/01/MUq8Ac71zmIGtRC.jpg",
+"file":"012_UNBELP.md",
 "recommend":[2,3]
 },
 {"id":"13",
-"title":"第二章 三维可视之TVTK基础",
-"subtitle":"用一个看歌剧小故事类比TVTK库的工作流程(管线)，介绍了TVTK支持的数据格式与数据加载，以及简单的TVTK可视化范例。",
+"title":"历史？",
+"subtitle":"——《万历十五年》读后感<br>test",
 "author":"浩瀚猫",
-"word":"4.2K",
-"date":"2018.12.18",
-"img":"https://i.loli.net/2020/04/01/yFsKDzqIWOUrp5v.jpg",
-"recommend":[14,15,16]
+"word":"4.6k",
+"date":"2020.05.23",
+"img":"http://p1.pstatp.com/large/aae0000fc89ea3eabc10",
+"file":"013_万历十五年.md",
+"recommend":[3]
 },
 {"id":"14",
-"title":"第一章 三维可视之前奏",
-"subtitle":"主要介绍了三维可视化基础，以及三维可视化的Python环境搭建。",
+"title":"404",
+"subtitle":"",
 "author":"浩瀚猫",
-"word":"1.1K",
-"date":"2018.12.18",
-"img":"https://i.loli.net/2020/04/01/yFsKDzqIWOUrp5v.jpg",
-"recommend":[13,15,16]
+"word":"",
+"date":"",
+"img":"",
+"file":"021_我的世界.md",
+"recommend":[]
 },
 {"id":"15",
-"title":"第三章 三维可视之Mayavi基础",
-"subtitle":"介绍了利用MayaVi库里面的Mlab模块，实现了科学数据(就是通过一堆复杂的一逼的数学公式算出来的数据)的三维可视化和使用三维模型(非科学数据)的应用级交互操作",
+"title":"404",
+"subtitle":"",
 "author":"浩瀚猫",
-"word":"8.6K",
-"date":"2018.12.17",
-"img":"https://i.loli.net/2020/04/01/yFsKDzqIWOUrp5v.jpg",
-"recommend":[14,13,16]
+"word":"",
+"date":"",
+"img":"",
+"file":"021_我的世界.md",
+"recommend":[]
 },
 {"id":"16",
-"title":"第四章 三维可视之Traits(UI)基础",
-"subtitle":"介绍了利用Traits库里面的Traits和TraitsUI模块，以及使用他们快速构建应用程序的一些例子",
+"title":"404",
+"subtitle":"",
 "author":"浩瀚猫",
-"word":"10.0K",
-"date":"2018.12.31",
-"img":"https://i.loli.net/2020/04/01/yFsKDzqIWOUrp5v.jpg",
-"recommend":[14,13,15]
+"word":"",
+"date":"",
+"img":"",
+"file":"021_我的世界.md",
+"recommend":[]
 },
 {"id":"17",
 "title":"2017年年终总结",
@@ -192,6 +209,7 @@ var jsdb = [
 "word":"63",
 "date":"2017.12.31",
 "img":"https://i.loli.net/2020/04/01/whtH5e29oWQjviJ.jpg",
+"file":"017_2017年年终总结.md",
 "recommend":[18,22]
 },
 {"id":"18",
@@ -201,6 +219,7 @@ var jsdb = [
 "word":"6.5K",
 "date":"2019.01.06",
 "img":"https://i.loli.net/2020/04/01/whtH5e29oWQjviJ.jpg",
+"file":"018_2018年年终总结.md",
 "recommend":[17,22]
 },
 {"id":"19",
@@ -210,6 +229,7 @@ var jsdb = [
 "word":"61.8K",
 "date":"2020.05.17",
 "img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
+"file":"019_线性代数Chapter1.md",
 "recommend":[2]
 },
 {"id":"20",
@@ -219,6 +239,7 @@ var jsdb = [
 "word":"2.0K",
 "date":"2019.01.20",
 "img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
+"file":"020_排异游戏.md",
 "recommend":[4,0,1]
 },
 {"id":"21",
@@ -228,6 +249,7 @@ var jsdb = [
 "word":"4.3K",
 "date":"2020.01.19",
 "img":"https://i.loli.net/2020/04/01/YLOmu9o1cnR6T2E.jpg",
+"file":"021_我的世界.md",
 "recommend":[3]
 },
 {"id":"22",
@@ -237,6 +259,7 @@ var jsdb = [
 "word":"3.7K",
 "date":"2020.01.01",
 "img":"https://i.loli.net/2020/04/01/whtH5e29oWQjviJ.jpg",
+"file":"022_2019年年终总结.md",
 "recommend":[17,18]
 },
 ];
