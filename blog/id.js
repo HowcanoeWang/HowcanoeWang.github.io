@@ -2,14 +2,14 @@ var section = {
 	/*home default index*/
 	"作者推荐":[21,18,20,9,4], 
 	/*=================*/
-	"读书杂记":[4,12,2,0,5,1,17,18,22],
+	"读书杂记":[4,12,2,5,1,17,18,22],
 	/*-----------------*/
-	"文学小说":[20,1,5],
+	"文学小说":[2,20,1,5],
 	"歌戏影视":[4],
-	"奇技赢巧":[2,12],
+	"奇技赢巧":[12],
     "回顾总结":[17,18,22],
 	/*=================*/
-	"科研技能":[3], /*note: article 14 and 13 顺序乱了*/
+	"科研技能":[3,19], /*note: article 14 and 13 顺序乱了*/
 	/*-----------------*/
 	"Py点云库":[3],
     /*"Py三维库":[],*/
@@ -32,7 +32,7 @@ var jsdb = [
 "title":"markdown测试页",
 "subtitle":"showmarkdown!",
 "author":"浩瀚猫",
-"word":"Error",
+"word":"326",
 "date":"2015.11.16",
 "img":"https://tse1-mm.cn.bing.net/th/id/OIP.KLvPfJ6Ui3cZQd4Zj17kJgHaE8?pid=Api&rs=1",
 "file":"000_test.md",
@@ -65,7 +65,7 @@ var jsdb = [
 "title":"起步：Win10平台python-pcl环境搭建(内含从源码编译)",
 "subtitle":"开源带来的最明显变化，就是从公司开发人员头发逐渐消失，变为所有用户头发一起逐渐消失。或者你可以选择放弃PCL，拥抱Open3D这个非常简单的库。",
 "author":"浩瀚猫",
-"word":"5.4k",
+"word":"5.1k",
 "date":"2020.05.24",
 "img":"https://i.loli.net/2020/04/01/28zgpaBUqk6uNvj.jpg",
 "file":"003_WinPythonPcl.md",
@@ -80,7 +80,7 @@ var jsdb = [
 "date":"2018.05.10",
 "img":"https://i.loli.net/2020/04/01/7XiFgT9KvsY8UE6.jpg",
 "file":"004_头号玩家.md",
-"recommend":[0,1,5]
+"recommend":[1,2,5]
 },
 {"id":"5",
 "title":"守望者究竟在麦田守望啥", 
@@ -90,7 +90,7 @@ var jsdb = [
 "date":"2015.03.26",
 "img":"https://i.loli.net/2020/04/01/Ifeaws8465cmdSb.jpg",
 "file":"005_麦田里的守望者.md",
-"recommend":[0,1,4]
+"recommend":[1,2,4]
 },
 {"id":"6",
 "title":"咏梅●藏头", 
@@ -166,7 +166,7 @@ var jsdb = [
 "title":"历史？",
 "subtitle":"——《万历十五年》读后感<br>test",
 "author":"浩瀚猫",
-"word":"4.6k",
+"word":"827",
 "date":"2020.05.23",
 "img":"http://p1.pstatp.com/large/aae0000fc89ea3eabc10",
 "file":"013_万历十五年.md",
@@ -240,7 +240,7 @@ var jsdb = [
 "date":"2019.01.20",
 "img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
 "file":"020_排异游戏.md",
-"recommend":[4,0,1]
+"recommend":[4,2,1]
 },
 {"id":"21",
 "title":"我的世界(Minecraft)Switch版通过DNS劫持实现连接自建云服务器",

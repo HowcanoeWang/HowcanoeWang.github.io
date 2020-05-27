@@ -189,7 +189,7 @@ python 3.6 => msvc 2017 of PCL-1.8.1 + 升级setuptools到最新版
     或者省心点，直接下载Build Tools for Visual Studio 2017也行
     ![Visual Studio截图](https://i.loli.net/2020/05/24/R6owdZHGcmW3KlO.png)
     https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017
-* Python 3.6.5 Windows x86-64 executable installer，网址是https://www.python.org/downloads/release/python-354/，注意选对版本
+* Python 3.6.5 Windows x86-64 executable installer，网址是https://www.python.org/downloads/release/python-354/ ，注意选对版本
     ![Python版本](https://i.loli.net/2020/05/24/kEKasjxfh2GVbDi.png)
 * numpy‑1.14.3+mkl‑cp36‑cp36m‑win_amd64.whl https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
     下载到PCL_Project文件夹里面，具体的文件名请根据当时的版本号自行改变
@@ -429,7 +429,7 @@ Traceback (most recent call last):
 ImportError: DLL load failed: 找不到指定的模块。
 ```
 
-有大佬https://github.com/strawlab/python-pcl/issues/155用工具定位了一下，发现是OpenNI2.dll没找到，于是把C:\Program Files\OpenNI2\Samples\Bin，这个里面含有OpenNI2.dll, 添加到Path环境变量就行了（这一点已经在上面环境变量那一步修改完成了），至于为什么不建议安装到默认的C:\Program Files里面呢，因为这么操作完，只有在管理员模式下import pcl才不会报错，到普通的IDE里面就同样的报错，因为不开管理员，就没有权限使用系统文件夹里面的文件，盲生你终于发现了华点。
+有大佬 https://github.com/strawlab/python-pcl/issues/155 用工具定位了一下，发现是OpenNI2.dll没找到，于是把C:\Program Files\OpenNI2\Samples\Bin，这个里面含有OpenNI2.dll, 添加到Path环境变量就行了（这一点已经在上面环境变量那一步修改完成了），至于为什么不建议安装到默认的C:\Program Files里面呢，因为这么操作完，只有在管理员模式下import pcl才不会报错，到普通的IDE里面就同样的报错，因为不开管理员，就没有权限使用系统文件夹里面的文件，盲生你终于发现了华点。
 
 如果修改了环境变量依然不能解决的话，找到D:\PCL_Project\PCL 1.8.1\3edParty\OpenNI2\OpenNI-Windows-x64-2.2.msi，双击运行，选择Repair后重启即可。
 

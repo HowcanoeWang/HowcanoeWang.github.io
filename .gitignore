@@ -6,9 +6,10 @@ __record__
 test
 ref.csv
 __pycache__
-*.old/*
+.old/*
 art/img.old/*
 blog/img/page-heading.old/*
 admin_tools/*
-blog.old/*
+.chrome/*
 css/markdown-github.css
+blog/Cent Browser-debug.lnk

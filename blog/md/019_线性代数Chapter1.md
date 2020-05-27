@@ -2,7 +2,7 @@
 
 ---
 
-![](../01线性方程组.svg)
+![](https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/files/19/01线性方程组.svg)
 
 # Part.1 基本问题
 
@@ -28,10 +28,28 @@
 
 |定义|描述|
 |---|---|
-|系数矩阵|把每一个变量的系数写在对其的一列``` \left\{ \begin{array}{rrrcr} x_1 & -2x_2 & +x_3 & = & 0 \\ & 2x_2 & -8x_3 & = & 8 \\5x_1 & & -5x_3 & = & 10 \end{array}\right. \rightarrow \left[ \begin{array}{rrr} 1 & -2 & 1 \\ 0 & 2 & -8 \\ 5 & 0 & -5 \end{array}\right] ​```|
+|系数矩阵|把每一个变量的系数写在对其的一列$$ \left\{ \begin{array}{rrrcr} x_1 & -2x_2 & +x_3 & = & 0 \\ & 2x_2 & -8x_3 & = & 8 \\5x_1 & & -5x_3 & = & 10 \end{array}\right. \rightarrow \left[ \begin{array}{rrr} 1 & -2 & 1 \\ 0 & 2 & -8 \\ 5 & 0 & -5 \end{array}\right] $$|
 |增广矩阵|把右边常数列也添加上$$ \left\{ \begin{array}{rrrcr} x_1 & -2x_2 & +x_3 & = & 0 \\ & 2x_2 & -8x_3 & = & 8 \\5x_1 & & -5x_3 & = & 10 \end{array} \right. \rightarrow \left[ \begin{array}{rrr\|r} 1 & -2 & 1 & 0 \\ 0 & 2 & -8 & 8 \\ 5 & 0 & -5 & 10 \end{array} \right] $$|
 |初等行变换(行化简)|1. **倍加变换**: 某一行换成该行和另一行的和<br>2. **对换变换**: 把两行交换<br>3. **倍乘变换**: 把某一行所有值同时乘非零值|
 |行等价|某个矩阵可以经过`初等行变换`变为另一个矩阵 $$\rightarrow$$ 他俩具有相同的解集|
+
+
+
+上接**Part.4 矩阵方程Ax=b**
+
+## (3) 线性方程组的解集（书1.5节）
+
+| 定义                                 | 描述                                                         |
+| ------------------------------------ | ------------------------------------------------------------ |
+| 齐次 / 非齐次                        | 当矩阵方程$A\mathbf{x}=\mathbf{b}$中, $\mathbf{b}$为$\mathbf{0}$, 即方程组的右边一列都是0, 则称为`齐次`的 |
+| 平凡解                               | $\mathbf{x}=\mathbf{0}$是必然存在的(`零向量`几何意义为坐标轴`原点`) |
+| 非平凡解                             | 其他不为0的"份数"组合, 使得"合力"为0 (把A中每列视为一个方向的力, `解集`为对应力的**份数**)<br />当且仅当方程至少有一个`自由变量`,齐次(矩阵)方程$A\mathbf{x}=\mathbf{b}$有非平凡解 |
+| 向量形式                             | 描述$10x_1-3x_2-2x_3=0$ (1) 的`解集`时, 化简为$x_1=0.3x_2+0.2x_3$, 其中$x_2$和$x_3$为`自由变量`,  通解为<br>$$\mathbf{x} = \left[ \begin{matrix} x_1 \\ x_2 \\ x_3 \end{matrix}\right] = \left[ \begin{matrix} 0.3x_2+0.2x_3 \\ x_2 \\ x_3 \end{matrix}\right] = \left[ \begin{matrix} 0.3x_2 \\ x_2 \\ 0 \end{matrix}\right] + \left[ \begin{matrix} 0.2x_3 \\ 0 \\ x_3 \end{matrix}\right] = x_2\left[ \begin{matrix} 0.3 \\ 1 \\ 0 \end{matrix}\right] + x_3 \left[ \begin{matrix} 0.2 \\ 0 \\ 1 \end{matrix}\right]$$ <br>即化为$\mathbf{x}=x_2 \cdot \mathbf{u} + x_3 \cdot \mathbf{v}$ (2) |
+| 向量形式的几何意义                   | 上面一条, 表明(1)的每个解都是(2)式表示的向量$\mathbf{u}$和$\mathbf{v}$的`线性组合`, 由于两个向量不重叠, 所以`解集`是通过向量$\mathbf{u}$和$\mathbf{v}$的平面$=span\{\mathbf{u}, \mathbf{v}\}$ |
+| 把方程组解集改成参数向量形式         | 1. 把`增广矩阵`行化简成`简化阶梯型`<br />2. 把每个基本变量用自由变量表示<br />3. 把解$\mathbf{x}$表示成向量, 如果有自由变量, 其元素依赖于自由变量<br />4. 把$\mathbf{x}$分解成向量(元素为常数)的`线性组合`, 用`自由变量`作为`参数` |
+| 参数向量方程                         | 上面`向量形式`(1)是平面的`隐式`描述(解析几何), 解方程就是找到这个平面的`显示`描述(用单位向量的分解来表示), 即上面的(2)式$\mathbf{x}=s\mathbf{u}+t\mathbf{v}$(s,t为实数) |
+| 非齐次方程组的解                     | $$A=\left[ \begin{array}{rrr} 3 & 5 & -4 \\ -3 & -2 & 4 \\ 6 & 1 & -8\end{array}\right], \mathbf{b}=\left[ \begin{array}{r} 7 \\ -1 \\ -4 \end{array} \right]$$, 解出来$\begin{array}{rrccr} x_1 & & -\frac{4}{3}x_3 & = & -1 \\ & x_2 & & = & 2 \\ & & 0 & = & 0\end{array}$<br />继续化简<br />$$\mathbf{x} = \left[ \begin{matrix} x_1 \\ x_2 \\ x_3 \end{matrix}\right] = \left[ \begin{matrix} -1 + \frac{4}{3}x_3 \\ 2 \\ x_3 \end{matrix}\right] = \left[ \begin{array}{r} -1 \\ 2 \\ 0 \end{array}\right] + \left[ \begin{matrix} \frac{4}{3}x_3 \\ 0 \\ x_3 \end{matrix}\right] = \left[ \begin{array}{r} -1 \\ 2 \\ 0 \end{array}\right] + x_3 \left[ \begin{matrix} \frac{4}{3} \\ 0 \\ 1 \end{matrix}\right]$$<br />得到参数方程$\mathbf{x}=\mathbf{p} + t\mathbf{v}$ (3), p本身也是方程Ax=b的`特解`<br />![平移](https://i.loli.net/2020/05/27/ZX4xRzWigEJmTK5.png) |
+| **定理六**：非齐次方程组解的几何解释 | 设方程$A\mathbf{x}=\mathbf{b}$对某个$\mathbf{b}$`相容`(有解), $\mathbf{p}$是一个特解, 则$A\mathbf{x}=\mathbf{b}$的可以由$A\mathbf{x}=\mathbf{0}$的解集平移向量$\mathbf{p}$得到 |
 
 
 
@@ -47,10 +65,10 @@
 |主元位置|矩阵对应的`阶梯型`中先导元素的位置|
 |主元列|矩阵中含有`主元位置`的列|
 |行化简算法|---------向前步骤---------<br>1. 从最左的非零列开始<br>2. 选一个非零元素作为主元，换行使它到首行<br>3. 用倍加法，把该元素下面都变成0<br>4. 进入下一列，重复上面步骤<br>---------向后步骤---------<br>5. 由最右边的主元开始，把每个主元上方的元素都变换成0<br>6. 该主元变换成1|
-|基本变量|把`增广矩阵`变成对应的线性方程组时$$\left[ \begin{array}{rrrr} 1 & 0 & -5 & 1\\ 0 & 1 & 1 & 4 \\ 0 & 0 & 0 & 0 \end{array} \right] \rightarrow  \left\{ \begin{array}{rrrcr} x_1 &  & -5x_3 & = & 1 \\ & x_2 & +x_3 & = & 4 \\ & & 0 & = & 0 \end{array} \right. $$对应主元列的变量$$x_1, x_2$$|
+|基本变量|把`增广矩阵`变成对应的线性方程组时<br>$$\left[ \begin{array}{rrrr} 1 & 0 & -5 & 1\\ 0 & 1 & 1 & 4 \\ 0 & 0 & 0 & 0 \end{array} \right] \rightarrow  \left\{ \begin{array}{rrrcr} x_1 &  & -5x_3 & = & 1 \\ & x_2 & +x_3 & = & 4 \\ & & 0 & = & 0 \end{array} \right. $$<br>对应主元列的变量$$x_1, x_2$$|
 |自由变量|其他没有系数的变量如$$x_3$$等|
-|通解+参数表示|把基本变量用自由变量表示，形如$$\left\{ \begin{array}{l} x_1 = 1+5x_3\\ x_2 = 4-x_3 \\ x_3 \text{是自由变量} \end{array}\right.$$的式子，因为$$x_3$$取不同值会影响其他值的取值，这样表示可以表达出所有的取值|
-|**定理二**:存在与唯一性定理|增广矩阵最右列不是主元列，即不存在$$\left[ \begin{matrix} 0 & \cdots & 0 & b \end{matrix}\right], b \neq 0$$，<br>则线性方程组`相容`(`存在性`), 若没有`自由变量`则有唯一解(`唯一性`)，否则有无穷多解|
+|通解+参数表示|把基本变量用自由变量表示，形如<br />$$\left\{ \begin{array}{l} x_1 = 1+5x_3\\ x_2 = 4-x_3 \\ x_3 \text{是自由变量} \end{array}\right.$$<br />的式子，因为$$x_3$$取不同值会影响其他值的取值，<br />这样表示可以表达出所有的取值|
+|**定理二**:存在与唯一性定理|增广矩阵最右列不是主元列，即不存在$$\left[ \begin{matrix} 0 & \cdots & 0 & b \end{matrix}\right], b \neq 0$$，<br>则线性方程组`相容`(`存在性`), <br />若没有`自由变量`则有唯一解(`唯一性`)，否则有无穷多解|
 |行化简解线性方程组|1. 改成`增广矩阵`<br>2. 化为`阶梯型`，判断是否`相容`(有解)<br>3. (若`相容`)化简成`简化阶梯型`<br>4. 写出简化阶梯型的方程组<br>5. 表示成`通解`与`参数形式`|
 
 
@@ -64,7 +82,7 @@
 |零向量|所有元素都为0的向量，元素个数通过上下文确定|
 |标量乘法<br>(数乘)|给定向量$$\mathbf{u}$$和实数$$c$$, 把$$\mathbf{u}$$的每个元素乘以$$c$$, 记为$$c\cdot\mathbf{u}$$|
 |平行四边形法则|两个向量用平面上的点表示，则他们的和可以用两个向量和0向量为三个顶点的平行四边形第四个顶点<br>![](http://www.ivy-end.com/wp-content/uploads/2013/08/5-1-300x263.png)|
-|$$\mathbb{R}^n$$中向量的代数性质|交换律、结合律、分配律|
+|$$\mathbb{R}^n$$中向量的代数性质|交换律、结合律、分配律<br>1. $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$<br />2. $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$<br />3. $\mathbf{u} + \mathbf{0} = \mathbf{0} + \mathbf{u} = \mathbf{u}$<br />4. $\mathbf{u} + (-\mathbf{u}) = -\mathbf{u} + \mathbf{u} = \mathbf{0}$<br />5. $c(\mathbf{u} + \mathbf{v}) = c\mathbf{u} + c\mathbf{v}$<br />6. $(c+d)\mathbf{u} = c\mathbf{u} + d\mathbf{u}$<br />7. $c(d\mathbf{u}) = (cd)\mathbf{u}$<br />8. $1\mathbf{u} = \mathbf{u}$|
 |线性组合|给定$$\mathbb{R}^n$$中的向量$$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_n$$和标量$$c_1, c_2, \cdots, c_n$$, 向量$$\mathbf{y} = c_1\mathbf{v}_1 + \cdots + c_p\mathbf{v}_p$$称为向量v以标量c为`权`的`线性组合`, 几何描述为以这几个向量作为单位坐标网格, 改网格线上对应的点的位置<br>![](https://pic4.zhimg.com/v2-f05fd33a67d91da8d3449b2d6bc10533_r.jpg)|
 |向量方程|$$x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n= \mathbf{b}$$<br>设$$\mathbf{a}_1 = \left[ \begin{array}{r} 1 \\ -2 \\ -5 \end{array} \right], \mathbf{a}_2 = \left[ \begin{array}{r} 2 \\ 5 \\ 6 \end{array} \right], \mathbf{b} = \left[ \begin{array}{r} 7 \\ 4 \\ -3 \end{array} \right]$$,  $$\mathbf{b}$$能否写成$$\mathbf{a}_1, \mathbf{a}_2$$的线性组合? 设权$$x_1$$,$$x_2$$, 使得$$x_1\mathbf{a}_1 + x_2\mathbf{a}_2 = \mathbf{b}$$成立, 即解线性方程组$$\left\{ \begin{array}{rrr} x_1 & + 2x_2  & = & 7 \\ -2x_1 & +5x_2 & = & 4 \\ -5x_1 & +6x_2 & = & -3\end{array} \right.$$|
 |$$Span\{\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p\}$$|$$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p$$是$$\mathbb{R}^n$$中的向量，他们的所有线性组合所组成的集合(即上图中蓝色坐标能取到的所有点)，专业术语，$$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p$$所张成的$$\mathbb{R}^n$$的子集|
@@ -76,15 +94,15 @@
 | 定义                                                         | 描述                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 矩阵与向量的积Ax                                             | $$A\mathbf{x}=[\begin{matrix} \mathbf{a}_1 & \mathbf{a}_2 & \cdots & \mathbf{a}_n \end{matrix}] \left[\begin{matrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{matrix}\right]=x_1\mathbf{a}_1+ x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n$$<br>A的各**列**以x中对应元素为**权**的线性组合, 即**线性组合**=矩阵$$\times$$方程 |
-| 矩阵方程                                                     | 形式为$$A\mathbf{x}=\mathbf{b}$$的 矩阵$$\times$$权向量=向量     |
+| 矩阵方程                                                     | 形式为$$A\mathbf{x}=\mathbf{b}$$的 矩阵$$\times$$权向量=向量 |
 | **定理三**:线性方程组的三种等价形式                          | 1. 矩阵方程 $$A\mathbf{x}=\mathbf{b}$$<br>2. 向量方程 $$x_1\mathbf{a}_1+ x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n=\mathbf{b}$$<br>3. 增广矩阵 $$\left[ \begin{matrix} \mathbf{a}_1 & \mathbf{a}_2 & \cdots & \mathbf{a}_n & \mathbf{b} \end{matrix}\right]$$<br>当构造实际生活中的数学模型时, 可以选取任何一种最自然的观点, 也可以从一个观点转换到另一个观点, 求解时都用`增广矩阵行化简`来求 |
 | 判断方程$$A\mathbf{x}=\mathbf{b}$$是否对任意的$$\mathbf{b}$$都有解 | 先转换成增广矩阵$$\left[ \begin{matrix} \mathbf{a}_1 & \mathbf{a}_2 & \cdots & \mathbf{a}_n & \mathbf{b} \end{matrix}\right]$$, 然后`行化简`成`阶梯型`,判断增广矩阵是否`相容`, 即通过`定理二`判断是否存在$$\left[ \begin{matrix} 0 & \cdots & 0 & b \end{matrix}\right]$$的行, 没有就适用于所有情况 |
 | **定理四**:等价形式的延伸结论                                | 当A为线性方程组的`系数矩阵`时<br>* 方程$$A\mathbf{x}=\mathbf{b}$$对$$\mathbb{R}^m$$中每个$$\mathbf{b}$$都有解 (`矩阵方程`视角)<br>* $$\mathbb{R}^m$$中每个$$\mathbf{b}$$, 都是A的列的一个线性组合 (`向量方程`视角, $$\mathbf{b}$$能写成$$\mathbf{a}_1, \mathbf{a}_n$$的线性组合)<br>* A的各列生成$$\mathbb{R}^m$$ (`Span{}`的定义视角)<br>* A在每一行都有一个主元位置 (矩阵方程`定理二`实际操作) |
-| Ax的行-向量规则                                              |                                                              |
-| 单位矩阵I                                                    |                                                              |
-| **定理五**: 矩阵向量积Ax性质                                 |                                                              |
-|                                                              |                                                              |
-|                                                              |                                                              |
+| Ax的行-向量规则                                              | 若乘积$A\mathbf{x}$有定义, 则$A\mathbf{x}$中第$i$个元素是$A$的第$i$行元素与$x$的相应元素的乘积之和 |
+| 单位矩阵$I$                                                  | 矩阵的主对角线上的元素为1, 其他元素为0, 形如:<br>$$\left[ \begin{matrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{matrix} \right]$$ |
+| **定理五**: 矩阵向量积Ax性质                                 | A是$m \times n$矩阵, $\mathbf{u}$和$\mathbf{v}$是$\mathbb{R}^n$中向量, $c$是标量, 则<br />1. $A(\mathbf{u} + \mathbf{v})=A\mathbf{u} + A\mathbf{v}$<br />2. $A(c\mathbf{u})=c(A\mathbf{v})$ |
+
+下承**Part.1 基本问题**.(3) 线性方程组的解集(书1.5节)
 
 
 
@@ -100,22 +118,3 @@
 
 [1] 线性代数中的线性方程组_part1 https://blog.csdn.net/wvence/article/details/7849121
 
-## 草稿
-
-基本变量与自由变量
-
-3向量方程的基底与几何意义
-
-线性组合的意义与增广矩阵[0 0 0 b]的解
-
-4矩阵方程
-
-a1x1 + ... + anxn =[a1 a2 ... an][x1 x2] = Ax 
-
-A中各列以x为权的线性组合
-
-定理3 的详细
-
-定理4 的详细
-
-定理5 的详细

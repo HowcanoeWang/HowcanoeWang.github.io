@@ -142,62 +142,6 @@
         },'text');
     </script>
     
-    <!-- color codes by highlight.js -->
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-    <!-- Add img title below the img-->
-    <script>
-        window.onload = function () {
-            var anchors = document.getElementsByTagName("img");
-            for (var id in anchors) {
-                var img = anchors.item(id)
-                if (img.hasAttribute('title')){
-                    var imgtitle = document.createElement("div");
-                    imgtitle.classList.add("text-center")
-                    imgtitle.classList.add("text-muted")
-                    imgtitle.innerHTML = img.title;
-                    img.parentNode.insertBefore(imgtitle, img.nextSibling)
-                };
-            };
-        };
-    </script>
-    
-    <!-- Add copy button on code block -->
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
-    <script type="text/javascript">
-        //https://predictablynoisy.com/sphinx-copy-buttons
-        function showCopy(){
-            alert("已复制好，可贴粘。\nHas been copied to clipboard");
-        };
-    
-        function addCopyButtonToCode(){
-            // get all code elements
-            var allCodeBlocksElements = $("pre");
-
-            // For each element, do the following steps
-            allCodeBlocksElements.each(function(ii) {
-                // define a unique id for this element and add it
-                var currentId = "codeblock" + (ii + 1);
-                $(this).attr('id', currentId);
-
-                // create a button that's configured for clipboard.js
-                // point it to the text that's in this code block
-                // add the button just after the text in the code block w/ jquery
-                var clipButton = '<button class="btn copybtn" data-clipboard-target="#' + currentId + '" onclick="showCopy();"><img src="https://clipboardjs.com/assets/images/clippy.svg" width="13" alt="Copy to clipboard"></button>';
-                $(this).before(clipButton); // .after() originally
-            });
-
-            // tell clipboard.js to look for clicks that match this query
-            new Clipboard('.btn');
-        }
-
-        $(document).ready(function () {
-            // Once the DOM is loaded for the page, attach clipboard buttons
-            addCopyButtonToCode();
-        });
-    </script>
-
-    
     <!--script>
     renderMathInElement(document.body,{delimiters: [
                             {left: "$$", right: "$$", display: true},
@@ -292,7 +236,62 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<!-- Custom scripts for this template -->
-  <script src="../js/clean-blog.js"></script>
-  <script src="../js/social-share.min.js"></script>
+    <script src="../js/clean-blog.js"></script>
+    <script src="../js/social-share.min.js"></script>
+    
+    <!-- color codes by highlight.js -->
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- Add img title below the img-->
+    <script>
+        window.onload = function () {
+            var anchors = document.getElementsByTagName("img");
+            for (var id in anchors) {
+                var img = anchors.item(id)
+                if (img.hasAttribute('title')){
+                    var imgtitle = document.createElement("div");
+                    imgtitle.classList.add("text-center")
+                    imgtitle.classList.add("text-muted")
+                    imgtitle.innerHTML = img.title;
+                    img.parentNode.insertBefore(imgtitle, img.nextSibling)
+                };
+            };
+        };
+    </script>
+    
+    <!-- Add copy button on code block -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+    <script type="text/javascript">
+        //https://predictablynoisy.com/sphinx-copy-buttons
+        function showCopy(){
+            alert("已复制好，可贴粘。\nHas been copied to clipboard");
+        };
+    
+        function addCopyButtonToCode(){
+            // get all code elements
+            var allCodeBlocksElements = $("pre");
+
+            // For each element, do the following steps
+            allCodeBlocksElements.each(function(ii) {
+                // define a unique id for this element and add it
+                var currentId = "codeblock" + (ii + 1);
+                $(this).attr('id', currentId);
+
+                // create a button that's configured for clipboard.js
+                // point it to the text that's in this code block
+                // add the button just after the text in the code block w/ jquery
+                var clipButton = '<button class="btn copybtn" data-clipboard-target="#' + currentId + '" onclick="showCopy();"><img src="https://clipboardjs.com/assets/images/clippy.svg" width="13" alt="Copy to clipboard"></button>';
+                $(this).before(clipButton); // .after() originally
+            });
+
+            // tell clipboard.js to look for clicks that match this query
+            new Clipboard('.btn');
+        }
+
+        $(document).ready(function () {
+            // Once the DOM is loaded for the page, attach clipboard buttons
+            addCopyButtonToCode();
+        });
+    </script>
 </body>
 </html>
