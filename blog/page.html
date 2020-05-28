@@ -6,6 +6,8 @@
 	<meta itemprop="name" content="合喵博客"/>
 	<meta itemprop="image" content="http://www.sigmameow.com/images/logo.gif" />
 	<meta name="description" itemprop="description" content="浩瀚猫及基友们的博客集散地" />
+    
+    <title>合喵博客</title>
 
 	<link href="../images/home.ico" rel="icon"> 
 	
@@ -31,29 +33,68 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/default.min.css">
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/highlight.min.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+    
     <!-- latex formular extention-->
     <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.js"></script-->
 
-  
-    <script type="text/javascript">
-      window.onscroll = function() {scrollFunction()};
-
-      function scrollFunction() {
-          if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
-              document.getElementById("myBtn").style.display = "block";
-          } else {
-              document.getElementById("myBtn").style.display = "none";
-          }
-      }
-    </script>
-	
 	<!-- load json database -->
 	<script type="text/javascript" src="id.js"></script> 
-	
-	<!-- read param in url -->
-	<script type="text/javascript">
+  
+    <script type="text/javascript">
+        // template scorll function
+        window.onscroll = function() {scrollFunction()};
+        
+        function scrollFunction() {
+            if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+        /////////////////////////////////////////////////////
+        
+        // Add copy button on code block by clipboard.js
+        //https://predictablynoisy.com/sphinx-copy-buttons
+        function showCopy(){
+            alert("已复制好，可贴粘。\nHas been copied to clipboard");
+        };
+    
+        function addCopyButtonToCode(){
+            // get all code elements
+            var allCodeBlocksElements = $("pre");
+
+            // For each element, do the following steps
+            allCodeBlocksElements.each(function(ii) {
+                // define a unique id for this element and add it
+                var currentId = "codeblock" + (ii + 1);
+                $(this).attr('id', currentId);
+
+                // create a button that's configured for clipboard.js
+                // point it to the text that's in this code block
+                // add the button just after the text in the code block w/ jquery
+                var clipButton = '<button class="btn copybtn" data-clipboard-target="#' + currentId + '" onclick="showCopy();"><img src="https://clipboardjs.com/assets/images/clippy.svg" width="13" alt="Copy to clipboard"></button>';
+                $(this).before(clipButton); // .after() originally
+            });
+
+            // tell clipboard.js to look for clicks that match this query
+            new Clipboard('.btn');
+        }
+        //////////////////////////////////////////////////////////////////////////
+        
+        // read param in url
+        function getQueryVariable(variable){
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                    var pair = vars[i].split("=");
+                    if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        };
+        
         var id = getQueryVariable("id");
         if (typeof id == 'string') {
             var info = jsdb[id];
@@ -69,76 +110,75 @@
                         "img":"../images/blog-bg.jpg",
                         "file":""};
         };
-        function getQueryVariable(variable){
-            var query = window.location.search.substring(1);
-            var vars = query.split("&");
-            for (var i=0;i<vars.length;i++) {
-                    var pair = vars[i].split("=");
-                    if(pair[0] == variable){return pair[1];}
-            }
-            return(false);
-        };
-	</script>
-	
-	<script type="text/javascript">
+
+        // change header back-img and recommend article
 		$(function(){
-			 var urlString = 'url("' + info.img + '")';
-			 $('#header-img').css('background-image', urlString);
-			 });
-		$(function (){
-		var $jsontip = $("#recommand");
-		var show = info.recommend;
-		var recommandHtml = "";
-		$jsontip.empty();
-		for (var id in show) {
-            page = jsdb[show[id]];
-            recommandHtml += '<div class="post-preview">';
-            recommandHtml += '<a href="page.html?id=' + page.id + '">';
-            recommandHtml += '<h3 class="post-title">' + page.title + '</h3>';
-            recommandHtml += '<h5 class="post-subtitle">' + page.subtitle + '</h5></a>';
-            recommandHtml += '<p class="post-meta">字数: ' + page.word + ' | 作者: ' + page.author+ ' | 更新: ' + page.date + '</p></div><hr>';
-		};
-		$jsontip.html(recommandHtml);//显示处理后的数据
+			var urlString = 'url("' + info.img + '")';
+			$('#header-img').css('background-image', urlString);
+            
+            var $jsontip = $("#recommand");
+            var show = info.recommend;
+            var recommandHtml = "";
+            $jsontip.empty();
+            for (var id in show) {
+                page = jsdb[show[id]];
+                recommandHtml += '<div class="post-preview">';
+                recommandHtml += '<a href="page.html?id=' + page.id + '">';
+                recommandHtml += '<h3 class="post-title">' + page.title + '</h3>';
+                recommandHtml += '<h5 class="post-subtitle">' + page.subtitle + '</h5></a>';
+                recommandHtml += '<p class="post-meta">字数: ' + page.word + ' | 作者: ' + page.author+ ' | 更新: ' + page.date + '</p></div><hr>';
+            };
+            $jsontip.html(recommandHtml);//显示处理后的数据
 		});
-	</script>
-	
-	<script type="text/javascript">
+        
+        // change <head> meta infos
 		document.title= info.title;
 		$('meta[itemprop=name]').attr('content', info.title);
 		$('meta[itemprop=image]').attr('content', info.img);
 		$('meta[itemprop=description]').attr('content', info.subtitle);
-	</script>
     
-    <!-- dynamic load nav-bar, side-bar, and article contents -->
-    <script type="text/javascript">
+        // dynamic load nav-bar, side-bar, and article contents
         $.get('../nav.html', function(data) {
            $('#nav-placeholder').html(data);
         });
         $.get('sidebar.html', function(data) {
            $('#left-sidebar').html(data);
         });
+        
+        // Add img title below the img 
+        $(function () {
+            var anchors = document.getElementsByTagName("img");
+            for (var id in anchors) {
+                var img = anchors.item(id)
+                if (img.hasAttribute('title')){
+                    var imgtitle = document.createElement("div");
+                    imgtitle.classList.add("text-center")
+                    imgtitle.classList.add("text-muted")
+                    imgtitle.innerHTML = img.title;
+                    img.parentNode.insertBefore(imgtitle, img.nextSibling)
+                };
+            };
+        });
+        
         // convert markdown
+        var converter = new showdown.Converter();
+        converter.setOption('parseImgDimensions', true);
+        converter.setOption('simplifiedAutoLink', true);
+        converter.setOption('literalMidWordUnderscores', true);            
+        converter.setOption('strikethrough', true);            
+        converter.setOption('tables', true);
+        converter.setOption('tasklists', true);
+        converter.setOption('simpleLineBreaks', true);
+        converter.setOption('emoji', true);
+        
         $.get("md/"+ info.file, function( md ) {
-            var converter = new showdown.Converter();
-            converter.setOption('parseImgDimensions', true);
-            converter.setOption('simplifiedAutoLink', true);
-            converter.setOption('literalMidWordUnderscores', true);            
-            converter.setOption('strikethrough', true);            
-            converter.setOption('tables', true);
-            converter.setOption('tasklists', true);
-            converter.setOption('simpleLineBreaks', true);
-            converter.setOption('emoji', true);
-            
             html = converter.makeHtml(md);
             $('#page-placeholder').html(html);
-            //renderMathInElement(document.body,
-            //                    {delimiters: [
-            //                        {left: "$$", right: "$$", display: true},
-            //                        {left: "\\[", right: "\\]", display: true},
-            //                        {left: "$", right: "$", display: false},
-            //                        {left: "\\(", right: "\\)", display: false}
-            //                        ]}
-            //                    );
+            
+            // Once the markdwon is loaded for the page, attach clipboard buttons
+            addCopyButtonToCode();
+            //  color codes by highlight.js 
+            hljs.initHighlightingOnLoad();
         },'text');
     </script>
     
@@ -149,8 +189,6 @@
     ]});
 
     </script-->
-    
-    <title>合喵博客</title>
 </head>
 <!-- oncontextmenu="return false" ondragstart="return false" onselectstart="return false" onselect="return false" onmouseup="return false" oncopy="return false" onbeforecopy="return false"-->
 <body>
@@ -238,60 +276,5 @@
 	<!-- Custom scripts for this template -->
     <script src="../js/clean-blog.js"></script>
     <script src="../js/social-share.min.js"></script>
-    
-    <!-- Add img title below the img-->
-    <script>
-        $(function () {
-            var anchors = document.getElementsByTagName("img");
-            for (var id in anchors) {
-                var img = anchors.item(id)
-                if (img.hasAttribute('title')){
-                    var imgtitle = document.createElement("div");
-                    imgtitle.classList.add("text-center")
-                    imgtitle.classList.add("text-muted")
-                    imgtitle.innerHTML = img.title;
-                    img.parentNode.insertBefore(imgtitle, img.nextSibling)
-                };
-            };
-        });
-    </script>
-    
-    <!-- Add copy button on code block -->
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
-    <script type="text/javascript">
-        //https://predictablynoisy.com/sphinx-copy-buttons
-        function showCopy(){
-            alert("已复制好，可贴粘。\nHas been copied to clipboard");
-        };
-    
-        function addCopyButtonToCode(){
-            // get all code elements
-            var allCodeBlocksElements = $("pre");
-
-            // For each element, do the following steps
-            allCodeBlocksElements.each(function(ii) {
-                // define a unique id for this element and add it
-                var currentId = "codeblock" + (ii + 1);
-                $(this).attr('id', currentId);
-
-                // create a button that's configured for clipboard.js
-                // point it to the text that's in this code block
-                // add the button just after the text in the code block w/ jquery
-                var clipButton = '<button class="btn copybtn" data-clipboard-target="#' + currentId + '" onclick="showCopy();"><img src="https://clipboardjs.com/assets/images/clippy.svg" width="13" alt="Copy to clipboard"></button>';
-                $(this).before(clipButton); // .after() originally
-            });
-
-            // tell clipboard.js to look for clicks that match this query
-            new Clipboard('.btn');
-        }
-
-        $(function () {
-            // Once the DOM is loaded for the page, attach clipboard buttons
-            addCopyButtonToCode();
-        });
-    </script>
-    
-    <!-- color codes by highlight.js -->
-    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
