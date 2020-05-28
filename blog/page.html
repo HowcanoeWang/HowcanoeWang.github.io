@@ -240,11 +240,15 @@
     <script src="../js/social-share.min.js"></script>
     
     <!-- color codes by highlight.js -->
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+        $(document).ready(function () {
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
     
     <!-- Add img title below the img-->
     <script>
-        window.onload = function () {
+        $(document).ready(function () {
             var anchors = document.getElementsByTagName("img");
             for (var id in anchors) {
                 var img = anchors.item(id)
@@ -256,7 +260,7 @@
                     img.parentNode.insertBefore(imgtitle, img.nextSibling)
                 };
             };
-        };
+        });
     </script>
     
     <!-- Add copy button on code block -->

@@ -6,7 +6,7 @@
 
 # Part.1 基本问题
 
-## (1) 线性方程组&解集
+## (1) 线性方程组&解集定义
 
 |定义|描述|
 |---|---|
@@ -75,6 +75,8 @@
 
 # Part.3 向量方程
 
+## (1) 向量
+
 |定义|描述|
 |---|---|
 |(列)向量|仅含有一列的矩阵，如$$\mathbf{w} = \left[ \begin{matrix} w_1 \\ w_2 \end{matrix} \right]$$，<br/>书中为了省空间，使用了$$(w_1, w_2)$$的形式，注意是**圆括号**|
@@ -83,11 +85,31 @@
 |标量乘法<br>(数乘)|给定向量$$\mathbf{u}$$和实数$$c$$, 把$$\mathbf{u}$$的每个元素乘以$$c$$, 记为$$c\cdot\mathbf{u}$$|
 |平行四边形法则|两个向量用平面上的点表示，则他们的和可以用两个向量和0向量为三个顶点的平行四边形第四个顶点<br>![](http://www.ivy-end.com/wp-content/uploads/2013/08/5-1-300x263.png)|
 |$$\mathbb{R}^n$$中向量的代数性质|交换律、结合律、分配律<br>1. $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$<br />2. $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$<br />3. $\mathbf{u} + \mathbf{0} = \mathbf{0} + \mathbf{u} = \mathbf{u}$<br />4. $\mathbf{u} + (-\mathbf{u}) = -\mathbf{u} + \mathbf{u} = \mathbf{0}$<br />5. $c(\mathbf{u} + \mathbf{v}) = c\mathbf{u} + c\mathbf{v}$<br />6. $(c+d)\mathbf{u} = c\mathbf{u} + d\mathbf{u}$<br />7. $c(d\mathbf{u}) = (cd)\mathbf{u}$<br />8. $1\mathbf{u} = \mathbf{u}$|
+
+## (2) 线性组合
+|定义|描述|
+|---|---|
 |线性组合|给定$$\mathbb{R}^n$$中的向量$$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_n$$和标量$$c_1, c_2, \cdots, c_n$$, 向量$$\mathbf{y} = c_1\mathbf{v}_1 + \cdots + c_p\mathbf{v}_p$$称为向量v以标量c为`权`的`线性组合`, 几何描述为以这几个向量作为单位坐标网格, 改网格线上对应的点的位置<br>![](https://pic4.zhimg.com/v2-f05fd33a67d91da8d3449b2d6bc10533_r.jpg)|
 |向量方程|$$x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n= \mathbf{b}$$<br>设$$\mathbf{a}_1 = \left[ \begin{array}{r} 1 \\ -2 \\ -5 \end{array} \right], \mathbf{a}_2 = \left[ \begin{array}{r} 2 \\ 5 \\ 6 \end{array} \right], \mathbf{b} = \left[ \begin{array}{r} 7 \\ 4 \\ -3 \end{array} \right]$$,  $$\mathbf{b}$$能否写成$$\mathbf{a}_1, \mathbf{a}_2$$的线性组合? 设权$$x_1$$,$$x_2$$, 使得$$x_1\mathbf{a}_1 + x_2\mathbf{a}_2 = \mathbf{b}$$成立, 即解线性方程组$$\left\{ \begin{array}{rrr} x_1 & + 2x_2  & = & 7 \\ -2x_1 & +5x_2 & = & 4 \\ -5x_1 & +6x_2 & = & -3\end{array} \right.$$|
 |$$Span\{\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p\}$$|$$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p$$是$$\mathbb{R}^n$$中的向量，他们的所有线性组合所组成的集合(即上图中蓝色坐标能取到的所有点)，专业术语，$$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p$$所张成的$$\mathbb{R}^n$$的子集|
 |判断$$\mathbf{b}$$是否属于$$Span\{\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p\}$$|即b能否写成$$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p$$的线性组合？即判断向量方程$$x_1\mathbf{v}_1 + x_2\mathbf{v}_2 + \cdots + x_n\mathbf{v}_n= \mathbf{b}$$是否有解，即判断增广矩阵为$$\left[\begin{matrix} \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n & b \end{matrix} \right]$$的线性方程组是否有解|
 |$$Span\{\mathbf{u}\}$$和$$Span\{\mathbf{u}，\mathbf{v} \}$$的几何解释$$^{[1]}$$|u、v非0向量，不是互相的倍数(不然就线性相关了)![span{u}+span{u,v}几何解释](https://i.loli.net/2020/05/20/eD3RpCj75PlwGEg.jpg)|
+
+
+
+## (3) 线性无关 (书1.7节)
+
+| 定义               | 描述                                                         |
+| ------------------ | ------------------------------------------------------------ |
+| 线性无关           | 对于给定的向量集$\{\mathbf{v_1}, \cdots, \mathbf{v_n}\}$, 若它构成的`向量方程`<br />$x_1\mathbf{v_1}+x_2\mathbf{v_2}+ \cdots + x_n\mathbf{v_n} = \mathbf{0}$仅有平凡解, <br />即所有$x_i$都为0时, 等式才成立, 则这个向量集`线性无关` |
+| 线性相关           | 上面的例子中, 存在**不全为**0的权$x_i$使得等式也成立, 则这个向量集`线性相关` |
+| 线性无关的确定方法 | 把对应的`增广矩阵`进行`行变换`, 看是否有`自由变量`, <br />根据`定理二`就是确定是否有系数全是0的行 |
+| 矩阵的线性无关     | 矩阵$A=[\mathbf{a_1} \cdots \mathbf{a_n} ]$, 对应的矩阵方程$A\mathbf{x}=\mathbf{0}$可以写成<br />$$x_1\mathbf{a_1}+x_2\mathbf{a_2}+ \cdots + x_n\mathbf{a_n} = \mathbf{0}$$, <br />根据上面的定义, 当它仅有平凡解时, 矩阵A各列线性无关 |
+| 几何意义           | 当用上面的**向量集**中的向量(**作为基底**)去构建(变换)成新的坐标系时, <br />如果其中有一个向量, 可以被其他向量表示出来, 那么说明这个向量可以被**省略**(**化简**)掉, 这种情况叫做`线性相关`, <br />当没有任何向量可以被其他向量表示时, 说明这个向量集已经达到了最简的情况, 没法继续化简了, 则这种情况叫做`线性无关` |
+| 一个向量的集合     | 当只有一个向量时, 除了向量为0向量, 否则没法用第二个向量来表示, 即任何时候都线性无关 |
+| 两个向量的集合     | 当一个向量是另一个向量的倍数时, 符合线性相关的定义, 可以被化简, 即为`线性相关`, 否则`线性无关`<br />![test.png](https://i.loli.net/2020/05/28/gIsCT4BvN1hHJwS.png) |
+
+
 
 # Part.4 矩阵方程
 
