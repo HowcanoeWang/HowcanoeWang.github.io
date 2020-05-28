@@ -175,6 +175,7 @@
             html = converter.makeHtml(md);
             $('#page-placeholder').html(html);
             
+            setTimeout("console.log(1)", 1000 )
             // Once the markdwon is loaded for the page, attach clipboard buttons
             addCopyButtonToCode();
             //  color codes by highlight.js 
