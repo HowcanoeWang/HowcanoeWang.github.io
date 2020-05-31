@@ -143,7 +143,7 @@
                 return $(this).text() == '[toc]';
             })
             if (ptoc.length == 1) {
-                ptoc.replaceWith($('<div class="toc"><ul id="tocjs"></ul></div>'));
+                ptoc.replaceWith('<div class="toc"><ul id="tocjs"></ul></div>');
                 $("#tocjs").toc({content: "article", headings: "h1,h2,h3"});
                 console.log("10 toc generated");
             };
