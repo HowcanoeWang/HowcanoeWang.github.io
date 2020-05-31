@@ -6,7 +6,7 @@
 
 本文主要讲解Python-PCL库的背景知识与搭建步骤，主要内容有：
 
-[TOC]
+[toc]
 
 # 背景知识
 
@@ -16,7 +16,7 @@
 
 Python，是一种广泛使用的高级编程语言，她的设计哲学是强调代码的可读性和简洁的语法 (尤其是强制使用空格缩进划分代码块而非大括号或关键词)，她跨平台和开源的特点，使其作为一门胶水语言，被广泛的应用在了各个领域中。
 
-![pythoneer](https://i.loli.net/2020/05/24/K7k53gvXjVYTm82.png "Python是世界上最美的语言(痴汉脸)")
+![pythoneer](https://img.moegirl.org/common/c/c0/Python.jpg "Python是世界上最美的语言(痴汉脸)")
 
 ## 点云
 
