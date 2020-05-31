@@ -143,14 +143,21 @@ this is a [link to google][1]
 jmRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAY
 SURBVBhXYwCC/2AAZYEoOAMs8Z+BgQEAXdcR7/Q1gssAAAAASUVORK5CYII=)
 
+# 公式
+text $a = \sqrt{x^2}$ text
+
+$$x=\frac{ -b\pm\sqrt{ b^2-4ac } } {2a}$$
+
+$$\left\{ \begin{array}{rrrcr} 2x_1 & -x_2 & 1.5x_3 & = & 8 \\ x_1 & & -4x_3 & = & -7 \end{array} \right.$$
+
 # 表格
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
 | **col 3 is**  | right-aligned | $1600 |
 | col 2 is      | *centered*    |   $12 |
 | zebra stripes | ~~are neat~~  |    $1 |
-|formular|$a=b$|$$c=d$$|
-|complex|$\begin{array}{cc|c} a & b & c \\ d & e & f \end{array}$|end|
+|formular|$$a=b$$|$$c=d$$|
+|complex|$$\begin{array}{cc\|c} a & b & c \\ d & e & f \end{array}$$|end|
 
 # html
 some markdown **here**
