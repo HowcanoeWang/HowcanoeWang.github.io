@@ -93,7 +93,7 @@
 |向量方程|$x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \cdots + x_n\mathbf{a}_n= \mathbf{b}$<br>设$\mathbf{a}_1 = \left[ \begin{array}{r} 1 \\ -2 \\ -5 \end{array} \right], \mathbf{a}_2 = \left[ \begin{array}{r} 2 \\ 5 \\ 6 \end{array} \right], \mathbf{b} = \left[ \begin{array}{r} 7 \\ 4 \\ -3 \end{array} \right]$,  $\mathbf{b}$能否写成$\mathbf{a}_1, \mathbf{a}_2$的线性组合? 设权$x_1$,$x_2$, 使得$x_1\mathbf{a}_1 + x_2\mathbf{a}_2 = \mathbf{b}$成立, 即解线性方程组$\left\{ \begin{array}{rrr} x_1 & + 2x_2  & = & 7 \\ -2x_1 & +5x_2 & = & 4 \\ -5x_1 & +6x_2 & = & -3\end{array} \right.$|
 |$Span\{\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p\}$|$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p$是$\mathbb{R}^n$中的向量，他们的所有线性组合所组成的集合(即上图中蓝色坐标能取到的所有点)，专业术语，$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p$所张成的$\mathbb{R}^n$的子集|
 |判断$\mathbf{b}$是否属于$Span\{\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p\}$|即b能否写成$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_p$的线性组合？即判断向量方程$x_1\mathbf{v}_1 + x_2\mathbf{v}_2 + \cdots + x_n\mathbf{v}_n= \mathbf{b}$是否有解，即判断增广矩阵为$\left[\begin{matrix} \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n & b \end{matrix} \right]$的线性方程组是否有解|
-|$Span\{\mathbf{u}\}$和$Span\{\mathbf{u}，\mathbf{v} \}$的几何解释$^{[1]}$|u、v非0向量，不是互相的倍数(不然就线性相关了)![span{u}+span{u,v}几何解释](https://i.loli.net/2020/05/20/eD3RpCj75PlwGEg.jpg)|
+|$Span\{\mathbf{u}\}$和$Span\{\mathbf{u}, \mathbf{v} \}$的几何解释$^{[1]}$|u、v非0向量，不是互相的倍数(不然就线性相关了)![span{u}+span{u,v}几何解释](https://i.loli.net/2020/05/20/eD3RpCj75PlwGEg.jpg)|
 
 
 
@@ -138,11 +138,15 @@
 | $A\mathbf{x}=\mathbf{b}$动态观点                             | 把矩阵A当作一种对象, 通过乘法**作用**于向量$\mathbf{x}$, 产生新的向量$\mathbf{b}$, <br />解方程$A\mathbf{x}=\mathbf{b}$就是找到所有经过A变成$\mathbf{b}$的原始向量$\mathbf{x}$ |
 | 函数                                                         | 把一个实数变为另一个实数的规则                               |
 | 变换<br />(映射, 函数)<br /><br />定义域<br />值域<br />余定义域<br />像 | 一个把$\mathbb{R}^n$中每个向量$\mathbf{x}$对应到$\mathbb{R}^m$中的一个向量$T(\mathbf{x})$的变换规则<br />![T:Rn->Rm的定义域, 余定义域, 值域](https://i.loli.net/2020/05/30/gW8bCHT2XVDsAOM.png)<br />$T:\mathbb{R}^n \rightarrow \mathbb{R}^m$说明T的`定义域`是$\mathbb{R}^n$而`余定义域`是$\mathbb{R}^m$, $T(\mathbf{x})$称为$\mathbf{x}$在T的作用下的`像` |
-| 矩阵变换$T(\mathbf{x})=A\mathbf{x}$                          | A为$m \times n$矩阵(m行, n列), 则定义域维度为n, 余定义域维度为m, 把一个n维的向量变换成了m维的向量 |
+| 矩阵变换$T(\mathbf{x})=A\mathbf{x}$                          | *A*为$m \times n$矩阵(m行, n列), 则定义域维度为n, 余定义域维度为m, **把一个n维的向量变换成了m维的向量** |
 | 线性变换的判断                                               | 当变换维线性时, 满足两个条件:<br />1. 直线依旧是直线, 即$T(\mathbf{u}+\mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v})$ & $T(c\mathbf{u})=cT(\mathbf{u})$<br />2. 原点依旧是原点, 即$T(\mathbf{0}) = \mathbf{0}$ |
 | 叠加原理(第四章细说)                                         | 设$\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_n$是进入某个系统的信号, 则$T(\mathbf{v}_1), \cdots, T(\mathbf{v}_n)$是系统对这些输入的相应, 则$T(c_1\mathbf{v}_1 + \cdots + c_n\mathbf{v}_n)=c_1T(\mathbf{v}_1) + \cdots + c_nT(\mathbf{v}_n)$ |
 | **定理10**: 标准矩阵                                         | 设有一个初始二维线性空间的基底向量为$\mathbf{e}_1=\left[ \begin{matrix} 1 \\ 0 \end{matrix}\right], \mathbf{e}_2=\left[ \begin{matrix} 0 \\ 1 \end{matrix}\right]$ (广义上, $\mathbf{e}_i$是单位矩阵$I_n=\left[ \begin{matrix} 1 & 0 & 0 \\ 0 & \ddots & 0 \\ 0 & 0 & 1\end{matrix} \right]$的第$i$列), 经过变换T变成了$T(\mathbf{e}_1), T(\mathbf{e}_2)$, 那么该线性变换的标准矩阵就是$A=\left[T(\mathbf{e}_1) \cdots T(\mathbf{e}_n)\right]$ |
 | 几何线性变换                                                 | 对称, 收缩拉伸, 剪切变换, 投影变换                           |
+| 满射<br />(存在性问题)                                       | ![image.png](https://i.loli.net/2020/06/01/6qFU4cGoYjHrxy1.png)在映射$T: \mathbb{R}^n \rightarrow \mathbb{R}^m$中, $\mathbb{R}^m$中的每个$\mathbf{b}$是$\mathbb{R}^n$中至**少**一个$x$的像<br />等价于: 若对$\mathbb{R}^m$中的每个$\mathbf{b}$, 方程$T(x)=\mathbf{b}$至少有一个解(**有解**)<br />**几何解释**: T是到$\mathbb{R}^m$上的, 即$T(x)$的`值域`是$\mathbb{R}^m$的`余定义域`(右图, 必然有解), 左图是反例, 在余定义域上有一些点$\mathbf{b}$,  在$\mathbb{R}^n$里面找不到对应的解(**无解**) |
+| 单射<br />(唯一性问题)                                       | ![image.png](https://i.loli.net/2020/06/01/1T47YyLx9gvXwtW.png)在**一对一**映射$T: \mathbb{R}^n \rightarrow \mathbb{R}^m$中, $\mathbb{R}^m$中的每个$\mathbf{b}$是$\mathbb{R}^n$中至**多**一个$x$的像<br />等价于: 若对$\mathbb{R}^m$中的每个$\mathbf{b}$, 方程$T(x)=\mathbf{b}$有`唯一解`或`无解`<br />几何意义: $\mathbb{R}^m$中是否有**某**个$\mathbf{b}$是$\mathbb{R}^n$中多个向量的像(左图, 如投影变换), |
+| **定理11**:一对一的判断                                      | 设$T: \mathbb{R}^n \rightarrow \mathbb{R}^m$为**线性**变换, `当且仅当`方程$A\mathbf{x}=\mathbf{0}$仅有平凡解时(0解), T是一对一变换<br />(当且仅当表示两个方向都成立, P当且仅当Q等价于Q当且仅当P)<br />**解释**: 解方程Ax=0的意思为, 要在$\mathbb{R}^n$中找到一个点经变换后在$\mathbb{R}^m$中变成了原点, 要满足一对一的条件, 那么在$\mathbb{R}^n$中只能有一个点(至多一个像, 单射的定义); 又由于是**线性**变换, 线性变换的原点始终不变($T(0)=0$定理), 所以这个点只能是原点, 反应为平凡解(0解) |
+| **定理12**                                                   |                                                              |
 
 
 

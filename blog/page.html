@@ -124,8 +124,8 @@
         function addImgTitleBelowImg() {
             var anchors = document.getElementsByTagName("img");
             console.log(anchors)
-            for (var id in anchors) {
-                var img = anchors.item(id)
+            for (var aid in anchors) {
+                var img = anchors.item(aid)
                 if (img.hasAttribute('title')){
                     var imgtitle = document.createElement("div");
                     imgtitle.classList.add("text-center")
@@ -137,7 +137,7 @@
             console.log("7 head img loaded");
         };
         
-        function generateTOC() {
+        function updateTOC() {
             // https://github.com/ndabas/toc
             var ptoc = $("p").filter(function(index){
                 return $(this).text() == '[toc]';
@@ -199,7 +199,8 @@
                 ],
               }),
             ],
-          });
+        });
+        
         converter.setOption('parseImgDimensions', true);
         converter.setOption('simplifiedAutoLink', true);
         converter.setOption('literalMidWordUnderscores', true);            
@@ -207,7 +208,7 @@
         converter.setOption('tables', true);
         converter.setOption('tasklists', true);
         converter.setOption('simpleLineBreaks', true);
-        converter.setOption('emoji', true);
+        converter.setOption('emoji', true);        
         
         $.get("md/"+ info.file, function( md ) {
             var md_1 = md.replace(/\\{2}/g, "\\\\\\\\")
@@ -215,7 +216,6 @@
             var md_3 = md_2.replace(/\\\}/g, "\\\\\}")
             
             html = converter.makeHtml(md_3);
-            console.log(md_3)
             console.log("4 md file loaded");
             $('#page-placeholder').html(html);
             console.log("5 markdown.html displayed");
@@ -225,23 +225,16 @@
             
             // Once the markdwon is loaded for the page, attach clipboard buttons
             addCopyButtonToCode();
-            
-            //  color codes by highlight.js 
-            hljs.initHighlightingOnLoad();
+                                            
+            // color codes by highlight.js 
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
             console.log("9 highlight.js loaded");
             
-            generateTOC();
+            updateTOC();
             
         },'text');
-    </script>
-    
-    <script type="text/javascript">
-        //var str = "a\\b\\c";
-        //alert(str);
-        //alert(str.replace(/\\/g,"/"));
-        str1 = "\\left\\{ \\begin{array}{rrrcr} 2x_1 & -x_2 & 1.5x_3 & = & 8 \\\\ x_1 & & -4x_3 & = & -7 \\end{array} \\right."
-        console.log(str1)
-        console.log(str1.replace(/\\left\\\{/g, "\\left\\\\\{"))
     </script>
 </head>
 <!-- oncontextmenu="return false" ondragstart="return false" onselectstart="return false" onselect="return false" onmouseup="return false" oncopy="return false" onbeforecopy="return false"-->
@@ -279,8 +272,11 @@
             <div id="left-sidebar" class="sidebar"></div>
           </div>
           <div class="col-md-10 mx-auto">
+            <!--p>[toc]</p>
+            <h1>esdgsefd</h1-->
             <!-- contents page -->
-            <div id="page-placeholder" class="mdcss"></div>
+            <div id="page-placeholder" class="mdcss">
+            </div>
             <!-- contents page end-->
             
             <!-- share -->
@@ -322,9 +318,10 @@
 				<div id="recommand"></div>
 			</div>
 		</div>
+        
 	</div>
 	
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
+    <!--script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<!-- Custom scripts for this template -->
