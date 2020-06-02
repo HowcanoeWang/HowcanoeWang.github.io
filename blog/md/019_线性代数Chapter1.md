@@ -101,9 +101,9 @@
 
 | 定义                                             | 描述                                                         |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| 线性无关                                         | 对于给定的向量集$\{\mathbf{v_1}, \cdots, \mathbf{v_n}\}$, 若它构成的`向量方程`<br />$x_1\mathbf{v_1}+x_2\mathbf{v_2}+ \cdots + x_n\mathbf{v_n} = \mathbf{0}$仅有平凡解, <br />即所有$x_i$都为0时, 等式才成立, 则这个向量集`线性无关` |
+| 线性无关                                         | 对于给定的向量集$\{\mathbf{v_1}, \cdots, \mathbf{v_n}\}$, 若它构成的`向量方程`<br />$x_1\mathbf{v_1}+x_2\mathbf{v_2}+ \cdots + x_n\mathbf{v_n} = \mathbf{0}$仅有平凡解 (没有自由变量) <br />即所有$x_i$都为0时, 等式才成立, 则这个向量集`线性无关` |
 | 线性相关                                         | 上面的例子中, 存在**不全为**0的权$x_i$使得等式也成立, 则这个向量集`线性相关` |
-| 线性无关的确定方法                               | 把对应的`增广矩阵`进行`行变换`, 看是否有`自由变量`, <br />根据`定理二`就是确定是否有系数全是0的行 |
+| **线性无关的确定方法**                           | 把对应的`增广矩阵`进行`行变换`, 看是否有`自由变量`, <br />根据`定理二`就是确定是否有系数全是0的行, 有0行就线性相关, 没有就线性无关 |
 | 矩阵的线性无关                                   | 矩阵$A=[\mathbf{a_1} \cdots \mathbf{a_n} ]$, 对应的矩阵方程$A\mathbf{x}=\mathbf{0}$可以写成<br />$x_1\mathbf{a_1}+x_2\mathbf{a_2}+ \cdots + x_n\mathbf{a_n} = \mathbf{0}$, <br />根据上面的定义, 当它仅有平凡解时, 矩阵A各列线性无关 |
 | 几何意义                                         | 当用上面的**向量集**中的向量(**作为基底**)去构建(变换)成新的坐标系时, <br />如果其中有一个向量, 可以被其他向量表示出来, 那么说明这个向量可以被**省略**(**化简**)掉, 这种情况叫做`线性相关`, <br />当没有任何向量可以被其他向量表示时, 说明这个向量集已经达到了最简的情况, 没法继续化简了, 则这种情况叫做`线性无关` |
 | 一个向量的集合                                   | 当只有一个向量时, 除了向量为0向量, 否则没法用第二个向量来表示, 即任何时候都线性无关 |
@@ -146,11 +146,25 @@
 | 满射<br />(存在性问题)                                       | ![image.png](https://i.loli.net/2020/06/01/6qFU4cGoYjHrxy1.png)在映射$T: \mathbb{R}^n \rightarrow \mathbb{R}^m$中, $\mathbb{R}^m$中的每个$\mathbf{b}$是$\mathbb{R}^n$中至**少**一个$x$的像<br />等价于: 若对$\mathbb{R}^m$中的每个$\mathbf{b}$, 方程$T(x)=\mathbf{b}$至少有一个解(**有解**)<br />**几何解释**: T是到$\mathbb{R}^m$上的, 即$T(x)$的`值域`是$\mathbb{R}^m$的`余定义域`(右图, 必然有解), 左图是反例, 在余定义域上有一些点$\mathbf{b}$,  在$\mathbb{R}^n$里面找不到对应的解(**无解**) |
 | 单射<br />(唯一性问题)                                       | ![image.png](https://i.loli.net/2020/06/01/1T47YyLx9gvXwtW.png)在**一对一**映射$T: \mathbb{R}^n \rightarrow \mathbb{R}^m$中, $\mathbb{R}^m$中的每个$\mathbf{b}$是$\mathbb{R}^n$中至**多**一个$x$的像<br />等价于: 若对$\mathbb{R}^m$中的每个$\mathbf{b}$, 方程$T(x)=\mathbf{b}$有`唯一解`或`无解`<br />几何意义: $\mathbb{R}^m$中是否有**某**个$\mathbf{b}$是$\mathbb{R}^n$中多个向量的像(左图, 如投影变换), |
 | **定理11**:一对一的判断                                      | 设$T: \mathbb{R}^n \rightarrow \mathbb{R}^m$为**线性**变换, `当且仅当`方程$A\mathbf{x}=\mathbf{0}$仅有平凡解时(0解), T是一对一变换<br />(当且仅当表示两个方向都成立, P当且仅当Q等价于Q当且仅当P)<br />**解释**: 解方程Ax=0的意思为, 要在$\mathbb{R}^n$中找到一个点经变换后在$\mathbb{R}^m$中变成了原点, 要满足一对一的条件, 那么在$\mathbb{R}^n$中只能有一个点(至多一个像, 单射的定义); 又由于是**线性**变换, 线性变换的原点始终不变($T(0)=0$定理), 所以这个点只能是原点, 反应为平凡解(0解) |
-| **定理12**                                                   |                                                              |
-
-
+| **定理12**                                                   | 设$T: \mathbb{R}^n \rightarrow \mathbb{R}^m$为**线性**变换, A为T的标准矩阵, 则:<br />1. 当且仅当A的列生成$\mathbb{R}^m$时, T把$\mathbb{R}^n$映射到$\mathbb{R}^m$上, (即满射)<br />2. `定理11`+当且仅当A的列`线性无关`(`向量方程`仅有平凡解, `系数矩阵`没有`自由变量`), T是一对一的 |
 
 # Part.6 应用
+
+## (1) 经济学中的齐次线性方程组
+
+即一个系统内部每个部分的总产出是如何分配(或交易)到其他部分的
+
+**例1**: 一个经济系统由煤炭, 电力, 和钢铁三个部分组成, 各部门之间的分配如图所示, 如何分配各个资源的价格, 能使得系统内收支平衡?
+
+<img src="https://i.loli.net/2020/06/02/M3sCKnv9HBrFRiI.png" width="400px" title="经济系统"/>
+
+**解**: 用一个表格把上面的图换成如下的表, 并且标上对应的价格:
+
+<table><tbody><tr><td align="center" valign="middle" style="width:120px" class="" rowspan="1" colspan="3">部门的产出分配</td><td align="center" valign="middle" style="width:120px" class="" rowspan="2" colspan="1">采购部门</td></tr><tr><td align="center" valign="middle" style="width:120px" class="">煤炭(价格Pc)</td><td align="center" valign="middle" style="width:120px" class="">电力(价格Pe)</td><td align="center" valign="middle" style="width:120px" class="">钢铁(价格Ps)</td></tr><tr><td align="center" valign="middle" style="width:120px" class="">0.0</td><td align="center" valign="middle" style="width:120px" class="">0.4</td><td align="center" valign="middle" style="width:120px" class="">0.6</td><td align="center" valign="middle" style="width:120px" class="">煤炭</td></tr><tr><td align="center" valign="middle" style="width:120px" class="">0.6</td><td align="center" valign="middle" style="width:120px" class="">0.1</td><td align="center" valign="middle" style="width:120px" class="">0.2</td><td align="center" valign="middle" style="width:120px" class="">电力</td></tr><tr><td align="center" valign="middle" style="width:120px" class="">0.4</td><td align="center" valign="middle" style="width:120px" class="">0.5</td><td align="center" valign="middle" style="width:120px" class="">0.2</td><td align="center" valign="middle" style="width:120px" class="">钢铁</td></tr></tbody></table>
+
+要使收拾平衡, 以煤炭为例, 产出为$P_c$, 成本为 $0.0 \times P_c + 0.4 \times P_e + 0.6 \times P_s$, 二者要相等, 即$P_c - ( 0.0 \times P_c + 0.4 \times P_e + 0.6 \times P_s ) = 0$, 推广到其他部门, 可以产出下面的方程组
+
+$$\left\{ \begin{array}{rrrrr} P_c & -0.4P_e & -0.6P_s & = 0 \\ -0.6P_c &  +0.9P_e & -0.2P_s & =0 \\ -0.4P_c & -0.5P_e & +0.8P_s & =0 \end{array} \right.$$
 
 
 
