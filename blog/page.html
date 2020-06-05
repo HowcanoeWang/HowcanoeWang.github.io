@@ -54,12 +54,16 @@
         window.onscroll = function() {scrollFunction()};
         
         function scrollFunction() {
-            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+            if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
                 document.getElementById("myBtn").style.display = "block";
-                document.getElementById("live2dcanvas").style.display = "block";
+                if (document.getElementById("live2dcanvas") !== null){
+                    document.getElementById("live2dcanvas").style.display = "block";
+                };
             } else {
                 document.getElementById("myBtn").style.display = "none";
-                document.getElementById("live2dcanvas").style.display = "none";
+                if (document.getElementById("live2dcanvas") !== null){
+                    document.getElementById("live2dcanvas").style.display = "none";
+                };
             };
         };
         
@@ -68,8 +72,8 @@
             var query = window.location.search.substring(1);
             var vars = query.split("&");
             for (var i=0;i<vars.length;i++) {
-                    var pair = vars[i].split("=");
-                    if(pair[0] == variable){return pair[1];}
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
             }
             console.log("0 ?id get")
             return(false);
@@ -216,9 +220,11 @@
         converter.setOption('emoji', true);        
         
         $.get("md/"+ info.file, function( md ) {
+            console.log(md)
             var md_1 = md.replace(/\\{2}/g, "\\\\\\\\")
             var md_2 = md_1.replace(/\\\{/g, "\\\\\{");
             var md_3 = md_2.replace(/\\\}/g, "\\\\\}")
+            console.log(md_3)
             
             html = converter.makeHtml(md_3);
             console.log("4 md file loaded");
