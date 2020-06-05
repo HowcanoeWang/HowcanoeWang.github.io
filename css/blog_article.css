@@ -16,6 +16,8 @@
 .mdcss h2 {
   font-size: 30px;
   margin-top: 30px;
+  padding-bottom: .3em;
+  border-bottom: 1px solid #eaecef;
 }
 
 .mdcss h3 {

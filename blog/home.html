@@ -18,9 +18,21 @@
 		
         <!-- jQuery -->
         <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
+        
+        <script type="text/javascript" charset="utf-8" async="" src="https://cdn.jsdelivr.net/npm/live2d-widget@3.0.5/lib/L2Dwidget.min.js"></script>
 		
 		<script type="text/javascript" src="id.js"></script>
 		<script type="text/javascript">
+        window.onscroll = function() {scrollFunction()};
+        
+        function scrollFunction() {
+            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                document.getElementById("live2dcanvas").style.display = "block";
+            } else {
+                document.getElementById("live2dcanvas").style.display = "none";
+            };
+        };
+        
 		/*get ?section string in url*/
 		var sid = decodeURI(getQueryVariable('section'));
 		if (sid == 'false') {
@@ -116,6 +128,32 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     	<!-- Custom scripts for this template -->
-    	<script src="/js/clean-blog.js"></script>
+    	<!--script src="/js/clean-blog.js"></script-->
+        <!-- 右下角live2d效果 -->
+        <script type="text/javascript">
+        setTimeout(() => {
+            L2Dwidget.init({
+                "model": {
+                    "jsonPath": 'https://cdn.jsdelivr.net/gh/xiazeyu/live2d-widget-models/packages/live2d-widget-model-hijiki/assets/hijiki.model.json',
+                    "scale": 1
+                },
+                "display": {
+                    "position": "left",
+                    "width": 90,
+                    "height": 130,
+                    "hOffset": 10,
+                    "vOffset": -20
+                },
+                "mobile": {
+                    "show": false,
+                    "scale": 1
+                },
+                "react": {
+                    "opacityDefault": 0.7,
+                    "opacityOnHover": 0.2
+                }
+            });
+        }, 1000)
+        </script>
 	</body>
 </html>
