@@ -220,14 +220,14 @@
         converter.setOption('emoji', true);        
         
         $.get("md/"+ info.file, function( md ) {
-            console.log(md)
+            //console.log(md)
             var md_1 = md.replace(/\\{2}/g, "\\\\\\\\")
             var md_2 = md_1.replace(/\\\{/g, "\\\\\{");
             var md_3 = md_2.replace(/\\\}/g, "\\\\\}")
-            console.log(md_3)
+            //console.log(md_3)
             
             html = converter.makeHtml(md_3);
-            console.log("4 md file loaded");
+            console.log("4 md file " + info.file + " loaded");
             $('#page-placeholder').html(html);
             console.log("5 markdown.html displayed");
             
