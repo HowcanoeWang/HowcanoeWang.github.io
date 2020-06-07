@@ -1,15 +1,5 @@
-linux.conf/*
-__history__
-__example__
-__record__
 *.psd
-test
-ref.csv
-__pycache__
 .old/*
-art/img.old/*
-blog/img/page-heading.old/*
-admin_tools/*
-.chrome/*
+.idea/*
 css/markdown-github.css
 blog/Cent Browser-debug.lnk

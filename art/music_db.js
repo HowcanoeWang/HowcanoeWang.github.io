@@ -3,9 +3,18 @@ var musicList = [
   {
     "id":"0",
     "name":"动漫歌曲",
+    "tag":"口琴歌单",
     "intro":"动画中的BGM，时而轻快，时而忧伤，包含了绮丽多彩的情愫，牵动着剧情的发展。天空之城、Secret Base都是口琴的入门歌曲，吹奏的同时脑海中不断浮现出的剧情，倾听清亮的琴音，让时间静静流逝，让旋律在心中流淌。",
     "cover":"https://i.loli.net/2020/04/01/qRCIwuXixNO5yPE.png",
     "song":[0,1,2,3]
+  },
+  {
+    "id":"1",
+    "name":"动漫串烧",
+    "tag":"Remix",
+    "intro":"违和感？？",
+    "cover":"https://i.loli.net/2020/04/01/qRCIwuXixNO5yPE.png",
+    "song":[2]
   }
 ];
 
@@ -17,7 +26,7 @@ var song = [
     "singer":"浩瀚猫",
     "time":"05:36",
     "cover":"https://i.loli.net/2020/04/01/3S1KeANhaWdmyJo.jpg",
-    "mv":NaN,
+    "mv":"",
     "mp3":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/art/audio/Secret Base.mp3",
     "score":"score/secret_base.pdf"
   },
@@ -28,7 +37,7 @@ var song = [
     "singer":"浩瀚猫|飘零",
     "time":"02:07",
     "cover":"https://i.loli.net/2020/04/01/DdP5juNI4Bbming.jpg",
-    "mv":NaN,
+    "mv":"",
     "mp3":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/art/audio/天空之城.mp3",
     "score":"score/天空之城.pdf"
   },
