@@ -5,7 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="../images/home.ico" rel="icon">
-    <meta itemprop="description" content="合喵博客，囊括影评书评、个人随笔与学习笔记，科研板块涉及数据处理、数据可视化、数理统计等基本技能，以及点云数据与鱼眼相机、全景相机图像信息提取">
+        <meta itemprop="description" content="合喵博客，囊括影评书评、个人随笔与学习笔记，科研板块涉及数据处理、数据可视化、数理统计等基本技能，以及点云数据与鱼眼相机、全景相机图像信息提取">
 		
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -26,10 +26,12 @@
         window.onscroll = function() {scrollFunction()};
         
         function scrollFunction() {
-            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-                document.getElementById("live2dcanvas").style.display = "block";
-            } else {
-                document.getElementById("live2dcanvas").style.display = "none";
+            if (document.getElementById("live2dcanvas") !== null){
+                if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                    document.getElementById("live2dcanvas").style.display = "block";
+                } else {
+                    document.getElementById("live2dcanvas").style.display = "none";
+                };
             };
         };
         
@@ -50,18 +52,29 @@
 	  	};
 		/* rendering the page html code */
 		$(function (){
-		  var $jsontip = $("#jsonTip");
-		  var strHtml = "";
-		  $jsontip.empty();
-		  for (var id in show) {
-		    info = jsdb[show[id]];
-		    strHtml += '<div class="post-preview">';
-		    strHtml += '<a href="page.html?id=' + info.id + '">';
-		    strHtml += '<h3 class="post-title">' + info.title + '</h3>';
-		    strHtml += '<h5 class="post-subtitle">' + info.subtitle + '</h5></a>';
-		    strHtml += '<p class="post-meta">字数: ' + info.word + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div><hr>';
-		  };
-		  $jsontip.html(strHtml);//显示处理后的数据
+		    var $jsontip = $("#jsonTip");
+		    var strHtml = "";
+		    $jsontip.empty();
+            // example code
+            //<div class="post-preview">
+            //    <a href="p/1.html">
+            //    <h3 class="post-title">
+            //    我的雅思备考方法
+            //    </h3>
+            //    <h5 class="post-subtitle">
+            //     有志者，事竟成，破釜沉舟，百二秦关终属楚；<br>苦心人，天不负，卧薪尝胆，三千越甲可吞吴。
+            //    </h5>
+            //    </a>
+            //<p class="post-meta">浏览: 12 | 作者: 浩瀚猫 | 更新: 2015.09.19</p>
+		    for (var id in show) {
+		        info = jsdb[show[id]];
+		        strHtml += '<div class="post-preview">';
+		        strHtml += '<a href="page.html?id=' + info.id + '">';
+		        strHtml += '<h3 class="post-title">' + info.title + '</h3>';
+		        strHtml += '<h5 class="post-subtitle">' + info.subtitle + '</h5></a>';
+		        strHtml += '<p class="post-meta">字数: ' + info.word + ' | 作者: ' + info.author+ ' | 更新: ' + info.date + '</p></div><hr>';
+		    };
+		    $jsontip.html(strHtml);//显示处理后的数据
 		});
 		</script> 
         
@@ -105,30 +118,14 @@
 						<a class="text-center text-muted col-1"><h1><script type="text/javascript">document.write(sid);</script></h1></a>
 						<hr>
 						<div id="jsonTip"></div> 
-						<!-- example code
-						<div class="post-preview">
-							<a href="p/1.html">
-							<h3 class="post-title">
-							我的雅思备考方法
-							</h3>
-							<h5 class="post-subtitle">
-							 有志者，事竟成，破釜沉舟，百二秦关终属楚；<br>苦心人，天不负，卧薪尝胆，三千越甲可吞吴。
-							</h5>
-							</a>
-						<p class="post-meta">浏览: 12 | 作者: 浩瀚猫 | 更新: 2015.09.19</p>
-						-->
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Bootstrap core JavaScript -->
-        <!--script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script-->
-    	<!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script-->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    	<!-- Custom scripts for this template -->
-    	<!--script src="/js/clean-blog.js"></script-->
         <!-- 右下角live2d效果 -->
         <script type="text/javascript">
         setTimeout(() => {
