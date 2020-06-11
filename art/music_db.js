@@ -56,7 +56,7 @@ var song = [
     "id":"3",
     "name":"いつも何度でも（《千与千寻》主题曲）",
     "date":"2020.03.17",
-    "singer":"浩瀚猫",
+    "singer":"浩瀚猫|绽放式微笑",
     "time":"02:24",
     "cover":"https://i.loli.net/2020/04/01/1vqUbTdIyxOHQ7n.jpg",
     "mv":"https://www.bilibili.com/video/BV1H7411d7t9",
