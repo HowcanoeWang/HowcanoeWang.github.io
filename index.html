@@ -81,7 +81,7 @@
             songHtml += '    <div class="mb-1 text-dark" href="#">' + songInfo.date + '</div>';
             songHtml += '    <div class="mb-2 text-muted">时长: ' + songInfo.time + '</div>';
             songHtml += '    <p class="card-text mb-auto ">作者：<span>'+ songInfo.singer + '</span></p>';
-            songHtml += '    <a class="btn btn-outline-dark" href="http://www.sigmameow.com/art/music.html" target="_blank">查看</a>';
+            songHtml += '    <a class="btn btn-outline-dark" href="http://www.sigmameow.com/art/music.html?song='+songInfo.id+'" target="_blank">查看</a>';
             songHtml += '  </div>';
             songHtml += '  <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/250x250?theme=thumb" alt="Thumbnail [250x250]" style="width: 250px; height: 250px;" src="' + songInfo.cover + '" data-holder-rendered="true">';
             songHtml += '</div>';
@@ -226,7 +226,7 @@
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <!--script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script-->
 		<!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script-->
-		<script src="https://unpkg.com/@popperjs/core@2"></script>
+		<script src="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/js/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	</body>
 </html>
