@@ -43,6 +43,8 @@
 
     <!--musicplayer -->
     <script type="text/javascript">
+        // related blog: https://blog.csdn.net/petrelselina/article/details/50709693
+        // source code: https://github.com/petrelselina/awesome/blob/master/Demos/musicPlayer/player.js
         var ctx ={
             isPlaying:false,
             playListId:0,
@@ -54,7 +56,18 @@
             $needle:null,
             $discCover:null, /*封面图url*/
             $playBtn:null,
-            $pauseBtn:null
+            $pauseBtn:null,
+            /*progress bar*/
+            $curTime: null,
+            //$totTime: null,
+            $processBtn: null,
+            $processBar: null,
+            $rdyBar: null,
+            $curBar: null,
+            processBtnState: 0,
+            originX: 0,
+            originCur: 0,
+            originRdy:0,
         };
 
         ctx.init = function(){
@@ -62,10 +75,10 @@
             ctx._initData();
             /*ctx._initState();*/
             /*
-            ctx.updateSong();
+            ctx.updateSong();*/
             ctx.setInterval();
             ctx._initProcessBtn(ctx.$processBtn);
-            ctx.updateCoverState(0);*/
+            /*ctx.updateCoverState(0);*/
         };
 
         ctx._initData = function(){
@@ -81,6 +94,13 @@
             ctx.$buttom_pic = $('#buttom_Pic');
             ctx.$buttom_name = $('#buttom_name');
             ctx.$buttom_singer = $('#buttom_singer');
+            /* progress */
+            ctx.$curTime = $('#processCrtTime');
+            //ctx.$totTime = $('#totalTime');
+            ctx.$processBtn = $('#processBtn');
+            ctx.$processBar = $('#processBar');
+            ctx.$rdyBar = $('#processCache');
+            ctx.$curBar = $('#processCrt');
         };
 
         ctx._initPlayList = function(){
@@ -90,6 +110,54 @@
         ctx._initState = function(){
             alert('initstate');
         };
+
+        ctx._initProcessBtn = function ($btn) {
+            var moveFun = function (e) {
+                    var duration = ctx.player.duration,
+                        e = e.originalEvent,
+                        totalWidth = ctx.$processBar.width(), percent, moveX, newWidth, time_str;
+
+                    e.preventDefault();
+                    if (ctx.processBtnState) {
+                        moveX = (e.clientX || e.touches[0].clientX) - ctx.originX;
+                        newWidth = ctx.originCur + moveX;
+                        newRdyWidth = ctx.originRdy - moveX;
+
+                        if (newWidth > totalWidth) {
+                            ctx.processBtnState = 0;
+                        } else {
+                            percent = newWidth / totalWidth;
+                            time_str = validateTime(percent * duration / 60) + ":" + validateTime(percent * duration % 60)
+                            ctx.$curBar.width(newWidth);
+                            ctx.$rdyBar.width(newRdyWidth);
+                            ctx.$curTime.text(time_str);
+                        }
+                    }
+                },
+                startFun = function (e) {
+                    e = e.originalEvent;
+                    ctx.processBtnState = 1;
+                    ctx.originX = (e.clientX || e.touches[0].clientX);
+                    ctx.originCur = ctx.$curBar.width();
+                    ctx.originRdy = ctx.$rdyBar.width();
+                    document.getElementById('processCrt').style.transition = "none";
+                    document.getElementById('processCache').style.transition = "none";
+                },
+                endFun = function () {
+                    if (ctx.processBtnState) {
+                        ctx.player.currentTime = ctx.$curBar.width() / ctx.$processBar.width() * ctx.player.duration;
+                        ctx.processBtnState = 0;
+                        ctx.originCur = 0;
+                        ctx.originRdy = 0;
+                        document.getElementById('processCrt').style.transition = null;
+                        document.getElementById('processCache').style.transition = null;
+                        ctx.updateProcess();
+                    }
+                };
+            $btn.on('mousedown touchstart', startFun);
+            $("body").on('mouseup touchend', endFun);
+            $("#processBar").on('mousemove touchmove', moveFun);
+        }
 
         ctx.play = function () {
             ctx.player.play();
@@ -166,6 +234,38 @@
         ctx.add2PlayList = function(){
             alert("增加到播放列表");
         };
+
+        ctx.updateProcess = function () {
+            var buffer = ctx.player.buffered,
+                bufferTime = buffer.length > 0 ? buffer.end(buffer.length - 1) : 0,
+                duration = ctx.player.duration,
+                currentTime = ctx.player.currentTime;
+            //ctx.$totTime.text(validateTime(duration / 60) + ":" + validateTime(duration % 60));
+            ctx.$rdyBar.width(((bufferTime - currentTime)/ duration + 18 / ctx.$processBar.width()) * 100 + '%');
+            if (!ctx.processBtnState) {
+                ctx.$curBar.width(currentTime / duration * 100 + '%');
+                ctx.$curTime.text(validateTime(currentTime / 60) + ":" + validateTime(currentTime % 60));
+            }
+        };
+
+        ctx.setInterval = function () {
+            if (!ctx.interval) {
+                ctx.updateProcess();
+                ctx.interval = setInterval(ctx.updateProcess, 1000);
+            }
+        };
+
+        ctx.clearInterval = function () {
+            if (ctx.interval) {
+                clearInterval(ctx.interval);
+            }
+
+        };
+
+        function validateTime(number) {
+            var value = (number > 10 ? number + '' : '0' + number).substring(0, 2);
+            return isNaN(value) ? '00' : value;
+        }
 
         $(function () {
             ctx.init();
@@ -411,10 +511,12 @@
 
 <!-- 底端控制条 -->
 <div class="container bg-white fixed-bottom">
-    <div class="row progress">
-        <div class="progress-bar bg-secondary progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="20"
-             aria-valuemin="0" aria-valuemax="100" style="width:20%">01:23</div>
+    <div class="row progress" id="processBar">
+        <div class="progress-bar bg-secondary progress-bar-striped progress-bar-animated" style="width:0%;" id="processCrt">
+            <span id="processCrtTime">01:23</span>
+        </div>
         <div id="processBtn" class="btn btn-sm bg-white"></div>
+        <div class="progress-bar bg-secondary" style="width:0%" id="processCache"></div>
     </div>
     <div class="control_panel">
         <div class="poster text-center">

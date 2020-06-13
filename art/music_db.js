@@ -24,7 +24,7 @@ var song = [
     "name":"Secret Base（《未闻花名》ed）",
     "date":"2018.07.17",
     "singer":"浩瀚猫",
-    "time":"05:36",
+    "time":"06:18",
     "cover":"https://i.loli.net/2020/04/01/3S1KeANhaWdmyJo.jpg",
     "mv":"",
     "mp3":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/art/audio/Secret Base.mp3",
