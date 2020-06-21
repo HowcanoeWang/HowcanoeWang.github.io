@@ -47,7 +47,7 @@
         // source code: https://github.com/petrelselina/awesome/blob/master/Demos/musicPlayer/player.js
         var ctx ={
             isPlaying:false,
-            playListId:0,
+            //playListId:0,
             playList:[],
             currentIndex:null, /*playlist 里面的ID*/
             currentSong:null,
@@ -73,7 +73,7 @@
         ctx.init = function(){
             ctx._initPlayList();
             ctx._initData();
-            /*ctx._initState();*/
+            ctx._initState();
             /*
             ctx.updateSong();*/
             ctx.setInterval();
@@ -104,12 +104,20 @@
         };
 
         ctx._initPlayList = function(){
-            ctx.playList = musicList[ctx.playListId].song_list;
+            //ctx.playList = musicList[ctx.playListId].song_list;
             ctx.refreshPlayList();
         };
 
+        /* 判断是否播放完毕，播完了就下一首 */
         ctx._initState = function(){
-            alert('initstate');
+            ctx.player.addEventListener('ended', function(){
+                /*if(ctx.singleLoop){
+                    ctx.moveTo(ctx.currentIndex);
+                }else{
+                    ctx.next();
+                }*/
+                ctx.next();
+            });
         };
 
         ctx.play = function () {
@@ -129,6 +137,26 @@
             ctx.$playBtn.show();
             ctx.$pauseBtn.hide();
         };
+
+        ctx.previous = function () {
+            if (ctx.currentIndex - 1 < 0) {
+                ctx.currentIndex = ctx.playList.length -1;
+            } else {
+                ctx.currentIndex = ctx.currentIndex - 1
+            }
+            ctx.playNewSong(ctx.playList[ctx.currentIndex])
+            ctx.updateNowPlayArrow()
+        }
+
+        ctx.next = function () {
+            if (ctx.currentIndex + 1 > ctx.playList.length - 1) {
+                ctx.currentIndex = 0;
+            } else {
+                ctx.currentIndex = ctx.currentIndex + 1
+            }
+            ctx.playNewSong(ctx.playList[ctx.currentIndex])
+            ctx.updateNowPlayArrow()
+        }
 
         ctx.moveNeedle = function (play) {
             if (play) {
@@ -151,7 +179,7 @@
             $('#detail_name').text(song[songid].name);
             $('#detail_singer').text(song[songid].singer);
             /*[mv] button display*/
-            if (typeof song[songid].mv !== 'string'){
+            if (song[songid].mv === ''){
                 $('#detail_mv').hide();
             }
             else {
@@ -163,6 +191,9 @@
             /*改变按钮信息*/
             $('#score_btn').children('a').attr('href', song[songid].score);
             $('#download_btn').children('a').attr('href', song[songid].mp3);
+            document.getElementById('share_btn').onclick = function () {
+                copyToClipboard('https://www.sigmameow.com/art/music.html?song='+songid);
+            };
             /*=====update 底栏 信息=====*/
             $('#buttom_pic').attr('src', song[songid].cover);
             $('#buttom_name').text(song[songid].name);
@@ -178,6 +209,8 @@
 
         ctx.playNewSong = function (songid) {
             ctx.updateNewSong(songid);
+            ctx.currentIndex = ctx.getSongListIndex(songid);
+            ctx.updateNowPlayArrow()
             if (ctx.isPlaying) {
                 setTimeout(ctx.play, 500);
             } else {ctx.play()};
@@ -204,9 +237,10 @@
             var now_play_list_html = ''
             for (var id in ctx.playList) {
                 song_inner = song[ctx.playList[id]];
-                now_play_list_html = now_play_list_html + '<tr><td class="text-center"></td>'
+                now_play_list_html = now_play_list_html + '<tr>'
+                    + '<td class="text-center"><i class="fa fa-play d-none playlistarrow" aria-hidden="true"></i></td>'
                     + '<td><span onClick="ctx.playNewSong('+ song_inner.id +')" style="cursor:pointer">' + song_inner.name + '</span></td>'
-                    + '<td><i class="fa fa-trash btn btn-sm" aria-hidden="true"></i></td>'
+                    + '<td><i class="fa fa-trash btn btn-sm playtrasharrow" aria-hidden="true" onclick="ctx.removefromPlayList('+ song_inner.id +')"></i></td>'
                     + '</tr>'
             }
 
@@ -216,19 +250,83 @@
         ctx.replacePlayList = function(listid){
             ctx.playList = musicList[listid].song_list.slice();
             ctx.refreshPlayList();
-            alert('then play the first one')
+            ctx.currentIndex = 0;
+            ctx.playNewSong(ctx.playList[ctx.currentIndex]);
+            ctx.updateNowPlayArrow();
         };
 
         ctx.add2PlayList = function(listid){
+            //console.log('before add2PlayList', ctx.playList)
             for (var id in musicList[listid].song_list) {
-                sig = musicList[listid].song_list[id];
-                if (!ctx.playList.includes(sig)) {
-                    ctx.playList.push(sig)
-                }
+                var sig = musicList[listid].song_list[id];
+                ctx.addSong2PlayList(sig);
             }
+            //console.log('after add2PlayList', ctx.playList)
             ctx.refreshPlayList();
-            alert('then play the first one')
+            ctx.updateNowPlayArrow();
         };
+
+        ctx.addSong2PlayList = function(songid){
+            if (!ctx.playList.includes(songid)) {
+                ctx.playList.push(songid)
+            }
+        };
+
+        ctx.removefromPlayList = function (songid) {
+            var list_index = ctx.playList.indexOf(songid)
+            if (list_index === -1) {
+                console.log('this song is not in the list')
+            } else {
+                if (list_index > ctx.currentIndex) {
+                    var removed = ctx.playList.splice(list_index, 1)
+                } else {
+                    var removed = ctx.playList.splice(list_index, 1)
+                    ctx.currentIndex -= 1;
+                }
+                ctx.refreshPlayList()
+                ctx.updateNowPlayArrow()
+            }
+        }
+
+        ctx.removeAllfromPlayList = function () {
+            var left_song_id = ctx.playList[ctx.currentIndex]
+            ctx.playList = [left_song_id]
+            ctx.refreshPlayList();
+            ctx.currentIndex = 0;
+            ctx.updateNowPlayArrow();
+        }
+
+        /* 更新播放列表中，正在播放的箭头指向 */
+        ctx.updateNowPlayArrow = function() {
+            //console.log('currentIndex', ctx.currentIndex)
+            var all_arrow = document.getElementsByClassName('playlistarrow')
+            var all_trash = document.getElementsByClassName('playtrasharrow')
+            //console.log(all_arrow)
+            for (var i = 0; i < all_arrow.length; i++) {
+                var arrow_item = all_arrow.item(i);
+                var trash_item = all_trash.item(i);
+                if (i === ctx.currentIndex) {
+                    arrow_item.classList.remove("d-none")
+                    trash_item.classList.add("d-none")
+                    //console.log('equal', arrow_item)
+                } else {
+                    arrow_item.classList.add("d-none")
+                    trash_item.classList.remove("d-none")
+                    //console.log('not-equal', arrow_item)
+                }
+            };
+        };
+
+        /* 查找某个song_id在当前SongList中的index值，如果不在则添加到播放列表最后 */
+        ctx.getSongListIndex = function(song_id) {
+            var song_id_in_list = ctx.playList.indexOf(song_id);
+            if (song_id_in_list === -1) {
+                ctx.addSong2PlayList(song_id)
+                song_id_in_list = ctx.playList.indexOf(song_id);
+                ctx.refreshPlayList();
+            }
+            return song_id_in_list
+        }
 
         ctx._initProcessBtn = function ($btn) {
             var moveFun = function (e) {
@@ -326,6 +424,18 @@
 
     <!-- init the music page -->
     <script type="text/javascript">
+        function copyToClipboard(text) {
+            // https://komsciguy.com/js/a-better-way-to-copy-text-to-clipboard-in-javascript/
+            const listener = function(ev) {
+                ev.preventDefault();
+                ev.clipboardData.setData('text/plain', text);
+            };
+            document.addEventListener('copy', listener);
+            document.execCommand('copy');
+            document.removeEventListener('copy', listener);
+            alert('已经复制分享链接到剪贴板^_^');
+        };
+
         function getQueryVariable(variable){
             var query = window.location.search.substring(1);
             var vars = query.split("&");
@@ -346,6 +456,8 @@
             if (musicList[list_url_id] === undefined) {
                 alert("找不到编号为"+ list_url_id +"的歌单，启用默认歌单0")
                 list_url_id = 0;
+            } else {
+                list_url_id = parseInt(list_url_id)
             }
         }
         if (song_url_id === false) {
@@ -355,6 +467,8 @@
             if (song[song_url_id] === undefined) {
                 alert("找不到编号为"+ song_url_id +"的歌曲，启用默认歌曲0")
                 song_url_id = 0;
+            } else {
+                song_url_id = parseInt(song_url_id)
             }
         }
 
@@ -391,12 +505,13 @@
                 + '</div>'
                 + '<div class="detail_discribe text-muted  text-left"><p>' + list_info.intro +'</p></div>'
                 + '<div class="detail_btns">'
-                + '<span class="btn playall" onClick="ctx.replacePlayList('+list_id+')"><i class="fa fa-play-circle-o" aria-hidden="true" ></i>&nbsp;&nbsp;播放全部</span><span class="btn plus" onClick="ctx.add2PlayList('+list_id+')"><i class="fa fa-plus" aria-hidden="true" ></i></span>'
-                + '<span class="btn share"><i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;分享</span>'
+                + '<span class="btn playall" onclick="ctx.replacePlayList('+list_id+')"><i class="fa fa-play-circle-o" aria-hidden="true" ></i>&nbsp;&nbsp;播放全部</span><span class="btn plus" onClick="ctx.add2PlayList('+list_id+')"><i class="fa fa-plus" aria-hidden="true" ></i></span>'
+                + '<span class="btn share" onclick="copyToClipboard(\'https://www.sigmameow.com/art/music.html?list='+ list_id + '\')"><i class="fa fa-share-square-o" aria-hidden="true")"></i>&nbsp;&nbsp;分享</span>'
                 + '</div>'
                 + '</div>'
 
             $("#list-placeholder").html(list_ph_html);
+
 
             // for loop to generate table list
             /*
@@ -461,6 +576,10 @@
         $(document).ready(function() {
             $.refreshPageByList(list_url_id);
             ctx.updateNewSong(song_url_id);
+            ctx.addSong2PlayList(song_url_id);
+            ctx.add2PlayList(list_url_id);
+            ctx.refreshPlayList();
+            ctx.updateNowPlayArrow();
         });
     </script>
 </head>
@@ -541,7 +660,7 @@
                                 <!--span class="btn playall" id="play_btn" onClick="ctx.play()"><i class="fa fa-play-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;播放</span-->
                                 <span class="btn playall" id="score_btn"><a href="score/secret_base.pdf" target="_blank"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;乐谱</a></span>
                                 <span class="btn playall" id="download_btn"><a href="audio/Secret Base.mp3" download><i class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;下载</a></span>
-                                <span class="btn playall"><i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;分享</span>
+                                <span class="btn playall" id="share_btn"><i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;分享</span>
                             </div>
                         </div>
                         <!--h4>歌曲界面</h4>
@@ -576,10 +695,10 @@
             <p id="buttom_singer">浩瀚猫</p>
         </div>
         <div class="control_btn" id="controls">
-            <div class="btn prev "><i class="fa fa-step-backward" aria-hidden="true"></i></div>
-            <div class="btn play" onClick="ctx.play()"><i class="fa fa-play" aria-hidden="true"></i></div>
-            <div class="btn pause" onClick="ctx.pause()" style="display:none"><i class="fa fa-pause" aria-hidden="true"></i></div>
-            <div class="btn next"><i class="fa fa-step-forward" aria-hidden="true"></i>
+            <div class="btn prev" onclick="ctx.previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></div>
+            <div class="btn play" onclick="ctx.play()"><i class="fa fa-play" aria-hidden="true"></i></div>
+            <div class="btn pause" onclick="ctx.pause()" style="display:none"><i class="fa fa-pause" aria-hidden="true"></i></div>
+            <div class="btn next" onclick="ctx.next()"><i class="fa fa-step-forward" aria-hidden="true"></i>
             </div>
             <!--正在播放列表-->
             <!--div class="btn nowplaylist" onclick="switch2playlist()"><i class="fa fa-th-list" aria-hidden="true"></i></div-->
@@ -590,8 +709,8 @@
                 <div class="container nowplay_section">
                     <div class="list_head">
                         <p style="vertical-align: middle;"><b>当前播放</b>
-                            <span id="clear_all" onclick="alert('rua')" style="float: right;cursor:pointer">
-                                <i class="fa fa-trash" aria-hidden="true"></i>清空
+                            <span id="clear_all" onclick="ctx.removeAllfromPlayList()" style="float: right;cursor:pointer">
+                                <i class="fa fa-trash" aria-hidden="true"></i>清空待播
                             </span>
                         </p>
                     </div>

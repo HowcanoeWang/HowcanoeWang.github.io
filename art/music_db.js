@@ -46,7 +46,7 @@ var song = [
     "name":"青い栞（《未闻花名》op）",
     "date":"2018.09.21",
     "singer":"浩瀚猫",
-    "time":"05:40",
+    "time":"05:35",
     "cover":"https://i.loli.net/2020/04/01/2X5qBdFjE6tYspe.jpg",
     "mv":"https://www.bilibili.com/video/av32135131",
     "mp3":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/art/audio/Blue Bookmark.mp3",
