@@ -9,7 +9,7 @@ var section = {
 	"奇技赢巧":[12],
     "回顾总结":[17,18,22],
 	/*=================*/
-	"科研技能":[3,19,14], /*note: article 14 and 13 顺序乱了*/
+	"科研技能":[3,19,14,15], /*note: article 14 and 13 顺序乱了*/
 	/*-----------------*/
 	"Py点云库":[3],
     /*"Py三维库":[],*/
@@ -17,7 +17,7 @@ var section = {
 	"数据处理":[],*/
 	/*"统计分析":[19],*/
     /*"论文写作":[],*/
-    "线性代数":[19,14],
+    "线性代数":[19,14,15],
 	/*=================*/
 	"兴趣爱好":[9,11,21],
 	/*-----------------*/
@@ -180,17 +180,17 @@ var jsdb = [
 "date":"2020.06.23",
 "img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
 "file":"014_线性代数Chapter2.md",
-"recommend":[19]
+"recommend":[19, 15]
 },
 {"id":"15",
-"title":"404",
-"subtitle":"",
+"title":"第三章：行列式",
+"subtitle":"线性代数及其应用(原书第五版)》总结笔记",
 "author":"浩瀚猫",
-"word":"",
-"date":"",
-"img":"",
-"file":"000_404.md",
-"recommend":[]
+"word":"100",
+"date":"2020.09.23",
+"img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
+"file":"015_线性代数Chapter3.md",
+"recommend":[19, 14]
 },
 {"id":"16",
 "title":"404",
@@ -230,7 +230,7 @@ var jsdb = [
 "date":"2020.05.17",
 "img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
 "file":"019_线性代数Chapter1.md",
-"recommend":[14]
+"recommend":[14, 15]
 },
 {"id":"20",
 "title":"排异游戏",
