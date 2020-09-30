@@ -186,8 +186,8 @@ var jsdb = [
 "title":"第三章：行列式",
 "subtitle":"线性代数及其应用(原书第五版)》总结笔记",
 "author":"浩瀚猫",
-"word":"100",
-"date":"2020.09.23",
+"word":"1.1k",
+"date":"2020.09.30",
 "img":"https://i.loli.net/2020/04/01/jpFs4IML87gcfJt.jpg",
 "file":"015_线性代数Chapter3.md",
 "recommend":[19, 14]
