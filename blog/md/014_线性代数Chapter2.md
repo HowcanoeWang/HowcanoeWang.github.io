@@ -146,7 +146,7 @@ $$B = \left[ \begin{array}{rr} -5 & 2 \\ 1 & -3 \\ 0 & 4\end{array}\right], B^T 
 
 > 并没有看懂
 
-# Part.2 分块矩F阵
+# Part.2 分块矩阵
 
 ## 2.1 标量乘法
 
