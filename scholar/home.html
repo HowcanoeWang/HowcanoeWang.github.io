@@ -69,11 +69,61 @@
         }
 
         .blog-footer {
-            padding: 2.5rem 0px; text-align: center; color: rgb(153, 153, 153); border-top-color: rgb(229, 229, 229); border-top-width: 0.05rem; border-top-style: solid; background-color: rgb(249, 249, 249);
+            padding: 2.5rem 0px; 
+            text-align: center; 
+            color: rgb(153, 153, 153); 
+            border-top-color: rgb(229, 229, 229);
+            border-top-width: 0.05rem; 
+            border-top-style: solid; 
+            background-color: rgb(249, 249, 249);
         }
         .blog-footer p:last-child {
             margin-bottom: 0px;
         }
+
+        /* timeline css*/
+        .expertiesico {
+            /*padding: 50px 20px 50px 0;*/
+            padding-right: 20px;
+            text-align: right;
+            font-family: 'Crimson Text',serif;
+            font-size: 21px;
+            line-height: 24px;
+            color: #5b4c5c;
+            font-style: italic;
+        }
+        .expertiesdesc {
+            border-left: 2px solid #ada5ad;
+            padding: 0 0 0 50px;
+            margin-bottom: 50px;
+        }
+
+        .expertiesdesc h4 {
+            /*font-size: 14px;*/
+            font-size: 18px;
+            font-weight: 300;
+            line-height: normal;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .expertiesdesc h5 {
+            font-family: 'Crimson Text', serif;
+            color: #5b4c5c;
+            font-size: 16px;
+            /*font-style: italic;*/
+            font-weight: 400;
+        }
+
+        .expertiesdesc p {
+            padding-right: 10px;
+            padding-bottom: 0;
+            font-size: 13px;
+            line-height: 27px;
+            font-weight: 400;
+            margin: 0px;
+        }
+
     </style>
 </head>
 <body>
@@ -178,7 +228,7 @@
 <div class="masthead bg-light">
     <div class="container pb-3">
         <div class="row text-center">
-            <div class="col-lg-12 py-2">
+            <div class="col-lg-12 py-4">
                 <h3 class="font-weight-bold">Publications</h3>
                 <p class="lead my-1 text-muted">学术成果</p>
             </div>
@@ -195,6 +245,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" id="conference-tab" data-toggle="tab" href="#conference" role="tab" aria-controls="conference" aria-selected="false">Conferences <span class="text-muted">(会议)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" id="patent-tab" data-toggle="tab" href="#patent" role="tab" aria-controls="patent" aria-selected="false">Patents <span class="text-muted">(专利)</span></a>
                     </li>
                 </ul>
             </div>
@@ -254,6 +307,16 @@
                             <a class="btn btn-sm btn-outline-dark" href="https://doi.org/10.5846/stxb201803300694" target="_blank">DOI</a>
                             <a class="btn btn-sm btn-outline-dark" href="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/scholar/files/paper/18_acta.pdf" target="_blank">PDF</a>
                         </div>
+                        <hr/>
+
+                        <div class="csl-bib-body">
+                            <div class="csl-entry"><b>Wang, H.</b>, <b><span class="text-success">2017</span></b>. Extracting DBH Measurements from RGB Photo Images (<b>BSc Ecology thesis</b>). The Nanjing University of Forestry.</div>
+                        </div>
+                        <div class="btn-group csl-bib-btn pt-2">
+                            <a class="btn btn-sm btn-outline-dark" href="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/scholar/files/paper/17_thesis.pdf" target="_blank">PDF</a>
+                            <a class="btn btn-sm btn-outline-dark" href="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/scholar/files/paper/17_thesis_ppt.pdf" target="_blank">PPT</a>
+                            <a class="btn btn-sm btn-outline-dark" href="https://github.com/HowcanoeWang/ImageDBH" target="_blank">Codes</a>
+                        </div>
                     </div>
 
                     <!-- Conference Tab -->
@@ -310,6 +373,55 @@
                             <a class="btn btn-sm btn-outline-dark" href="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/scholar/files/conf/17_ICE_ppt.pdf" target="_blank">PPT</a>
                         </div>
                     </div>
+
+                    <!-- Patent Tab -->
+                    <div class="tab-pane fade" id="patent" role="tabpanel" aria-labelledby="patent-tab">
+                        <div class="csl-bib-body">
+                            <div class="csl-entry">王锋，韩东，<b>王浩舟</b>，卢琦，潘绪斌，一种基于无人机的景观尺度植被覆盖度的计算方法及系统：<b><span class="text-success">2019</span></b>. CN 201610913357</div>
+                        </div>
+                        <div class="btn-group csl-bib-btn pt-2">
+                            <a class="btn btn-sm btn-outline-dark" href="https://patents.google.com/patent/CN106403904A/zh" target="_blank">URL</a>
+                            <a class="btn btn-sm btn-outline-dark" href="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/scholar/files/patent/19_CAF.pdf" target="_blank">PDF</a>
+                        </div>
+                        <hr/>
+
+                        <div class="csl-bib-body">
+                            <div class="csl-entry">无人机高精度影像分析平台[简称: UAV-HiRAP] v3.0, <b><span class="text-success">2019</span></b>. 软著登字第 2019SR0286422.</div>
+                        </div>
+                        <div class="btn-group csl-bib-btn pt-2">
+                            <a class="btn btn-sm btn-outline-dark" href="https://www.uav-hirap.org" target="_blank">URL</a>
+                            <a class="btn btn-sm btn-outline-dark" href="https://github.com/UAV-HiRAP/UAV-HiRAP" target="_blank">Codes</a>
+                        </div>
+                        <hr/>
+
+                        <div class="csl-bib-body">
+                            <div class="csl-entry">无人机高精度影像分析平台[简称: UAV-HiRAP] v2.0, <b><span class="text-success">2017</span></b>. 软著登字第 2017SR558256.</div>
+                        </div>
+                        <div class="btn-group csl-bib-btn pt-2">
+                            <a class="btn btn-sm btn-outline-dark" href="https://www.uav-hirap.org" target="_blank">URL</a>
+                            <a class="btn btn-sm btn-outline-dark" href="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/scholar/files/patent/17_uavhirap2.pdf" target="_blank">Manual</a>
+                        </div>
+                        <hr/>
+
+                        <div class="csl-bib-body">
+                            <div class="csl-entry">无人机高精度影像分析平台[简称: UAV-HiRAP] v1.0, <b><span class="text-success">2016</span></b>. 软著登字第 2016SR198498.</div>
+                        </div>
+                        <div class="btn-group csl-bib-btn pt-2">
+                            <a class="btn btn-sm btn-outline-dark" href="https://github.com/UAV-HiRAP/UAV-HiRAP-Matlab" target="_blank">Codes</a>
+                            <a class="btn btn-sm btn-outline-dark" href="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/scholar/files/patent/16_uavhirap.pdf" target="_blank">Manual</a>
+                            <a class="btn btn-sm btn-outline-dark" href="https://github.com/UAV-HiRAP/UAV-HiRAP-Matlab/releases/tag/v1.0" target="_blank">EXE</a>
+                        </div>
+                        <hr/>
+
+                        <div class="csl-bib-body">
+                            <div class="csl-entry">Yaira 实测数据多维可视化软件[简称:Yaira] v1.0, <b><span class="text-success">2016</span></b>. 软著登字第 2016SR178462.</div>
+                        </div>
+                        <div class="btn-group csl-bib-btn pt-2">
+                            <a class="btn btn-sm btn-outline-dark" href="https://github.com/HowcanoeWang/Yaira" target="_blank">Codes</a>
+                            <a class="btn btn-sm btn-outline-dark" href="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/scholar/files/patent/16_yaira.pdf" target="_blank">Manual</a>
+                            <a class="btn btn-sm btn-outline-dark" href="https://github.com/HowcanoeWang/Yaira/releases/tag/v1.0" target="_blank">EXE</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -319,24 +431,75 @@
 <div class="masthead bg-white">
     <div class="container">
         <div class="row text-center">
-            <div class="col-lg-12 py-2">
+            <div class="col-lg-12 py-4">
                 <h3 class="font-weight-bold">Experience Timeline</h3>
                 <p class="lead my-1 text-muted">履历时间线</p>
             </div>
         </div>
-        <div class="row">
-            <!--div class="card-columns">
-                <div class="card shadow-sm">
-                    <div class="card-header lead my-0 common-text">Master of Science in Forestry</div>
-                    <div class="card-body">
-                        <p class="card-text common-text py-0">The University of New Brunswick</p>
-                        <p class="card-text common-text py-0 text-muted">新不伦瑞克大学</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="lead py-0 common-text">2017.09 - 2019.12</p>
-                    </div>
+        <!--Idea comes from : https://www.webmoban.net/mb/929.html -->
+        <div class="row media">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="expertiesico">
+                    Apr, 2020<br>Now
                 </div>
-            </div-->
+            </div>
+            <div class="expertiesdesc col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                <h4>The University of Tokyo | 东京大学</h4>
+                <h5>The Doctoral Student in Agricultural | 农学博士在读</h5>
+                <p>The research proposal is "Development of 3D high-throughput close-range remote sensing phenotyping applications for agronomy".</p>
+                <p class="text-muted">研究计划为《三维高通量近地面遥感在育种学上的发展与应用》</p>
+            </div>
+        </div>
+        <div class="row media">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="expertiesico">
+                    Sept, 2017<br>Dec, 2019
+                </div>
+            </div>
+            <div class="expertiesdesc col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                <h4>The University of New Brunswick | 新不伦瑞克大学</h4>
+                <h5>Master of Science in Forestry | 林学研究型硕士</h5>
+                <p>Focus on the area of distorted analyzing forest images taken by fisheye and spherical camera. Participated several university and international oral presentation and competition. The title of Thesis is "Estimating Forest Attributes from Spherical Images"</p>
+                <p class="text-muted">研究方向为鱼眼相机和全景相机拍摄的畸变森林影像分析。参与学校、国际会议演讲与比赛若干。毕业论文题目为《从全景相机中提取森林参数》</p>
+            </div>
+        </div>
+        <div class="row media">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="expertiesico">
+                    May, 2016<br>Aug, 2016
+                </div>
+            </div>
+            <div class="expertiesdesc col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                <h4>The Chinese Academy of Forestry | 中国林业科学研究院</h4>
+                <h5>Internship | 实习</h5>
+                <p>Developing software for UAV image analysis in sparse Elm grassland. Registor software copyright for Matlab based UAV-HiRAP and Web-based UAV-HiRAP (<a href="https://www.uav-hirap.org">www.uav-hirap.org</a>) for semi-automatic classify plants and backgrounds. The achievements were extended to a patent, an oral presentation on The 12th International Congress of Ecological, and pulished on top journal "Acta Ecologica Sinica" and "Agricultural and Forest Meteorology", respectively.</p>
+                <p class="text-muted">实习期间开发榆树疏林草原无人机影像分析软件，先后申请基于Matlab和Web的分类植物和背景的UAV-HiRAP(www.uav-hirap.org)软件著作权。此后几年保持合作并基于此成果进行拓展，申请发明专利一项、在第12届国际生态学大会做报告、分别在国内顶刊《生态学报》与SCI一区《农林气象》发表论文一篇。
+                </p>
+            </div>
+        </div>
+        <div class="row media">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="expertiesico align-items-center">
+                    Sept, 2013<br>June, 2017
+                </div>
+            </div>
+            <div class="expertiesdesc col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                <h4>The Nanjing Forestry University | 南京林业大学</h4>
+                <h5>Bachelor of Science in Ecology | 生态学学士</h5>
+                <p>During the study period, participated all kinds of activaties during study period, envolved in the College Student Innovation Training Projects and applied two software copyrights. The last year as a transfer student in the University of New Brunsiwick. The titile of dissertation is "Extracting DBH Measurements from RGB Photo Images"</p>
+                <p class="text-muted">就读期间积极参加各类活动，参与大学生创新训练计划项目并申请软件著作权两项。最后一年于新不伦瑞克大学交换，毕业论文题目为《从RGB图像中提取树木胸径》</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="masthead bg-light">
+    <div class="container pb-3">
+        <div class="row text-center">
+            <div class="col-lg-12 py-4">
+                <h3 class="font-weight-bold">Awards</h3>
+                <p class="lead my-1 text-muted">获奖情况</p>
+            </div>
         </div>
 
     </div>
