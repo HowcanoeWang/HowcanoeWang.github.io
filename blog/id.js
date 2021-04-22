@@ -239,7 +239,7 @@ var jsdb = [
 "word":"2.0K",
 "date":"2019.01.20",
 "img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/blog-bg.jpg",
-"file":"020_排异游戏.md"
+"file":"020_排异游戏.md",
 "recommend":[4,2,1]
 },
 {"id":"21",
