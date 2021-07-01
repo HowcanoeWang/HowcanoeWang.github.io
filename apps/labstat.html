@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://daemonite.github.io/material/css/material.min.css">
 
-		<title>河鳍人员状态</title>
+		<title>ISAS二楼lab人员状态</title>
         
     <!-- Custom styles for this page -->
 		<link rel="stylesheet" href="../css/index.css">
@@ -44,8 +44,7 @@
                     在室
                   </div>
                   <div class="panel-body">
-                    <ul id="1" class="list-unstyled connectedLists">
-                      <div class="panel-body"></div>
+                    <ul id="room" class="list-unstyled connectedLists">
                     </ul>
                   </div>
                 </div>
@@ -57,8 +56,7 @@
                     場内
                   </div>
                   <div class="panel-body">
-                    <ul id="2" class="list-unstyled connectedLists">
-                      <div class="panel-body"></div>
+                    <ul id="inside" class="list-unstyled connectedLists">
                     </ul>
                   </div>
                 </div>
@@ -70,8 +68,7 @@
                     場外
                   </div>
                   <div class="panel-body">
-                    <ul id="3" class="list-unstyled connectedLists">
-                      <div class="panel-body"></div>
+                    <ul id="outside" class="list-unstyled connectedLists ">
                     </ul>
                   </div>
                 </div>
@@ -83,56 +80,55 @@
                     帰宅
                   </div>
                   <div class="panel-body">
-                    <ul id="4" class="list-unstyled connectedLists">
-                      <li class="panel panel-primary innerpanel" id="student_3_id">
-                        <input type="hidden" name="student_3_id" value="1">
+                    <ul id="home" class="list-unstyled connectedLists">
+                      <li class="panel panel-primary innerpanel">
+                        <input type="hidden" >
                         <div class="panel-body">
                           駒崎
                         </div>
                       </li>
-                      <li class="panel panel-primary innerpanel" id="student_3_id">
-                        <input type="hidden" name="student_3_id" value="1">
+                      <li class="panel panel-primary innerpanel">
+                        <input type="hidden">
                         <div class="panel-body">
                           周
                         </div>
                       </li>
-                      <li class="panel panel-primary innerpanel" id="student_3_id">
-                        <input type="hidden" name="student_3_id" value="1">
+                      <li class="panel panel-primary innerpanel">
+                        <input type="hidden">
                         <div class="panel-body">
                           中山
                         </div>
                       </li>
-                      <li class="panel panel-primary innerpanel" id="student_3_id">
-                        <input type="hidden" name="student_3_id" value="1">
+                      <li class="panel panel-primary innerpanel">
+                        <input type="hidden">
                         <div class="panel-body">
                           樋口
                         </div>
                       </li>
-                      <li class="panel panel-primary innerpanel" id="student_3_id">
-                        <input type="hidden" name="student_3_id" value="1">
+                      <li class="panel panel-primary innerpanel">
+                        <input type="hidden">
                         <div class="panel-body">
                           栗栖
                         </div>
                       </li>
-                      <li class="panel panel-primary innerpanel" id="student_3_id">
-                        <input type="hidden" name="student_3_id" value="1">
+                      <li class="panel panel-primary innerpanel">
+                        <input type="hidden">
                         <div class="panel-body">
                           劉
                         </div>
                       </li>
-                      <li class="panel panel-primary innerpanel" id="student_3_id">
-                        <input type="hidden" name="student_3_id" value="1">
+                      <li class="panel panel-primary innerpanel">
+                        <input type="hidden">
                         <div class="panel-body">
                           Kandel
                         </div>
                       </li>
-                      <li class="panel panel-primary innerpanel" id="student_3_id">
-                        <input type="hidden" name="student_3_id" value="1">
+                      <li class="panel panel-primary innerpanel">
+                        <input type="hidden">
                         <div class="panel-body">
                           謝
                         </div>
                       </li>
-                      <div class="panel-body"></div>
                     </ul>
                   </div>
                 </div>
@@ -142,43 +138,50 @@
         </div>
     </div>
 
-      <!-- Bootstrap core JavaScript -->
-      <!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script-->
-      <script src="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/js/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.1.1/dist/js/bootstrap.min.js" ></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script-->
+    <script src="https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/js/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.1.1/dist/js/bootstrap.min.js" ></script>
+    <!-- Sortable -->
+    <script src="https://rawgit.com/RubaXa/Sortable/master/Sortable.js"></script>
 
-      <script type="text/javascript">
-        $(document).ready(function(){
-          $('.sidebar').css('overflow-y','scroll');
-            jQuery(function(event, ui) {
-                $('.connectedLists').sortable({
-                    connectWith: ".connectedLists",
-                    stop: function(event, ui) {          
-                        item = ui.item;
-                        var newList = item.closest("ul");
-                        var group = newList.attr('id');
-                        var formField = item.find("input");
-                        formField.val(group);
-                    },
-                    appendTo: 'body',
-                    helper:  function(e, elt) {
-                        $(elt).css('list-style-type','none');
-                        return elt.clone(true);
-                    }
-                });
-            });
+    <script type="text/javascript">
+        //new Sortable(document.getElementsByClassName('sortable')[0], {group: "rua"});
+        Sortable.create(room, {
+          group: {
+            name: 'room',
+            pull: true,
+            put:['inside','outside','home']
+          },
+          animation: 100
         });
 
-        $('.unsortedList li.panel').mousedown(function(){
-        $('.sidebar').css('overflow-y','');
+        Sortable.create(inside, {
+          group: {
+            name: 'inside',
+            pull: true,
+            put:['room','outside','home']
+          },
+          animation: 100
         });
 
-
-        $('.unsortedList li.panel').mouseup(function(){
-        $('.sidebar').css('overflow-y','scroll');
+        Sortable.create(outside, {
+          group: {
+            name: 'outside',
+            pull: true,
+            put: ['room', 'inside', 'home']
+          },
+          animation: 100
         });
-      </script>
+        Sortable.create(home, {
+          group: {
+            name: 'home',
+            pull: true,
+            put: ['room', 'inside', 'outside']
+          },
+          animation: 100
+        });
+    </script>
 
-    </body>
+  </body>
 </html>
