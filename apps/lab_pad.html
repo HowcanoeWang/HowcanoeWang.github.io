@@ -26,7 +26,7 @@
 		<link rel="stylesheet" href="../css/blog.css">
     <link rel="stylesheet" href="../css/tools.css">
 
-    <script type="text/javascript" src="lab_db.js?rnd=233"></script>
+    <script type="text/javascript" src="lab_db.js?rnd=234"></script>
 
     <!-- jQuery -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
@@ -64,7 +64,7 @@
         bottom: 0;
         width: 100%;
         /* Set the fixed height of the footer here */
-        height: 35px;
+        height: 40px;
       }
 
       .text-large {
@@ -190,6 +190,14 @@
 
     <script type="text/javascript">
       var card_html = "";
+      if (name_list.length < 6) {
+        var label = '<div class="panel-body text-center">'
+      }else if (name_list.length > 12){
+        var label = '<div class="panel-body text-center p-1">'
+      }else{
+        var label = '<div class="panel-body text-center p-2">'
+      }
+
       for (var n in name_list) {
         /* example of name card
         <li class="panel panel-primary innerpanel">
@@ -201,7 +209,7 @@
         */
         card_html = card_html + '<li class="panel panel-primary innerpanel">'
           + '<input type="hidden">'
-            + '<div class="panel-body text-center">'
+            + label /*<div class="panel-body text-center">*/
               + name_list[n]
             + '</div>'
           + '</li>'
