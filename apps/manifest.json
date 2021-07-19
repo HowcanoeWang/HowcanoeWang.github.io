@@ -1,0 +1,21 @@
+{ 
+
+    "name": "Lab Member Status", 
+  
+    "short_name": "LMS", 
+  
+    "start_url": "lab_pad.html", 
+  
+    "display": "standalone", 
+  
+    "icons": [{ 
+  
+      "src": "logo.png", 
+  
+      "sizes": "350x350", 
+  
+      "type": "image/png" 
+  
+    }] 
+  
+  } 
