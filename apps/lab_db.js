@@ -6,7 +6,7 @@ var db = {
     },
     "216": {
         "room_title": "セミナー室",
-        "room_member": ["菅野", "奥田", "西田", "Wangmo", "Winnie", "Thum", "Tahir", "江草", "イム"],
+        "room_member": ["菅野", "奥田", "西田", "Wangmo", "Winnie", "Thum", "Tahir", "江草", "イム", "田口", "後藤", "八藤後"],
         "color": "#6f42c1",
     },
     "999": {
