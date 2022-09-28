@@ -24,7 +24,7 @@ var section = {
 	"诗词歌赋":[9,11,10,8,7,6],
 	/*"音乐乐理":[],*/
 	"游戏心得":[21],
-    "四海云游":[16]
+    "四海云游":[16,23]
 };
 
 var jsdb = [
@@ -198,10 +198,10 @@ var jsdb = [
 "subtitle":"记一次不太快乐的青岛一日游",
 "author":"浩瀚猫",
 "word":"2.6k",
-"date":"2020.12.02",
+"date":"2020.12.28",
 "img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/wolai1.jpg",
 "file":"016_体温升高.md",
-"recommend":[]
+"recommend":[23]
 },
 {"id":"17",
 "title":"2017年年终总结",
@@ -262,5 +262,15 @@ var jsdb = [
 "img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/blog-bg.jpg",
 "file":"022_2019年年终总结.md",
 "recommend":[17,18]
+},
+{"id":"23",
+"title":"连夜买第二天的机票并赶去千里外的机场，这样的安排你喜欢吗",
+"subtitle":"记一次差点又没出国成功的上海之行",
+"author":"浩瀚猫",
+"word":"2.7K",
+"date":"2020.12.29",
+"img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/wolai2.jpg",
+"file":"023_连夜机场.md",
+"recommend":[16]
 },
 ];
