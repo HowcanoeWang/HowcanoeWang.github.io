@@ -1,13 +1,13 @@
 var section = {
 	/*home default index*/
-	"作者推荐":[21,18,20,9,4], 
+	"作者推荐":[23,16,21,22,20,9,4], 
 	/*=================*/
 	"读书杂记":[4,12,2,5,1,17,18,22],
 	/*-----------------*/
 	"文学小说":[2,20,1,5],
 	"歌戏影视":[4],
 	"奇技赢巧":[12],
-    "回顾总结":[17,18,22],
+    "回顾总结":[17,18,22,24],
 	/*=================*/
 	"科研技能":[3,19,14,15], /*note: article 14 and 13 顺序乱了*/
 	/*-----------------*/
@@ -211,7 +211,7 @@ var jsdb = [
 "date":"2017.12.31",
 "img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/blog-bg.jpg",
 "file":"017_2017年年终总结.md",
-"recommend":[18,22]
+"recommend":[18,22,24]
 },
 {"id":"18",
 "title":"2018年年终总结",
@@ -221,7 +221,7 @@ var jsdb = [
 "date":"2019.01.06",
 "img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/blog-bg.jpg",
 "file":"018_2018年年终总结.md",
-"recommend":[17,22]
+"recommend":[17,22,24]
 },
 {"id":"19",
 "title":"第一章：线性方程组",
@@ -261,7 +261,7 @@ var jsdb = [
 "date":"2020.01.01",
 "img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/blog-bg.jpg",
 "file":"022_2019年年终总结.md",
-"recommend":[17,18]
+"recommend":[17,18,24]
 },
 {"id":"23",
 "title":"连夜买第二天的机票并赶去千里外的机场，这样的安排你喜欢吗",
@@ -272,5 +272,15 @@ var jsdb = [
 "img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/wolai2.jpg",
 "file":"023_连夜机场.md",
 "recommend":[16]
+},
+{"id":"24",
+"title":"2020年年终总结",
+"subtitle":"写了篇wolai的软文？后续更新把那部分删掉了",
+"author":"浩瀚猫",
+"word":"4.3K",
+"date":"2020.12.28",
+"img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/blog-bg.jpg",
+"file":"024_2020年年终总结.md",
+"recommend":[17,18,22]
 },
 ];
