@@ -23,7 +23,8 @@ var section = {
 	/*-----------------*/
 	"诗词歌赋":[9,11,10,8,7,6],
 	/*"音乐乐理":[],*/
-	"游戏心得":[21]
+	"游戏心得":[21],
+    "四海云游":[16]
 };
 
 var jsdb = [
@@ -193,13 +194,13 @@ var jsdb = [
 "recommend":[19, 14]
 },
 {"id":"16",
-"title":"404",
-"subtitle":"",
+"title":"关于体温在一刻钟内升高0.9℃这档事",
+"subtitle":"记一次不太快乐的青岛一日游",
 "author":"浩瀚猫",
-"word":"",
-"date":"",
-"img":"",
-"file":"000_404.md",
+"word":"2.6k",
+"date":"2020.12.02",
+"img":"https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/blog/img/page-heading/wolai1.jpg",
+"file":"016_体温升高.md",
 "recommend":[]
 },
 {"id":"17",
