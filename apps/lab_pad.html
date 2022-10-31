@@ -87,6 +87,7 @@
 
       var room_title = db[room_number]["room_title"];
       var name_list = db[room_number]["room_member"];
+      var room_subtitle = db[room_number]["room_subtitle"]
       var room_color = db[room_number]["color"];
     </script>
         
@@ -99,14 +100,16 @@
          </div>
          <div class="col-md-10 col-md-offset-2 content p-0">
           <div class="container" style="margin-top:70px;">
-            <div class="row">
-              <h1 class="text-large" id="room-title">title</h1>
+            <div class="row align-items-end">
+                <h1 class="text-large" id="room-title">title</h1>
+                <h2 class="text-muted ml-4" id="room-subtitle">subtitle</h1>
             </div>
+            <hr />
             <div class="row pt-3">
                 <div class="col-md-3 col-sm-3 col-xs-3" id="panel_1">
                   <div class="panel panel-info outerpanel">
                     <div class="panel-heading">
-                      在室
+                      在室 (In room)
                     </div>
                     <div class="panel-body">
                       <ul id="room" class="list-unstyled connectedLists">
@@ -118,7 +121,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-3" id="panel_2">
                   <div class="panel panel-warning outerpanel">
                     <div class="panel-heading">
-                      場内
+                      場内 (In building)
                     </div>
                     <div class="panel-body">
                       <ul id="inside" class="list-unstyled connectedLists">
@@ -130,7 +133,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-3" id="panel_3">
                   <div class="panel panel-success outerpanel">
                     <div class="panel-heading">
-                      場外
+                      場外 (In field)
                     </div>
                     <div class="panel-body">
                       <ul id="outside" class="list-unstyled connectedLists ">
@@ -142,7 +145,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-3" id="panel_4">
                   <div class="panel panel-default outerpanel">
                     <div class="panel-heading">
-                      帰宅
+                      帰宅 (At home)
                     </div>
                     <div class="panel-body">
                       <ul id="home" class="list-unstyled connectedLists">
@@ -221,6 +224,7 @@
       $('#home').html(card_html);
       $('#room-number').html(room_number);
       $('#room-title').html(room_title);
+      $('#room-subtitle').html(room_subtitle);
       $('#room-color').css({'background-color': room_color});
     </script>
 
