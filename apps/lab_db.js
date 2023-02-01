@@ -8,7 +8,7 @@ var db = {
     "104": {
         "room_title": "研究員室2",
         "room_subtitle": "国際フィールドフェノミクス研究拠点<br/>Field Phenomics Research Laboratory",
-        "room_member": ["石井", "兒玉", "赵", "張", "森永", "和田", "Irena"],
+        "room_member": ["石井", "兒玉", "張", "森永", "和田", "小西"],
         "color": "#6f42c1",
     },
     "216":{

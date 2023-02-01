@@ -1,0 +1,1 @@
+const cdn = `https://cdn.jsdelivr.net/gh/HowcanoeWang/HowcanoeWang.github.io/`;

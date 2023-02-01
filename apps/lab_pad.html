@@ -26,7 +26,7 @@
 		<link rel="stylesheet" href="../css/blog.css">
     <link rel="stylesheet" href="../css/tools.css">
 
-    <script type="text/javascript" src="lab_db.js?rnd=235"></script>
+    <script type="text/javascript" src="lab_db.js?rnd=236"></script>
 
     <!-- jQuery -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
@@ -82,6 +82,23 @@
         }
         return(false);
       };
+
+      function refreshAt(hours, minutes, seconds) {
+        var now = new Date();
+        var then = new Date();
+
+        if(now.getHours() > hours ||
+          (now.getHours() == hours && now.getMinutes() > minutes) ||
+            now.getHours() == hours && now.getMinutes() == minutes && now.getSeconds() >= seconds) {
+            then.setDate(now.getDate() + 1);
+        }
+        then.setHours(hours);
+        then.setMinutes(minutes);
+        then.setSeconds(seconds);
+
+        var timeout = (then.getTime() - now.getTime());
+        setTimeout(function() { window.location.reload(true); }, timeout);
+      }
 
       var room_number = getQueryVariable("id");
 
@@ -264,6 +281,11 @@
           },
           animation: 100
         });
+    </script>
+
+    <script type="text/javascript">
+      //refresh at 4.00 am
+      refreshAt(4,0,0);
     </script>
 
   </body>
